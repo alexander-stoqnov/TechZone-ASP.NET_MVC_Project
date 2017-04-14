@@ -13,6 +13,8 @@
 
         public int Id { get; set; }
 
+        public int Warnings { get; set; }
+
         public decimal Credits { get; set; }
 
         [ForeignKey("User")]

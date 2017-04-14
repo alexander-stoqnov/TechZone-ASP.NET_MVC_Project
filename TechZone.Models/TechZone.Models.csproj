@@ -103,7 +103,6 @@
     <Compile Include="EntityModels\Purchase.cs" />
     <Compile Include="Enums\GraphicCardManufacturerType.cs" />
     <Compile Include="Enums\GraphicCardMemoryType.cs" />
-    <Compile Include="Enums\GraphicCardSlotType.cs" />
     <Compile Include="Enums\ManufacturerType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />

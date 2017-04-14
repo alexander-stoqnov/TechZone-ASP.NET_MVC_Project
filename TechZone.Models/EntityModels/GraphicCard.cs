@@ -11,8 +11,6 @@
 
         public GraphicCardManufacturerType Brand { get; set; }
 
-        public IEnumerable<GraphicCardSlotType> Ports { get; set; }
-
         public ManufacturerType Manufacturer { get; set; }
 
         public int Memory { get; set; }
