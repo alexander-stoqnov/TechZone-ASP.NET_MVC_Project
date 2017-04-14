@@ -9,15 +9,18 @@
     using Microsoft.Owin.Security;
     using Models.EntityModels;
     using Models.ViewModels.Account;
+    using TechZone.Data;
 
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private TechZoneContext context;
 
         public AccountController()
         {
+            this.context = new TechZoneContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -149,10 +152,19 @@
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Username,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    this.UserManager.AddToRole(user.Id, "Customer");
+                    this.context.Customers.Add(new Customer() { UserId = user.Id });
+                    context.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
