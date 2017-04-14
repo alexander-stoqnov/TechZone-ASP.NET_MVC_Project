@@ -94,7 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModels\ApplicationUser.cs" />
+    <Compile Include="EntityModels\Customer.cs" />
     <Compile Include="EntityModels\Product.cs" />
+    <Compile Include="EntityModels\Purchase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />

@@ -20,8 +20,8 @@ namespace TechZone.Data.Migrations
 
             if (!roleManager.RoleExists("Admin"))
                 roleManager.Create(new IdentityRole("Admin"));
-            if (!roleManager.RoleExists("BlogAuthor"))
-                roleManager.Create(new IdentityRole("BlogAuthor"));
+            if (!roleManager.RoleExists("Publisher"))
+                roleManager.Create(new IdentityRole("Publisher"));
             if (!roleManager.RoleExists("Moderator"))
                 roleManager.Create(new IdentityRole("Moderator"));
             if (!roleManager.RoleExists("Customer"))
