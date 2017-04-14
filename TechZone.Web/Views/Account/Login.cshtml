@@ -34,14 +34,11 @@
             </div>
             <div class="etc-login-form">
                 <p>
-                    Forgot your password? <a href="#">Click here</a>
-                </p>
-                <p>
                     New user? @Html.ActionLink("Create New Account", "Register", "Account")
                 </p>
             </div>
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            <p>@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</p>
+            <p>@Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })</p>           
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         }
     </div>

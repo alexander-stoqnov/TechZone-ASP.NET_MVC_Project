@@ -12,9 +12,25 @@
                 for details on setting up this ASP.NET application to support logging in via external services.
             </p>
         </div>
+        @*<div class="row omb_row-sm-offset-3 omb_socialButtons" style="text-align: center">
+            <div style="display: inline">
+                <a href="#" class="btn btn-lg omb_btn-facebook">
+                    <i class="fa fa-facebook visible-xs"></i>
+                    <span>Facebook</span>
+                </a>
+            </div>
+            <div style="display: inline">
+                <a href="#" class="btn btn-lg omb_btn-google">
+                    <i class="fa fa-google-plus visible-xs"></i>
+                    <span>Google+</span>
+                </a>
+            </div>
+        </div>*@
     }
-    else {
-        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
+    else
+    {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>
