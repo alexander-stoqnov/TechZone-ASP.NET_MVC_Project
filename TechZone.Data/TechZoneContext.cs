@@ -15,6 +15,12 @@ namespace TechZone.Data
 
         public virtual DbSet<Customer> Customers { get; set; }
 
+        public virtual DbSet<Publisher> Publishers { get; set; }
+
+        public virtual DbSet<Article> Articles { get; set; }
+
+        public virtual DbSet<Purchase> Purchases { get; set; }
+
         public static TechZoneContext Create()
         {
             return new TechZoneContext();
