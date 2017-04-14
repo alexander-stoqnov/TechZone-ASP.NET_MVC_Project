@@ -97,9 +97,14 @@
     <Compile Include="EntityModels\ApplicationUser.cs" />
     <Compile Include="EntityModels\Article.cs" />
     <Compile Include="EntityModels\Customer.cs" />
+    <Compile Include="EntityModels\GraphicCard.cs" />
     <Compile Include="EntityModels\Product.cs" />
     <Compile Include="EntityModels\Publisher.cs" />
     <Compile Include="EntityModels\Purchase.cs" />
+    <Compile Include="Enums\GraphicCardManufacturerType.cs" />
+    <Compile Include="Enums\GraphicCardMemoryType.cs" />
+    <Compile Include="Enums\GraphicCardSlotType.cs" />
+    <Compile Include="Enums\ManufacturerType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
