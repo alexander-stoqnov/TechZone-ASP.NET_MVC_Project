@@ -4,6 +4,9 @@
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using AutoMapper;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models.ViewModels.Admin;
 
     public class MvcApplication : HttpApplication
     {
@@ -21,7 +24,10 @@
 
         private void ConfigureMappings()
         {
-
+            Mapper.Initialize(m =>
+            {
+                m.CreateMap<IdentityRole, RoleViewModel>();
+            });
         }
     }
 }
