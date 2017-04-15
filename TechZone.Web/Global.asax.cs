@@ -7,6 +7,8 @@
     using AutoMapper;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.ViewModels.Admin;
+    using Models.EntityModels;
+    using Models.ViewModels.Products;
 
     public class MvcApplication : HttpApplication
     {
@@ -27,6 +29,7 @@
             Mapper.Initialize(m =>
             {
                 m.CreateMap<IdentityRole, RoleViewModel>();
+                m.CreateMap<Product, GeneralProductPageViewModel>();
             });
         }
     }
