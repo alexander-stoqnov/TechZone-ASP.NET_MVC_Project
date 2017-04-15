@@ -15,6 +15,8 @@ namespace TechZone.Data
 
         public virtual DbSet<GraphicCard> GraphicCards { get; set; }
 
+        public virtual DbSet<HardDrive> HardDrives { get; set; }
+
         public virtual DbSet<Customer> Customers { get; set; }
 
         public virtual DbSet<Publisher> Publishers { get; set; }

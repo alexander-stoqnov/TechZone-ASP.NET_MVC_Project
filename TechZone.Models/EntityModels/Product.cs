@@ -1,10 +1,8 @@
 ﻿namespace TechZone.Models.EntityModels
 {
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("Products")]
-    public class Product
+    public abstract class Product
     {
         public Product()
         {

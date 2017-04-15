@@ -2,7 +2,6 @@
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using Enums;
-    using System.Collections.Generic;
 
     [Table("GraphicCard")]
     public class GraphicCard : Product
