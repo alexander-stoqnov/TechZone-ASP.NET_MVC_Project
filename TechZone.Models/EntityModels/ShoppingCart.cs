@@ -11,10 +11,10 @@
 
         public int Id { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser Customer { get; set; }
 
-        public string Session { get; set; }
+        public string SessionId { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

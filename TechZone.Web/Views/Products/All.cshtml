@@ -2,9 +2,7 @@
 @{
     ViewBag.Title = "All";
 }
-<style>
 
-</style>
 @section styles {
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Content/ProductStyles.css">
@@ -54,11 +52,12 @@
                     </div>
                     <div class="separator clear-left">
                         <p class="btn-add">
-                            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a>
+                            <i class="fa fa-shopping-cart"></i>
+                            <a href="#" class="hidden-sm">Add to cart</a>
                         </p>
                         <p class="btn-details">
                             <i class="fa fa-list"></i>
-                            @Html.ActionLink("More details", "Details", "Products", new { id = product.Id}, new { @class = "hidden-sm"})
+                            @Html.ActionLink("More details", "Details", "Products", new { id = product.Id }, new { @class = "hidden-sm" })
                         </p>
                     </div>
                     <div class="clearfix">

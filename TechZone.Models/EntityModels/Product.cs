@@ -8,6 +8,7 @@
         {
             this.Purchases = new HashSet<Purchase>();
             this.WishlistedBy = new HashSet<Customer>();
+            this.ShoppingCarts = new HashSet<ShoppingCart>();
         }
 
         public int Id { get; set; }
@@ -31,5 +32,7 @@
         public virtual ICollection<Purchase> Purchases { get; set; }
 
         public virtual ICollection<Customer> WishlistedBy { get; set; }
+
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }
 }

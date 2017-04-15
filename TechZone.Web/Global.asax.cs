@@ -9,6 +9,7 @@
     using Models.ViewModels.Admin;
     using Models.EntityModels;
     using Models.ViewModels.Products;
+    using System;
 
     public class MvcApplication : HttpApplication
     {
@@ -22,6 +23,11 @@
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        void Session_Start(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session.Add("__MyAppSession", string.Empty);
         }
 
         private void ConfigureMappings()

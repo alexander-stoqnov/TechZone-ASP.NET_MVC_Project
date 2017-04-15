@@ -25,6 +25,8 @@ namespace TechZone.Data
 
         public virtual DbSet<Purchase> Purchases { get; set; }
 
+        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
         public static TechZoneContext Create()
         {
             return new TechZoneContext();
