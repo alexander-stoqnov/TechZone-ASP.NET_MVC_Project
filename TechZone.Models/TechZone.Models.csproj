@@ -102,6 +102,7 @@
     <Compile Include="EntityModels\Product.cs" />
     <Compile Include="EntityModels\Publisher.cs" />
     <Compile Include="EntityModels\Purchase.cs" />
+    <Compile Include="EntityModels\ShoppingCart.cs" />
     <Compile Include="Enums\GraphicCardManufacturerType.cs" />
     <Compile Include="Enums\GraphicCardMemoryType.cs" />
     <Compile Include="Enums\HardDriveBrandType.cs" />

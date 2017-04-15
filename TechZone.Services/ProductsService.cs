@@ -35,11 +35,13 @@
         public ProductDetailsViewModel GetProductDetails(int id)
         {
             var product = this.Context.Products.Find(id);
+            product.Views++;
             var productDetailsVm = Mapper.Map<ProductDetailsViewModel>(product);
             if (product.Discount != 0)
             {
                 productDetailsVm.FinalPrice = CalculateFinalPrice(product.Discount, product.Price);
             }
+            this.Context.SaveChanges();
             return productDetailsVm;
         }
 
