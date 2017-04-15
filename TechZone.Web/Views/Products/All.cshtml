@@ -53,7 +53,8 @@
                     <div class="separator clear-left">
                         <p class="btn-add">
                             <i class="fa fa-shopping-cart"></i>
-                            <a href="#" class="hidden-sm">Add to cart</a>
+                            <input type="hidden" id="productId_@product.Id" value="@product.Id"/>
+                            <a href="#" class="hidden-sm" onclick="addToCart(@product.Id)">Add to cart</a>
                         </p>
                         <p class="btn-details">
                             <i class="fa fa-list"></i>
@@ -72,3 +73,21 @@
         counter++;
     }
 </div>
+
+@section scripts
+{
+<script>
+    function addToCart(prodId) {
+        var productId = "productId_" + prodId;
+        var product = document.getElementById(productId);
+        $.ajax({
+            type: "POST",
+            url: "/Purchase/AddToShoppingCart",
+            data: { id : product.value},
+            success: function () {
+                window.location.href = '/Products/All/';
+            }
+        });
+    }
+</script>
+}
