@@ -31,6 +31,8 @@
                 m.CreateMap<IdentityRole, RoleViewModel>();
                 m.CreateMap<Product, GeneralProductPageViewModel>();
                 m.CreateMap<Product, ProductDetailsViewModel>();
+                m.CreateMap<GraphicCard, GraphicCardSpecsViewModel>();
+                m.CreateMap<HardDrive, HardDriveSpecsViewModel>();
             });
         }
     }

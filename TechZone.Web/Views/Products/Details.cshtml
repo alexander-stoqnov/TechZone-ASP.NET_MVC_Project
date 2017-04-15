@@ -18,7 +18,15 @@
                     </div>
                     <div class="col-md-7">
                         <div class="product-title">@Model.Name</div>
-                        <div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
+                        <div class="product-rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (Math.Round(Model.Rating) >= i)
+                                {<i class="fa fa-star gold"></i>}
+                                else
+                                {<i class="fa fa-star-o"></i>}
+                            }
+                        </div>
                         <hr>
                         <div class="product-price">
                             @if (Model.Discount != 0)
@@ -58,11 +66,9 @@
         <div class="container-fluid">
             <div class="col-md-12 product-info">
                 <ul id="myTab" class="nav nav-tabs nav_tabs">
-
                     <li class="active"><a href="#service-one" data-toggle="tab">DESCRIPTION</a></li>
                     <li><a href="#service-two" data-toggle="tab">PRODUCT INFO</a></li>
                     <li><a href="#service-three" data-toggle="tab">REVIEWS</a></li>
-
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="service-one">
@@ -73,7 +79,7 @@
 
                     </div>
                     <div class="tab-pane fade" id="service-two">
-
+                        @Html.Action("HardwareSpecs", Model.Id)
                         <section class="container"></section>
 
                     </div>

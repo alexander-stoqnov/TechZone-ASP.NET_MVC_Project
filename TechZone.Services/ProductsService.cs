@@ -48,5 +48,25 @@
             decimal discountFinal = discount / 100.0m;
             return price - price * discountFinal;
         }
+
+        public bool ProductIsGraphicCard(int id)
+        {
+            return this.Context.GraphicCards.FirstOrDefault(g => g.Id == id) != null;
+        }
+
+        public bool ProductIsHardDrive(int id)
+        {
+            return this.Context.HardDrives.FirstOrDefault(hd => hd.Id == id) != null;
+        }
+
+        public GraphicCardSpecsViewModel GetGraphicSpecs(int id)
+        {
+            return Mapper.Map<GraphicCardSpecsViewModel>(this.Context.GraphicCards.Find(id));
+        }
+
+        public HardDriveSpecsViewModel GetHardDriveSpecs(int id)
+        {
+            return Mapper.Map<HardDriveSpecsViewModel>(this.Context.HardDrives.Find(id));
+        }
     }
 }

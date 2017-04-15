@@ -129,6 +129,8 @@
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Products\GeneralProductPageViewModel.cs" />
+    <Compile Include="ViewModels\Products\GraphicCardSpecsViewModel.cs" />
+    <Compile Include="ViewModels\Products\HardDriveSpecsViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@
         <div class="col-xs-12 col-sm-6 col-md-3" style="padding: 15px;">
             <div class="col-item">
                 <div class="post-img-content">
-                    <img src="@product.ImageUrl" class="img-responsive" alt="@product.Name" width="350" height="260"/>
+                    <img src="@product.ImageUrl" class="img-responsive" alt="@product.Name" width="350" height="260" />
                     @if (product.Discount != 0)
                     {
                         <span class="round-tag">-@product.Discount%</span>
@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="price col-md-7">
                             <h5> @product.Name</h5>
-                            <h5 class="price-text-color">                              
+                            <h5 class="price-text-color">
                                 @if (product.Discount != 0)
                                 {
                                     <del>$@product.Price</del> @:$@product.FinalPrice.ToString("0.00")
@@ -45,8 +45,10 @@
                         <div class="rating hidden-sm col-md-5">
                             @for (int i = 1; i <= 5; i++)
                             {
-                                if (Math.Round(product.Rating) >= i){<i class="price-text-color fa fa-star"></i>}
-                                else{<i class="fa fa-star"></i>}
+                                if (Math.Round(product.Rating) >= i)
+                                {<i class="price-text-color fa fa-star"></i>}
+                                else
+                                {<i class="fa fa-star"></i>}
                             }
                         </div>
                     </div>
@@ -55,7 +57,8 @@
                             <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a>
                         </p>
                         <p class="btn-details">
-                            <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a>
+                            <i class="fa fa-list"></i>
+                            @Html.ActionLink("More details", "Details", "Products", new { id = product.Id}, new { @class = "hidden-sm"})
                         </p>
                     </div>
                     <div class="clearfix">

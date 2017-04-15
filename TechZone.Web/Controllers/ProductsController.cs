@@ -33,5 +33,21 @@
             ProductDetailsViewModel productDetailsVm = this.service.GetProductDetails(id);
             return this.View(productDetailsVm);
         }
+
+        [ChildActionOnly]
+        public ActionResult HardwareSpecs(int id)
+        {
+            if (this.service.ProductIsGraphicCard(id))
+            {
+                GraphicCardSpecsViewModel gcsvm = this.service.GetGraphicSpecs(id);
+                return this.PartialView("_GraphicCardSpecsPartial", gcsvm);
+            }
+            else if (this.service.ProductIsHardDrive(id))
+            {
+                HardDriveSpecsViewModel hdsvm = this.service.GetHardDriveSpecs(id);
+                return this.PartialView("_HardDriveSpecsPartial", hdsvm);
+            }
+            return RedirectToAction("All");
+        }
     }
 }
