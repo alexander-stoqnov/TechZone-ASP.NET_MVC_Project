@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using TechZone.Models.ViewModels.Products;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Services;
+    using System.Collections.Generic;
+    using Models.ViewModels.Products;
 
     [RoutePrefix("Products")]
     public class ProductsController : Controller
@@ -21,6 +20,18 @@ namespace TechZone.Web.Controllers
         {
             IEnumerable<GeneralProductPageViewModel> productVms = this.service.GetAllProducts();
             return View(productVms);
+        }
+
+        [Route("Details/{id=1}")]
+        public ActionResult Details(int id = 1)
+        {
+            if (!this.service.ProductExists(id))
+            {
+                return RedirectToAction("All");
+            }
+
+            ProductDetailsViewModel productDetailsVm = this.service.GetProductDetails(id);
+            return this.View(productDetailsVm);
         }
     }
 }

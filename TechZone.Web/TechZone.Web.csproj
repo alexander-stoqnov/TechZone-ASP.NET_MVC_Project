@@ -217,6 +217,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\LoginRegisterStyles.css" />
+    <Content Include="Content\ProductDetails.css" />
     <Content Include="Content\ProductStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -288,6 +289,7 @@
     <Content Include="Views\Shared\Unauthorized.cshtml" />
     <Content Include="Views\Shared\_BackUpLayout.cshtml" />
     <Content Include="Views\Products\All.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">

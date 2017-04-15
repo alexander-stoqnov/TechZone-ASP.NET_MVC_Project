@@ -20,13 +20,33 @@
                 }
                 if (product.Discount != 0)
                 {
-                    decimal discountFinal = product.Discount / 100.0m;
-                    decimal finalPrice = product.Price - product.Price * discountFinal;
-                    productVm.FinalPrice = finalPrice;
+                    productVm.FinalPrice = CalculateFinalPrice(product.Discount, product.Price);
                 }
                 productVms.Add(productVm);
             }
             return productVms;
+        }
+
+        public bool ProductExists(int id)
+        {
+            return this.Context.Products.Find(id) != null;
+        }
+
+        public ProductDetailsViewModel GetProductDetails(int id)
+        {
+            var product = this.Context.Products.Find(id);
+            var productDetailsVm = Mapper.Map<ProductDetailsViewModel>(product);
+            if (product.Discount != 0)
+            {
+                productDetailsVm.FinalPrice = CalculateFinalPrice(product.Discount, product.Price);
+            }
+            return productDetailsVm;
+        }
+
+        private decimal CalculateFinalPrice(int discount, decimal price)
+        {
+            decimal discountFinal = discount / 100.0m;
+            return price - price * discountFinal;
         }
     }
 }

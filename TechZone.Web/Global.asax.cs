@@ -30,6 +30,7 @@
             {
                 m.CreateMap<IdentityRole, RoleViewModel>();
                 m.CreateMap<Product, GeneralProductPageViewModel>();
+                m.CreateMap<Product, ProductDetailsViewModel>();
             });
         }
     }
