@@ -52,5 +52,16 @@
             ShoppingCartViewModel cart = this.service.GetCartItems(userId, this.Session.SessionID);
             return this.View(cart);
         }
+
+        [Route("Checkout")]
+        public ActionResult Checkout()
+        {
+            var userId = this.User.Identity.GetUserId();
+            if (!service.IsShoppingCartForRegisteredUser(userId))
+            {
+                return RedirectToAction("Register", "Account");
+            }
+            return null;
+        }
     }
 }

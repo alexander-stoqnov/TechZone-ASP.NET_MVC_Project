@@ -114,5 +114,9 @@
             return price - price * discountFinal;
         }
 
+        public bool IsShoppingCartForRegisteredUser(string userId)
+        {
+            return this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == userId) != null;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model int
 <li>
-    <a href="/Purchase/ShoppingCart" class="shopping-cart-button float-right" data-toggle="shopping-cart-dropdown">
+    <a href="@Url.Action("ShoppingCart", "Purchase")" class="shopping-cart-button float-right">
         <i class="fa fa-shopping-cart"></i>
         <span class="text">Shopping Cart (@Model)</span>
     </a>
