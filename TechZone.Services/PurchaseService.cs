@@ -45,5 +45,25 @@ namespace TechZone.Services
             shoppingCart.Products.Add(product);
             this.Context.SaveChanges();
         }
+
+        public int ProductsInCartForLoggedInUser(string currentUserId)
+        {
+            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == currentUserId);
+            if (cart == null)
+            {
+                return 0;
+            }
+            return cart.Products.Count;
+        }
+
+        public int ProductsInCartForGuest(string sessionId)
+        {
+            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
+            if (cart == null)
+            {
+                return 0;
+            }
+            return cart.Products.Count;
+        }
     }
 }

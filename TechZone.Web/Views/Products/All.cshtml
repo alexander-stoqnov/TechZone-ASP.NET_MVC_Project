@@ -16,7 +16,7 @@
         {
             @:<div class="row">
         }
-        <div class="col-xs-12 col-sm-6 col-md-3" style="padding: 15px;">
+        <div class="col-xs-12 col-sm-6 col-md-3" style="padding: 15px;" id="@product.Id">
             <div class="col-item">
                 <div class="post-img-content">
                     <img src="@product.ImageUrl" class="img-responsive" alt="@product.Name" width="350" height="260" />
@@ -80,12 +80,14 @@
     function addToCart(prodId) {
         var productId = "productId_" + prodId;
         var product = document.getElementById(productId);
+
         $.ajax({
             type: "POST",
             url: "/Purchase/AddToShoppingCart",
             data: { id : product.value},
             success: function () {
-                window.location.href = '/Products/All/';
+                location.reload();
+                window.location.href = '/Products/All/#' + prodId;
             }
         });
     }

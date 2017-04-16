@@ -294,6 +294,7 @@
     <Content Include="Views\Products\_GraphicCardSpecsPartial.cshtml" />
     <Content Include="Views\Products\_HardDriveSpecsPartial.cshtml" />
     <Content Include="Views\Purchase\ShoppingCart.cshtml" />
+    <Content Include="Views\Shared\_NavigationHelpersPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">
