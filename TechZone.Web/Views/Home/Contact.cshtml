@@ -1,17 +1,70 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+
+<style>
+    #map {
+        height: 600px;
+        width: 55%;
+    }
+</style>
+
+<div id="map"></div>
+
+@section scripts {
+    <script>
+      function initMap() {
+        var uluru = {lat: 43.4152342, lng: 24.6207013};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 17,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+</script>
+    <script>
+        function distance(lon1, lat1, lon2, lat2) {
+            var R = 6371; // Radius of the earth in km
+            var dLat = (lat2-lat1).toRad();  // Javascript functions in radians
+            var dLon = (lon2-lon1).toRad();
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            var d = R * c; // Distance in km
+            return d;
+        }
+
+        /** Converts numeric degrees to radians */
+        if (typeof(Number.prototype.toRad) === "undefined") {
+            Number.prototype.toRad = function() {
+                return this * Math.PI / 180;
+            }
+        }
+
+        window.navigator.geolocation.getCurrentPosition(function(pos) {
+            console.log(pos);
+            console.log(
+                distance(pos.coords.longitude, pos.coords.latitude, 23.3219, 42.6977)  // Sofia Coordinates
+            );
+        });
+    </script>
+@*GOES TOGETHER WITH THE MAP FRAME, DO NOT REMOVE*@
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqheJwES09BJ6oMzs5dL-HPc3hgoD2yvQ&callback=initMap">
+</script>
+}
 
 <address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
+    Vassil Aprilov 17<br />
+    5809 Pleven, Bulgaria<br />
     <abbr title="Phone">P:</abbr>
-    425.555.0100
+    +359885428144
 </address>
 
 <address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    <strong>Big Baws:</strong>   <a href="mailto:petar.dimitrov.86@students.softuni.bg">petar.dimitrov.86@students.softuni.bg</a><br />
 </address>

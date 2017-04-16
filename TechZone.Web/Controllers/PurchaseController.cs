@@ -3,7 +3,7 @@
     using System.Web.Mvc;
     using Services;
     using Microsoft.AspNet.Identity;
-    using TechZone.Models.ViewModels.Purchase;
+    using Models.ViewModels.Purchase;
 
     [RoutePrefix("Purchase")]
     public class PurchaseController : Controller
@@ -62,15 +62,12 @@
             return RedirectToAction("ShoppingCart", "Purchase");
         }
 
-        [Route("Checkout")]
-        public ActionResult Checkout()
+        [Route("CheckOut")]
+        [Authorize(Roles = "Customer")]
+        public ActionResult CheckOut()
         {
-            var userId = this.User.Identity.GetUserId();
-            if (!service.IsShoppingCartForRegisteredUser(userId))
-            {
-                return RedirectToAction("Register", "Account");
-            }
-            return null;
+
+            return this.View();
         }
     }
 }
