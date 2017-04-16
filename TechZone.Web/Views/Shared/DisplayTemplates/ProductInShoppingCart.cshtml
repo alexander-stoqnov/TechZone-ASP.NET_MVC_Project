@@ -17,9 +17,14 @@
             <td class="col-sm-1 col-md-1 text-center"><strong>$@product.Price</strong></td>
             <td class="col-sm-1 col-md-1 text-center"><strong>$@product.FinalPrice</strong></td>
             <td class="col-sm-1 col-md-1">
-                <button type="button" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-remove"></span> Remove
-                </button>
+                @using (Html.BeginForm("RemoveFromCart", "Purchase", FormMethod.Post))
+                {
+                    <input type ="hidden" name="id" value="@product.Id"/>
+                    <button type="submit" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span> Remove
+                    </button>
+                }
+
             </td>
         </tr>
     }

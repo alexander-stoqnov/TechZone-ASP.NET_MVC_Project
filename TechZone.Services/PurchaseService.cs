@@ -118,5 +118,17 @@
         {
             return this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == userId) != null;
         }
+
+        public void RemoveProductFromCart(string currentUserId, string sessionId, int productId)
+        {
+            var cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
+            if (cart == null)
+            {
+                cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == sessionId);
+            }
+            var productToRemove = cart.Products.FirstOrDefault(pr => pr.Id == productId);
+            cart.Products.Remove(productToRemove);
+            this.Context.SaveChanges();
+        }
     }
 }

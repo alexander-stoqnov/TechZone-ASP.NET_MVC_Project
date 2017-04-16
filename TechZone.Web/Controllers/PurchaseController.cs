@@ -53,6 +53,15 @@
             return this.View(cart);
         }
 
+        [HttpPost]
+        [Route("Delete")]
+        public ActionResult RemoveFromCart(int id)
+        {
+            var currentUserId = this.User.Identity.GetUserId();
+            this.service.RemoveProductFromCart(currentUserId, this.Session.SessionID ,id);
+            return RedirectToAction("ShoppingCart", "Purchase");
+        }
+
         [Route("Checkout")]
         public ActionResult Checkout()
         {
