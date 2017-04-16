@@ -1,1 +1,26 @@
-﻿@model TechZone.Models.ViewModels.Purchase.ProductInCartViewModel
+﻿@model IEnumerable<TechZone.Models.ViewModels.Purchase.ProductInCartViewModel>  
+
+@{
+    foreach (var product in Model)
+    {
+        <tr>
+            <td class="col-sm-8 col-md-6">
+                <div class="media">
+                    <span class="thumbnail pull-left" href="#" style="margin-bottom: 0;"> <img class="media-object" src="@product.ImageUrl" style="width: 72px; height: 72px;"> </span>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a style="height:72px;display:table-cell;vertical-align:middle;">@product.Name</a>
+                        </h4>
+                    </div>
+                </div>
+            </td>
+            <td class="col-sm-1 col-md-1 text-center"><strong>$@product.Price</strong></td>
+            <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
+            <td class="col-sm-1 col-md-1">
+                <button type="button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> Remove
+                </button>
+            </td>
+        </tr>
+    }
+}
