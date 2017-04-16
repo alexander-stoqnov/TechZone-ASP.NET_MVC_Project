@@ -11,6 +11,6 @@
 
         public int Id { get; set; }
 
-        public ICollection<ProductInCartViewModel> ProductsInCart { get; set; }
+        public IEnumerable<ProductInCartViewModel> ProductsInCart { get; set; }
     }
 }

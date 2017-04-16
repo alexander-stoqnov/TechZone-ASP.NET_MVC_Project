@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web
+﻿using TechZone.Models.ViewModels.Purchase;
+
+namespace TechZone.Web
 {
     using System.Web;
     using System.Web.Mvc;
@@ -37,6 +39,7 @@
                 m.CreateMap<IdentityRole, RoleViewModel>();
                 m.CreateMap<Product, GeneralProductPageViewModel>();
                 m.CreateMap<Product, ProductDetailsViewModel>();
+                m.CreateMap<Product, ProductInCartViewModel>();
                 m.CreateMap<GraphicCard, GraphicCardSpecsViewModel>();
                 m.CreateMap<HardDrive, HardDriveSpecsViewModel>();
             });

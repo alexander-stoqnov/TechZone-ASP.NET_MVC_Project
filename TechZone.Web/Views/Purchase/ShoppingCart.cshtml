@@ -1,7 +1,84 @@
-﻿
+﻿@model TechZone.Models.ViewModels.Purchase.ShoppingCartViewModel
 @{
     ViewBag.Title = "ShoppingCart";
 }
 
-<h2>ShoppingCart</h2>
+<style>
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+</style>
 
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                @{
+                    foreach (var product in Model.ProductsInCart)
+                    {
+                        <tr>
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <span class="thumbnail pull-left" href="#" style="margin-bottom: 0;"> <img class="media-object" src="@product.ImageUrl" style="width: 72px; height: 72px;"> </span>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a style="height:72px;display:table-cell;vertical-align:middle;">@product.Name</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>$@product.Price</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                <button type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove"></span> Remove
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }                
+                <tr>
+                    <td colspan="2"></td>
+                    <td><h5>Subtotal</h5></td>
+                    <td class="text-right"><h5><strong>$24.59</strong></h5></td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><h5>Estimated shipping</h5></td>
+                    <td class="text-right"><h5><strong>$6.94</strong></h5></td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td>
+                        <h3>Total</h3></td>
+                    <td class="text-right">
+                        <h3><strong>$31.53</strong>
+                        </h3></td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td>
+                        <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success">
+                            Checkout <span class="glyphicon glyphicon-play"></span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

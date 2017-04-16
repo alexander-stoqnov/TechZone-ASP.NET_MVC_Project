@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using Services;
     using Microsoft.AspNet.Identity;
+    using TechZone.Models.ViewModels.Purchase;
 
     [RoutePrefix("Purchase")]
     public class PurchaseController : Controller
@@ -48,8 +49,8 @@
         public ActionResult ShoppingCart()
         {
             var userId = this.User.Identity.GetUserId();
-            // ShoppingCartViewModel cart = this.
-            return null;
+            ShoppingCartViewModel cart = this.service.GetCartItems(userId, this.Session.SessionID);
+            return this.View(cart);
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿using System.Linq;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
+    using System.Linq;
     using Models.EntityModels;
+    using System.Collections.Generic;
+    using AutoMapper;
+    using Models.ViewModels.Purchase;
 
     public class PurchaseService : Service
     {
@@ -60,6 +62,32 @@ namespace TechZone.Services
                 return cart.Products.Count;
             }
             return 0;
+        }
+
+        public ShoppingCartViewModel GetCartItems(string userId, string sessionId)
+        {
+            ShoppingCartViewModel scvm = new ShoppingCartViewModel { Id = 0 };
+
+            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == userId);
+            if (cart != null)
+            {
+                scvm = new ShoppingCartViewModel
+                {
+                    Id = cart.Id,
+                    ProductsInCart = Mapper.Map<IEnumerable<ProductInCartViewModel>>(cart.Products)
+                };
+                return scvm;
+            }
+            cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
+            if (cart != null)
+            {
+                scvm = new ShoppingCartViewModel
+                {
+                    Id = cart.Id,
+                    ProductsInCart = Mapper.Map<IEnumerable<ProductInCartViewModel>>(cart.Products)
+                };
+            }
+            return scvm;
         }
     }
 }
