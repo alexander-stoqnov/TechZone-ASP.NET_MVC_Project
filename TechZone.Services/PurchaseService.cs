@@ -74,8 +74,10 @@
                 scvm = new ShoppingCartViewModel
                 {
                     Id = cart.Id,
-                    ProductsInCart = Mapper.Map<IEnumerable<ProductInCartViewModel>>(cart.Products)
+                    ProductsInCart = GetFinalProductInCartInfo(cart.Products)
                 };
+                scvm.FinalPriceWithoutDiscount = scvm.ProductsInCart.Sum(pr => pr.Price);
+                scvm.FinalPriceWithDiscount = scvm.ProductsInCart.Sum(pr => pr.FinalPrice);
                 return scvm;
             }
             cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
@@ -84,10 +86,33 @@
                 scvm = new ShoppingCartViewModel
                 {
                     Id = cart.Id,
-                    ProductsInCart = Mapper.Map<IEnumerable<ProductInCartViewModel>>(cart.Products)
+                    ProductsInCart = GetFinalProductInCartInfo(cart.Products)
                 };
             }
+            scvm.FinalPriceWithoutDiscount = scvm.ProductsInCart.Sum(pr => pr.Price);
+            scvm.FinalPriceWithDiscount = scvm.ProductsInCart.Sum(pr => pr.FinalPrice);
             return scvm;
         }
+
+        private IEnumerable<ProductInCartViewModel> GetFinalProductInCartInfo(IEnumerable<Product> products)
+        {
+            var productsInCartVms = new HashSet<ProductInCartViewModel>();
+
+            foreach (var product in products)
+            {
+                var productVm = Mapper.Map<ProductInCartViewModel>(product);
+                productVm.FinalPrice = CalculateFinalPrice(product.Discount, product.Price);
+                productsInCartVms.Add(productVm);
+            }
+
+            return productsInCartVms;
+        }
+
+        private decimal CalculateFinalPrice(int discount, decimal price)
+        {
+            decimal discountFinal = discount / 100.0m;
+            return price - price * discountFinal;
+        }
+
     }
 }

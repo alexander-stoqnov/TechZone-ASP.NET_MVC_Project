@@ -12,5 +12,11 @@
         public int Id { get; set; }
 
         public IEnumerable<ProductInCartViewModel> ProductsInCart { get; set; }
+
+        public decimal FinalPriceWithoutDiscount { get; set; }
+
+        public decimal FinalPriceWithDiscount { get; set; }
+
+        public decimal AmmountSaved { get; set; }
     }
 }
