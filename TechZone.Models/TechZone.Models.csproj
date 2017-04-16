@@ -133,6 +133,8 @@
     <Compile Include="ViewModels\Products\GraphicCardSpecsViewModel.cs" />
     <Compile Include="ViewModels\Products\HardDriveSpecsViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Purchase\ProductInCartViewModel.cs" />
+    <Compile Include="ViewModels\Purchase\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

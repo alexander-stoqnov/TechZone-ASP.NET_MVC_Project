@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Services;
+    using Microsoft.AspNet.Identity;
 
+    [RoutePrefix("Purchase")]
     public class PurchaseController : Controller
     {
         private PurchaseService service;
@@ -15,6 +15,7 @@ namespace TechZone.Web.Controllers
         }
 
         [HttpPost]
+        [Route("AddToShoppingCart")]
         public ActionResult AddToShoppingCart(int id)
         {
             if (!this.service.ProductExists(id))
@@ -37,16 +38,18 @@ namespace TechZone.Web.Controllers
         public ActionResult CountOfProductsInCart()
         {
             int count = 0;
-            if (User.Identity.IsAuthenticated)
-            {
-                string currentUserId = this.User.Identity.GetUserId();
-                count = this.service.ProductsInCartForLoggedInUser(currentUserId);
-            }
-            else
-            {
-                count = this.service.ProductsInCartForGuest(this.Session.SessionID);
-            }
+            string currentUserId = this.User.Identity.GetUserId();
+            count = this.service.GetNumberOfItemsInCart(currentUserId, this.Session.SessionID);
+
             return this.PartialView("_NavigationHelpersPartial", count);
+        }
+
+        [Route("ShoppingCart")]
+        public ActionResult ShoppingCart()
+        {
+            var userId = this.User.Identity.GetUserId();
+            // ShoppingCartViewModel cart = this.
+            return null;
         }
     }
 }

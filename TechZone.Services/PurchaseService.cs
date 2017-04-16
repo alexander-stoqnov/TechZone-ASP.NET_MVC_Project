@@ -46,24 +46,20 @@ namespace TechZone.Services
             this.Context.SaveChanges();
         }
 
-        public int ProductsInCartForLoggedInUser(string currentUserId)
+        public int GetNumberOfItemsInCart(string currentUserId, string sessionId)
         {
             ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == currentUserId);
-            if (cart == null)
+            if (cart != null)
             {
-                return 0;
+                return cart.Products.Count;
             }
-            return cart.Products.Count;
-        }
 
-        public int ProductsInCartForGuest(string sessionId)
-        {
-            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
-            if (cart == null)
+            cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
+            if (cart != null)
             {
-                return 0;
+                return cart.Products.Count;
             }
-            return cart.Products.Count;
+            return 0;
         }
     }
 }
