@@ -4,10 +4,10 @@
 }
 
 @section styles{
-    <style>
-    .table > tbody > tr > td {
-        vertical-align: middle;
-    }
+<style>
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
 </style>
 }
 
@@ -28,7 +28,7 @@
                 <tr>
                     <td colspan="2"></td>
                     <td><h5>Price w/o shipment</h5></td>
-                    <td class="text-right"><h5><strong>$@Model.FinalPriceWithoutDiscount.ToString("0.00")</strong></h5></td>
+                    <td class="text-right"><h5><strong>$@Model.FinalPriceWithDiscount.ToString("0.00")</strong></h5></td>
                 </tr>
                 <tr>
                     <td colspan="2"></td>

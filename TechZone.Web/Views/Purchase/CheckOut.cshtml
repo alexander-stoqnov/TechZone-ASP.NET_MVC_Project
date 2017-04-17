@@ -1,10 +1,41 @@
-﻿@{
+﻿@model decimal
+@{
     ViewBag.Title = "CheckOut";
 }
 
-<h2>CheckOut</h2>
+<style>
+    body {
+        text-align: center;
+    }
+</style>
 
-<p id="distanceCalc"> Total distance :</p>
+<h4 id="distanceCalc"></h4>
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4">
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th>Items Price</th>
+                <td>$@(Model.ToString("0.00"))</td>
+            </tr>
+            <tr>
+                <th>Shipping Costs</th>
+                <td id="shippingCosts"></td>
+            </tr>
+            <tr class="bg-success">
+                <th>Final Price</th>
+                <td id="priceWithShipment"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <a href="@Url.Action("ShoppingCart", "Purchase")" class="btn btn-danger">
+        <span class="glyphicon glyphicon-shopping-cart"></span> Back to Cart
+    </a>
+    <a href="@Url.Action("Checkout", "Purchase")" class="btn btn-success">
+        Purchase <span class="glyphicon glyphicon-play"></span>
+    </a>
+</div>
 
 @section scripts {
 <script>
@@ -27,24 +58,15 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 	}
 }
 
-window.navigator.geolocation.getCurrentPosition(function(pos) {
-	console.log(distance(pos.coords.longitude, pos.coords.latitude, 23.3219, 42.6977));  // Sofia Coordinates
-    $("#distanceCalc").text(Math.round(distance(pos.coords.longitude, pos.coords.latitude, 23.3219, 42.6977)));
+window.navigator.geolocation.getCurrentPosition(function (pos) {
+    var finalDistance = distance(pos.coords.longitude, pos.coords.latitude, 23.3219, 42.6977);
+    console.log(finalDistance);  // Sofia Coordinates
+    var distanceText = 'Distance to you : ' + Math.round(finalDistance) + ' km.';
+    $("#distanceCalc").text(distanceText);
+    var shippingCosts = Math.round((Number(finalDistance) / 40) * 100) / 100;
+    $("#shippingCosts").text('$' + shippingCosts);
+    var priceWithShipment = '$' + Math.round((shippingCosts + @Model) * 100) / 100;
+	$("#priceWithShipment").text(priceWithShipment);
 });
 </script>
 }
-
-@*<script>
-var x = document.getElementById("demo");
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
-}
-</script>*@

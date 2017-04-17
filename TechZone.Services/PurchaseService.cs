@@ -130,5 +130,16 @@
             cart.Products.Remove(productToRemove);
             this.Context.SaveChanges();
         }
+
+        public decimal CalculatePriceWithoutShipment(string currentUserId)
+        {
+            var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
+            decimal totalSum = 0;
+            foreach (var product in cart.Products)
+            {
+                totalSum += this.CalculateFinalPrice(product.Discount, product.Price);
+            }
+            return totalSum;
+        }
     }
 }

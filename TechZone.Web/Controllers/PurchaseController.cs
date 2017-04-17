@@ -66,7 +66,9 @@
         [Authorize(Roles = "Customer")]
         public ActionResult CheckOut()
         {
-            return this.View();
+            var currentUserId = this.User.Identity.GetUserId();
+            decimal finalItemsPrice = this.service.CalculatePriceWithoutShipment(currentUserId);
+            return this.View(finalItemsPrice);
         }
     }
 }
