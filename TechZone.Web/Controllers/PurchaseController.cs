@@ -1,5 +1,6 @@
 ﻿namespace TechZone.Web.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
     using Services;
     using Microsoft.AspNet.Identity;
@@ -50,6 +51,10 @@
         {
             var userId = this.User.Identity.GetUserId();
             ShoppingCartViewModel cart = this.service.GetCartItems(userId, this.Session.SessionID);
+            if (!cart.ProductsInCart.Any())
+            {
+                return RedirectToAction("All", "Products");
+            }
             return this.View(cart);
         }
 

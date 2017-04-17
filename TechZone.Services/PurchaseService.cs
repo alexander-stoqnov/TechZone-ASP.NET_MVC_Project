@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
+    using System;
     using System.Linq;
     using Models.EntityModels;
     using System.Collections.Generic;
@@ -52,13 +51,13 @@ namespace TechZone.Services
 
         public int GetNumberOfItemsInCart(string currentUserId, string sessionId)
         {
-            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == currentUserId);
+            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
             if (cart != null)
             {
                 return cart.Products.Count;
             }
 
-            cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
+            cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == currentUserId);
             if (cart != null)
             {
                 return cart.Products.Count;
@@ -70,7 +69,7 @@ namespace TechZone.Services
         {
             ShoppingCartViewModel scvm = new ShoppingCartViewModel { Id = 0 };
 
-            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == userId);
+            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
             if (cart != null)
             {
                 scvm = new ShoppingCartViewModel
@@ -82,7 +81,8 @@ namespace TechZone.Services
                 scvm.FinalPriceWithDiscount = scvm.ProductsInCart.Sum(pr => pr.FinalPrice);
                 return scvm;
             }
-            cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
+
+            cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == userId);
             if (cart != null)
             {
                 scvm = new ShoppingCartViewModel
@@ -170,6 +170,7 @@ namespace TechZone.Services
             customer.Credits -= finalPrice;
             this.Context.Purchases.Add(purchase);
             this.Context.ShoppingCarts.Remove(cart);
+            this.Context.ShoppingCarts.Add(new ShoppingCart {Customer = customer.User});
             this.Context.SaveChanges();
         }
     }
