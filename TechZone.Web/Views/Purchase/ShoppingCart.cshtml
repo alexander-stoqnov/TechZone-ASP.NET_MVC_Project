@@ -19,7 +19,7 @@
                     <tr>
                         <th>Product</th>
                         <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
+                        <th class="text-center">Discounted Price</th>
                         <th> </th>
                     </tr>
                 </thead>
@@ -27,20 +27,15 @@
                 @Html.DisplayFor(vm => vm.ProductsInCart, "ProductInShoppingCart")              
                 <tr>
                     <td colspan="2"></td>
-                    <td><h5>Final Price</h5></td>
+                    <td><h5>Price w/o shipment</h5></td>
                     <td class="text-right"><h5><strong>$@Model.FinalPriceWithoutDiscount.ToString("0.00")</strong></h5></td>
                 </tr>
                 <tr>
                     <td colspan="2"></td>
-                    <td><h5>You Save</h5></td>
-                    <td class="text-right"><h5><strong>$@((Model.FinalPriceWithoutDiscount - Model.FinalPriceWithDiscount).ToString("0.00"))</strong></h5></td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
                     <td>
-                        <h3>Total</h3></td>
+                        <h3>You Save</h3></td>
                     <td class="text-right">
-                        <h3><strong>$31.53</strong>
+                        <h3><strong>$@((Model.FinalPriceWithoutDiscount - Model.FinalPriceWithDiscount).ToString("0.00"))</strong>
                         </h3></td>
                 </tr>
                 <tr>

@@ -124,7 +124,7 @@
             var cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
             if (cart == null)
             {
-                cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == sessionId);
+                cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == currentUserId);
             }
             var productToRemove = cart.Products.FirstOrDefault(pr => pr.Id == productId);
             cart.Products.Remove(productToRemove);

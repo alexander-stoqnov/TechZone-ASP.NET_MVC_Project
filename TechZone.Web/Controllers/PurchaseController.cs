@@ -66,7 +66,6 @@
         [Authorize(Roles = "Customer")]
         public ActionResult CheckOut()
         {
-
             return this.View();
         }
     }
