@@ -9,7 +9,7 @@
     using Microsoft.Owin.Security;
     using Models.EntityModels;
     using Models.ViewModels.Account;
-    using TechZone.Data;
+    using Data;
 
     [Authorize]
     public class AccountController : Controller
@@ -85,6 +85,7 @@
             switch (result)
             {
                 case SignInStatus.Success:
+                    this.AddOrUpdateCartForUser(model.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -167,9 +168,11 @@
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
                     this.UserManager.AddToRole(user.Id, "Customer");
                     this.context.Customers.Add(new Customer() { UserId = user.Id });
                     context.SaveChanges();
+                    this.AddOrUpdateCartForUser(model.Email);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     return RedirectToAction("Index", "Home");
@@ -342,6 +345,7 @@
             switch (result)
             {
                 case SignInStatus.Success:
+                    this.AddOrUpdateCartForUser(loginInfo.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -367,7 +371,6 @@
             {
                 return RedirectToAction("Index", "Manage");
             }
-
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
@@ -380,6 +383,7 @@
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    this.AddOrUpdateCartForUser(model.Email);
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
@@ -412,9 +416,22 @@
             return View();
         }
 
-        private void AddOrUpdateCartForUser()
+        private void AddOrUpdateCartForUser(string userEmail)
         {
+            var cart = this.context.ShoppingCarts.FirstOrDefault(c => c.SessionId == this.Session.SessionID);
+            var user = this.context.Users.FirstOrDefault(u => u.Email == userEmail);
 
+            if (cart != null)
+            {
+                cart.SessionId = null;
+                cart.Customer = user;
+            }
+            else
+            {
+                ShoppingCart newCart = new ShoppingCart { Customer = user };
+                this.context.ShoppingCarts.Add(newCart);
+            }
+            this.context.SaveChanges();
         }
 
         protected override void Dispose(bool disposing)
