@@ -3,48 +3,12 @@
     ViewBag.Title = "Contact";
 }
 
-<style>
-    #map {
-        height: 600px;
-        width: 55%;
-    }
-</style>
-
 <div id="map"></div>
 
 @section scripts {
-    <script>
-      var map;
-      function initialize() {
-          var latlng = new google.maps.LatLng(43.415504, 24.620746);
-          var myOptions = {
-              zoom: 17,
-              center: latlng,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          map = new google.maps.Map(document.getElementById("map"), myOptions);
-          var marker = new google.maps.Marker
-          (
-              {
-                  position: new google.maps.LatLng(43.415504, 24.620746),
-                  map: map,
-                  title: 'Click me'
-              }
-          );
-          var infowindow = new google.maps.InfoWindow({
-              content: 'Vassil Aprilov 17<br/>TechZone<br/> Pleven, 5809<br/>Bulgaria<br/>+359885428144'
-          });
-          google.maps.event.addListener(marker, 'click', function () {
-              // Calling the open method of the infoWindow 
-              infowindow.open(map, marker);
-          });
-      }
-</script>
-
+<script src="~/Scripts/CustomScripts/GoogleMapScript.js" type="text/javascript"></script>
 @*GOES TOGETHER WITH THE MAP FRAME, DO NOT REMOVE*@
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=@(Model)&callback=initialize">
-</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=@(Model)&callback=initialize"></script>
 }
 
 <address>
