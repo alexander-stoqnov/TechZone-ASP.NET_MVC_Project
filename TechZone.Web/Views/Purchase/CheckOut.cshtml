@@ -7,6 +7,9 @@
     body {
         text-align: center;
     }
+    td.price-data-cell {
+        text-align: right;
+    }
 </style>
 
 <h4 id="distanceCalc"></h4>
@@ -15,15 +18,15 @@
         <table class="table table-responsive table-hover">
             <tr>
                 <th>Items Price</th>
-                <td id="itemsPrice">$@(Model.ToString("0.00"))</td>
+                <td id="itemsPrice" class="price-data-cell">$@(Model.ToString("0.00"))</td>
             </tr>
             <tr>
                 <th>Shipping Costs</th>
-                <td id="shippingCosts"></td>
+                <td id="shippingCosts" class="price-data-cell"></td>
             </tr>
             <tr class="bg-success">
                 <th>Final Price</th>
-                <td id="priceWithShipment"></td>
+                <td id="priceWithShipment" class="price-data-cell"></td>
             </tr>
         </table>
     </div>
