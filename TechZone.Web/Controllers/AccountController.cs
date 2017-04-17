@@ -432,6 +432,13 @@
                 this.context.ShoppingCarts.Add(newCart);
             }
             this.context.SaveChanges();
+
+            while (this.context.ShoppingCarts.Count(sc => sc.Customer.Email == userEmail) > 1)
+            {
+                var cartToRemove = this.context.ShoppingCarts.First(sc => sc.Customer.Email == userEmail);
+                this.context.ShoppingCarts.Remove(cartToRemove);
+                this.context.SaveChanges();
+            }
         }
 
         protected override void Dispose(bool disposing)
