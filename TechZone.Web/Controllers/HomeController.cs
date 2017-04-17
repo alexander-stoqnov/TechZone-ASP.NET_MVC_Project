@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
+    using System.Web.Mvc;
+
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -18,9 +18,9 @@ namespace TechZone.Web.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            string path = Server.MapPath("~/Scripts/CustomScripts/");
+            var apikey = System.IO.File.ReadAllLines(path + "keys.txt");
+            return View("Contact", null, apikey[0]);
         }
     }
 }
