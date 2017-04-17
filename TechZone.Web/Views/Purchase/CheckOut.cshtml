@@ -30,14 +30,7 @@
             </tr>
             <tr>
                 <th>Your Balance</th>
-                @if (Model.FinalPrice > Model.CurrentCustomerBalance)
-                {
-                    <td class="price-data-cell bg-danger">$@(Model.CurrentCustomerBalance.ToString("0.00"))</td>
-                }
-                else
-                {
-                    <td class="price-data-cell bg-success">$@(Model.CurrentCustomerBalance.ToString("0.00"))</td>
-                }
+                <td class="price-data-cell bg-success" id="currentBalance">$@(Model.CurrentCustomerBalance.ToString("0.00"))</td>
             </tr>
         </table>
         <p id="credits-enough"></p>
@@ -47,9 +40,9 @@
     <a href="@Url.Action("ShoppingCart", "Purchase")" class="btn btn-danger">
         <span class="glyphicon glyphicon-shopping-cart"></span> Back to Cart
     </a>
-    <a href="@Url.Action("Checkout", "Purchase")" class="btn btn-success">
+    <button type="submit" class="btn btn-success">
         Purchase <span class="glyphicon glyphicon-play"></span>
-    </a>
+    </button>
 </div>
 
 @section scripts {
