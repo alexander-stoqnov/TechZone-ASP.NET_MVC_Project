@@ -31,6 +31,7 @@ function calculateFinalPrice(distance) {
     var itemsPrice = $('#itemsPrice').text();
     var priceWithShipment = Math.round((shippingCosts + Number(itemsPrice.substr(1))) * 100) / 100;
     $("#priceWithShipment").text('$' + priceWithShipment);
+    $("#finalPrice").val(priceWithShipment);
     checkIfCreditsAreEnough(priceWithShipment);
 }
 

@@ -1,4 +1,6 @@
-﻿namespace TechZone.Services
+﻿using System;
+
+namespace TechZone.Services
 {
     using System.Linq;
     using Models.EntityModels;
@@ -147,6 +149,28 @@
         {
             var customer = this.Context.Customers.First(c => c.User.Id == currentUserId);
             return customer.Credits > totalPrice;
+        }
+
+        public void FinalizePurchase(string currentUserId, decimal finalPrice)
+        {
+            var customer = this.Context.Customers.First(c => c.User.Id == currentUserId);
+            var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
+
+            Purchase purchase = new Purchase
+            {
+                Customer = customer,
+                PurchaseDate = DateTime.Now,
+            };
+
+            foreach (var product in cart.Products)
+            {
+                purchase.Products.Add(product);
+            }
+
+            customer.Credits -= finalPrice;
+            this.Context.Purchases.Add(purchase);
+            this.Context.ShoppingCarts.Remove(cart);
+            this.Context.SaveChanges();
         }
     }
 }

@@ -37,12 +37,16 @@
     </div>
 </div>
 <div class="row">
-    <a href="@Url.Action("ShoppingCart", "Purchase")" class="btn btn-danger">
-        <span class="glyphicon glyphicon-shopping-cart"></span> Back to Cart
-    </a>
-    <button type="submit" class="btn btn-success">
-        Purchase <span class="glyphicon glyphicon-play"></span>
-    </button>
+    @using (Html.BeginForm("Finalize", "Purchase", FormMethod.Post))
+    {
+        <a href="@Url.Action("ShoppingCart", "Purchase")" class="btn btn-danger">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Back to Cart
+        </a>
+        <button type="submit" class="btn btn-success">
+            Purchase <span class="glyphicon glyphicon-play"></span>
+        </button>
+        <input type="hidden" id="finalPrice" name="finalPrice"/>
+    }
 </div>
 
 @section scripts {

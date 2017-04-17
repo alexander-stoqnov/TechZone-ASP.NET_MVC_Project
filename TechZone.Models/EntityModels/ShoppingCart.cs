@@ -11,9 +11,9 @@
 
         public int Id { get; set; }
 
-        public virtual ApplicationUser Customer { get; set; }
-
         public string SessionId { get; set; }
+
+        public virtual ApplicationUser Customer { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }

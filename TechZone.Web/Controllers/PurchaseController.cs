@@ -82,5 +82,19 @@
             }
             return null;
         }
+
+        [HttpPost]
+        [Route("Finalize")]
+        [Authorize(Roles = "Customer")]
+        public ActionResult Finalize(decimal finalPrice)
+        {
+            var currentUserId = this.User.Identity.GetUserId();
+            if (!this.service.EnoughCredits(currentUserId, finalPrice))
+            {
+                return RedirectToAction("CheckOut", "Purchase");
+            }
+            this.service.FinalizePurchase(currentUserId, finalPrice);
+            return this.RedirectToAction("All", "Products");
+        }
     }
 }
