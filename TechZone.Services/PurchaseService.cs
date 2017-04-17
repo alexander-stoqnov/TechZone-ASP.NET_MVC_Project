@@ -131,15 +131,22 @@
             this.Context.SaveChanges();
         }
 
-        public decimal CalculatePriceWithoutShipment(string currentUserId)
+        public FinalCheckoutViewModel CalculatePriceWithoutShipment(string currentUserId)
         {
+            var customer = this.Context.Customers.First(c => c.User.Id == currentUserId);
             var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
-            decimal totalSum = 0;
+            var finalCheckoutVm = new FinalCheckoutViewModel { CurrentCustomerBalance = customer.Credits };
             foreach (var product in cart.Products)
             {
-                totalSum += this.CalculateFinalPrice(product.Discount, product.Price);
+                finalCheckoutVm.FinalPrice += this.CalculateFinalPrice(product.Discount, product.Price);
             }
-            return totalSum;
+            return finalCheckoutVm;
+        }
+
+        public bool EnoughCredits(string currentUserId, decimal totalPrice)
+        {
+            var customer = this.Context.Customers.First(c => c.User.Id == currentUserId);
+            return customer.Credits > totalPrice;
         }
     }
 }

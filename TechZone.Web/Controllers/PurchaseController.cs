@@ -67,8 +67,20 @@
         public ActionResult CheckOut()
         {
             var currentUserId = this.User.Identity.GetUserId();
-            decimal finalItemsPrice = this.service.CalculatePriceWithoutShipment(currentUserId);
+            FinalCheckoutViewModel finalItemsPrice = this.service.CalculatePriceWithoutShipment(currentUserId);
             return this.View(finalItemsPrice);
+        }
+
+        [Route("BalanceCheck")]
+        [Authorize(Roles = "Customer")]
+        public ActionResult BalanceCheck(decimal totalPrice)
+        {
+            var currentUserId = this.User.Identity.GetUserId();
+            if (!this.service.EnoughCredits(currentUserId, totalPrice))
+            {
+                return this.PartialView("_NotEnoughCreditsPartial");
+            }
+            return null;
         }
     }
 }

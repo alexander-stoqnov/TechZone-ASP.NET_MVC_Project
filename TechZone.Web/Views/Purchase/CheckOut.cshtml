@@ -1,4 +1,4 @@
-﻿@model decimal
+﻿@model TechZone.Models.ViewModels.Purchase.FinalCheckoutViewModel
 @{
     ViewBag.Title = "CheckOut";
 }
@@ -15,20 +15,32 @@
 <h4 id="distanceCalc"></h4>
 <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4">
-        <table class="table table-responsive table-hover">
+        <table class="table table-responsive table-hover table-bordered">
             <tr>
                 <th>Items Price</th>
-                <td id="itemsPrice" class="price-data-cell">$@(Model.ToString("0.00"))</td>
+                <td id="itemsPrice" class="price-data-cell">$@(Model.FinalPrice.ToString("0.00"))</td>
             </tr>
             <tr>
                 <th>Shipping Costs</th>
                 <td id="shippingCosts" class="price-data-cell"></td>
             </tr>
-            <tr class="bg-success">
+            <tr>
                 <th>Final Price</th>
-                <td id="priceWithShipment" class="price-data-cell"></td>
+                <td id="priceWithShipment" class="price-data-cell bg-success"></td>
+            </tr>
+            <tr>
+                <th>Your Balance</th>
+                @if (Model.FinalPrice > Model.CurrentCustomerBalance)
+                {
+                    <td class="price-data-cell bg-danger">$@(Model.CurrentCustomerBalance.ToString("0.00"))</td>
+                }
+                else
+                {
+                    <td class="price-data-cell bg-success">$@(Model.CurrentCustomerBalance.ToString("0.00"))</td>
+                }
             </tr>
         </table>
+        <p id="credits-enough"></p>
     </div>
 </div>
 <div class="row">

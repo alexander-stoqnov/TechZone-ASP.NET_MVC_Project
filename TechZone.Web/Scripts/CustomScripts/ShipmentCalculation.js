@@ -20,11 +20,20 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 window.navigator.geolocation.getCurrentPosition(function (pos) {
     var finalDistance = distance(pos.coords.longitude, pos.coords.latitude, 23.3219, 42.6977);
     console.log(finalDistance);  // Sofia Coordinates
-    var distanceText = 'Distance to you : ' + Math.round(finalDistance) + ' km.';
+    calculateFinalPrice(finalDistance);
+});
+
+function calculateFinalPrice(distance) {
+    var distanceText = 'Distance to you : ' + Math.round(distance) + ' km.';
     $("#distanceCalc").text(distanceText);
-    var shippingCosts = Math.round((Number(finalDistance) / 40) * 100) / 100;
+    var shippingCosts = Math.round((Number(distance) / 40) * 100) / 100;
     $("#shippingCosts").text('$' + shippingCosts);
     var itemsPrice = $('#itemsPrice').text();
-    var priceWithShipment = '$' + Math.round((shippingCosts + Number(itemsPrice.substr(1))) * 100) / 100;
-    $("#priceWithShipment").text(priceWithShipment);
-});
+    var priceWithShipment = Math.round((shippingCosts + Number(itemsPrice.substr(1))) * 100) / 100;
+    $("#priceWithShipment").text('$' + priceWithShipment);
+    checkIfCreditsAreEnough(priceWithShipment);
+}
+
+function checkIfCreditsAreEnough(price) {
+    $("#credits-enough").load("/Purchase/BalanceCheck", { "totalPrice": price });
+}
