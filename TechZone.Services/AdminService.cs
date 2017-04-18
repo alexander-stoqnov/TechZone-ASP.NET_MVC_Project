@@ -37,5 +37,11 @@
             user.Roles.Clear();
             this.Context.SaveChanges();
         }
+
+        public IEnumerable<ManageProductViewModel> GetProductsToManage()
+        {
+            var products = this.Context.Products;
+            return Mapper.Instance.Map<IEnumerable<ManageProductViewModel>>(products);
+        }
     }
 }

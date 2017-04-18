@@ -4,7 +4,7 @@
 
     public abstract class Product
     {
-        public Product()
+        protected Product()
         {
             this.Purchases = new HashSet<Purchase>();
             this.WishlistedBy = new HashSet<Customer>();

@@ -8,6 +8,7 @@
     using Microsoft.AspNet.Identity.Owin;
     using Models.BindingModels;
     using Models.ViewModels.Admin;
+    using System.Collections.Generic;
 
     [RouteArea("Admin")]
     [RoutePrefix("Control")]
@@ -40,6 +41,13 @@
                 userManager.AddToRoles(curbm.Id, role);
             }
             return RedirectToAction("Users", "Control", new { area = "Admin" });
+        }
+
+        [Route("Products")]
+        public ActionResult Products()
+        {
+            IEnumerable<ManageProductViewModel> manageProductVms = this._service.GetProductsToManage();
+            return this.View(manageProductVms);
         }
     }
 }

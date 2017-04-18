@@ -1,6 +1,4 @@
-﻿using TechZone.Models.ViewModels.Purchase;
-
-namespace TechZone.Web
+﻿namespace TechZone.Web
 {
     using System.Web;
     using System.Web.Mvc;
@@ -12,6 +10,7 @@ namespace TechZone.Web
     using Models.EntityModels;
     using Models.ViewModels.Products;
     using System;
+    using Models.ViewModels.Purchase;
 
     public class MvcApplication : HttpApplication
     {
@@ -40,6 +39,7 @@ namespace TechZone.Web
                 m.CreateMap<Product, GeneralProductPageViewModel>();
                 m.CreateMap<Product, ProductDetailsViewModel>();
                 m.CreateMap<Product, ProductInCartViewModel>();
+                m.CreateMap<Product, ManageProductViewModel>();
                 m.CreateMap<GraphicCard, GraphicCardSpecsViewModel>();
                 m.CreateMap<HardDrive, HardDriveSpecsViewModel>();
             });
