@@ -49,5 +49,17 @@
             IEnumerable<ManageProductViewModel> manageProductVms = this._service.GetProductsToManage();
             return this.View(manageProductVms);
         }
+
+        [HttpPost]
+        [Route("DeleteProduct")]
+        public ActionResult ToggleProductAvailability(int id)
+        {
+            if (!this._service.ProductExists(id))
+            {
+                return RedirectToAction("Products", "Control");
+            }
+            this._service.DisableEnableSelectedProduct(id);
+            return RedirectToAction("Products", "Control");
+        }
     }
 }

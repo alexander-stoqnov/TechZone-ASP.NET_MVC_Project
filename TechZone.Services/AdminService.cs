@@ -43,5 +43,17 @@
             var products = this.Context.Products;
             return Mapper.Instance.Map<IEnumerable<ManageProductViewModel>>(products);
         }
+
+        public bool ProductExists(int id)
+        {
+            return this.Context.Products.Find(id) != null;
+        }
+
+        public void DisableEnableSelectedProduct(int id)
+        {
+            var productToDisable = this.Context.Products.Find(id);
+            productToDisable.IsAvailable = !productToDisable.IsAvailable;         
+            this.Context.SaveChanges();
+        }
     }
 }

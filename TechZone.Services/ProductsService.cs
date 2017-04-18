@@ -22,7 +22,10 @@
                 {
                     productVm.FinalPrice = CalculateFinalPrice(product.Discount, product.Price);
                 }
-                productVms.Add(productVm);
+                if (product.IsAvailable)
+                {
+                    productVms.Add(productVm);
+                }
             }
             return productVms;
         }

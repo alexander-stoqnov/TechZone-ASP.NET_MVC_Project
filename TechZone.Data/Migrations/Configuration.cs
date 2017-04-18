@@ -19,10 +19,10 @@ namespace TechZone.Data.Migrations
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            //SeedRoles(roleManager);
-            //SeedUsers(context, userManager);
-            //SeedGraphicCards(context);
-            //SeedHardDrives(context);
+            SeedRoles(roleManager);
+            SeedUsers(context, userManager);
+            SeedGraphicCards(context);
+            SeedHardDrives(context);
             context.SaveChanges();
         }
 
@@ -338,6 +338,18 @@ namespace TechZone.Data.Migrations
                     Description = "Powered by Radeon rx 460 and integrated with 4GB GDDR5 128bit memory",
                     Memory = 4,
                     Name = "Gigabyte Radeon Rx 460, 4GB GDDR5",
+                    Price = 121.34m,
+                    Quantity = 23,
+                    ImageUrl = "https://p1.akcdn.net/full/405542854.gigabyte-radeon-rx-460-windforce-oc-4gb-gddr5-128bit-pcie-gv-rx460wf2oc-4gd.jpg"
+                },
+                new GraphicCard
+                {
+                    Brand = GraphicCardManufacturerType.Nvidia,
+                    Manufacturer = ManufacturerType.MSI,
+                    MemoryType = GraphicCardMemoryType.GDDR5,
+                    Description = "DELETE MEDELETE MEDELETE MEDELETE MEDELETE MEDELETE MEDELETE MEDELETE MEDELETE MEDELETE MEDELETE MEDELETE MEDELETE ME",
+                    Memory = 4,
+                    Name = "Gigabyte Radeon DELLLLL",
                     Price = 121.34m,
                     Quantity = 23,
                     ImageUrl = "https://p1.akcdn.net/full/405542854.gigabyte-radeon-rx-460-windforce-oc-4gb-gddr5-128bit-pcie-gv-rx460wf2oc-4gd.jpg"
