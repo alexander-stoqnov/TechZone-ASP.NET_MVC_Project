@@ -18,7 +18,7 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 }
 
 window.navigator.geolocation.getCurrentPosition(function (pos) {
-    var finalDistance = distance(pos.coords.longitude, pos.coords.latitude, 23.3219, 42.6977);
+    var finalDistance = distance(pos.coords.longitude, pos.coords.latitude, 24.620746, 43.415504);
     console.log(finalDistance);  // Sofia Coordinates
     calculateFinalPrice(finalDistance);
 });
