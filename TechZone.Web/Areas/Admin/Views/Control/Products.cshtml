@@ -28,11 +28,11 @@
                 <td>$@Html.DisplayFor(vm => product.Price)</td>
                 <td>
                     @Html.ActionLink("Edit", "EditProduct", "Control", new { area = "Admin", id = @product.Id}, new { @class = "btn btn-warning btn-xs"})
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("DeleteProduct", "Control", new { area="Admin"}, FormMethod.Post, new { style = "display:inline" }))
                     {
-  
+                        @Html.HiddenFor(vm => product.Id)
+                        <input type="submit" value="Delete" class="btn btn-danger btn-xs"/>
                     }
-                    @Html.ActionLink("Delete", "DeleteProduct", "Control", new { area = "Admin"}, new { @class = "btn btn-danger btn-xs"})
                 </td>
             </tr>
         }
