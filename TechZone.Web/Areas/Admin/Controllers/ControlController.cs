@@ -10,21 +10,21 @@
     using Models.ViewModels.Admin;
 
     [RouteArea("Admin")]
-    [RoutePrefix("Manage")]
+    [RoutePrefix("Control")]
     [CustomAuthorize(Roles = "Admin")]
-    public class ManageController : Controller
+    public class ControlController : Controller
     {
-        private AdminService service;
+        private readonly AdminService _service;
 
-        public ManageController()
+        public ControlController()
         {
-            this.service = new AdminService();
+            this._service = new AdminService();
         }
 
         [Route("Users")]
         public ActionResult Users()
         {
-            UserRolesViewModel urvm = service.GetAllUsersAndRoles();
+            UserRolesViewModel urvm = _service.GetAllUsersAndRoles();
             return this.View(urvm);
         }
 
@@ -33,13 +33,13 @@
         public ActionResult Users([Bind(Include = "Id,Roles")] ChangeUserRolesBindingModel curbm)
         {
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            service.ChangeUserRoles(curbm.Id);
+            _service.ChangeUserRoles(curbm.Id);
 
             foreach (var role in curbm.Roles)
             {
                 userManager.AddToRoles(curbm.Id, role);
             }
-            return RedirectToAction("Users", "Manage", new { area = "Admin" });
+            return RedirectToAction("Users", "Control", new { area = "Admin" });
         }
     }
 }

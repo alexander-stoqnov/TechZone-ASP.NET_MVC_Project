@@ -10,7 +10,7 @@ namespace TechZone.Models.ViewModels.Account
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression("[a-zA-Z][a-zA-Z0-9]{5,}", ErrorMessage = "Username must start with a letter and containt only letters and digits!")]
+        [RegularExpression("[a-zA-Z][a-zA-Z0-9]+", ErrorMessage = "Username must start with a letter and contain only letters and digits!")]
         [MinLength(6, ErrorMessage = "Username must be at least 6 characters long")]
         public string Username { get; set; }
 

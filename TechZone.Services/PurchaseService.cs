@@ -164,6 +164,7 @@
 
             foreach (var product in cart.Products)
             {
+                product.Quantity--;
                 purchase.Products.Add(product);
             }
 

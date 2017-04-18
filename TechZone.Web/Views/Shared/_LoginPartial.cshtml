@@ -14,7 +14,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Courses", "Courses", "Manage", new { area = "Admin" }, null)</li>
-                        <li>@Html.ActionLink("Users", "Users", "Manage", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Users", "Users", "Control", new { area = "Admin" }, null)</li>
                     </ul>
                 </li>
             }
@@ -23,9 +23,19 @@
                 <li>@Html.ActionLink("Trainer", "Courses", "Trainer")</li>
             }
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
+                <a href="@Url.Action("Index", "Manage")">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span class="text">@User.Identity.GetUserName()</span>
+                </a>
+
+                @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})*@
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li> 
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <span class="text">Log off</span>
+                </a>
+            </li>
             @Html.Action("CountOfProductsInCart", "Purchase")
         </ul>
     }
@@ -33,8 +43,20 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>
+            <a href="@Url.Action("Register", "Account")" id="registerLink">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                <span class="text">Register</span>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Login", "Account")" id="loginLink">
+                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                <span class="text">Login</span>
+            </a>
+        </li>
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
         @Html.Action("CountOfProductsInCart", "Purchase")
     </ul>
 }
