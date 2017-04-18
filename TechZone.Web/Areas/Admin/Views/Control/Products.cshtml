@@ -18,30 +18,5 @@
         <th>@Html.DisplayNameFor(vm => vm.Price)</th>
         <th>Manage</th>
     </tr>
-    @{
-        foreach (var product in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(vm => product.Id)</td>
-                <td>@Html.DisplayFor(vm => product.Name)</td>
-                <td>@Html.DisplayFor(vm => product.Quantity)</td>
-                <td>$@Html.DisplayFor(vm => product.Price)</td>
-                <td>
-                    @Html.ActionLink("Edit", "EditProduct", "Control", new { area = "Admin", id = @product.Id}, new { @class = "btn btn-warning btn-xs"})
-                    @using (Html.BeginForm("ToggleProductAvailability", "Control", new { area="Admin" }, FormMethod.Post, new { style = "display:inline" }))
-                    {
-                        <input type="hidden" name="id" value="@product.Id"/>
-                        if (product.IsAvailable)
-                        {
-                            <input type="submit" value="Disable" class="btn btn-danger btn-xs"/>
-                        }
-                        else
-                        {
-                            <input type="submit" value="Enable" class="btn btn-success btn-xs" />
-                        }
-                    }
-                </td>
-            </tr>
-        }
-    }
+    @Html.DisplayFor(vm => Model, "ManagableByAdminProducts")
 </table>
