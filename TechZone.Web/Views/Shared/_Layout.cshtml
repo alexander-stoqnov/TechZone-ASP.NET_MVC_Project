@@ -22,17 +22,17 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Products", "All", "Products")</li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-info" aria-hidden="true"></i>
-                        Info<span class="caret"></span>
+                        <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                     </ul>
                 </li>
+                <li>@Html.ActionLink("Products", "All", "Products")</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
