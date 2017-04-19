@@ -11,6 +11,7 @@
     using Models.ViewModels.Products;
     using System;
     using Models.ViewModels.Purchase;
+    using Models.ViewModels.Customer;
 
     public class MvcApplication : HttpApplication
     {
@@ -42,6 +43,7 @@
                 m.CreateMap<Product, ManageProductViewModel>();
                 m.CreateMap<GraphicCard, GraphicCardSpecsViewModel>();
                 m.CreateMap<HardDrive, HardDriveSpecsViewModel>();
+                m.CreateMap<Purchase, CustomerPurchaseHistoryViewModel>();
             });
         }
     }
