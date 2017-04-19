@@ -1,4 +1,6 @@
 ﻿function distance(lon1, lat1, lon2, lat2) {
+    lon1 = Number(lon1);
+    lat1 = Number(lat1);
     var R = 6371; // Radius of the earth in km
     var dLat = (lat2-lat1).toRad();  // Javascript functions in radians
     var dLon = (lon2-lon1).toRad();
@@ -11,10 +13,28 @@
 }
 
 /** Converts numeric degrees to radians */
-if (typeof(Number.prototype.toRad) === "undefined") {
-    Number.prototype.toRad = function() {
+if (typeof (Number.prototype.toRad) === "undefined") {
+    Number.prototype.toRad = function () {
         return this * Math.PI / 180;
     }
+}
+
+$(document)
+    .ready(function() {
+        var latLong;
+        $.getJSON("http://ipinfo.io",
+            function(ipinfo) {
+                console.log("Found location [" + ipinfo.loc + "] by ipinfo.io");
+                latLong = ipinfo.loc.split(",");
+                backUpCalc(latLong[0], latLong[1]);
+            });
+        backUpCalc(latLong[0], latLong[1]);
+    });
+
+function backUpCalc(lat, long) {
+    var finalDistance = distance(long, lat, 24.620746, 43.415504);
+    console.log(finalDistance);  // Sofia Coordinates
+    calculateFinalPrice(finalDistance);
 }
 
 window.navigator.geolocation.getCurrentPosition(function (pos) {

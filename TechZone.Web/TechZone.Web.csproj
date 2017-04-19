@@ -202,6 +202,7 @@
     <Compile Include="Areas\Admin\Controllers\ControlController.cs" />
     <Compile Include="Attributes\CustomAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -303,6 +304,7 @@
     <Content Include="Views\Purchase\CheckOut.cshtml" />
     <Content Include="Views\Purchase\_NotEnoughCreditsPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ManagableByAdminProducts.cshtml" />
+    <Content Include="Views\Customers\ProfilePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">

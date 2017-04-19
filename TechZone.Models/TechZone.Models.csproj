@@ -122,6 +122,7 @@
     <Compile Include="ViewModels\Admin\RoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserRolesViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerPurchaseHistoryViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />

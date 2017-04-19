@@ -159,6 +159,7 @@
             Purchase purchase = new Purchase
             {
                 Customer = customer,
+                FinalPrice = finalPrice,
                 PurchaseDate = DateTime.Now,
             };
 
