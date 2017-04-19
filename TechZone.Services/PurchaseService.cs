@@ -1,8 +1,4 @@
-﻿using System.Text;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System;
     using System.Linq;
@@ -14,6 +10,9 @@ namespace TechZone.Services
     using Dropbox.Api;
     using Dropbox.Api.Files;
     using System.IO;
+    using System.Text;
+    using iTextSharp.text;
+    using iTextSharp.text.pdf;
 
     public class PurchaseService : Service
     {
@@ -187,8 +186,10 @@ namespace TechZone.Services
             this.Context.SaveChanges();
 
             //byte[] imageByteData = File.ReadAllBytes("C:\\Users\\Petar\\Downloads\\IMG_1770-2.jpg");
-            byte[] pdfData = CreatePdf(customer.Purchases);
-            this.Upload(new DropboxClient(dropboxKey), @"/Images", "testPdfFirstTry.pdf", pdfData);
+            byte[] pdfData = CreatePdf(customer.Purchases.Last());
+            string fileName =
+                $"{purchase.Customer.User.UserName}_{purchase.PurchaseDate.ToString("yyyyMMdd")}_{purchase.Id.ToString("00000000")}.pdf";
+            this.Upload(new DropboxClient(dropboxKey), $"/Users/{customer.User.UserName}", fileName, pdfData);
         }
 
         public bool ContainsItemsNotInStock(string currentUserId)
@@ -214,28 +215,20 @@ namespace TechZone.Services
         /// <param name="tableLayout"></param>
         /// <returns></returns>
 
-        public byte[] CreatePdf(ICollection<Purchase> purchases)
+        public byte[] CreatePdf(Purchase purchase)
         {
             MemoryStream workStream = new MemoryStream();
-            StringBuilder status = new StringBuilder("");
-            DateTime dTime = DateTime.Now;
-            //file name to be created   
-            string strPDFFileName = string.Format("SamplePdf" + dTime.ToString("yyyyMMdd") + "-" + ".pdf");
             Document doc = new Document();
             doc.SetMargins(0f, 0f, 0f, 0f);
-            //Create PDF Table with 5 columns  
-            PdfPTable tableLayout = new PdfPTable(5);
+            //Create PDF Table with 4 columns  
+            PdfPTable tableLayout = new PdfPTable(4);
             doc.SetMargins(0f, 0f, 0f, 0f);
-            //Create PDF Table  
-
-            //file will created in this path  
-            //string strAttachment = Server.MapPath("~/Downloadss/" + strPDFFileName);
 
             PdfWriter.GetInstance(doc, workStream).CloseStream = false;
             doc.Open();
 
             //Add Content to PDF   
-            doc.Add(Add_Content_To_PDF(tableLayout, purchases));
+            doc.Add(Add_Content_To_PDF(tableLayout, purchase));
 
             // Closing the document  
             doc.Close();
@@ -247,11 +240,11 @@ namespace TechZone.Services
             //return File(workStream, "application/pdf", strPDFFileName);
         }
 
-        protected PdfPTable Add_Content_To_PDF(PdfPTable tableLayout, ICollection<Purchase> purchasess)
+        protected PdfPTable Add_Content_To_PDF(PdfPTable tableLayout, Purchase purchase)
         {
-            float[] headers = { 50, 24, 45, 35, 50 }; //Header Widths  
-            tableLayout.SetWidths(headers); //Set the pdf headers  
-            tableLayout.WidthPercentage = 100; //Set the PDF File witdh percentage  
+            float[] headers = { 30, 55, 20, 10 };   //Header Widths  
+            tableLayout.SetWidths(headers);         //Set the pdf headers  
+            tableLayout.WidthPercentage = 90;       //Set the PDF File witdh percentage  
             tableLayout.HeaderRows = 1;
 
             //Add Title to the PDF file at the top  
@@ -264,14 +257,17 @@ namespace TechZone.Services
             AddCellToHeader(tableLayout, "Id");
             AddCellToHeader(tableLayout, "Name");
             AddCellToHeader(tableLayout, "Price");
-
+            AddCellToHeader(tableLayout, "Discount");
             ////Add body  
 
-            foreach (var prod in purchasess)
+            var purchasesVms = GetFinalProductInCartInfo(purchase.Products);
+
+            foreach (var prod in purchasesVms)
             {
                 AddCellToBody(tableLayout, prod.Id.ToString());
-                AddCellToBody(tableLayout, prod.FinalPrice.ToString());
-                AddCellToBody(tableLayout, prod.PurchaseDate.ToString());
+                AddCellToBody(tableLayout, prod.Name);
+                AddCellToBody(tableLayout, "$" + prod.FinalPrice);
+                AddCellToBody(tableLayout, prod.Discount + "%");
             }
             return tableLayout;
         }
