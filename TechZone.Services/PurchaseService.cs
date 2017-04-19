@@ -1,4 +1,8 @@
-﻿namespace TechZone.Services
+﻿using System.Text;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
+namespace TechZone.Services
 {
     using System;
     using System.Linq;
@@ -182,8 +186,9 @@
             this.Context.ShoppingCarts.Add(new ShoppingCart {Customer = customer.User});
             this.Context.SaveChanges();
 
-            byte[] imageByteData = File.ReadAllBytes("C:\\Users\\Petar\\Downloads\\IMG_1770-2.jpg");
-            this.Upload(new DropboxClient(dropboxKey), @"/Images", "test.jpg", imageByteData);
+            //byte[] imageByteData = File.ReadAllBytes("C:\\Users\\Petar\\Downloads\\IMG_1770-2.jpg");
+            byte[] pdfData = CreatePdf(customer.Purchases);
+            this.Upload(new DropboxClient(dropboxKey), @"/Images", "testPdfFirstTry.pdf", pdfData);
         }
 
         public bool ContainsItemsNotInStock(string currentUserId)
@@ -201,6 +206,95 @@
                     WriteMode.Overwrite.Instance,
                     body: mem);
             }
+        }
+
+        /// <summary>
+        /// Helper Method to Generate Pdfs
+        /// </summary>
+        /// <param name="tableLayout"></param>
+        /// <returns></returns>
+
+        public byte[] CreatePdf(ICollection<Purchase> purchases)
+        {
+            MemoryStream workStream = new MemoryStream();
+            StringBuilder status = new StringBuilder("");
+            DateTime dTime = DateTime.Now;
+            //file name to be created   
+            string strPDFFileName = string.Format("SamplePdf" + dTime.ToString("yyyyMMdd") + "-" + ".pdf");
+            Document doc = new Document();
+            doc.SetMargins(0f, 0f, 0f, 0f);
+            //Create PDF Table with 5 columns  
+            PdfPTable tableLayout = new PdfPTable(5);
+            doc.SetMargins(0f, 0f, 0f, 0f);
+            //Create PDF Table  
+
+            //file will created in this path  
+            //string strAttachment = Server.MapPath("~/Downloadss/" + strPDFFileName);
+
+            PdfWriter.GetInstance(doc, workStream).CloseStream = false;
+            doc.Open();
+
+            //Add Content to PDF   
+            doc.Add(Add_Content_To_PDF(tableLayout, purchases));
+
+            // Closing the document  
+            doc.Close();
+
+            byte[] byteInfo = workStream.ToArray();
+            return byteInfo;
+            //workStream.Write(byteInfo, 0, byteInfo.Length);
+            //workStream.Position = 0;
+            //return File(workStream, "application/pdf", strPDFFileName);
+        }
+
+        protected PdfPTable Add_Content_To_PDF(PdfPTable tableLayout, ICollection<Purchase> purchasess)
+        {
+            float[] headers = { 50, 24, 45, 35, 50 }; //Header Widths  
+            tableLayout.SetWidths(headers); //Set the pdf headers  
+            tableLayout.WidthPercentage = 100; //Set the PDF File witdh percentage  
+            tableLayout.HeaderRows = 1;
+
+            //Add Title to the PDF file at the top  
+            tableLayout.AddCell(new PdfPCell(new Phrase("Creating Pdf using ItextSharp", new Font(Font.FontFamily.HELVETICA, 8, 1, new BaseColor(0, 0, 0))))
+            {
+                Colspan = 12, Border = 0, PaddingBottom = 5, HorizontalAlignment = Element.ALIGN_CENTER
+            });
+
+            ////Add header  
+            AddCellToHeader(tableLayout, "Id");
+            AddCellToHeader(tableLayout, "Name");
+            AddCellToHeader(tableLayout, "Price");
+
+            ////Add body  
+
+            foreach (var prod in purchasess)
+            {
+                AddCellToBody(tableLayout, prod.Id.ToString());
+                AddCellToBody(tableLayout, prod.FinalPrice.ToString());
+                AddCellToBody(tableLayout, prod.PurchaseDate.ToString());
+            }
+            return tableLayout;
+        }
+
+        private static void AddCellToHeader(PdfPTable tableLayout, string cellText)
+        {
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, BaseColor.YELLOW)))
+            {
+                HorizontalAlignment = Element.ALIGN_LEFT,
+                Padding = 5,
+                BackgroundColor = new BaseColor(128, 0, 0)
+            });
+        }
+
+        // Method to add single cell to the body  
+        private static void AddCellToBody(PdfPTable tableLayout, string cellText)
+        {
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, BaseColor.BLACK)))
+            {
+                HorizontalAlignment = Element.ALIGN_LEFT,
+                Padding = 5,
+                BackgroundColor = new BaseColor(255, 255, 255)
+            });
         }
     }
 }
