@@ -27,6 +27,16 @@
                 </strong>
             </td>
             <td class="col-sm-1 col-md-1 text-center"><strong>$@(product.FinalPrice.ToString("0.00"))</strong></td>
+            <td class="col-sm-1 col-md-1 text-center">
+                @if (product.IsAvailable)
+                {
+                    <i class="fa fa-check fa-3x" aria-hidden="true" style="color: green"></i>
+                }
+                else
+                {
+                    <i class="fa fa-times fa-3x" aria-hidden="true" style="color: red"></i>
+                }
+            </td>
             <td class="col-sm-1 col-md-1">
                 @using (Html.BeginForm("RemoveFromCart", "Purchase", FormMethod.Post))
                 {

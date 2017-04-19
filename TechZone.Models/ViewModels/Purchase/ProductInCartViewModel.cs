@@ -13,5 +13,7 @@
         public int Discount { get; set; }
 
         public decimal FinalPrice { get; set; }
+
+        public bool IsAvailable { get; set; }
     }
 }
