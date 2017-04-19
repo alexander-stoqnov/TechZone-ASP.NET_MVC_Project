@@ -6,6 +6,10 @@
     using System.Collections.Generic;
     using AutoMapper;
     using Models.ViewModels.Purchase;
+    using System.Threading.Tasks;
+    using Dropbox.Api;
+    using Dropbox.Api.Files;
+    using System.IO;
 
     public class PurchaseService : Service
     {
@@ -150,7 +154,7 @@
             return customer.Credits > totalPrice;
         }
 
-        public void FinalizePurchase(string currentUserId, decimal finalPrice)
+        public void FinalizePurchase(string currentUserId, decimal finalPrice, string dropboxKey)
         {
             var customer = this.Context.Customers.First(c => c.User.Id == currentUserId);
             var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
@@ -177,12 +181,26 @@
             this.Context.ShoppingCarts.Remove(cart);
             this.Context.ShoppingCarts.Add(new ShoppingCart {Customer = customer.User});
             this.Context.SaveChanges();
+
+            byte[] imageByteData = File.ReadAllBytes("C:\\Users\\Petar\\Downloads\\IMG_1770-2.jpg");
+            this.Upload(new DropboxClient(dropboxKey), @"/Images", "test.jpg", imageByteData);
         }
 
         public bool ContainsItemsNotInStock(string currentUserId)
         {
             var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
             return cart.Products.Any(c => !c.IsAvailable);
+        }
+
+        async Task Upload(DropboxClient dbx, string folder, string file, byte[] content)
+        {
+            using (var mem = new MemoryStream(content))
+            {
+                var updated = await dbx.Files.UploadAsync(
+                    folder + "/" + file,
+                    WriteMode.Overwrite.Instance,
+                    body: mem);
+            }
         }
     }
 }

@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using TechZone.Web.Attributes;
-
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Services;
     using System.Collections.Generic;
     using Models.ViewModels.Customer;
     using Microsoft.AspNet.Identity;
+    using Attributes;
+
 
     [RoutePrefix("Customers")]
     [CustomAuthorize(Roles = "Customer")]
@@ -21,8 +19,8 @@ namespace TechZone.Web.Controllers
             this._service = new CustomersService();
         }
 
-        [Route("Profile")]
-        public ActionResult ProfilePage()
+        [Route("UserProfile")]
+        public ActionResult UserProfile()
         {
             var currentUserId = this.User.Identity.GetUserId();
             IEnumerable<CustomerPurchaseHistoryViewModel> purchaseHistory = this._service.GetCurrentUserPurchases(currentUserId);

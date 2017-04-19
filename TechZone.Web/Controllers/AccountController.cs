@@ -170,7 +170,7 @@
                 {
 
                     this.UserManager.AddToRole(user.Id, "Customer");
-                    this.context.Customers.Add(new Customer() { UserId = user.Id });
+                    this.context.Customers.Add(new Customer { UserId = user.Id, Credits = 10000 });
                     context.SaveChanges();
                     this.AddOrUpdateCartForUser(model.Email);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

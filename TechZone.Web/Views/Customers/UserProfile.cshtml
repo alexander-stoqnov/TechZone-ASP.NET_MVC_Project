@@ -18,7 +18,7 @@
                 <td>@Html.DisplayFor(p => purchase.PurchaseDate)</td>
                 <td>$@Html.DisplayFor(p => purchase.FinalPrice)</td>
                 <td>
-                    @Html.ActionLink("Invoice", "Orders", "Customers", new { id = purchase.Id}, null);
+                    @Html.ActionLink("Invoice", "Orders", "Customers", new { id = purchase.Id}, null)
                 </td>
             </tr>
         }
