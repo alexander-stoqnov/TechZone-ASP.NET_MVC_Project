@@ -72,6 +72,12 @@
         public ActionResult CheckOut()
         {
             var currentUserId = this.User.Identity.GetUserId();
+
+            if (this.service.ContainsItemsNotInStock(currentUserId))
+            {
+                return RedirectToAction("ShoppingCart", "Purchase");
+            }
+
             FinalCheckoutViewModel finalItemsPrice = this.service.CalculatePriceWithoutShipment(currentUserId);
             return this.View(finalItemsPrice);
         }

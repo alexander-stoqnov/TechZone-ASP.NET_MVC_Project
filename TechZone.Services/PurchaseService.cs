@@ -179,5 +179,12 @@
             this.Context.ShoppingCarts.Add(new ShoppingCart {Customer = customer.User});
             this.Context.SaveChanges();
         }
+
+
+        public bool ContainsItemsNotInStock(string currentUserId)
+        {
+            var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
+            return cart.Products.Any(c => !c.IsAvailable);
+        }
     }
 }
