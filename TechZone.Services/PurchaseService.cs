@@ -67,33 +67,32 @@
 
         public ShoppingCartViewModel GetCartItems(string userId, string sessionId)
         {
-            ShoppingCartViewModel scvm = new ShoppingCartViewModel { Id = 0 };
-
-            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
+            ShoppingCartViewModel scvm = new ShoppingCartViewModel();
+            ShoppingCart cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == userId);
             if (cart != null)
             {
                 scvm = new ShoppingCartViewModel
                 {
-                    Id = cart.Id,
                     ProductsInCart = GetFinalProductInCartInfo(cart.Products)
                 };
+
                 scvm.FinalPriceWithoutDiscount = scvm.ProductsInCart.Sum(pr => pr.Price);
                 scvm.FinalPriceWithDiscount = scvm.ProductsInCart.Sum(pr => pr.FinalPrice);
                 return scvm;
             }
 
-            cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.Customer.Id == userId);
+            cart = this.Context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == sessionId);
             if (cart != null)
             {
                 scvm = new ShoppingCartViewModel
                 {
-                    Id = cart.Id,
                     ProductsInCart = GetFinalProductInCartInfo(cart.Products)
-                };
+                };               
             }
             scvm.FinalPriceWithoutDiscount = scvm.ProductsInCart.Sum(pr => pr.Price);
             scvm.FinalPriceWithDiscount = scvm.ProductsInCart.Sum(pr => pr.FinalPrice);
             return scvm;
+
         }
 
         private IEnumerable<ProductInCartViewModel> GetFinalProductInCartInfo(IEnumerable<Product> products)
@@ -179,7 +178,6 @@
             this.Context.ShoppingCarts.Add(new ShoppingCart {Customer = customer.User});
             this.Context.SaveChanges();
         }
-
 
         public bool ContainsItemsNotInStock(string currentUserId)
         {

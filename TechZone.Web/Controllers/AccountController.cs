@@ -418,6 +418,19 @@
 
         private void AddOrUpdateCartForUser(string userEmail)
         {
+            string currentUserId = this.context.Users.FirstOrDefault(u => u.Email == userEmail).Id;
+            if (this.context.ShoppingCarts.Any(sc => sc.Customer.Id == currentUserId))
+            {
+                var cartToRemove =
+                    this.context.ShoppingCarts.FirstOrDefault(sc => sc.SessionId == this.Session.SessionID);
+                if (cartToRemove != null)
+                {
+                    this.context.ShoppingCarts.Remove(cartToRemove);
+                    this.context.SaveChanges();
+                }
+                return;
+            }
+
             var cart = this.context.ShoppingCarts.FirstOrDefault(c => c.SessionId == this.Session.SessionID);
             var user = this.context.Users.FirstOrDefault(u => u.Email == userEmail);
 
@@ -432,13 +445,6 @@
                 this.context.ShoppingCarts.Add(newCart);
             }
             this.context.SaveChanges();
-
-            while (this.context.ShoppingCarts.Count(sc => sc.Customer.Email == userEmail) > 1)
-            {
-                var cartToRemove = this.context.ShoppingCarts.First(sc => sc.Customer.Email == userEmail);
-                this.context.ShoppingCarts.Remove(cartToRemove);
-                this.context.SaveChanges();
-            }
         }
 
         protected override void Dispose(bool disposing)

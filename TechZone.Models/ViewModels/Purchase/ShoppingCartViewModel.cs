@@ -9,8 +9,6 @@
             this.ProductsInCart = new HashSet<ProductInCartViewModel>();
         }
 
-        public int Id { get; set; }
-
         public IEnumerable<ProductInCartViewModel> ProductsInCart { get; set; }
 
         public decimal FinalPriceWithoutDiscount { get; set; }

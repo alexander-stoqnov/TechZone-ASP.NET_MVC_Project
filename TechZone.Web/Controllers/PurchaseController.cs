@@ -39,9 +39,8 @@
         [ChildActionOnly]
         public ActionResult CountOfProductsInCart()
         {
-            int count = 0;
             string currentUserId = this.User.Identity.GetUserId();
-            count = this.service.GetNumberOfItemsInCart(currentUserId, this.Session.SessionID);
+            int count = this.service.GetNumberOfItemsInCart(currentUserId, this.Session.SessionID);
 
             return this.PartialView("_NavigationHelpersPartial", count);
         }
