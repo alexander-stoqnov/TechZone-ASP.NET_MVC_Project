@@ -166,6 +166,10 @@
             foreach (var product in cart.Products)
             {
                 product.Quantity--;
+                if (product.Quantity <= 0)
+                {
+                    product.IsAvailable = false;
+                }
                 purchase.Products.Add(product);
             }
 

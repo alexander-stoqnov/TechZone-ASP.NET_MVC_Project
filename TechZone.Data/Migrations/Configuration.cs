@@ -19,10 +19,10 @@ namespace TechZone.Data.Migrations
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            //SeedRoles(roleManager);
-            //SeedUsers(context, userManager);
-            //SeedGraphicCards(context);
-            //SeedHardDrives(context);
+            SeedRoles(roleManager);
+            SeedUsers(context, userManager);
+            SeedGraphicCards(context);
+            SeedHardDrives(context);
             context.SaveChanges();
         }
 
@@ -371,7 +371,7 @@ namespace TechZone.Data.Migrations
                 userManager.Create(newUser, "Pesho1!");
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Admin");
-                context.Customers.Add(new Customer() { UserId = newUser.Id });
+                context.Customers.Add(new Customer() { UserId = newUser.Id, Credits = 10000 });
             }
 
             var pesho = userManager.FindByName("pesho");
@@ -388,7 +388,7 @@ namespace TechZone.Data.Migrations
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Admin");
                 userManager.AddToRole(newUser.Id, "Customer");
-                context.Customers.Add(new Customer() { UserId = newUser.Id });
+                context.Customers.Add(new Customer() { UserId = newUser.Id, Credits = 10000 });
             }
 
             var bojo = userManager.FindByName("bojo");
@@ -436,7 +436,7 @@ namespace TechZone.Data.Migrations
                 userManager.Create(newUser, "Pesho1!");
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Customer");
-                context.Customers.Add(new Customer() { UserId = newUser.Id });
+                context.Customers.Add(new Customer() { UserId = newUser.Id, Credits = 10000 });
             }
 
             context.SaveChanges();
