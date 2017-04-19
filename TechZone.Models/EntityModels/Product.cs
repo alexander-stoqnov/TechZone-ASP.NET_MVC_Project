@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Enums;
 
     public abstract class Product
     {
@@ -41,6 +42,8 @@
 
         [Range(0, 5, ErrorMessage = "Rating must be between 0 and 5 inclusive")]
         public decimal Rating { get; set; }
+
+        public GuaranteeDurationType Guarantee { get; set; }
 
         public virtual ICollection<Purchase> Purchases { get; set; }
 

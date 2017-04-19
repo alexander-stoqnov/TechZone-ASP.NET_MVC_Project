@@ -1,4 +1,6 @@
-﻿namespace TechZone.Services
+﻿using System.Globalization;
+
+namespace TechZone.Services
 {
     using System;
     using System.Linq;
@@ -186,7 +188,7 @@
             this.Context.SaveChanges();
 
             //byte[] imageByteData = File.ReadAllBytes("C:\\Users\\Petar\\Downloads\\IMG_1770-2.jpg");
-            byte[] pdfData = CreatePdf(customer.Purchases.Last());
+            byte[] pdfData = CreatePdf(purchase);
             string fileName =
                 $"{purchase.Customer.User.UserName}_{purchase.PurchaseDate.ToString("yyyyMMdd")}_{purchase.Id.ToString("00000000")}.pdf";
             this.Upload(new DropboxClient(dropboxKey), $"/Users/{customer.User.UserName}", fileName, pdfData);
@@ -221,7 +223,7 @@
             Document doc = new Document();
             doc.SetMargins(0f, 0f, 0f, 0f);
             //Create PDF Table with 4 columns  
-            PdfPTable tableLayout = new PdfPTable(4);
+            PdfPTable tableLayout = new PdfPTable(3);
             doc.SetMargins(0f, 0f, 0f, 0f);
 
             PdfWriter.GetInstance(doc, workStream).CloseStream = false;
@@ -242,52 +244,56 @@
 
         protected PdfPTable Add_Content_To_PDF(PdfPTable tableLayout, Purchase purchase)
         {
-            float[] headers = { 30, 55, 20, 10 };   //Header Widths  
+            float[] headers = { 75, 17, 15 };       //Header Widths  
             tableLayout.SetWidths(headers);         //Set the pdf headers  
-            tableLayout.WidthPercentage = 90;       //Set the PDF File witdh percentage  
+            tableLayout.WidthPercentage = 85;       //Set the PDF File witdh percentage  
             tableLayout.HeaderRows = 1;
 
             //Add Title to the PDF file at the top  
-            tableLayout.AddCell(new PdfPCell(new Phrase("Creating Pdf using ItextSharp", new Font(Font.FontFamily.HELVETICA, 8, 1, new BaseColor(0, 0, 0))))
+            tableLayout.AddCell(new PdfPCell(new Phrase($"ORDER #{purchase.Id.ToString("00000000")}", new Font(Font.FontFamily.HELVETICA, 14, 1, new BaseColor(0, 0, 0))))
             {
                 Colspan = 12, Border = 0, PaddingBottom = 5, HorizontalAlignment = Element.ALIGN_CENTER
             });
 
+            tableLayout.AddCell(new PdfPCell(new Phrase($"Purchase Date: {purchase.PurchaseDate.ToString("D", new CultureInfo("en-US"))}", new Font(Font.FontFamily.COURIER, 12, 1, new BaseColor(0, 0, 0))))
+            {
+                Colspan = 12, Border = 0, PaddingBottom = 5, HorizontalAlignment = Element.ALIGN_CENTER
+            });
+            tableLayout.AddCell(new PdfPCell(new Phrase($"Customer: {purchase.Customer.User.FullName}", new Font(Font.FontFamily.COURIER, 11, 1, new BaseColor(0, 0, 0))))
+            {
+                Colspan = 12, Border = 0, PaddingBottom = 5, HorizontalAlignment = Element.ALIGN_CENTER
+            });
             ////Add header  
-            AddCellToHeader(tableLayout, "Id");
             AddCellToHeader(tableLayout, "Name");
             AddCellToHeader(tableLayout, "Price");
-            AddCellToHeader(tableLayout, "Discount");
+            AddCellToHeader(tableLayout, "Guarantee");
             ////Add body  
 
             var purchasesVms = GetFinalProductInCartInfo(purchase.Products);
 
             foreach (var prod in purchasesVms)
             {
-                AddCellToBody(tableLayout, prod.Id.ToString());
                 AddCellToBody(tableLayout, prod.Name);
                 AddCellToBody(tableLayout, "$" + prod.FinalPrice);
-                AddCellToBody(tableLayout, prod.Discount + "%");
+                AddCellToBody(tableLayout, (int)prod.Guarantee + "M");
             }
             return tableLayout;
         }
 
         private static void AddCellToHeader(PdfPTable tableLayout, string cellText)
         {
-            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, BaseColor.YELLOW)))
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 11, 1, BaseColor.WHITE)))
             {
-                HorizontalAlignment = Element.ALIGN_LEFT,
-                Padding = 5,
-                BackgroundColor = new BaseColor(128, 0, 0)
+                HorizontalAlignment = Element.ALIGN_CENTER, Padding = 5, BackgroundColor = new BaseColor(105, 105, 105)
             });
         }
 
         // Method to add single cell to the body  
         private static void AddCellToBody(PdfPTable tableLayout, string cellText)
         {
-            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, BaseColor.BLACK)))
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 10, 1, BaseColor.BLACK)))
             {
-                HorizontalAlignment = Element.ALIGN_LEFT,
+                HorizontalAlignment = Element.ALIGN_CENTER,
                 Padding = 5,
                 BackgroundColor = new BaseColor(255, 255, 255)
             });

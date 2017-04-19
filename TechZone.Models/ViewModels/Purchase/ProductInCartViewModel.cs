@@ -1,5 +1,7 @@
 ﻿namespace TechZone.Models.ViewModels.Purchase
 {
+    using Enums;
+
     public class ProductInCartViewModel
     {
         public int Id { get; set; }
@@ -11,6 +13,8 @@
         public decimal Price { get; set; }
 
         public int Discount { get; set; }
+
+        public GuaranteeDurationType Guarantee { get; set; }
 
         public decimal FinalPrice { get; set; }
 
