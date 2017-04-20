@@ -27,3 +27,7 @@ textarea {
     height: 600px;
     width: 65%;
 }
+
+.table > tbody > tr > td {
+vertical-align: middle;
+}

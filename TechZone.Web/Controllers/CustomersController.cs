@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Services;

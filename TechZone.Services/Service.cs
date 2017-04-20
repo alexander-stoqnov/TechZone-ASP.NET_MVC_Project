@@ -23,7 +23,7 @@ namespace TechZone.Services
             {
                 var updated = await dbx.Files.UploadAsync(
                     folder + "/" + file,
-                    WriteMode.Overwrite.Instance,
+                    WriteMode.Overwrite.Instance, 
                     body: mem);
             }
         }
