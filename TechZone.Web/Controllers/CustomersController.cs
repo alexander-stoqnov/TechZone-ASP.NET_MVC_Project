@@ -35,34 +35,42 @@
             return View(purchaseHistory);
         }
 
-        [Route("Upload")]
+        [Route("UploadPicture")]
         [HttpPost]
-        public ActionResult Upload()
+        public ActionResult UploadPicture()
         {
+            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             string currentUserId = User.Identity.GetUserId();
-            //StudentProfileViewModel studentVm = this.service.GetUserProfile(currentUserId);
+            IEnumerable<CustomerPurchaseHistoryViewModel> purchaseHistory = this._service.GetCurrentUserPurchases(currentUserId);
 
-            HttpPostedFileBase file = this.Request.Files["exam"];
+            HttpPostedFileBase file = this.Request.Files["picture"];
 
             if (file.ContentLength > 2097152)
             {
-                ModelState.AddModelError("", "File cannot be larger than 2Mb!");
-                //return this.View("Profile", studentVm);
+                ModelState.AddModelError("", "Image size should be less than 2mb");
+                return this.View("UserProfile", purchaseHistory);
             }
 
             string fileName = Path.GetFileName(file.FileName);
-            if (!fileName.EndsWith(".rar"))
+            if (!fileName.EndsWith(".jpg"))
             {
-                ModelState.AddModelError("", "Please upload only .rar files.");
-                //return this.View("Profile");
+                ModelState.AddModelError("", "Please upload only .jpg pictures.");
+                return this.View("UserProfile", purchaseHistory);
             }
-            //string fullFileName = service.GetFullFileName(id, currentUserId, fileName);
 
-            string path = Server.MapPath("~/Exams");
-           // string fullPath = Path.Combine(path, fullFileName);
-            //file.SaveAs(fullPath);
-            //return RedirectToAction("Profile", studentVm);
-            return null;
+            byte[] data;
+            using (Stream inputStream = file.InputStream)
+            {
+                MemoryStream memoryStream = inputStream as MemoryStream;
+                if (memoryStream == null)
+                {
+                    memoryStream = new MemoryStream();
+                    inputStream.CopyTo(memoryStream);
+                }
+                data = memoryStream.ToArray();
+            }
+            this._service.UploadUserProfilePicture(currentUserId, apikey[1], data);
+            return RedirectToAction("UserProfile", "Customers");
         }
     }
 }

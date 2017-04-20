@@ -3,7 +3,14 @@
     ViewBag.Title = "ProfilePage";
 }
 
-<img src="@ViewBag.ImageData" />
+@using (Html.BeginForm("UploadPicture", "Customers", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <input type="file" name="picture"/>
+    <input type="submit" value="Upload Profile Picture" class="btn btn-default"/>
+    @Html.ValidationSummary("", new {@class = "text-danger"})
+}
+
+@*<img src="@ViewBag.ImageData" />*@
 
 <table class="table table-hover">
     <tr>

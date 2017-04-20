@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System;
     using System.Linq;
@@ -8,13 +6,11 @@ namespace TechZone.Services
     using System.Collections.Generic;
     using AutoMapper;
     using Models.ViewModels.Purchase;
-    using System.Threading.Tasks;
     using Dropbox.Api;
-    using Dropbox.Api.Files;
     using System.IO;
-    using System.Text;
     using iTextSharp.text;
     using iTextSharp.text.pdf;
+    using System.Globalization;
 
     public class PurchaseService : Service
     {
@@ -191,24 +187,13 @@ namespace TechZone.Services
             byte[] pdfData = CreatePdf(purchase);
             string fileName =
                 $"{purchase.Customer.User.UserName}_{purchase.PurchaseDate.ToString("yyyyMMdd")}_{purchase.Id.ToString("00000000")}.pdf";
-            this.Upload(new DropboxClient(dropboxKey), $"/Users/{customer.User.UserName}", fileName, pdfData);
+            Upload(new DropboxClient(dropboxKey), $"/Users/{customer.User.UserName}", fileName, pdfData);
         }
 
         public bool ContainsItemsNotInStock(string currentUserId)
         {
             var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
             return cart.Products.Any(c => !c.IsAvailable);
-        }
-
-        async Task Upload(DropboxClient dbx, string folder, string file, byte[] content)
-        {
-            using (var mem = new MemoryStream(content))
-            {
-                var updated = await dbx.Files.UploadAsync(
-                    folder + "/" + file,
-                    WriteMode.Overwrite.Instance,
-                    body: mem);
-            }
         }
 
         /// <summary>
