@@ -305,6 +305,7 @@
     <Content Include="Views\Purchase\_NotEnoughCreditsPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ManagableByAdminProducts.cshtml" />
     <Content Include="Views\Customers\UserProfile.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CustomerPurchasesHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">

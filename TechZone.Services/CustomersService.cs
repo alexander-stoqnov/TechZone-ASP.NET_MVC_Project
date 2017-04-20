@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Customer;
@@ -10,11 +8,15 @@ namespace TechZone.Services
 
     public class CustomersService : Service
     {
-        public IEnumerable<CustomerPurchaseHistoryViewModel> GetCurrentUserPurchases(string currentUserId)
+        public CustomerProfileViewModel GetCurrentUserProfile(string currentUserId)
         {
             var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
-            var customerPurchases = customer.Purchases;
-            return Mapper.Instance.Map<IEnumerable<CustomerPurchaseHistoryViewModel>>(customerPurchases);
+            var customerProfileVm = Mapper.Instance.Map<CustomerProfileViewModel>(customer);
+            customerProfileVm.PurchasesHistory = Mapper.Instance.Map<ICollection<CustomerPurchaseHistoryViewModel>>(customer.Purchases);
+
+            customerProfileVm.Credits = customer.Credits;
+
+            return customerProfileVm;
         }
 
         public void UploadUserProfilePicture(string currentUserId, string dropboxKey, byte[] file)

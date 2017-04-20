@@ -1,35 +1,35 @@
-﻿@model IEnumerable<TechZone.Models.ViewModels.Customer.CustomerPurchaseHistoryViewModel>
+﻿@model TechZone.Models.ViewModels.Customer.CustomerProfileViewModel
 @{
     ViewBag.Title = "ProfilePage";
 }
 
-@using (Html.BeginForm("UploadPicture", "Customers", FormMethod.Post, new {enctype = "multipart/form-data"}))
-{
-    <input type="file" name="picture"/>
-    <input type="submit" value="Upload Profile Picture" class="btn btn-default"/>
-    @Html.ValidationSummary("", new {@class = "text-danger"})
-}
-
 @*<img src="@ViewBag.ImageData" />*@
 
-<table class="table table-hover">
-    <tr>
-        <th>Order Number</th>
-        <th>@Html.DisplayNameFor(vm => vm.PurchaseDate)</th>
-        <th>@Html.DisplayNameFor(vm => vm.FinalPrice)</th>
-        <th>Details</th>
-    </tr>
-    @{
-        foreach (var purchase in Model)
-        {
-            <tr>
-                <td>#@purchase.Id.ToString("00000000")</td>
-                <td>@Html.DisplayFor(p => purchase.PurchaseDate)</td>
-                <td>$@Html.DisplayFor(p => purchase.FinalPrice)</td>
-                <td>
-                    @Html.ActionLink("Invoice", "Orders", "Customers", new { id = purchase.Id}, null)
-                </td>
-            </tr>
-        }
-    }
-</table>
+<div class="row">
+    <div class="col-md-3">
+        <div class="text-center">
+            @if (Model.ImageData == null)
+            {
+                <img src="//placehold.it/100" class="avatar img-circle" alt="@Model.FullName Profile Picture">
+            }
+            else
+            {
+                <img src="@Model.ImageData" class="avatar img-circle" alt="@Model.FullName Profile Picture">
+            }
+            <h6>Upload a different photo...</h6>
+
+            @using (Html.BeginForm("UploadPicture", "Customers", FormMethod.Post, new {enctype = "multipart/form-data"}))
+            {
+                <label class="btn btn-success btn-md" for="my-file-selector">
+                    <input id="my-file-selector" type="file" name="picture" style="display: none;">
+                    Browse
+                </label>
+                <input type="submit" value="Upload" class="btn btn-default btn-md" style="border: none"/>
+                @Html.ValidationSummary("", new {@class = "text-danger"})
+            }
+        </div>
+    </div>
+    <div class="col-md-9">
+        @Html.DisplayFor(vm => vm.PurchasesHistory, "CustomerPurchasesHistory")      
+    </div>
+</div>

@@ -44,6 +44,7 @@
                 m.CreateMap<GraphicCard, GraphicCardSpecsViewModel>();
                 m.CreateMap<HardDrive, HardDriveSpecsViewModel>();
                 m.CreateMap<Purchase, CustomerPurchaseHistoryViewModel>();
+                m.CreateMap<Customer, CustomerProfileViewModel>();
             });
         }
     }

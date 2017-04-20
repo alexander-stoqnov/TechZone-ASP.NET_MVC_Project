@@ -1,0 +1,23 @@
+﻿@model IEnumerable<TechZone.Models.ViewModels.Customer.CustomerPurchaseHistoryViewModel>
+
+<table class="table table-hover">
+    <tr>
+        <th>Order Number</th>
+        <th>@Html.DisplayNameFor(vm => vm.PurchaseDate)</th>
+        <th>@Html.DisplayNameFor(vm => vm.FinalPrice)</th>
+        <th>Details</th>
+    </tr>
+    @{
+        foreach (var purchase in Model)
+        {
+            <tr>
+                <td>#@purchase.Id.ToString("00000000")</td>
+                <td>@Html.DisplayFor(p => purchase.PurchaseDate)</td>
+                <td>$@Html.DisplayFor(p => purchase.FinalPrice)</td>
+                <td>
+                    @Html.ActionLink("Invoice", "Orders", "Customers", new { id = purchase.Id }, null)
+                </td>
+            </tr>
+        }
+    }
+</table>  
