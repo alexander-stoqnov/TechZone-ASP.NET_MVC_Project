@@ -11,6 +11,10 @@
 
         public string FullName { get; set; }
 
+        public string Email { get; set; }
+
+        public string Username { get; set; }
+
         public string ImageData { get; set; }
 
         public decimal Credits { get; set; }

@@ -2,31 +2,57 @@
 @{
     ViewBag.Title = "ProfilePage";
 }
-
 <div class="row" style="padding: 15px">
-    <div class="col-md-3">
-        <div class="text-center">
-            @if (Model.ImageData == null)
-            {
-                <img src="//placehold.it/200" class="avatar img-rounded img-responsive" alt="@Model.FullName Profile Picture">
-            }
-            else
-            {
-                <img src="@Model.ImageData" class="avatar img-rounded img-responsive" alt="@Model.FullName Profile Picture">
-            }
-            <h6>Change Profile Picture</h6>
-            @using (Html.BeginForm("UploadPicture", "Customers", FormMethod.Post, new {enctype = "multipart/form-data"}))
-            {
-                <label class="btn btn-success btn-md" for="my-file-selector">
-                    <input id="my-file-selector" type="file" name="picture" style="display: none;">
-                    Browse
-                </label>
-                <input type="submit" value="Upload" class="btn btn-default btn-md" style="border: none"/>
-                @Html.ValidationSummary("", new {@class = "text-danger"})
-            }
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="text-center well well-sm">
+            <div style="position: relative;">
+                @if (Model.ImageData == null)
+                {
+                    <img src="http://placehold.it/380x500" alt="@Model.FullName Profile Picture" class="img-rounded img-responsive"/>
+                }
+                else
+                {
+                    <img src="@Model.ImageData" class="avatar img-rounded img-responsive" alt="@Model.FullName Profile Picture">
+                }
+                <div style="position: absolute; width: 100%; bottom: 5px; margin: 0 auto">
+                    @using (Html.BeginForm("UploadPicture", "Customers", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                    {
+                        <label class="btn btn-success btn-md" for="my-file-selector">
+                            <input id="my-file-selector" type="file" name="picture" style="display: none;">
+                            Browse
+                        </label>
+                        <input type="submit" value="Upload" class="btn btn-default btn-md" style="border: none"/>
+                        @Html.ValidationSummary("", new {@class = "text-danger"})
+                    }
+                </div>
+            </div>
+            <h4> @Model.FullName</h4>
+            <p>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span class="text">@Model.Username</span>
+                <br/>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span class="text">@Model.Email</span>
+                <br/>
+                <i class="fa fa-usd" style="color: green" aria-hidden="true"></i>
+                <span class="text">@Model.Credits</span>
+            </p>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">
+                    Options
+                </button>
+                <button type="button" class="btn btn-successs dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span><span class="sr-only">Options</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Edit Acccount</a></li>
+                    <li class="divider"></li>
+                    <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Remove Account</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="col-md-9">
-        @Html.DisplayFor(vm => vm.PurchasesHistory, "CustomerPurchasesHistory")      
+    <div class="col-lg-9 col-md-8 col-sm-6">
+        @Html.DisplayFor(vm => vm.PurchasesHistory, "CustomerPurchasesHistory")
     </div>
 </div>

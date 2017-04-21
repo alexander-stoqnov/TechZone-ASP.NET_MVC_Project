@@ -44,7 +44,10 @@
                 m.CreateMap<GraphicCard, GraphicCardSpecsViewModel>();
                 m.CreateMap<HardDrive, HardDriveSpecsViewModel>();
                 m.CreateMap<Purchase, CustomerPurchaseHistoryViewModel>();
-                m.CreateMap<Customer, CustomerProfileViewModel>();
+                m.CreateMap<Customer, CustomerProfileViewModel>()
+                .ForMember(cpvm => cpvm.FullName, expr => expr.MapFrom(c => c.User.FullName))
+                .ForMember(cpvm => cpvm.Email, expr => expr.MapFrom(c => c.User.Email))
+                .ForMember(cpvm => cpvm.Username, expr => expr.MapFrom(c => c.User.UserName));
             });
         }
     }
