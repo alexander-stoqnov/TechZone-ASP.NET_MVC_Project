@@ -16,8 +16,10 @@
             customerProfileVm.PurchasesHistory = Mapper.Instance.Map<ICollection<CustomerPurchaseHistoryViewModel>>(customer.Purchases);
 
             customerProfileVm.Credits = customer.Credits;
-            customerProfileVm.ImageData = this.GetUserProfilePicture(customer.User.ProfilePictureFileName, customer.User.UserName, dropboxKey);
-
+            if (customer.User.ProfilePictureFileName != null)
+            {
+                customerProfileVm.ImageData = this.GetUserProfilePicture(customer.User.ProfilePictureFileName, customer.User.UserName, dropboxKey);
+            }
             return customerProfileVm;
         }
 
