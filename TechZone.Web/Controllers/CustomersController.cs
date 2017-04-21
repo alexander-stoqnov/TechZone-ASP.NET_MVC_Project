@@ -22,12 +22,6 @@
         [Route("UserProfile")]
         public ActionResult UserProfile()
         {
-            //string path = Server.MapPath("~/images/computer.png");
-            //byte[] imageByteData = System.IO.File.ReadAllBytes("C:\\Users\\Petar\\Downloads\\IMG_1770-2.jpg");
-            //string imageBase64Data = Convert.ToBase64String(imageByteData);
-            //string imageDataURL = $"data:image/png;base64,{imageBase64Data}";
-            //ViewBag.ImageData = imageDataURL;
-
             var currentUserId = this.User.Identity.GetUserId();
             var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             CustomerProfileViewModel customerProfileVm = this._service.GetCurrentUserProfile(currentUserId, apikey[1]);
@@ -69,6 +63,21 @@
 
             this._service.UploadUserProfilePicture(currentUserId, apikey[1], fileName, imageData);
             return RedirectToAction("UserProfile", "Customers");
+        }
+
+        [Route("Order/{id}")]
+        public ActionResult Order(int id)
+        {
+            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
+            string currentUserId = User.Identity.GetUserId();
+            if (!this._service.OrderBellongsToCurrentUser(currentUserId, id))
+            {
+                return RedirectToAction("UserProfile", "Customers");
+            }
+
+            var pdfFile = this._service.DownloadOrderInvoice(currentUserId, id, apikey[1]);
+            MemoryStream ms = new MemoryStream(pdfFile);
+            return new FileStreamResult(ms, "application/pdf");
         }
     }
 }

@@ -15,7 +15,7 @@
                 <td>@Html.DisplayFor(p => purchase.PurchaseDate)</td>
                 <td>$@Html.DisplayFor(p => purchase.FinalPrice)</td>
                 <td>
-                    <a href="@Url.Action("Orders", "Customers")">
+                    <a href="@Url.Action("Order", "Customers", new { id = purchase.Id})">
                         <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true" style="color: red;"></i>
                         <span class="text">Invoice</span>
                     </a>

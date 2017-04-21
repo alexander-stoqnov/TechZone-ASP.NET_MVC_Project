@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Customer;
     using System.Linq;
     using AutoMapper;
     using Dropbox.Api;
+    using System;
 
     public class CustomersService : Service
     {
@@ -38,6 +36,20 @@ namespace TechZone.Services
             Upload(new DropboxClient(dropboxKey), $"/Users/{customer.User.UserName}/ProfilePicture", fileName, file);
         }
 
+        public bool OrderBellongsToCurrentUser(string currentUserId, int id)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            var purchase = this.Context.Purchases.Find(id);
+            return purchase?.Customer.Id == customer.Id;
+        }
 
+        public byte[] DownloadOrderInvoice(string currentUserId, int id, string dropboxKey)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            var purchase = this.Context.Purchases.Find(id);
+            string orderFileName = $"{customer.User.UserName}_{purchase.PurchaseDate.ToString("yyyyMMdd")}_{purchase.Id.ToString("00000000")}.pdf";
+            var imageByteData = this.DownloadAsync(new DropboxClient(dropboxKey), $"Users/{customer.User.UserName}/Orders", orderFileName);
+            return imageByteData.Result;
+        }
     }
 }

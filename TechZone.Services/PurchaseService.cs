@@ -182,12 +182,11 @@
             this.Context.ShoppingCarts.Remove(cart);
             this.Context.ShoppingCarts.Add(new ShoppingCart {Customer = customer.User});
             this.Context.SaveChanges();
-
-            //byte[] imageByteData = File.ReadAllBytes("C:\\Users\\Petar\\Downloads\\IMG_1770-2.jpg");
+            
             byte[] pdfData = CreatePdf(purchase);
             string fileName =
                 $"{purchase.Customer.User.UserName}_{purchase.PurchaseDate.ToString("yyyyMMdd")}_{purchase.Id.ToString("00000000")}.pdf";
-            Upload(new DropboxClient(dropboxKey), $"/Users/{customer.User.UserName}", fileName, pdfData);
+            Upload(new DropboxClient(dropboxKey), $"/Users/{customer.User.UserName}/Orders", fileName, pdfData);
         }
 
         public bool ContainsItemsNotInStock(string currentUserId)
@@ -199,9 +198,6 @@
         /// <summary>
         /// Helper Method to Generate Pdfs
         /// </summary>
-        /// <param name="tableLayout"></param>
-        /// <returns></returns>
-
         public byte[] CreatePdf(Purchase purchase)
         {
             MemoryStream workStream = new MemoryStream();
@@ -222,9 +218,6 @@
 
             byte[] byteInfo = workStream.ToArray();
             return byteInfo;
-            //workStream.Write(byteInfo, 0, byteInfo.Length);
-            //workStream.Position = 0;
-            //return File(workStream, "application/pdf", strPDFFileName);
         }
 
         protected PdfPTable Add_Content_To_PDF(PdfPTable tableLayout, Purchase purchase)

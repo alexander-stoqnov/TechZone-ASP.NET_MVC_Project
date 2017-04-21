@@ -15,7 +15,6 @@
                 <img src="@Model.ImageData" class="avatar img-rounded img-responsive" alt="@Model.FullName Profile Picture">
             }
             <h6>Change Profile Picture</h6>
-
             @using (Html.BeginForm("UploadPicture", "Customers", FormMethod.Post, new {enctype = "multipart/form-data"}))
             {
                 <label class="btn btn-success btn-md" for="my-file-selector">
