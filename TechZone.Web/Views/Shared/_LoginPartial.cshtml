@@ -35,7 +35,7 @@
                     <span class="text">Log off</span>
                 </a>
             </li>
-            @Html.Action("CountOfProductsInCart", "Purchase")
+            @Html.Action("CountOfProductsInCart", "Purchase", new { area = "" })
         </ul>
     }
 }

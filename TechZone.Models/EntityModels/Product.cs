@@ -32,7 +32,7 @@
         [Range(0, Int32.MaxValue, ErrorMessage = "Quantity cannot be less than 0")]
         public int Quantity { get; set; }
 
-        [Range(0, 60, ErrorMessage = "Discount cannot be less than 0 and more than 60")]
+        [Range(0, 40, ErrorMessage = "Discount cannot be less than 0 and more than 40")]
         public int Discount { get; set; }
 
         [Range(0, Int32.MaxValue, ErrorMessage = "Views cannot be less than 0")]

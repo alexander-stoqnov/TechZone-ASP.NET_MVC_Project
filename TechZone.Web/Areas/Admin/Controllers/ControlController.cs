@@ -61,5 +61,28 @@
             this._service.DisableEnableSelectedProduct(id);
             return RedirectToAction("Products", "Control");
         }
+
+        [Route("EditProduct")]
+        public ActionResult EditProduct(int id)
+        {
+            if (!this._service.ProductExists(id))
+            {
+                return RedirectToAction("Products", "Control");
+            }
+            EditProductViewModel epvm = this._service.GetProductToEditDetails(id);
+            return this.View(epvm);
+        }
+
+        [Route("EditProduct")]
+        [HttpPost]
+        public ActionResult EditProduct(EditProductViewModel epbm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View("EditProduct", epbm);
+            }
+            this._service.EditProductInfo(epbm);
+            return RedirectToAction("Products");
+        }
     }
 }

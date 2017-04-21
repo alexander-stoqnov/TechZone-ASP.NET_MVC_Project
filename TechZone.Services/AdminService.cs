@@ -55,5 +55,24 @@
             productToDisable.IsAvailable = !productToDisable.IsAvailable;         
             this.Context.SaveChanges();
         }
+
+        public EditProductViewModel GetProductToEditDetails(int id)
+        {
+            var product = this.Context.Products.Find(id);
+            return Mapper.Instance.Map<EditProductViewModel>(product);
+        }
+
+        public void EditProductInfo(EditProductViewModel epbm)
+        {
+            var product = this.Context.Products.Find(epbm.Id);
+            product.Description = epbm.Description;
+            product.Discount = epbm.Discount;
+            product.ImageUrl = epbm.ImageUrl;
+            product.Name = epbm.Name;
+            product.Price = epbm.Price;
+            product.Quantity = epbm.Quantity;
+
+            this.Context.SaveChanges();
+        }
     }
 }

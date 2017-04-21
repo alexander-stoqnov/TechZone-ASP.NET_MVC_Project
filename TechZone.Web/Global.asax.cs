@@ -41,6 +41,7 @@
                 m.CreateMap<Product, ProductDetailsViewModel>();
                 m.CreateMap<Product, ProductInCartViewModel>();
                 m.CreateMap<Product, ManageProductViewModel>();
+                m.CreateMap<Product, EditProductViewModel>();
                 m.CreateMap<GraphicCard, GraphicCardSpecsViewModel>();
                 m.CreateMap<HardDrive, HardDriveSpecsViewModel>();
                 m.CreateMap<Purchase, CustomerPurchaseHistoryViewModel>();
