@@ -15,5 +15,7 @@
         public int DaysAgoPublished { get; set; }
 
         public string ReviewerUsername { get; set; }
+
+        public string ReviewerImageData { get; set; }
     }
 }

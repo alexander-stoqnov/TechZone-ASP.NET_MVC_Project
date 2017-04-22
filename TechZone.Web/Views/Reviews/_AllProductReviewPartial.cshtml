@@ -1,4 +1,5 @@
-﻿@model TechZone.Models.ViewModels.Reviews.ReviewOverviewViewModel
+﻿@using System.Globalization
+@model TechZone.Models.ViewModels.Reviews.ReviewOverviewViewModel
 
 <div class="container">
     <div class="row">
@@ -107,12 +108,19 @@
                     {
                         <div class="row">
                             <div class="col-sm-3">
-                                <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                                @if (review.ReviewerImageData != null)
+                                {
+                                    <img src="@review.ReviewerImageData" class="img-rounded" style="width: 60px; height:60px">
+                                }
+                                else
+                                {
+                                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                                }
                                 <div class="review-block-name">
-                                    <a href="#">@review.ReviewerUsername</a>
+                                    <b>@review.ReviewerUsername</b>
                                 </div>
                                 <div class="review-block-date">
-                                    @review.PublishDate.ToString("yy-MMM-dd ddd")<br/>@review.DaysAgoPublished days ago
+                                    @review.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"))<br/>@review.DaysAgoPublished days ago
                                 </div>
                             </div>
                             <div class="col-sm-9">

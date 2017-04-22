@@ -26,7 +26,8 @@ namespace TechZone.Web.Controllers
         [ChildActionOnly]
         public ActionResult LoadProductReviews(int id)
         {
-            ReviewOverviewViewModel rovm = this._service.GetReviewsForProduct(id);
+            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
+            ReviewOverviewViewModel rovm = this._service.GetReviewsForProduct(id, apikey[1]);
             return this.PartialView("_AllProductReviewPartial", rovm);
         }
 
