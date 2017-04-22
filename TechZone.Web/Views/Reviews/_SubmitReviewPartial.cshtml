@@ -1,17 +1,24 @@
-﻿@model int
+﻿@model TechZone.Models.ViewModels.Reviews.SubmitReviewViewModel
 <div class="container">
     <div class="row" style="margin-top:40px;">
         <div class="col-md-8">
-            <div class="well well-sm">
-                <div class="text-right">
-                    <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+            @if (Model.AlreadyReviewed)
+            {
+                <div class="alert alert-success">
+                    You have already submitted a review! Click @Html.ActionLink("Here", "Details", "Reviews", new {id = Model.ReviewId}, null) to edit your review.
                 </div>
-
-                <div class="row" id="post-review-box" style="display:none;">
-                    <div class="col-md-12">
-                        @using (Html.BeginForm("Write", "Reviews", FormMethod.Post))
-                        {
-                            <input id="product-id" name="productId" type="hidden" value="@Model"/>
+            }
+            else
+            {
+                <div class="well well-sm">
+                    <div class="text-right">
+                        <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+                    </div>
+                    <div class="row" id="post-review-box" style="display: none;">
+                        <div class="col-md-12">
+                            @using (Html.BeginForm("Write", "Reviews", FormMethod.Post))
+                            {
+                            <input id="product-id" name="productId" type="hidden" value="@Model.Id" />
                             <input id="ratings-hidden" name="rating" type="hidden">
                             <textarea class="form-control animated" cols="250" id="new-review" name="content" placeholder="Enter your review here..." rows="5" style="max-width: inherit"></textarea>
 
@@ -22,10 +29,11 @@
                                 </a>
                                 <button class="btn btn-success btn-lg" type="submit">Save</button>
                             </div>
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+            }           
         </div>
     </div>
 </div>

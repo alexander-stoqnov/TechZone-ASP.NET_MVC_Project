@@ -64,5 +64,24 @@
             string imageBase64Data = Convert.ToBase64String(imageByteData.Result);
             return $"data:image/*;base64,{imageBase64Data}";
         }
+
+        public SubmitReviewViewModel CheckWhetherUserHasReviewedProduct(string currentUserId, int id)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            var srvm = new SubmitReviewViewModel { Id = id };
+            var review = this.Context.Reviews.FirstOrDefault(r => r.Reviewer.Id == customer.Id && r.Product.Id == id);
+            if (review != null)
+            {
+                srvm.AlreadyReviewed = true;
+                srvm.ReviewId = review.Id;
+            }
+            return srvm;
+        }
+
+        public bool HasUserReviewedProduct(string currentUserId, int id)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            return this.Context.Reviews.FirstOrDefault(r => r.Reviewer.Id == customer.Id && r.Product.Id == id) != null;
+        }
     }
 }

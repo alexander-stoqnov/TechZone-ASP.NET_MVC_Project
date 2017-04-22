@@ -146,6 +146,7 @@
     <Compile Include="ViewModels\Purchase\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModels\Reviews\ReviewOverviewViewModel.cs" />
     <Compile Include="ViewModels\Reviews\SimpleReviewViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\SubmitReviewViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,11 +1,10 @@
-﻿using TechZone.Models.ViewModels.Reviews;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Models.BindingModels;
     using Services;
     using Microsoft.AspNet.Identity;
+    using Models.ViewModels.Reviews;
 
     [RoutePrefix("Reviews")]
     public class ReviewsController : Controller
@@ -20,7 +19,13 @@ namespace TechZone.Web.Controllers
         [ChildActionOnly]
         public ActionResult SubmitReview(int id)
         {
-            return this.PartialView("_SubmitReviewPartial", id);
+            var currentUserId = this.User.Identity.GetUserId();
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return this.PartialView("_SubmitReviewPartial", new SubmitReviewViewModel { Id = id } );
+            }
+            SubmitReviewViewModel srvm = this._service.CheckWhetherUserHasReviewedProduct(currentUserId, id);
+            return this.PartialView("_SubmitReviewPartial", srvm);
         }
 
         [ChildActionOnly]
@@ -36,7 +41,7 @@ namespace TechZone.Web.Controllers
         [Authorize(Roles = "Customer")]
         public ActionResult Write(WriteReviewBindingModel wrbm)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || _service.HasUserReviewedProduct(User.Identity.GetUserId(), wrbm.ProductId))
             {
                 return RedirectToAction("Details", "Products", new { id = wrbm.ProductId });
             }
