@@ -9,6 +9,7 @@
         public Review()
         {
             this.Comments = new HashSet<Comment>();
+            this.PublishDate = DateTime.Now;
         }
 
         public int Id { get; set; }
@@ -27,6 +28,8 @@
 
         [Range(0, Int32.MaxValue)]
         public int Useless { get; set; }
+
+        public DateTime PublishDate { get; set; }
 
         public virtual Product Product { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using TechZone.Models.BindingModels;
+using TechZone.Models.ViewModels.Reviews;
 
 namespace TechZone.Web
 {
@@ -51,6 +52,7 @@ namespace TechZone.Web
                 .ForMember(cpvm => cpvm.FullName, expr => expr.MapFrom(c => c.User.FullName))
                 .ForMember(cpvm => cpvm.Email, expr => expr.MapFrom(c => c.User.Email))
                 .ForMember(cpvm => cpvm.Username, expr => expr.MapFrom(c => c.User.UserName));
+                m.CreateMap<Review, SimpleReviewViewModel>();
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
             });

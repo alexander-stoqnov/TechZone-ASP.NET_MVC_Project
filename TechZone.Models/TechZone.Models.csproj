@@ -144,6 +144,8 @@
     <Compile Include="ViewModels\Purchase\FinalCheckoutViewModel.cs" />
     <Compile Include="ViewModels\Purchase\ProductInCartViewModel.cs" />
     <Compile Include="ViewModels\Purchase\ShoppingCartViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewOverviewViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\SimpleReviewViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
