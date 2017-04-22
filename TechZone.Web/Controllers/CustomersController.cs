@@ -51,9 +51,9 @@
             }
 
             string fileName = Path.GetFileName(file.FileName);
-            if (!fileName.EndsWith(".jpg"))
+            if (!fileName.ToLower().EndsWith(".jpg") && !fileName.ToLower().EndsWith(".png"))
             {
-                ModelState.AddModelError("", "Please upload only .jpg pictures.");
+                ModelState.AddModelError("", "Invalid picture format!");
                 return this.View("UserProfile", customerProfileVm);
             }
 

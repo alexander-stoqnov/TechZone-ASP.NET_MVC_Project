@@ -27,7 +27,7 @@
         {
             var imageByteData = this.DownloadAsync(new DropboxClient(dropboxKey), $"Users/{userUserName}/ProfilePicture", profilePictureFileName);            
             string imageBase64Data = Convert.ToBase64String(imageByteData.Result);
-            return $"data:image/jpg;base64,{imageBase64Data}";
+            return $"data:image/*;base64,{imageBase64Data}";
         }
 
         public void UploadUserProfilePicture(string currentUserId, string dropboxKey, string fileName, byte[] file)

@@ -22,7 +22,6 @@
                             Browse
                         </label>
                         <input type="submit" value="Upload" class="btn btn-default btn-md" style="border: none"/>
-                        @Html.ValidationSummary("", new {@class = "text-danger"})
                     }
                 </div>
             </div>
@@ -51,6 +50,7 @@
                 </ul>
             </div>
         </div>
+        @Html.ValidationSummary("", new { @class = "text-danger" })
     </div>
     <div class="col-lg-9 col-md-8 col-sm-6">
         @Html.DisplayFor(vm => vm.PurchasesHistory, "CustomerPurchasesHistory")
