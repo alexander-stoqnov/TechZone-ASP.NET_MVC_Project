@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -309,6 +310,7 @@
     <Content Include="Views\Customers\UserProfile.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CustomerPurchasesHistory.cshtml" />
     <Content Include="Views\Products\_ProductReviewPartial.cshtml" />
+    <Content Include="Views\Reviews\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">

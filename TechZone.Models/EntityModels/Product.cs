@@ -11,6 +11,7 @@
         {
             this.Purchases = new HashSet<Purchase>();
             this.ShoppingCarts = new HashSet<ShoppingCart>();
+            this.Reviews = new HashSet<Review>();
             this.IsAvailable = true;
         }
 
@@ -47,5 +48,7 @@
         public virtual ICollection<Purchase> Purchases { get; set; }
 
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

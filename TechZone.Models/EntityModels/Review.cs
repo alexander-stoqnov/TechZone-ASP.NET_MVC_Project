@@ -28,6 +28,8 @@
         [Range(0, Int32.MaxValue)]
         public int Useless { get; set; }
 
+        public virtual Product Product { get; set; }
+
         public virtual Customer Reviewer { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }

@@ -54,7 +54,7 @@
         [ChildActionOnly]
         public ActionResult ProductReviews(int id)
         {
-            return this.PartialView("_ProductReviewPartial");
+            return this.PartialView("_ProductReviewPartial", id);
         }
     }
 }

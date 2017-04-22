@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web
+﻿using TechZone.Models.BindingModels;
+
+namespace TechZone.Web
 {
     using System.Web;
     using System.Web.Mvc;
@@ -49,6 +51,8 @@
                 .ForMember(cpvm => cpvm.FullName, expr => expr.MapFrom(c => c.User.FullName))
                 .ForMember(cpvm => cpvm.Email, expr => expr.MapFrom(c => c.User.Email))
                 .ForMember(cpvm => cpvm.Username, expr => expr.MapFrom(c => c.User.UserName));
+
+                m.CreateMap<WriteReviewBindingModel, Review>();
             });
         }
     }
