@@ -96,12 +96,14 @@
     <Compile Include="BindingModels\ChangeUserRolesBindingModel.cs" />
     <Compile Include="EntityModels\ApplicationUser.cs" />
     <Compile Include="EntityModels\Article.cs" />
+    <Compile Include="EntityModels\Comment.cs" />
     <Compile Include="EntityModels\Customer.cs" />
     <Compile Include="EntityModels\GraphicCard.cs" />
     <Compile Include="EntityModels\HardDrive.cs" />
     <Compile Include="EntityModels\Product.cs" />
     <Compile Include="EntityModels\Publisher.cs" />
     <Compile Include="EntityModels\Purchase.cs" />
+    <Compile Include="EntityModels\Review.cs" />
     <Compile Include="EntityModels\ShoppingCart.cs" />
     <Compile Include="Enums\GraphicCardManufacturerType.cs" />
     <Compile Include="Enums\GraphicCardMemoryType.cs" />

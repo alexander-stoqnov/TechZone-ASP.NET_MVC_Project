@@ -10,7 +10,6 @@
         protected Product()
         {
             this.Purchases = new HashSet<Purchase>();
-            this.WishlistedBy = new HashSet<Customer>();
             this.ShoppingCarts = new HashSet<ShoppingCart>();
             this.IsAvailable = true;
         }
@@ -46,8 +45,6 @@
         public GuaranteeDurationType Guarantee { get; set; }
 
         public virtual ICollection<Purchase> Purchases { get; set; }
-
-        public virtual ICollection<Customer> WishlistedBy { get; set; }
 
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }

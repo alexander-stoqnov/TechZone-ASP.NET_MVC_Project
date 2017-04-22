@@ -27,6 +27,10 @@ namespace TechZone.Data
 
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
+        public virtual DbSet<Review> Reviews { get; set; }
+
+        public virtual DbSet<Comment> Comments { get; set; }
+
         public static TechZoneContext Create()
         {
             return new TechZoneContext();
@@ -34,6 +38,17 @@ namespace TechZone.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Review>()
+                .HasRequired(r => r.Reviewer)
+                .WithMany(c => c.WrittenReviews)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Review>()
+                .HasMany(r => r.VotedBy)
+                .WithMany(c => c.VotedFor)
+                .Map(rc => rc.MapLeftKey("ReviewId")
+                    .MapRightKey("VoterId")
+                    .ToTable("ReviewsVoters"));
+
             base.OnModelCreating(modelBuilder);
         }
     }

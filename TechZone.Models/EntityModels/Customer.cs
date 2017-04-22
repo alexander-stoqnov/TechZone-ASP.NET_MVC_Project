@@ -8,7 +8,8 @@
         public Customer()
         {
             this.Purchases = new HashSet<Purchase>();
-            this.Wishlist = new HashSet<Product>();
+            this.VotedFor = new HashSet<Review>();
+            this.WrittenReviews = new HashSet<Review>();
         }
 
         public int Id { get; set; }
@@ -24,6 +25,8 @@
 
         public virtual ICollection<Purchase> Purchases { get; set; }
 
-        public virtual ICollection<Product> Wishlist { get; set; }
+        public virtual ICollection<Review> VotedFor { get; set; }
+
+        public virtual ICollection<Review> WrittenReviews { get; set; }
     }
 }
