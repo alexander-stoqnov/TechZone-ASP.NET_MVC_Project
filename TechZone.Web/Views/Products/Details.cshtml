@@ -79,8 +79,8 @@
                         <section class="container"></section>
                     </div>
                     <div class="tab-pane fade" id="service-three">
-                        @Html.Action("SubmitReview", Model.Id)
-                        @Html.Action("LoadProductReviews", Model.Id)
+                        @Html.Action("SubmitReview", "Reviews", Model.Id)
+                        @Html.Action("LoadProductReviews", "Reviews", Model.Id)
                     </div>
                 </div>
                 <hr>

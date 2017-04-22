@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web.Controllers
+﻿using TechZone.Models.ViewModels.Reviews;
+
+namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Models.BindingModels;
@@ -13,6 +15,19 @@
         public ReviewsController()
         {
             this._service = new ReviewsService();
+        }
+
+        [ChildActionOnly]
+        public ActionResult SubmitReview(int id)
+        {
+            return this.PartialView("_SubmitReviewPartial", id);
+        }
+
+        [ChildActionOnly]
+        public ActionResult LoadProductReviews(int id)
+        {
+            ReviewOverviewViewModel rovm = this._service.GetReviewsForProduct(id);
+            return this.PartialView("_AllProductReviewPartial", rovm);
         }
 
         [HttpPost]

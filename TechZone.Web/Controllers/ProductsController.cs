@@ -1,6 +1,4 @@
-﻿using TechZone.Models.ViewModels.Reviews;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Services;
@@ -51,19 +49,6 @@ namespace TechZone.Web.Controllers
                 return this.PartialView("_HardDriveSpecsPartial", hdsvm);
             }
             return RedirectToAction("All");
-        }
-
-        [ChildActionOnly]
-        public ActionResult SubmitReview(int id)
-        {
-            return this.PartialView("_SubmitReviewPartial", id);
-        }
-
-        [ChildActionOnly]
-        public ActionResult LoadProductReviews(int id)
-        {
-            ReviewOverviewViewModel rovm = this.service.GetReviewsForProduct(id);
-            return this.PartialView("_AllProductReviewPartial", rovm);
         }
     }
 }

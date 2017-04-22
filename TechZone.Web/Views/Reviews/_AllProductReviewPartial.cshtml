@@ -5,22 +5,23 @@
         <div class="col-sm-3">
             <div class="rating-block">
                 <h4>Average user rating</h4>
-                <h2 class="bold padding-bottom-7">@Model.AverageUserRating <small>/ 5</small></h2>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
+                <h2 class="bold padding-bottom-7">@(Model.AverageUserRating.ToString("0.##")) <small>/ 5</small>
+                </h2>
+                @for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= Model.AverageUserRating)
+                    {
+                        <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </button>
+                    }
+                }
             </div>
         </div>
         <div class="col-sm-3">
@@ -31,7 +32,7 @@
                 </div>
                 <div class="pull-left" style="width:180px;">
                     <div class="progress" style="height:9px; margin:8px 0;">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 100%">
                             <span class="sr-only">80% Complete (danger)</span>
                         </div>
                     </div>
@@ -97,6 +98,10 @@
         <div class="col-sm-7">
             <hr />
             <div class="review-block">
+                @if (Model.Reviews.Count == 0)
+                {
+                    <div class="alert alert-warning text-center">Be the first to write a review!</div>
+                }
                 @{
                     foreach (var review in Model.Reviews)
                     {
@@ -107,35 +112,38 @@
                                     <a href="#">@review.ReviewerUsername</a>
                                 </div>
                                 <div class="review-block-date">
-                                    @review.PublishDate.ToString("yy-MMM-dd ddd")<br />@review.DaysAgoPublished days ago
+                                    @review.PublishDate.ToString("yy-MMM-dd ddd")<br/>@review.DaysAgoPublished days ago
                                 </div>
                             </div>
                             <div class="col-sm-9">
                                 <div class="review-block-rate">
-                                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                    </button>
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= review.Rating)
+                                        {
+                                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                        }
+                                    }
                                 </div>
                                 <div class="review-block-title">this was nice in buy</div>
                                 <div class="review-block-description">@review.Content</div>
                             </div>
                         </div>
-                        <hr />
+                        if (review != Model.Reviews.Last())
+                        {
+                            <hr/>
+                        }
                     }
-                }               
+                }
             </div>
         </div>
     </div>
-</div> <!-- /container -->
+</div>
