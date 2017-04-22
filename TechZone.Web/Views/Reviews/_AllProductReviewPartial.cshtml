@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@model TechZone.Models.ViewModels.Reviews.ReviewOverviewViewModel
+﻿@model TechZone.Models.ViewModels.Reviews.ReviewOverviewViewModel
 
 <div class="container">
     <div class="row">
@@ -120,7 +119,7 @@
                                     <b>@review.ReviewerUsername</b>
                                 </div>
                                 <div class="review-block-date">
-                                    @review.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"))<br/>@review.DaysAgoPublished days ago
+                                    @review.PublishDateString<br/>@review.DaysAgoPublished days ago
                                 </div>
                             </div>
                             <div class="col-sm-9">

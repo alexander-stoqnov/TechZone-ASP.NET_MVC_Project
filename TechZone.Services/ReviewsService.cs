@@ -1,6 +1,4 @@
-﻿using Dropbox.Api;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using Models.BindingModels;
     using System.Linq;
@@ -8,6 +6,8 @@ namespace TechZone.Services
     using Models.EntityModels;
     using System;
     using Models.ViewModels.Reviews;
+    using System.Globalization;
+    using Dropbox.Api;
 
     public class ReviewsService : Service
     {
@@ -46,6 +46,7 @@ namespace TechZone.Services
                 SimpleReviewViewModel srvm = Mapper.Instance.Map<SimpleReviewViewModel>(review);
                 srvm.ReviewerUsername = review.Reviewer.User.UserName;
                 srvm.DaysAgoPublished = (int)(DateTime.Now - review.PublishDate).TotalDays;
+                srvm.PublishDateString = review.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"));
                 if (review.Reviewer.User.ProfilePictureFileName != null)
                 {
                     srvm.ReviewerImageData = this.GetUserProfilePicture(review.Reviewer.User.ProfilePictureFileName,

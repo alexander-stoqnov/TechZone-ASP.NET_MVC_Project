@@ -1,12 +1,10 @@
 ﻿namespace TechZone.Models.ViewModels.Reviews
 {
-    using System;
-
     public class SimpleReviewViewModel
     {
         public int Id { get; set; }
 
-        public DateTime PublishDate { get; set; }
+        public string PublishDateString { get; set; }
 
         public int Rating { get; set; }
 
