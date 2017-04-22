@@ -6,6 +6,18 @@
 @section styles {
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Content/ProductDetails.css">
+    <style>
+    .animated {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+    }
+    .stars {
+        margin: 20px 0;
+        font-size: 24px;
+        color: #d17581;
+    }
+    </style>
 }
 
 <div class="container-fluid">
@@ -74,19 +86,16 @@
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="service-one">
-
                         <section class="container product-info">
                             @Model.Description
                         </section>
-
                     </div>
                     <div class="tab-pane fade" id="service-two">
                         @Html.Action("HardwareSpecs", Model.Id)
                         <section class="container"></section>
-
                     </div>
                     <div class="tab-pane fade" id="service-three">
-
+                        @Html.Action("ProductReviews", Model.Id)
                     </div>
                 </div>
                 <hr>
@@ -94,3 +103,7 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/CustomScripts/ProductReviews.js"></script>
+}

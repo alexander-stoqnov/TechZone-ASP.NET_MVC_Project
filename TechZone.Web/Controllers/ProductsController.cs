@@ -34,6 +34,7 @@
             return this.View(productDetailsVm);
         }
 
+        [Route("HardwareSpecs/{id}")]
         [ChildActionOnly]
         public ActionResult HardwareSpecs(int id)
         {
@@ -48,6 +49,12 @@
                 return this.PartialView("_HardDriveSpecsPartial", hdsvm);
             }
             return RedirectToAction("All");
+        }
+
+        [ChildActionOnly]
+        public ActionResult ProductReviews(int id)
+        {
+            return this.PartialView("_ProductReviewPartial");
         }
     }
 }
