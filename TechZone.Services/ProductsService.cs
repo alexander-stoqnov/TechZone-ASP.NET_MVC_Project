@@ -95,7 +95,7 @@ namespace TechZone.Services
             {
                 SimpleReviewViewModel srvm = Mapper.Instance.Map<SimpleReviewViewModel>(review);
                 srvm.ReviewerUsername = review.Reviewer.User.UserName;
-                srvm.DaysAgoPublished = DateTime.Now.DayOfYear - review.PublishDate.DayOfYear;
+                srvm.DaysAgoPublished = (int) (DateTime.Now - review.PublishDate).TotalDays;
                 rovm.Reviews.Add(srvm);
             }
 
