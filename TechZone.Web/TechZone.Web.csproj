@@ -248,10 +248,6 @@
     <Content Include="Areas\Moderator\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Moderator\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Moderator\Views\Maintain\SubmitReport.cshtml" />
-    <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -259,6 +255,7 @@
     <Content Include="Scripts\CustomScripts\ProductReviews.js" />
     <Content Include="Scripts\CustomScripts\ReviewVoting.js" />
     <Content Include="Scripts\CustomScripts\ShipmentCalculation.js" />
+    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -270,7 +267,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
