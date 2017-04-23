@@ -94,7 +94,6 @@
         {
             var review = this.Context.Reviews.Find(id);
             ReviewDetailsViewModel rdvm = Mapper.Instance.Map<ReviewDetailsViewModel>(review);
-            rdvm.PublishDateString = review.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"));
             rdvm.VisitorIsAlsoReviewPublisher = currentUserId == review.Reviewer.UserId;
             if (review.Reviewer.User.ProfilePictureFileName != null)
             {

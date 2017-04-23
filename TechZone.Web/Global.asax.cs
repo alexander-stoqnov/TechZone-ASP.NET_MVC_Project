@@ -53,7 +53,8 @@
                 m.CreateMap<Review, SimpleReviewViewModel>();
                 m.CreateMap<Review, ReviewDetailsViewModel>()
                 .ForMember(rdvm => rdvm.CountOfComments, expr => expr.MapFrom(r => r.Comments.Count))
-                .ForMember(rdvm => rdvm.ReviewerUsername, expr => expr.MapFrom(r => r.Reviewer.User.UserName));
+                .ForMember(rdvm => rdvm.ReviewerUsername, expr => expr.MapFrom(r => r.Reviewer.User.UserName))
+                .ForMember(rdvm => rdvm.PublishDateString, expr => expr.MapFrom(c => c.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"))));
                 m.CreateMap<Comment, ReviewCommentViewModel>()
                 .ForMember(rcvm => rcvm.Commentor, expr => expr.MapFrom(c => c.Customer.User.UserName))
                 .ForMember(rcvm => rcvm.PublishDateString, expr => expr.MapFrom(c => c.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"))));
