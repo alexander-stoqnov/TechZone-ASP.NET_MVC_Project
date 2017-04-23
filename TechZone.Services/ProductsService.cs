@@ -1,7 +1,4 @@
-﻿using System;
-using TechZone.Models.ViewModels.Reviews;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Products;
@@ -57,24 +54,38 @@ namespace TechZone.Services
             return price - price * discountFinal;
         }
 
-        public bool ProductIsGraphicCard(int id)
+        public Dictionary<string, string> GetProductSpecs(int id)
+        {
+            Dictionary<string, string> specs = new Dictionary<string, string>();
+
+            if (ProductIsGraphicCard(id))
+            {
+                var graphicCard = this.Context.GraphicCards.Find(id);
+                specs["Brand"] = graphicCard.Brand.ToString("G");
+                specs["Manufacturer"] = graphicCard.Manufacturer.ToString("G");
+                specs["Memory Type"] = graphicCard.MemoryType.ToString("G");
+                specs["Memory Size"] = graphicCard.Memory.ToString();
+                return specs;
+            }
+
+            if (ProductIsHardDrive(id))
+            {
+                var hardDrive = this.Context.HardDrives.Find(id);
+                specs["Brand"] = hardDrive.DriveBrand.ToString("G");
+                specs["Type"] = hardDrive.DriveType.ToString("G");
+                specs["Capacity (Gb)"] = hardDrive.Capacity.ToString("G");
+            }
+            return specs;
+        }
+
+        private bool ProductIsGraphicCard(int id)
         {
             return this.Context.GraphicCards.FirstOrDefault(g => g.Id == id) != null;
         }
 
-        public bool ProductIsHardDrive(int id)
+        private bool ProductIsHardDrive(int id)
         {
             return this.Context.HardDrives.FirstOrDefault(hd => hd.Id == id) != null;
-        }
-
-        public GraphicCardSpecsViewModel GetGraphicSpecs(int id)
-        {
-            return Mapper.Map<GraphicCardSpecsViewModel>(this.Context.GraphicCards.Find(id));
-        }
-
-        public HardDriveSpecsViewModel GetHardDriveSpecs(int id)
-        {
-            return Mapper.Map<HardDriveSpecsViewModel>(this.Context.HardDrives.Find(id));
         }
     }
 }

@@ -38,17 +38,8 @@
         [ChildActionOnly]
         public ActionResult HardwareSpecs(int id)
         {
-            if (this.service.ProductIsGraphicCard(id))
-            {
-                GraphicCardSpecsViewModel gcsvm = this.service.GetGraphicSpecs(id);
-                return this.PartialView("_GraphicCardSpecsPartial", gcsvm);
-            }
-            else if (this.service.ProductIsHardDrive(id))
-            {
-                HardDriveSpecsViewModel hdsvm = this.service.GetHardDriveSpecs(id);
-                return this.PartialView("_HardDriveSpecsPartial", hdsvm);
-            }
-            return RedirectToAction("All");
+            Dictionary<string, string> specs = this.service.GetProductSpecs(id);
+            return this.PartialView("_ProductSpecsPartial", specs);
         }
     }
 }

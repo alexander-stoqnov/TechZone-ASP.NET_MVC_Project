@@ -45,8 +45,6 @@ namespace TechZone.Web
                 m.CreateMap<Product, ProductInCartViewModel>();
                 m.CreateMap<Product, ManageProductViewModel>();
                 m.CreateMap<Product, EditProductViewModel>();
-                m.CreateMap<GraphicCard, GraphicCardSpecsViewModel>();
-                m.CreateMap<HardDrive, HardDriveSpecsViewModel>();
                 m.CreateMap<Purchase, CustomerPurchaseHistoryViewModel>();
                 m.CreateMap<Customer, CustomerProfileViewModel>()
                 .ForMember(cpvm => cpvm.FullName, expr => expr.MapFrom(c => c.User.FullName))
