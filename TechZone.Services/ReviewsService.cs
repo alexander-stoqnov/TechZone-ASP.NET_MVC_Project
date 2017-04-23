@@ -118,5 +118,27 @@
             this.Context.Comments.Add(comment);
             this.Context.SaveChanges();
         }
+
+        public bool UserHasAlreadyVotedForReview(string currentUserId, int id)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            return customer.VotedFor.Any(r => r.Id == id);
+        }
+
+        public void CastUserVote(string currentUserId, VoteForReviewViewModel vote)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            var review = this.Context.Reviews.Find(vote.Id);
+            if (vote.Vote == "up")
+            {
+                review.Useful++;
+            }
+            else
+            {
+                review.Useless++;
+            }
+            customer.VotedFor.Add(review);
+            this.Context.SaveChanges();
+        }
     }
 }

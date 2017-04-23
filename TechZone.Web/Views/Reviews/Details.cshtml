@@ -22,22 +22,36 @@
                                 </a>
                                 <div class="media-body">
                                     <div class="well well-lg">
-                                        <h4 class="media-heading text-uppercase reviews">@Model.ReviewerUsername </h4>
-                                        <ul class="media-date text-uppercase reviews list-inline">
+                                        <h4 class="media-heading reviews">@Model.ReviewerUsername </h4>
+                                        <ul class="media-date reviews list-inline">
                                             <li>@Model.PublishDateString</li>
                                         </ul>
-                                        <p class="media-comment">
-                                            @Model.Content
-                                        </p>
-                                        <a class="btn btn-info btn-circle text-uppercase" href="#post-reply-form" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                        <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> @Model.CountOfComments comments</a>
+                                        <p class="media-comment">@Model.Content</p>
+                                        <a class="btn btn-info btn-circle" href="#post-reply-form" id="reply"><span class="glyphicon glyphicon-share-alt"></span>REPLY</a>
+                                        <a class="btn btn-warning btn-circle" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> @Model.CountOfComments COMMENTS</a>
                                         <div class="pull-right">
-                                            <button type="button" class="btn btn-success glyphicon glyphicon-thumbs-up">
-                                                @Model.Useful
-                                            </button>
-                                            <button type="button" id="testBtnDown" class="btn btn-danger glyphicon glyphicon-thumbs-down">
-                                                @Model.Useless
-                                            </button>
+                                            @using (Ajax.BeginForm("Vote", null, new AjaxOptions
+                                            {
+                                                HttpMethod = "post"
+                                            }, new { style = "display: inline" }))
+                                            {
+                                                @Html.HiddenFor(vm => vm.Id)
+                                                <input type="hidden" name="vote" value="up"/>
+                                                <button type="submit" class="btn btn-success fa fa-thumbs-up">
+                                                    @Model.Useful
+                                                </button>
+                                            }
+                                            @using (Ajax.BeginForm("Vote", null, new AjaxOptions
+                                            {
+                                                HttpMethod = "post"
+                                            }, new { style = "display: inline" }))
+                                            {
+                                                @Html.HiddenFor(vm => vm.Id)
+                                                <input type="hidden" name="vote" value="down" />
+                                                <button type="submit" id="testBtnDown" class="btn btn-danger fa fa-thumbs-down">
+                                                    @Model.Useless
+                                                </button>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +63,7 @@
                                                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-10 col-xs-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-2">
                                                     <div class="media-body">
                                                         <div class="well well-lg">
-                                                            <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> @comment.Commentor</h4>
+                                                            <h4 class="media-heading reviews"><span class="glyphicon glyphicon-share-alt"></span> @comment.Commentor</h4>
                                                             <ul class="media-date text-uppercase reviews list-inline">
                                                                 <li>@comment.PublishDateString</li>
                                                             </ul>
