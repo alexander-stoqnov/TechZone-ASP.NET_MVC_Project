@@ -32,24 +32,26 @@
                                         <div class="pull-right">
                                             @using (Ajax.BeginForm("Vote", null, new AjaxOptions
                                             {
-                                                HttpMethod = "post"
+                                                HttpMethod = "post",
+                                                OnComplete = "castUpVote()"
                                             }, new { style = "display: inline" }))
                                             {
                                                 @Html.HiddenFor(vm => vm.Id)
                                                 <input type="hidden" name="vote" value="up"/>
                                                 <button type="submit" class="btn btn-success fa fa-thumbs-up">
-                                                    @Model.Useful
+                                                   <span id="useful">@Model.Useful</span> 
                                                 </button>
                                             }
                                             @using (Ajax.BeginForm("Vote", null, new AjaxOptions
                                             {
-                                                HttpMethod = "post"
+                                                HttpMethod = "post",
+                                                OnComplete = "castDownVote()"
                                             }, new { style = "display: inline" }))
                                             {
                                                 @Html.HiddenFor(vm => vm.Id)
                                                 <input type="hidden" name="vote" value="down" />
                                                 <button type="submit" id="testBtnDown" class="btn btn-danger fa fa-thumbs-down">
-                                                    @Model.Useless
+                                                    <span id="useless">@Model.Useless</span> 
                                                 </button>
                                             }
                                         </div>
@@ -64,7 +66,7 @@
                                                     <div class="media-body">
                                                         <div class="well well-lg">
                                                             <h4 class="media-heading reviews"><span class="glyphicon glyphicon-share-alt"></span> @comment.Commentor</h4>
-                                                            <ul class="media-date text-uppercase reviews list-inline">
+                                                            <ul class="media-date reviews list-inline">
                                                                 <li>@comment.PublishDateString</li>
                                                             </ul>
                                                             <p class="media-comment">@comment.Content</p>
@@ -108,4 +110,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function castUpVote() {
+            var currentUpVoteCount = $("#useful").text();
+            $("#useful").text(Number(currentUpVoteCount) + 1);
+        }
+        function castDownVote() {
+            var currentDownVoteCount = $("#useless").text();
+            $("#useless").text(Number(currentDownVoteCount) + 1);
+        }
+    </script>
 }
