@@ -247,6 +247,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\CustomScripts\GoogleMapScript.js" />
     <Content Include="Scripts\CustomScripts\ProductReviews.js" />
+    <Content Include="Scripts\CustomScripts\ReviewVoting.js" />
     <Content Include="Scripts\CustomScripts\ShipmentCalculation.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -317,6 +318,7 @@
     <Content Include="Views\Products\_ProductSpecsPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ProductReviewSummary.cshtml" />
     <Content Include="Views\Reviews\_WriteCommentPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentForReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">
