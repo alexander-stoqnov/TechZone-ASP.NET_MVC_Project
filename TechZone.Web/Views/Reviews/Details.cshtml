@@ -29,34 +29,37 @@
                                         <p class="media-comment">@Model.Content</p>
                                         <a class="btn btn-info btn-circle" href="#post-reply-form" id="reply"><span class="glyphicon glyphicon-share-alt"></span>REPLY</a>
                                         <a class="btn btn-warning btn-circle" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> @Model.CountOfComments COMMENTS</a>
-                                        <div class="pull-right">
-                                            @using (Ajax.BeginForm("Vote", null, new AjaxOptions
-                                            {
-                                                HttpMethod = "post",
-                                                OnFailure = "userAlreadyVoted()",
-                                                OnSuccess = "castUpVote()"
-                                            }, new {style = "display: inline"}))
-                                            {
-                                                @Html.HiddenFor(vm => vm.Id)
-                                                <input type="hidden" name="vote" value="up"/>
-                                                <button type="submit" class="btn btn-success fa fa-thumbs-up">
-                                                    <span id="useful">@Model.Useful</span> 
-                                                </button>
-                                            }
-                                            @using (Ajax.BeginForm("Vote", null, new AjaxOptions
-                                            {
-                                                HttpMethod = "post",
-                                                OnFailure = "userAlreadyVoted()",
-                                                OnSuccess = "castDownVote()"
-                                            }, new {style = "display: inline"}))
-                                            {
-                                                @Html.HiddenFor(vm => vm.Id)
-                                                <input type="hidden" name="vote" value="down"/>
-                                                <button type="submit" id="testBtnDown" class="btn btn-danger fa fa-thumbs-down">
-                                                    <span id="useless">@Model.Useless</span> 
-                                                </button>
-                                            }
-                                        </div>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <div class="pull-right">
+                                                @using (Ajax.BeginForm("Vote", null, new AjaxOptions
+                                                {
+                                                    HttpMethod = "post",
+                                                    OnFailure = "userAlreadyVoted",
+                                                    OnSuccess = "castUpVote"
+                                                }, new { style = "display: inline" }))
+                                                {
+                                                    @Html.HiddenFor(vm => vm.Id)
+                                                    <input type="hidden" name="vote" value="up" />
+                                                    <button type="submit" class="btn btn-success fa fa-thumbs-up">
+                                                        <span id="useful">@Model.Useful</span>
+                                                    </button>
+                                                }
+                                                @using (Ajax.BeginForm("Vote", null, new AjaxOptions
+                                                {
+                                                    HttpMethod = "post",
+                                                    OnFailure = "userAlreadyVoted",
+                                                    OnSuccess = "castDownVote"
+                                                }, new { style = "display: inline" }))
+                                                {
+                                                    @Html.HiddenFor(vm => vm.Id)
+                                                    <input type="hidden" name="vote" value="down" />
+                                                    <button type="submit" id="testBtnDown" class="btn btn-danger fa fa-thumbs-down">
+                                                        <span id="useless">@Model.Useless</span>
+                                                    </button>
+                                                }
+                                            </div>
+                                        }                                       
                                     </div>
                                     <div id="error-message-here" class="alert alert-danger col-sm-6 col-sm-offset-4" hidden="hidden"></div>
                                 </div>                               

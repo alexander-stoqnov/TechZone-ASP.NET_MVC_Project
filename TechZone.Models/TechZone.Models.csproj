@@ -106,6 +106,7 @@
     <Compile Include="EntityModels\Product.cs" />
     <Compile Include="EntityModels\Publisher.cs" />
     <Compile Include="EntityModels\Purchase.cs" />
+    <Compile Include="EntityModels\Report.cs" />
     <Compile Include="EntityModels\Review.cs" />
     <Compile Include="EntityModels\ShoppingCart.cs" />
     <Compile Include="Enums\GraphicCardManufacturerType.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Moderator\SubmitReportViewModel.cs" />
     <Compile Include="ViewModels\Products\GeneralProductPageViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductDetailsViewModel.cs" />
     <Compile Include="ViewModels\Purchase\FinalCheckoutViewModel.cs" />

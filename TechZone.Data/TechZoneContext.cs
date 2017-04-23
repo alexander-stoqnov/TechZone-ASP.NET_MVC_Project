@@ -31,6 +31,8 @@ namespace TechZone.Data
 
         public virtual DbSet<Comment> Comments { get; set; }
 
+        public virtual DbSet<Report> Reports { get; set; }
+
         public static TechZoneContext Create()
         {
             return new TechZoneContext();

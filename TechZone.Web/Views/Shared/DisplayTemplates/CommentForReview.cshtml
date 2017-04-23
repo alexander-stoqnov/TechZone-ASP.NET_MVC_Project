@@ -9,7 +9,7 @@
                     <li>@Model.PublishDateString</li>
                 </ul>
                 <div class="pull-right">
-                    <a href="@Url.Action("Register", "Account")" class="btn btn-danger">
+                    <a href="@Url.Action("SubmitReport", "Maintain", new { area = "Moderator", id = Model.Id})" class="btn btn-danger">
                         <i class="fa fa-flag" aria-hidden="true"></i>
                         <span class="text">Report</span>
                     </a>
