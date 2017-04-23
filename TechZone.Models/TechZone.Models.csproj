@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModels\AddCommentBindingModel.cs" />
     <Compile Include="BindingModels\ChangeUserRolesBindingModel.cs" />
     <Compile Include="BindingModels\WriteReviewBindingModel.cs" />
     <Compile Include="EntityModels\ApplicationUser.cs" />

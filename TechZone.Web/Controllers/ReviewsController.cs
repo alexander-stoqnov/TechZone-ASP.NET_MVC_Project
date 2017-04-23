@@ -62,5 +62,21 @@
             ReviewDetailsViewModel rdvm = this._service.GetReviewDetails(currentUserId, id, apikey[1]);
             return this.View(rdvm);
         }
+
+        [HttpPost]
+        [Route("Comment")]
+        [Authorize]
+        public ActionResult Comment(AddCommentBindingModel acbm)
+        {
+            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
+            var currentUserId = this.User.Identity.GetUserId();
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Comment should be between 10 and 400 characters.");
+                return this.View("Details", this._service.GetReviewDetails(currentUserId, acbm.Id, apikey[1]));
+            }
+            this._service.WriteCommentToReview(currentUserId, acbm);
+            return RedirectToAction("Details", "Reviews", new { id = acbm.Id });
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using Models.BindingModels;
     using System.Linq;
@@ -10,6 +8,7 @@ namespace TechZone.Services
     using Models.ViewModels.Reviews;
     using System.Globalization;
     using Dropbox.Api;
+    using System.Collections.Generic;
 
     public class ReviewsService : Service
     {
@@ -104,6 +103,21 @@ namespace TechZone.Services
             }
             rdvm.ReviewComments = Mapper.Instance.Map<IEnumerable<ReviewCommentViewModel>>(review.Comments);
             return rdvm;
+        }
+
+        public void WriteCommentToReview(string currentUserId, AddCommentBindingModel acbm)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            var review = this.Context.Reviews.Find(acbm.Id);
+            Comment comment = new Comment
+            {
+                Review = review,
+                Content = acbm.Comment,
+                Customer = customer,
+                PublishDate = DateTime.Now
+            };
+            this.Context.Comments.Add(comment);
+            this.Context.SaveChanges();
         }
     }
 }
