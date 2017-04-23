@@ -33,6 +33,8 @@
                                             @using (Ajax.BeginForm("Vote", null, new AjaxOptions
                                             {
                                                 HttpMethod = "post",
+                                                OnFailure = "userAlreadyVoted()",
+                                                OnSuccess = "castUpVote()"
                                             }, new {style = "display: inline"}))
                                             {
                                                 @Html.HiddenFor(vm => vm.Id)
@@ -44,6 +46,8 @@
                                             @using (Ajax.BeginForm("Vote", null, new AjaxOptions
                                             {
                                                 HttpMethod = "post",
+                                                OnFailure = "userAlreadyVoted()",
+                                                OnSuccess = "castDownVote()"
                                             }, new {style = "display: inline"}))
                                             {
                                                 @Html.HiddenFor(vm => vm.Id)

@@ -1,4 +1,7 @@
-﻿namespace TechZone.Web.Controllers
+﻿using System;
+using System.Net;
+
+namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Models.BindingModels;
@@ -87,14 +90,10 @@
             var currentUserId = this.User.Identity.GetUserId();
             if (this._service.UserHasAlreadyVotedForReview(currentUserId, vfrvm.Id))
             {
-                return JavaScript("userAlreadyVoted()");
+                return new HttpStatusCodeResult(HttpStatusCode.NotAcceptable);
             }
             this._service.CastUserVote(currentUserId, vfrvm);
-            if (vfrvm.Vote == "up")
-            {
-                return JavaScript("castUpVote()");
-            }
-            return JavaScript("castDownVote()");
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }
