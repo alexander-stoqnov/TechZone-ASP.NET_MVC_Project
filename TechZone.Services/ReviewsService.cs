@@ -11,6 +11,11 @@
 
     public class ReviewsService : Service
     {
+        public bool ReviewExists(int id)
+        {
+            return this.Context.Reviews.Find(id) != null;
+        }
+
         public void CreateReview(string currentUserId, WriteReviewBindingModel wrbm)
         {
             var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
@@ -82,6 +87,20 @@
         {
             var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
             return this.Context.Reviews.FirstOrDefault(r => r.Reviewer.Id == customer.Id && r.Product.Id == id) != null;
+        }
+
+        public ReviewDetailsViewModel GetReviewDetails(string currentUserId, int id, string dropboxKey)
+        {
+            var review = this.Context.Reviews.Find(id);
+            ReviewDetailsViewModel rdvm = Mapper.Instance.Map<ReviewDetailsViewModel>(review);
+            rdvm.PublishDateString = review.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"));
+            rdvm.VisitorIsAlsoReviewPublisher = currentUserId == review.Reviewer.UserId;
+            if (review.Reviewer.User.ProfilePictureFileName != null)
+            {
+                rdvm.ReviewerImageData = this.GetUserProfilePicture(review.Reviewer.User.ProfilePictureFileName,
+                    review.Reviewer.User.UserName, dropboxKey);
+            }
+            return rdvm;
         }
     }
 }

@@ -49,5 +49,18 @@
             this._service.CreateReview(currentUserId, wrbm);
             return RedirectToAction("Details", "Products", new { id = wrbm.ProductId });
         }
+
+        [Route("Details/{id}")]
+        public ActionResult Details(int id)
+        {
+            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
+            if (!this._service.ReviewExists(id))
+            {
+                return this.RedirectToAction("All", "Products");
+            }
+            var currentUserId = this.User.Identity.GetUserId();
+            ReviewDetailsViewModel rdvm = this._service.GetReviewDetails(currentUserId, id, apikey[1]);
+            return this.View(rdvm);
+        }
     }
 }

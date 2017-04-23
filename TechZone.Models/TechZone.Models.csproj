@@ -142,6 +142,8 @@
     <Compile Include="ViewModels\Purchase\FinalCheckoutViewModel.cs" />
     <Compile Include="ViewModels\Purchase\ProductInCartViewModel.cs" />
     <Compile Include="ViewModels\Purchase\ShoppingCartViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewCommentViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewDetailsViewModel.cs" />
     <Compile Include="ViewModels\Reviews\ReviewOverviewViewModel.cs" />
     <Compile Include="ViewModels\Reviews\SimpleReviewViewModel.cs" />
     <Compile Include="ViewModels\Reviews\SubmitReviewViewModel.cs" />

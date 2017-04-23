@@ -223,6 +223,7 @@
     <Content Include="Content\ProductDetails.css" />
     <Content Include="Content\ProductReviews.css" />
     <Content Include="Content\ProductStyles.css" />
+    <Content Include="Content\ReviewDetails.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

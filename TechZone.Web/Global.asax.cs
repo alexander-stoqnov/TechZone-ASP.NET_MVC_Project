@@ -1,7 +1,4 @@
-﻿using TechZone.Models.BindingModels;
-using TechZone.Models.ViewModels.Reviews;
-
-namespace TechZone.Web
+﻿namespace TechZone.Web
 {
     using System.Web;
     using System.Web.Mvc;
@@ -15,6 +12,8 @@ namespace TechZone.Web
     using System;
     using Models.ViewModels.Purchase;
     using Models.ViewModels.Customer;
+    using Models.BindingModels;
+    using Models.ViewModels.Reviews;
 
     public class MvcApplication : HttpApplication
     {
@@ -51,6 +50,10 @@ namespace TechZone.Web
                 .ForMember(cpvm => cpvm.Email, expr => expr.MapFrom(c => c.User.Email))
                 .ForMember(cpvm => cpvm.Username, expr => expr.MapFrom(c => c.User.UserName));
                 m.CreateMap<Review, SimpleReviewViewModel>();
+                m.CreateMap<Review, ReviewDetailsViewModel>()
+                .ForMember(rdvm => rdvm.CountOfComments, expr => expr.MapFrom(r => r.Comments.Count))
+                .ForMember(rdvm => rdvm.ReviewerUsername, expr => expr.MapFrom(r => r.Reviewer.User.UserName));
+                m.CreateMap<Comment, ReviewCommentViewModel>();
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
             });
