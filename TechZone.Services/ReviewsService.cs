@@ -1,4 +1,6 @@
-﻿namespace TechZone.Services
+﻿using System.Collections.Generic;
+
+namespace TechZone.Services
 {
     using Models.BindingModels;
     using System.Linq;
@@ -100,6 +102,7 @@
                 rdvm.ReviewerImageData = this.GetUserProfilePicture(review.Reviewer.User.ProfilePictureFileName,
                     review.Reviewer.User.UserName, dropboxKey);
             }
+            rdvm.ReviewComments = Mapper.Instance.Map<IEnumerable<ReviewCommentViewModel>>(review.Comments);
             return rdvm;
         }
     }

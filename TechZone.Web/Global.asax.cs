@@ -14,6 +14,7 @@
     using Models.ViewModels.Customer;
     using Models.BindingModels;
     using Models.ViewModels.Reviews;
+    using System.Globalization;
 
     public class MvcApplication : HttpApplication
     {
@@ -53,7 +54,9 @@
                 m.CreateMap<Review, ReviewDetailsViewModel>()
                 .ForMember(rdvm => rdvm.CountOfComments, expr => expr.MapFrom(r => r.Comments.Count))
                 .ForMember(rdvm => rdvm.ReviewerUsername, expr => expr.MapFrom(r => r.Reviewer.User.UserName));
-                m.CreateMap<Comment, ReviewCommentViewModel>();
+                m.CreateMap<Comment, ReviewCommentViewModel>()
+                .ForMember(rcvm => rcvm.Commentor, expr => expr.MapFrom(c => c.Customer.User.UserName))
+                .ForMember(rcvm => rcvm.PublishDateString, expr => expr.MapFrom(c => c.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"))));
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
             });
