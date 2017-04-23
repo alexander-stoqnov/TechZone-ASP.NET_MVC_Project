@@ -319,6 +319,7 @@
     <Content Include="Views\Shared\DisplayTemplates\ProductReviewSummary.cshtml" />
     <Content Include="Views\Reviews\_WriteCommentPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CommentForReview.cshtml" />
+    <Content Include="Views\Shared\NaughtyStringsError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">

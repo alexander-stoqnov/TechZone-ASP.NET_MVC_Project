@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web.Controllers
+﻿using System.CodeDom;
+
+namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Models.BindingModels;
@@ -40,6 +42,7 @@
         [HttpPost]
         [Route("Write")]
         [Authorize(Roles = "Customer")]
+        [HandleError(ExceptionType = typeof(System.Web.HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Write(WriteReviewBindingModel wrbm)
         {
             if (!ModelState.IsValid || _service.HasUserReviewedProduct(User.Identity.GetUserId(), wrbm.ProductId))
@@ -67,6 +70,7 @@
         [HttpPost]
         [Route("Comment")]
         [Authorize]
+        [HandleError(ExceptionType = typeof(System.Web.HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Comment(AddCommentBindingModel acbm)
         {
             var currentUserId = this.User.Identity.GetUserId();
