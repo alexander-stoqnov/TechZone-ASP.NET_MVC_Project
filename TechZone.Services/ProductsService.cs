@@ -80,12 +80,12 @@
 
         private bool ProductIsGraphicCard(int id)
         {
-            return this.Context.GraphicCards.FirstOrDefault(g => g.Id == id) != null;
+            return this.Context.GraphicCards.Any(g => g.Id == id);
         }
 
         private bool ProductIsHardDrive(int id)
         {
-            return this.Context.HardDrives.FirstOrDefault(hd => hd.Id == id) != null;
+            return this.Context.HardDrives.Any(hd => hd.Id == id);
         }
     }
 }

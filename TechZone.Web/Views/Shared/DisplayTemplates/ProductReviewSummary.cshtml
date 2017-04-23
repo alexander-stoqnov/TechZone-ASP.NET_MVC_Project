@@ -1,0 +1,41 @@
+﻿@model TechZone.Models.ViewModels.Reviews.SimpleReviewViewModel
+
+<div class="row">
+    <div class="col-sm-3">
+        @if (Model.ReviewerImageData != null)
+        {
+            <img src="@Model.ReviewerImageData" class="img-rounded" style="width: 60px; height:60px">
+        }
+        else
+        {
+            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+        }
+        <div class="review-block-name">
+            <b>@Model.ReviewerUsername</b>
+        </div>
+        <div class="review-block-date">
+            @Model.PublishDateString<br />@Model.DaysAgoPublished days ago
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="review-block-rate">
+            @for (int i = 1; i <= 5; i++)
+            {
+                if (i <= Model.Rating)
+                {
+                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                }
+            }
+        </div>
+        <div class="review-block-title">@Html.ActionLink(Model.Title, "Details", "Reviews", new { id = Model.Id }, null)</div>
+        <div class="review-block-description">@Model.Content</div>
+    </div>
+</div>

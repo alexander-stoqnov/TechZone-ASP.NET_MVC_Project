@@ -312,6 +312,7 @@
     <Content Include="Views\Reviews\Details.cshtml" />
     <Content Include="Views\Reviews\_AllProductReviewPartial.cshtml" />
     <Content Include="Views\Products\_ProductSpecsPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ProductReviewSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">

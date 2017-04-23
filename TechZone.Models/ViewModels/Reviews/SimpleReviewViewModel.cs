@@ -10,6 +10,8 @@
 
         public string Content { get; set; }
 
+        public string Title { get; set; }
+
         public int DaysAgoPublished { get; set; }
 
         public string ReviewerUsername { get; set; }

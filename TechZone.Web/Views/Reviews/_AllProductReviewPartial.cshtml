@@ -105,45 +105,7 @@
                 @{
                     foreach (var review in Model.Reviews)
                     {
-                        <div class="row">
-                            <div class="col-sm-3">
-                                @if (review.ReviewerImageData != null)
-                                {
-                                    <img src="@review.ReviewerImageData" class="img-rounded" style="width: 60px; height:60px">
-                                }
-                                else
-                                {
-                                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                                }
-                                <div class="review-block-name">
-                                    <b>@review.ReviewerUsername</b>
-                                </div>
-                                <div class="review-block-date">
-                                    @review.PublishDateString<br/>@review.DaysAgoPublished days ago
-                                </div>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="review-block-rate">
-                                    @for (int i = 1; i <= 5; i++)
-                                    {
-                                        if (i <= review.Rating)
-                                        {
-                                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                            </button>
-                                        }
-                                        else
-                                        {
-                                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                            </button>
-                                        }
-                                    }
-                                </div>
-                                <div class="review-block-title">this was nice in buy</div>
-                                <div class="review-block-description">@review.Content</div>
-                            </div>
-                        </div>
+                        @Html.DisplayFor(vm => review, "ProductReviewSummary")
                         if (review != Model.Reviews.Last())
                         {
                             <hr/>
