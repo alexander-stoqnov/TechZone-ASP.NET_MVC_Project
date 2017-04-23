@@ -85,12 +85,16 @@
         public ActionResult Vote(VoteForReviewViewModel vfrvm)
         {
             var currentUserId = this.User.Identity.GetUserId();
-            //if (this._service.UserHasAlreadyVotedForReview(currentUserId, vfrvm.Id))
-            //{
-            //    return this.RedirectToAction("Details", "Reviews", new {id = vfrvm.Id});
-            //}
+            if (this._service.UserHasAlreadyVotedForReview(currentUserId, vfrvm.Id))
+            {
+                return JavaScript("userAlreadyVoted()");
+            }
             this._service.CastUserVote(currentUserId, vfrvm);
-            return this.RedirectToAction("Details", "Reviews", new { id = vfrvm.Id });
+            if (vfrvm.Vote == "up")
+            {
+                return JavaScript("castUpVote()");
+            }
+            return JavaScript("castDownVote()");
         }
     }
 }
