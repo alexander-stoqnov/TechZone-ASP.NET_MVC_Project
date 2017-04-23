@@ -1,13 +1,11 @@
-﻿using System;
-using System.Net;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Models.BindingModels;
     using Services;
     using Microsoft.AspNet.Identity;
     using Models.ViewModels.Reviews;
+    using System.Net;
 
     [RoutePrefix("Reviews")]
     public class ReviewsController : Controller
@@ -71,15 +69,21 @@ namespace TechZone.Web.Controllers
         [Authorize]
         public ActionResult Comment(AddCommentBindingModel acbm)
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             var currentUserId = this.User.Identity.GetUserId();
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Comment should be between 10 and 400 characters.");
-                return this.View("Details", this._service.GetReviewDetails(currentUserId, acbm.Id, apikey[1]));
+                return RedirectToAction("Details", "Reviews", new { id = acbm.Id });
             }
             this._service.WriteCommentToReview(currentUserId, acbm);
             return RedirectToAction("Details", "Reviews", new { id = acbm.Id });
+        }
+
+        [Route("CommentForm")]
+        [ChildActionOnly]
+        public ActionResult CommentForm(int id)
+        {
+            AddCommentBindingModel acbm = new AddCommentBindingModel { Id = id};
+            return this.PartialView("_WriteCommentPartial", acbm);
         }
 
         [HttpPost]

@@ -9,29 +9,29 @@
     [RoutePrefix("Purchase")]
     public class PurchaseController : Controller
     {
-        private PurchaseService service;
+        private PurchaseService _service;
 
         public PurchaseController()
         {
-            this.service = new PurchaseService();
+            this._service = new PurchaseService();
         }
 
         [HttpPost]
         [Route("AddToShoppingCart")]
         public ActionResult AddToShoppingCart(int id)
         {
-            if (!this.service.ProductExists(id))
+            if (!this._service.ProductExists(id))
             {
                 return RedirectToAction("All", "Products");
             }
 
             if (!User.Identity.IsAuthenticated)
             {
-                this.service.AddProductForCurrentSession(id, Session.SessionID);
+                this._service.AddProductForCurrentSession(id, Session.SessionID);
             }
             else
             {
-                this.service.AddProductToShoppingCart(id, User.Identity.GetUserId());
+                this._service.AddProductToShoppingCart(id, User.Identity.GetUserId());
             }
             return RedirectToAction("All", "Products");
         }
@@ -40,7 +40,7 @@
         public ActionResult CountOfProductsInCart()
         {
             string currentUserId = this.User.Identity.GetUserId();
-            int count = this.service.GetNumberOfItemsInCart(currentUserId, this.Session.SessionID);
+            int count = this._service.GetNumberOfItemsInCart(currentUserId, this.Session.SessionID);
 
             return this.PartialView("_NavigationHelpersPartial", count);
         }
@@ -49,7 +49,7 @@
         public ActionResult ShoppingCart()
         {
             var userId = this.User.Identity.GetUserId();
-            ShoppingCartViewModel cart = this.service.GetCartItems(userId, this.Session.SessionID);
+            ShoppingCartViewModel cart = this._service.GetCartItems(userId, this.Session.SessionID);
             if (!cart.ProductsInCart.Any())
             {
                 return RedirectToAction("All", "Products");
@@ -62,7 +62,7 @@
         public ActionResult RemoveFromCart(int id)
         {
             var currentUserId = this.User.Identity.GetUserId();
-            this.service.RemoveProductFromCart(currentUserId, this.Session.SessionID ,id);
+            this._service.RemoveProductFromCart(currentUserId, this.Session.SessionID ,id);
             return RedirectToAction("ShoppingCart", "Purchase");
         }
 
@@ -72,12 +72,12 @@
         {
             var currentUserId = this.User.Identity.GetUserId();
 
-            if (this.service.ContainsItemsNotInStock(currentUserId))
+            if (this._service.ContainsItemsNotInStock(currentUserId))
             {
                 return RedirectToAction("ShoppingCart", "Purchase");
             }
 
-            FinalCheckoutViewModel finalItemsPrice = this.service.CalculatePriceWithoutShipment(currentUserId);
+            FinalCheckoutViewModel finalItemsPrice = this._service.CalculatePriceWithoutShipment(currentUserId);
             return this.View(finalItemsPrice);
         }
 
@@ -86,7 +86,7 @@
         public ActionResult BalanceCheck(decimal totalPrice)
         {
             var currentUserId = this.User.Identity.GetUserId();
-            if (!this.service.EnoughCredits(currentUserId, totalPrice))
+            if (!this._service.EnoughCredits(currentUserId, totalPrice))
             {
                 return this.PartialView("_NotEnoughCreditsPartial");
             }
@@ -100,11 +100,11 @@
         {
             var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             var currentUserId = this.User.Identity.GetUserId();
-            if (!this.service.EnoughCredits(currentUserId, finalPrice))
+            if (!this._service.EnoughCredits(currentUserId, finalPrice))
             {
                 return RedirectToAction("CheckOut", "Purchase");
             }
-            this.service.FinalizePurchase(currentUserId, finalPrice, apikey[1]);
+            this._service.FinalizePurchase(currentUserId, finalPrice, apikey[1]);
             return this.RedirectToAction("All", "Products");
         }
     }
