@@ -36,7 +36,6 @@
             return RedirectToAction("All", "Products");
         }
 
-        [ChildActionOnly]
         public ActionResult CountOfProductsInCart()
         {
             string currentUserId = this.User.Identity.GetUserId();

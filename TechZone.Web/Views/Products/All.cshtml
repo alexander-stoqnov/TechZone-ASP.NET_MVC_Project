@@ -83,8 +83,10 @@
             url: "/Purchase/AddToShoppingCart",
             data: { id : product.value},
             success: function () {
-                location.reload();
-                window.location.href = '/Products/All/#' + prodId;
+                $('#shopping-cart').load('/Purchase/CountOfProductsInCart', function() {
+                    $(this).children(':first').unwrap();
+                    window.location.href = '/Products/All/#' + prodId;
+                });  
             }
         });
     }
