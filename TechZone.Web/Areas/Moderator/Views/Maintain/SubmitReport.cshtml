@@ -1,6 +1,7 @@
 ﻿@model TechZone.Models.ViewModels.Moderator.SubmitReportViewModel
 @{
     ViewBag.Title = "SubmitReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="text-center" style="padding: 50px 0">
     @using (Html.BeginForm(Html.BeginForm("SubmitReport", "Maintain", FormMethod.Post, new {@class = "text-left form-horizontal", role = "form", area = "Moderator"})))

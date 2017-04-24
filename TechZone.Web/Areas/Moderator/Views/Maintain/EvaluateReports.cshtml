@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TechZone.Models.ViewModels.Moderator.EvaluateReportViewModel>
+@{
+    ViewBag.Title = "EvaluateReports";
+}
+
+<div style="margin: 30px 0">
+    @{
+        foreach (var report in Model)
+        {
+            <div class="row">
+                <div class="col-sm-4">
+                    <table class="table table-responsive table-bordered text-center">
+                        <tr class="bg-success">
+                            <th>@Html.LabelFor(vm => report.SubmittedBy)</th>
+                            <td>@Html.DisplayFor(vm => report.SubmittedBy)</td>
+                        </tr>
+                        <tr class="bg-success">
+                            <th>@Html.LabelFor(vm => report.Title)</th>
+                            <td>@Html.DisplayFor(vm => report.Title)</td>
+                        </tr>
+                        <tr class="bg-success">
+                            <th>@Html.LabelFor(vm => report.Description)</th>
+                            <td>@Html.DisplayFor(vm => report.Description)</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <th>@Html.LabelFor(vm => report.CommentOffender)</th>
+                            <td>@Html.DisplayFor(vm => report.CommentOffender)</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <th>@Html.LabelFor(vm => report.CommentContent)</th>
+                            <td>@Html.DisplayFor(vm => report.CommentContent)</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td colspan="2">
+                                @Html.ActionLink("View", "Details", "Reviews", new { id = report.ReviewId, area = "" }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Dismiss", "DismissReport", "Maintain", null, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Warn", "IssueWarning", "Maintain", null ,new { @class = "btn btn-danger"})
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        }
+    }
+</div>

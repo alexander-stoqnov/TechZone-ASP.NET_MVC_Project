@@ -60,6 +60,11 @@ namespace TechZone.Web
                 m.CreateMap<Comment, ReviewCommentViewModel>()
                 .ForMember(rcvm => rcvm.Commentor, expr => expr.MapFrom(c => c.Customer.User.UserName))
                 .ForMember(rcvm => rcvm.PublishDateString, expr => expr.MapFrom(c => c.PublishDate.ToString("dd MMMM yyyy", new CultureInfo("en-US"))));
+                m.CreateMap<Report, EvaluateReportViewModel>()
+                    .ForMember(ervm => ervm.CommentContent, expr => expr.MapFrom(r => r.OffensiveComment.Content))
+                    .ForMember(ervm => ervm.SubmittedBy, expr => expr.MapFrom(r => r.Snitch.User.UserName))
+                    .ForMember(ervm => ervm.CommentOffender, expr => expr.MapFrom(r => r.OffensiveComment.Customer.User.UserName))
+                    .ForMember(ervm => ervm.ReviewId, expr => expr.MapFrom(r => r.OffensiveComment.Review.Id));
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
                 m.CreateMap<SubmitReportViewModel, Report>();

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Collections.Generic;
+using TechZone.Web.Attributes;
 
 namespace TechZone.Web.Areas.Moderator.Controllers
 {
     using System.Web.Mvc;
     using Services;
     using Models.ViewModels.Moderator;
+    using Microsoft.AspNet.Identity;
 
     [RouteArea("Moderator")]
     [RoutePrefix("Maintain")]
@@ -38,6 +40,14 @@ namespace TechZone.Web.Areas.Moderator.Controllers
 
             this._service.SendCommentReport(currentUserId, srbm);
             return RedirectToAction("Details", "Reviews", new { id = srbm.ReviewId });
+        }
+
+        [Route("EvaluateReports")]
+        [CustomAuthorize(Roles = "Moderator")]
+        public ActionResult EvaluateReports()
+        {
+            IEnumerable<EvaluateReportViewModel> reportsVms = this._service.GetAllUnevaluatedReports();
+            return this.View(reportsVms);
         }
 
     }

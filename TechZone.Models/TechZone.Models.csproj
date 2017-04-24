@@ -140,6 +140,7 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Moderator\EvaluateReportViewModel.cs" />
     <Compile Include="ViewModels\Moderator\SubmitReportViewModel.cs" />
     <Compile Include="ViewModels\Products\GeneralProductPageViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductDetailsViewModel.cs" />

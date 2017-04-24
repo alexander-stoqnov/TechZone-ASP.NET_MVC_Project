@@ -16,6 +16,8 @@ namespace TechZone.Models.EntityModels
         [MaxLength(300, ErrorMessage = "Description should be less than 300 characters long")]
         public string Description { get; set; }
 
+        public bool IsEvaluated { get; set; }
+
         public virtual Customer Snitch { get; set; }
 
         public virtual Comment OffensiveComment { get; set; }

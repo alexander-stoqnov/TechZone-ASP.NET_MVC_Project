@@ -4,6 +4,7 @@
     using System.Linq;
     using AutoMapper;
     using Models.EntityModels;
+    using System.Collections.Generic;
 
     public class ModeratorService : Service
     {
@@ -28,6 +29,12 @@
 
             this.Context.Reports.Add(report);
             this.Context.SaveChanges();
+        }
+
+        public IEnumerable<EvaluateReportViewModel> GetAllUnevaluatedReports()
+        {
+            var reportEntities = this.Context.Reports.Where(r => !r.IsEvaluated);
+            return Mapper.Instance.Map<IEnumerable<EvaluateReportViewModel>>(reportEntities);
         }
     }
 }

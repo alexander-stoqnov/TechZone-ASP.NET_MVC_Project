@@ -28,6 +28,7 @@ textarea {
     width: 65%;
 }
 
-.table > tbody > tr > td {
+.table > tbody > tr > td,
+.table > tbody > tr > th {
 vertical-align: middle;
 }
