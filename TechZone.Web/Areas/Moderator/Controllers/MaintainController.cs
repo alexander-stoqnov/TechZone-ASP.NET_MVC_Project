@@ -1,9 +1,9 @@
-﻿namespace TechZone.Web.Areas.Moderator.Controllers
+﻿using Microsoft.AspNet.Identity;
+
+namespace TechZone.Web.Areas.Moderator.Controllers
 {
-    using Attributes;
     using System.Web.Mvc;
     using Services;
-    using Microsoft.AspNet.Identity;
     using Models.ViewModels.Moderator;
 
     [RouteArea("Moderator")]
@@ -21,9 +21,24 @@
         [Authorize(Roles = "Customer")]
         public ActionResult SubmitReport(int id)
         {
-            var currentUserId = this.User.Identity.GetUserId();
-            SubmitReportViewModel srvm = this._service.PrepareSubmitReportInfo(currentUserId, id);
+            SubmitReportViewModel srvm = this._service.PrepareSubmitReportInfo(id);
             return View(srvm);
         }
+
+        [Route("SubmitReport/{id}")]
+        [Authorize(Roles = "Customer")]
+        [HttpPost]
+        public ActionResult SubmitReport(SubmitReportViewModel srbm)
+        {
+            var currentUserId = this.User.Identity.GetUserId();
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("SubmitReport", new {id = srbm.ReportedCommentId});
+            }
+
+            this._service.SendCommentReport(currentUserId, srbm);
+            return RedirectToAction("Details", "Reviews", new { id = srbm.ReviewId });
+        }
+
     }
 }

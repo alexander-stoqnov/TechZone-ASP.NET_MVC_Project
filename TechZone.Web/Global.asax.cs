@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web
+﻿using TechZone.Models.ViewModels.Moderator;
+
+namespace TechZone.Web
 {
     using System.Web;
     using System.Web.Mvc;
@@ -60,6 +62,7 @@
                 .ForMember(rcvm => rcvm.PublishDateString, expr => expr.MapFrom(c => c.PublishDate.ToString("dd MMMM yyyy", new CultureInfo("en-US"))));
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
+                m.CreateMap<SubmitReportViewModel, Report>();
             });
         }
     }
