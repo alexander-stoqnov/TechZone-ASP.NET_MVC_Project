@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using TechZone.Web.Attributes;
 
 namespace TechZone.Web.Areas.Moderator.Controllers
@@ -27,7 +28,7 @@ namespace TechZone.Web.Areas.Moderator.Controllers
             return View(srvm);
         }
 
-        [Route("SubmitReport/{id}")]
+        [Route("SubmitReport")]
         [Authorize(Roles = "Customer")]
         [HttpPost]
         public ActionResult SubmitReport(SubmitReportViewModel srbm)
@@ -39,7 +40,7 @@ namespace TechZone.Web.Areas.Moderator.Controllers
             }
 
             this._service.SendCommentReport(currentUserId, srbm);
-            return RedirectToAction("Details", "Reviews", new { id = srbm.ReviewId });
+            return RedirectToAction("Details", "Reviews", new { id = srbm.ReviewId, area = "" });
         }
 
         [Route("EvaluateReports")]
@@ -50,5 +51,30 @@ namespace TechZone.Web.Areas.Moderator.Controllers
             return this.View(reportsVms);
         }
 
+        [Route("DismissReport")]
+        [HttpPost]
+        public ActionResult DismissReport(int id)
+        {
+            if (!this._service.ReportStillExists(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            this._service.RemoveReport(id);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        [Route("IssueWarning")]
+        [HttpPost]
+        public ActionResult IssueWarning(int id)
+        {
+            if (!this._service.ReportStillExists(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            this._service.IssueWarningToCustomer(id);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
     }
 }

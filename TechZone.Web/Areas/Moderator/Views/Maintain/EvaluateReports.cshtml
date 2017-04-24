@@ -8,7 +8,7 @@
         foreach (var report in Model)
         {
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4" id="reportId_@report.Id">
                     <table class="table table-responsive table-bordered text-center">
                         <tr class="bg-success">
                             <th>@Html.LabelFor(vm => report.SubmittedBy)</th>
@@ -32,9 +32,25 @@
                         </tr>
                         <tr class="text-center">
                             <td colspan="2">
-                                @Html.ActionLink("View", "Details", "Reviews", new { id = report.ReviewId, area = "" }, new { @class = "btn btn-warning" })
-                                @Html.ActionLink("Dismiss", "DismissReport", "Maintain", null, new { @class = "btn btn-success" })
-                                @Html.ActionLink("Warn", "IssueWarning", "Maintain", null ,new { @class = "btn btn-danger"})
+                                @Html.ActionLink("View", "Details", "Reviews", new {id = report.ReviewId, area = ""}, new {@class = "btn btn-warning"})
+                                @using (Ajax.BeginForm("DismissReport", null, new AjaxOptions
+                                {
+                                    HttpMethod = "post",
+                                    OnSuccess = "toggleReport('" + report.Id + "')"
+                                }, new { style = "display: inline" }))
+                                {
+                                    <input type="hidden" name="id" value="@report.Id" />
+                                    <input type="submit" class="btn btn-success" value="Dismiss"/>
+                                }
+                                @using (Ajax.BeginForm("IssueWarning", null, new AjaxOptions
+                                {
+                                    HttpMethod = "post",
+                                    OnSuccess = "toggleReport('" + report.Id + "')"
+                                }, new {style = "display: inline"}))
+                                {
+                                    <input type="hidden" name="id" value="@report.Id"/>
+                                    <input type="submit" class="btn btn-danger" value="Warn"/>
+                                }
                             </td>
                         </tr>
                     </table>
@@ -43,3 +59,10 @@
         }
     }
 </div>
+
+<script>
+    function toggleReport(reportId) {
+        var divToToggle = '#reportId_' + reportId;
+        $(divToToggle).toggle("slow");
+    }
+</script>

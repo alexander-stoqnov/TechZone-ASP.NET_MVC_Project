@@ -36,5 +36,26 @@
             var reportEntities = this.Context.Reports.Where(r => !r.IsEvaluated);
             return Mapper.Instance.Map<IEnumerable<EvaluateReportViewModel>>(reportEntities);
         }
+
+        public bool ReportStillExists(int id)
+        {
+            return this.Context.Reports.Any(r => r.Id == id);
+        }
+
+        public void RemoveReport(int id)
+        {
+            var report = this.Context.Reports.Find(id);
+            this.Context.Reports.Remove(report);
+            this.Context.SaveChanges();
+        }
+
+        public void IssueWarningToCustomer(int id)
+        {
+            var report = this.Context.Reports.Find(id);
+            var customer = report.OffensiveComment.Customer;
+            customer.Warnings++;
+            this.Context.Reports.Remove(report);
+            this.Context.SaveChanges();
+        }
     }
 }
