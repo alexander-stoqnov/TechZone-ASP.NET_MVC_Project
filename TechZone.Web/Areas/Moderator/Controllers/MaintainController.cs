@@ -28,7 +28,7 @@ namespace TechZone.Web.Areas.Moderator.Controllers
             return View(srvm);
         }
 
-        [Route("SubmitReport")]
+        [Route("SubmitReport/{id}")]
         [Authorize(Roles = "Customer")]
         [HttpPost]
         public ActionResult SubmitReport(SubmitReportViewModel srbm)
