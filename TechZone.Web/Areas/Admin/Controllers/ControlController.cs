@@ -84,5 +84,17 @@
             this._service.EditProductInfo(epbm);
             return RedirectToAction("Products");
         }
+
+        [Route("AddProduct")]
+        public ActionResult AddProduct()
+        {
+            return this.View();
+        }
+
+        [Route("ProductSpecs")]
+        public ActionResult ProductSpecs(string productType)
+        {
+            return null;
+        }
     }
 }

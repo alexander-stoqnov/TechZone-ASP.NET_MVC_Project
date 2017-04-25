@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingModels\AddCommentBindingModel.cs" />
+    <Compile Include="BindingModels\AddProductBindingModel.cs" />
     <Compile Include="BindingModels\ChangeUserRolesBindingModel.cs" />
     <Compile Include="BindingModels\VoteForReviewViewModel.cs" />
     <Compile Include="BindingModels\WriteReviewBindingModel.cs" />
