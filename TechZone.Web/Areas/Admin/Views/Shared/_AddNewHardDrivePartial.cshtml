@@ -1,0 +1,20 @@
+﻿@using TechZone.Models.Enums
+@model TechZone.Models.BindingModels.AddHardDriveBindingModel
+<div class="form-group">
+    @Html.LabelFor(m => m.DriveType, new {@class = "col-md-2 control-label"})
+    <div class="col-md-2">
+        @Html.DropDownListFor(m => m.DriveType, Enum.GetNames(typeof(HardDriveType)).Select(e => new SelectListItem {Text = e}), new {@class = "form-control"})
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.DriveBrand, new {@class = "col-md-2 control-label"})
+    <div class="col-md-2">
+        @Html.DropDownListFor(m => m.DriveBrand, Enum.GetNames(typeof(HardDriveBrandType)).Select(e => new SelectListItem {Text = e}), new {@class = "form-control"})
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Capacity, new { @class = "col-md-2 control-label" })
+    <div class="col-md-2">
+        @Html.TextBoxFor(m => m.Capacity, new { @class = "form-control", type = "number" })
+    </div>
+</div>

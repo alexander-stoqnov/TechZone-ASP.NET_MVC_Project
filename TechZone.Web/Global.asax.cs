@@ -1,6 +1,4 @@
-﻿using TechZone.Models.ViewModels.Moderator;
-
-namespace TechZone.Web
+﻿namespace TechZone.Web
 {
     using System.Web;
     using System.Web.Mvc;
@@ -17,6 +15,7 @@ namespace TechZone.Web
     using Models.BindingModels;
     using Models.ViewModels.Reviews;
     using System.Globalization;
+    using Models.ViewModels.Moderator;
 
     public class MvcApplication : HttpApplication
     {
@@ -68,6 +67,8 @@ namespace TechZone.Web
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
                 m.CreateMap<SubmitReportViewModel, Report>();
+                m.CreateMap<AddHardDriveBindingModel, HardDrive>();
+                m.CreateMap<AddGraphicCardBindingModel, GraphicCard>();
             });
         }
     }

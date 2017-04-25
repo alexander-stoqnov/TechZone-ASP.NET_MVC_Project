@@ -1,4 +1,7 @@
-﻿namespace TechZone.Web.Areas.Admin.Controllers
+﻿using AutoMapper;
+using TechZone.Models.EntityModels;
+
+namespace TechZone.Web.Areas.Admin.Controllers
 {
     using System.Web.Mvc;
     using Attributes;
@@ -94,6 +97,30 @@
         [Route("ProductSpecs")]
         public ActionResult ProductSpecs(string productType)
         {
+            if (productType.ToLower() == "harddrive")
+            {
+                return this.PartialView("_AddNewHardDrivePartial");
+            }
+            if (productType.ToLower() == "graphiccard")
+            {
+                return this.PartialView("_AddNewGraphicCardPartial");
+            }
+            return null;
+        }
+
+        [HttpPost]
+        [Route("AddHardDrive")]
+        public ActionResult AddHardDrive(AddHardDriveBindingModel ahdbm)
+        {
+            HardDrive hardDrive = Mapper.Instance.Map<HardDrive>(ahdbm);
+            return null;
+        }
+
+        [HttpPost]
+        [Route("AddGraphicCard")]
+        public ActionResult AddGraphicCard(AddGraphicCardBindingModel agcbm)
+        {
+            GraphicCard graphicCard = Mapper.Instance.Map<GraphicCard>(agcbm);
             return null;
         }
     }

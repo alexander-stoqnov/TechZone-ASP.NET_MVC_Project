@@ -1,17 +1,16 @@
-﻿@model TechZone.Models.BindingModels.AddProductBindingModel
+﻿@using TechZone.Models.Enums
+@model TechZone.Models.BindingModels.AddProductBindingModel
 @{
     ViewBag.Title = "AddProduct";
 }
 
 <style>
-input,
-select,
-textarea {
+input, select, textarea {
     max-width: 480px;
 }
 </style>
 
-@using (Html.BeginForm("AddProduct", "Control", FormMethod.Post, new { @class = "form-horizontal text-center", role = "form" }))
+@using (Html.BeginForm("AddProduct", "Control", FormMethod.Post, new { @class = "form-horizontal text-center", role = "form", id = "new-product-form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new product.</h4>
@@ -36,19 +35,26 @@ textarea {
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Price, new {@class = "col-md-2 control-label"})
         <div class="col-md-1">
-            @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Price, new {@class = "form-control"})
         </div>
-        @Html.LabelFor(m => m.Quantity, new { @class = "col-md-1 control-label" })
+        @Html.LabelFor(m => m.Quantity, new {@class = "col-md-1 control-label"})
         <div class="col-md-1">
-            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", type = "number" })
+            @Html.TextBoxFor(m => m.Quantity, new {@class = "form-control", type = "number"})
         </div>
-        @Html.LabelFor(m => m.Discount, new { @class = "col-md-1 control-label" })
+        @Html.LabelFor(m => m.Discount, new {@class = "col-md-1 control-label"})
         <div class="col-md-1">
-            @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", type = "number" })
+            @Html.TextBoxFor(m => m.Discount, new {@class = "form-control", type = "number"})
         </div>
     </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Guarantee, new { @class = "col-md-2 control-label" })
+        <div class="col-md-2">
+            @Html.DropDownListFor(m => m.Guarantee, Enum.GetNames(typeof(GuaranteeDurationType)).Select(e => new SelectListItem { Text =  e }), new { @class = "form-control" })
+        </div>
+    </div>
+    //GuaranteeDurationType
     <div class="form-group">
         <label for="product-type" class="control-label col-md-2">Type</label>
         <div class="col-md-2">
@@ -60,13 +66,18 @@ textarea {
         </div>
     </div>
     <div id="product-specs">
-        
     </div>
     <input type="submit" class="btn btn-success" value="Create" />
 }
 
 <script>
     function loadSpecsInfo(selectObject) {
+        if (selectObject.value == 'hardDrive') {
+            $('#new-product-form').attr("action", "/Admin/Control/AddHardDrive");
+        }
+        if (selectObject.value == 'graphicCard') {
+            $('#new-product-form').attr("action", "/Admin/Control/AddGraphicCard");
+        }
         $('#product-specs').load('/Admin/Control/ProductSpecs', { productType: selectObject.value });
     }
 </script>
