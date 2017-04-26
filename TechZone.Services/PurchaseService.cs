@@ -192,7 +192,7 @@
         public bool ContainsItemsNotInStock(string currentUserId)
         {
             var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
-            return cart.Products.Any(c => !c.IsAvailable);
+            return cart.Products.Any(c => !c.IsAvailable || c.Quantity <= 0);
         }
 
         /// <summary>

@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using TechZone.Models.EntityModels;
-
-namespace TechZone.Web.Areas.Admin.Controllers
+﻿namespace TechZone.Web.Areas.Admin.Controllers
 {
     using System.Web.Mvc;
     using Attributes;
@@ -12,6 +9,8 @@ namespace TechZone.Web.Areas.Admin.Controllers
     using Models.BindingModels;
     using Models.ViewModels.Admin;
     using System.Collections.Generic;
+    using AutoMapper;
+    using Models.EntityModels;
 
     [RouteArea("Admin")]
     [RoutePrefix("Control")]
@@ -112,16 +111,27 @@ namespace TechZone.Web.Areas.Admin.Controllers
         [Route("AddHardDrive")]
         public ActionResult AddHardDrive(AddHardDriveBindingModel ahdbm)
         {
-            HardDrive hardDrive = Mapper.Instance.Map<HardDrive>(ahdbm);
-            return null;
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Hard Drive Capacity should be between 80 and 10000");
+                return RedirectToAction("AddProduct");
+            }
+            this._service.AddNewHardDrive(ahdbm);
+            return RedirectToAction("Products");
         }
 
         [HttpPost]
         [Route("AddGraphicCard")]
         public ActionResult AddGraphicCard(AddGraphicCardBindingModel agcbm)
         {
-            GraphicCard graphicCard = Mapper.Instance.Map<GraphicCard>(agcbm);
-            return null;
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Hard Drive Capacity should be between 80 and 10000");
+                return RedirectToAction("AddProduct");
+            }
+
+            this._service.AddNewGraphicCard(agcbm);
+            return RedirectToAction("Products");
         }
     }
 }

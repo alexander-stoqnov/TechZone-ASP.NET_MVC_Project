@@ -6,6 +6,7 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.EntityModels;
     using Models.ViewModels.Admin;
+    using Models.BindingModels;
 
     public class AdminService : Service
     {
@@ -72,6 +73,20 @@
             product.Price = epbm.Price;
             product.Quantity = epbm.Quantity;
 
+            this.Context.SaveChanges();
+        }
+
+        public void AddNewHardDrive(AddHardDriveBindingModel ahdbm)
+        {
+            HardDrive hardDrive = Mapper.Instance.Map<HardDrive>(ahdbm);
+            this.Context.HardDrives.Add(hardDrive);
+            this.Context.SaveChanges();
+        }
+
+        public void AddNewGraphicCard(AddGraphicCardBindingModel agcbm)
+        {
+            GraphicCard graphicCard = Mapper.Instance.Map<GraphicCard>(agcbm);
+            this.Context.GraphicCards.Add(graphicCard);
             this.Context.SaveChanges();
         }
     }

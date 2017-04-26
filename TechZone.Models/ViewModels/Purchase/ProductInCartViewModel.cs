@@ -14,6 +14,8 @@
 
         public int Discount { get; set; }
 
+        public int Quantity { get; set; }
+
         public GuaranteeDurationType Guarantee { get; set; }
 
         public decimal FinalPrice { get; set; }
