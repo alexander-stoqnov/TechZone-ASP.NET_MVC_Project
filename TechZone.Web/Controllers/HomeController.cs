@@ -1,12 +1,22 @@
 ﻿namespace TechZone.Web.Controllers
 {
+    using Models.ViewModels.Home;
     using System.Web.Mvc;
+    using Services;
 
     public class HomeController : Controller
     {
+        private ProductsService _productsService;
+
+        public HomeController()
+        {
+            this._productsService = new ProductsService();
+        }
+
         public ActionResult Index()
         {
-            return View();
+            HomePageViewModel hpvm = this._productsService.GetHomePageInfo();
+            return View(hpvm);
         }
 
         public ActionResult About()

@@ -1,9 +1,12 @@
-﻿namespace TechZone.Services
+﻿using System;
+
+namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Products;
     using System.Linq;
     using AutoMapper;
+    using Models.ViewModels.Home;
 
     public class ProductsService : Service
     {
@@ -86,6 +89,22 @@
         private bool ProductIsHardDrive(int id)
         {
             return this.Context.HardDrives.Any(hd => hd.Id == id);
+        }
+
+        public HomePageViewModel GetHomePageInfo()
+        {
+            var latestProducts = this.Context.Products.OrderByDescending(p => p.Id).Take(3).ToList();
+            HomePageViewModel hpvm = new HomePageViewModel();
+
+            foreach (var product in latestProducts)
+            {
+                LatestProductsViewModel lpvm = Mapper.Instance.Map<LatestProductsViewModel>(product);
+                lpvm.FinalPrice = this.CalculateFinalPrice(product.Discount, product.Price);
+                lpvm.Description = product.Description.Substring(0, Math.Min(product.Description.Length, 180)) + "...";
+                hpvm.LatestProducts.Add(lpvm);
+            }
+
+            return hpvm;
         }
     }
 }

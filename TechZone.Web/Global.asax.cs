@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web
+﻿using TechZone.Models.ViewModels.Home;
+
+namespace TechZone.Web
 {
     using System.Web;
     using System.Web.Mvc;
@@ -46,6 +48,7 @@
                 m.CreateMap<Product, ProductInCartViewModel>();
                 m.CreateMap<Product, ManageProductViewModel>();
                 m.CreateMap<Product, EditProductViewModel>();
+                m.CreateMap<Product, LatestProductsViewModel>();
                 m.CreateMap<Purchase, CustomerPurchaseHistoryViewModel>();
                 m.CreateMap<Customer, CustomerProfileViewModel>()
                 .ForMember(cpvm => cpvm.FullName, expr => expr.MapFrom(c => c.User.FullName))
