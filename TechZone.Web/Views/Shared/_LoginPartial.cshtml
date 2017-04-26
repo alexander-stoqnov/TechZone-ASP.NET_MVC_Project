@@ -18,9 +18,9 @@
                     </ul>
                 </li>
             }
-            @if (User.IsInRole("Trainer"))
+            @if (User.IsInRole("Moderator"))
             {
-                <li>@Html.ActionLink("Trainer", "Courses", "Trainer")</li>
+                <li>@Html.ActionLink("Moderator", "EvaluateReports", "Maintain", new { area = "Moderator" }, null)</li>
             }
             <li>
                 <a href="@Url.Action("UserProfile", "Customers")">
