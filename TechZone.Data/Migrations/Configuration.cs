@@ -23,7 +23,94 @@ namespace TechZone.Data.Migrations
             SeedUsers(context, userManager);
             SeedGraphicCards(context);
             SeedHardDrives(context);
+            SeedProcessors(context);
             context.SaveChanges();
+        }
+
+        private void SeedProcessors(TechZoneContext context)
+        {
+            context.Processors.AddOrUpdate(p => p.Name, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i7,
+                Cores = ProcessorCoresType.Quad_Core,
+                Cache = 8,
+                ProcessorSpeed = 4.2m,
+                Price = 339.99m,
+                Discount = 5,
+                Quantity = 232,
+                Name = "Intel 7th Gen Intel i7-7700K",
+                Description = "Leading the pack is the Intel Core i7-7700K processor. Architected for performance, this processor packs 4 high performing cores with core base frequency of 4.2GHz and 8MB of cache memory. Kick up the performance even higher with Intel Turbo Boost 2.0 technology to bump the max turbo frequency to an amazing 4.5GHz. Add Intel Hyper-Threading Technology for 8-way multitasking to deliver the performance knockout punch. Not enough? For the enthusiast, this processor is unlocked, you can tweak the performance to its fullest potential.",
+                ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/51zkoInLSiL.jpg",
+                Guarantee = GuaranteeDurationType.ThirtySixMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i7,
+                Cores = ProcessorCoresType.Quad_Core,
+                Cache = 8,
+                ProcessorSpeed = 4m,
+                Price = 339.99m,
+                Discount = 15,
+                Quantity = 65,
+                Name = "Intel Core i7 6700K 4.00 GHz, Skylake, Socket LGA 1151",
+                Description = "With faster, intelligent, multi-core technology that applies processing power where it's needed most, Intel Core i7 processors deliver an incredible breakthrough in PC performance. You'll multitask applications faster and unleash incredible digital media creation. And you'll experience maximum performance for everything you do.",
+                ImageUrl = "http://saletookar.com/oc-content/uploads/0/53.jpg",
+                Guarantee = GuaranteeDurationType.SixtyMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i7,
+                Cores = ProcessorCoresType.Quad_Core,
+                Cache = 8,
+                ProcessorSpeed = 4m,
+                Price = 311.00m,
+                Quantity = 89,
+                Name = "Intel Core i7-4790K Processor (8M Cache, up to 4.40 GHz)",
+                Description = "The Intel 4th generation Core i7-4790 processor is based on the new 22nm Haswell Microarchitecture for improved CPU performance. Advanced power management innovations help keep power consumption in check. New compute instructions ensure enhanced performance per cycle. Improved Intel integrated graphics enables discrete-level graphics performance. Extract more power from your Haswell core-based processor.",
+                ImageUrl = "https://n2.sdlcdn.com/imgs/a/l/r/Intel-Core-i7-4790-Processor-SDL147336105-2-4b8bb.jpg",
+                Guarantee = GuaranteeDurationType.TwelveMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i5,
+                Cores = ProcessorCoresType.Quad_Core,
+                Cache = 6,
+                ProcessorSpeed = 3.8m,
+                Price = 311.00m,
+                Discount = 10,
+                Quantity = 429,
+                Name = "Intel Core i5-7600K LGA 1151",
+                Description = "With new 7th Generation Intel® Core™ processors, your PC will meet every demand quickly and seamlessly – get 0.5 second wake with Windows* Modern Standby and Intel® Ready Mode Technology (Intel® RMT), and rapidly switch between applications and web pages with Intel® Speed Shift Technology.",
+                ImageUrl = "https://images10.newegg.com/ProductImage/19-117-728-Z01.jpg",
+                Guarantee = GuaranteeDurationType.TwentyFourMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i5,
+                Cores = ProcessorCoresType.Quad_Core,
+                Cache = 6,
+                ProcessorSpeed = 3.2m,
+                Price = 197.03m,
+                Quantity = 321,
+                Name = "Intel Core i5 6500 3.20 GHz Quad Core, LGA 1151, 6MB Cache",
+                Description = "With intelligent performance that accelerates in response to demanding tasks, such as playing games and editing photos, the Intel Core i5 processor moves faster when you do. The Intel Core i5 processor automatically allocates processing power where it's needed most. Whether you're creating HD video, composing digital music, editing photos, or playing the coolest PC games - with the Intel Core i5 processor you can multitask with ease and be more productive than ever.",
+                ImageUrl = "https://images10.newegg.com/NeweggImage/ProductImage/19-117-563-01.jpg",
+                Guarantee = GuaranteeDurationType.TwentyFourMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i5,
+                Cores = ProcessorCoresType.Quad_Core,
+                Cache = 6,
+                ProcessorSpeed = 3m,
+                Price = 199.89m,
+                Quantity = 43,
+                Name = "Intel Core i5-7400 Kaby Lake Quad-Core 3.0 GHz LGA 1151",
+                Description = "Are you amazed by the things you can do with your computer? . If you bought your computer more than a handful of years ago, you're missing more than you know - uncompromised gaming, while you stream, chat and share with your community - stunning visuals of 4K HDR premium content - transport into a great VR experience. With premium performance and new & enhanced features, a desktop computer based on an 7th Gen Intel Core processor is always ready for real-life productivity, creativity and entertainment. With a range of smart, stylish designs and sizes, there is a 7th Gen Intel Core Desktop powered computer to fit a wide range of budgets and needs.",
+                ImageUrl = "https://images10.newegg.com/ProductImage/19-117-731-Z01.jpg",
+                Guarantee = GuaranteeDurationType.ThirtySixMonths
+            });
         }
 
         private void SeedHardDrives(TechZoneContext context)
