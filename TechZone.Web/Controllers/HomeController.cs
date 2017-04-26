@@ -7,15 +7,19 @@
     public class HomeController : Controller
     {
         private ProductsService _productsService;
+        private ReviewsService _reviewsService;
 
         public HomeController()
         {
             this._productsService = new ProductsService();
+            this._reviewsService = new ReviewsService();
         }
 
         public ActionResult Index()
         {
-            HomePageViewModel hpvm = this._productsService.GetHomePageInfo();
+            HomePageViewModel hpvm = new HomePageViewModel();
+            hpvm.LatestProducts = this._productsService.GetHomePageLatestProducts();
+            hpvm.LatestReviews = this._reviewsService.GetHomePageLatestReviews();
             return View(hpvm);
         }
 

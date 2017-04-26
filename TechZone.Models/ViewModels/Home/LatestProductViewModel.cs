@@ -1,6 +1,6 @@
 ﻿namespace TechZone.Models.ViewModels.Home
 {
-    public class LatestProductsViewModel
+    public class LatestProductViewModel
     {
         public int Id { get; set; }
 

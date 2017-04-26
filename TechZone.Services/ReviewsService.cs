@@ -9,6 +9,7 @@
     using System.Globalization;
     using Dropbox.Api;
     using System.Collections.Generic;
+    using Models.ViewModels.Home;
 
     public class ReviewsService : Service
     {
@@ -129,6 +130,7 @@
         {
             var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
             var review = this.Context.Reviews.Find(vote.Id);
+
             if (vote.Vote == "up")
             {
                 review.Useful++;
@@ -139,6 +141,20 @@
             }
             customer.VotedFor.Add(review);
             this.Context.SaveChanges();
+        }
+
+        public ICollection<LatestReviewViewModel> GetHomePageLatestReviews()
+        {
+            var latestReviews = this.Context.Reviews.OrderByDescending(r => r.PublishDate).Take(3);
+            var latestReviewsVm = new HashSet<LatestReviewViewModel>();
+
+            foreach (var review in latestReviews)
+            {
+                var reviewVm = Mapper.Instance.Map<LatestReviewViewModel>(review);
+                reviewVm.Content = review.Content.Substring(0, Math.Min(review.Content.Length, 250)) + "...";
+                latestReviewsVm.Add(reviewVm);
+            }
+            return latestReviewsVm;
         }
     }
 }

@@ -6,9 +6,12 @@ namespace TechZone.Models.ViewModels.Home
     {
         public HomePageViewModel()
         {
-            this.LatestProducts = new HashSet<LatestProductsViewModel>();
+            this.LatestProducts = new HashSet<LatestProductViewModel>();
+            this.LatestReviews = new HashSet<LatestReviewViewModel>();
         }
 
-        public ICollection<LatestProductsViewModel> LatestProducts { get; set; }
+        public ICollection<LatestProductViewModel> LatestProducts { get; set; }
+
+        public ICollection<LatestReviewViewModel> LatestReviews { get; set; }
     }
 }

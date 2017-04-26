@@ -136,7 +136,8 @@
     <Compile Include="ViewModels\Customer\CustomerProfileViewModel.cs" />
     <Compile Include="ViewModels\Customer\CustomerPurchaseHistoryViewModel.cs" />
     <Compile Include="ViewModels\Home\HomePageViewModel.cs" />
-    <Compile Include="ViewModels\Home\LatestProductsViewModel.cs" />
+    <Compile Include="ViewModels\Home\LatestProductViewModel.cs" />
+    <Compile Include="ViewModels\Home\LatestReviewViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />

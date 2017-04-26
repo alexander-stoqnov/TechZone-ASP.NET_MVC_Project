@@ -48,13 +48,16 @@ namespace TechZone.Web
                 m.CreateMap<Product, ProductInCartViewModel>();
                 m.CreateMap<Product, ManageProductViewModel>();
                 m.CreateMap<Product, EditProductViewModel>();
-                m.CreateMap<Product, LatestProductsViewModel>();
+                m.CreateMap<Product, LatestProductViewModel>();
                 m.CreateMap<Purchase, CustomerPurchaseHistoryViewModel>();
                 m.CreateMap<Customer, CustomerProfileViewModel>()
                 .ForMember(cpvm => cpvm.FullName, expr => expr.MapFrom(c => c.User.FullName))
                 .ForMember(cpvm => cpvm.Email, expr => expr.MapFrom(c => c.User.Email))
                 .ForMember(cpvm => cpvm.Username, expr => expr.MapFrom(c => c.User.UserName));
                 m.CreateMap<Review, SimpleReviewViewModel>();
+                m.CreateMap<Review, LatestReviewViewModel>()
+                .ForMember(lrvm => lrvm.ProductImage, expr => expr.MapFrom(r => r.Product.ImageUrl))
+                .ForMember(lrvm => lrvm.ProductName, expr => expr.MapFrom(r => r.Product.Name));
                 m.CreateMap<Review, ReviewDetailsViewModel>()
                 .ForMember(rdvm => rdvm.CountOfComments, expr => expr.MapFrom(r => r.Comments.Count))
                 .ForMember(rdvm => rdvm.ReviewerUsername, expr => expr.MapFrom(r => r.Reviewer.User.UserName))

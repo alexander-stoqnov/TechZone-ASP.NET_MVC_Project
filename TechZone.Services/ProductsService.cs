@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Products;
     using System.Linq;
     using AutoMapper;
     using Models.ViewModels.Home;
+    using System;
 
     public class ProductsService : Service
     {
@@ -91,20 +90,20 @@ namespace TechZone.Services
             return this.Context.HardDrives.Any(hd => hd.Id == id);
         }
 
-        public HomePageViewModel GetHomePageInfo()
+        public ICollection<LatestProductViewModel> GetHomePageLatestProducts()
         {
             var latestProducts = this.Context.Products.OrderByDescending(p => p.Id).Take(3).ToList();
-            HomePageViewModel hpvm = new HomePageViewModel();
+            var latestProductsVms = new HashSet<LatestProductViewModel>();
 
             foreach (var product in latestProducts)
             {
-                LatestProductsViewModel lpvm = Mapper.Instance.Map<LatestProductsViewModel>(product);
+                LatestProductViewModel lpvm = Mapper.Instance.Map<LatestProductViewModel>(product);
                 lpvm.FinalPrice = this.CalculateFinalPrice(product.Discount, product.Price);
                 lpvm.Description = product.Description.Substring(0, Math.Min(product.Description.Length, 180)) + "...";
-                hpvm.LatestProducts.Add(lpvm);
+                latestProductsVms.Add(lpvm);
             }
 
-            return hpvm;
+            return latestProductsVms;
         }
     }
 }
