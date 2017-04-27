@@ -57,7 +57,8 @@ namespace TechZone.Web
                 m.CreateMap<Review, SimpleReviewViewModel>();
                 m.CreateMap<Review, LatestReviewViewModel>()
                 .ForMember(lrvm => lrvm.ProductImage, expr => expr.MapFrom(r => r.Product.ImageUrl))
-                .ForMember(lrvm => lrvm.ProductName, expr => expr.MapFrom(r => r.Product.Name));
+                .ForMember(lrvm => lrvm.ProductName, expr => expr.MapFrom(r => r.Product.Name))
+                .ForMember(lrvm => lrvm.ProductId, expr => expr.MapFrom(r => r.Product.Id));
                 m.CreateMap<Review, ReviewDetailsViewModel>()
                 .ForMember(rdvm => rdvm.CountOfComments, expr => expr.MapFrom(r => r.Comments.Count))
                 .ForMember(rdvm => rdvm.ReviewerUsername, expr => expr.MapFrom(r => r.Reviewer.User.UserName))

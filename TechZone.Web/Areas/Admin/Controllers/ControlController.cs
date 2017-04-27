@@ -9,8 +9,6 @@
     using Models.BindingModels;
     using Models.ViewModels.Admin;
     using System.Collections.Generic;
-    using AutoMapper;
-    using Models.EntityModels;
 
     [RouteArea("Admin")]
     [RoutePrefix("Control")]
@@ -103,6 +101,10 @@
             if (productType.ToLower() == "graphiccard")
             {
                 return this.PartialView("_AddNewGraphicCardPartial");
+            }
+            if (productType.ToLower() == "processor")
+            {
+                return this.PartialView("_AddNewProcessorPartial");
             }
             return null;
         }

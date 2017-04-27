@@ -66,7 +66,7 @@
                 specs["Brand"] = graphicCard.Brand.ToString("G");
                 specs["Manufacturer"] = graphicCard.Manufacturer.ToString("G");
                 specs["Memory Type"] = graphicCard.MemoryType.ToString("G");
-                specs["Memory Size"] = graphicCard.Memory.ToString();
+                specs["Memory Size"] = graphicCard.Memory + " Gb";
                 return specs;
             }
 
@@ -75,7 +75,17 @@
                 var hardDrive = this.Context.HardDrives.Find(id);
                 specs["Brand"] = hardDrive.DriveBrand.ToString("G");
                 specs["Type"] = hardDrive.DriveType.ToString("G");
-                specs["Capacity (Gb)"] = hardDrive.Capacity.ToString("G");
+                specs["Capacity (Gb)"] = hardDrive.Capacity.ToString("G") + " Gb";
+            }
+
+            if (ProductIsProcessor(id))
+            {
+                var processor = this.Context.Processors.Find(id);
+                specs["Brand"] = processor.Brand.ToString("G");
+                specs["Series"] = processor.Series.ToString("G");
+                specs["Cores"] = processor.Cores.ToString("G").Replace("_", " ");
+                specs["Clock Speed"] = processor.ProcessorSpeed.ToString("0.00") + " Ghz";
+                specs["Cache"] = processor.Cache + " Mb";
             }
             return specs;
         }
@@ -88,6 +98,11 @@
         private bool ProductIsHardDrive(int id)
         {
             return this.Context.HardDrives.Any(hd => hd.Id == id);
+        }
+
+        private bool ProductIsProcessor(int id)
+        {
+            return this.Context.Processors.Any(pr => pr.Id == id);
         }
 
         public ICollection<LatestProductViewModel> GetHomePageLatestProducts()

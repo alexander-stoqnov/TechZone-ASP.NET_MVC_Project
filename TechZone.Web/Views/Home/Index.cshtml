@@ -64,7 +64,7 @@
             {
                 <div class="col-lg-4 text-center">
                     <img class="img-circle" src="@review.ProductImage" alt="Author image" width="140" height="140">
-                    <h2>@review.ProductName</h2>
+                    <h2>@Html.ActionLink($"{review.ProductName}", "Details", "Products", new { id = review.ProductId}, null)</h2>
                     <h3>@review.Title</h3>
                     <p>@review.Content</p>
                     <p><a class="btn btn-default" href="@Url.Action("Details", "Reviews", new { id = review.Id})" role="button">Read More »</a>

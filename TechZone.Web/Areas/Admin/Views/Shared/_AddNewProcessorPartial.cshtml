@@ -1,0 +1,32 @@
+﻿@using TechZone.Models.Enums
+@model TechZone.Models.BindingModels.AddProcessorBindingModel
+<div class="form-group">
+    @Html.LabelFor(m => m.Brand, new { @class = "col-md-2 control-label" })
+    <div class="col-md-2">
+        @Html.DropDownListFor(m => m.Brand, Enum.GetNames(typeof(ProcessorBrandType)).Select(e => new SelectListItem { Text = e }), new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Series, new {@class = "col-md-2 control-label"})
+    <div class="col-md-2">
+        @Html.DropDownListFor(m => m.Series, Enum.GetNames(typeof(ProcessorSeriesType)).Select(e => new SelectListItem {Text = e}), new {@class = "form-control"})
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Cores, new { @class = "col-md-2 control-label" })
+    <div class="col-md-2">
+        @Html.DropDownListFor(m => m.Series, Enum.GetNames(typeof(ProcessorCoresType)).Select(e => new SelectListItem { Text = e.Replace("_", " ") }), new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.ProcessorSpeed, new {@class = "col-md-2 control-label"})
+    <div class="col-md-2">
+        @Html.TextBoxFor(m => m.ProcessorSpeed, new {@class = "form-control", type = "number"})
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Cache, new { @class = "col-md-2 control-label" })
+    <div class="col-md-2">
+        @Html.TextBoxFor(m => m.Cache, new { @class = "form-control", type = "number" })
+    </div>
+</div>

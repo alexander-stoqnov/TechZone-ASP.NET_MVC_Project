@@ -1,11 +1,10 @@
-﻿namespace TechZone.Models.EntityModels
+﻿namespace TechZone.Models.BindingModels
 {
-    using Enums;
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
+    using Enums;
 
-    [Table("Processor")]
-    public class Processor : Product
+
+    public class AddProcessorBindingModel : AddProductBindingModel
     {
         public ProcessorSeriesType Series { get; set; }
 
@@ -18,6 +17,7 @@
         public int Cache { get; set; }
 
         [Required]
+        [Display(Name = "Clock Speed")]
         [Range(1, 16, ErrorMessage = "Processor clock speed be between 1 and 16 Ghz")]
         public decimal ProcessorSpeed { get; set; }
     }

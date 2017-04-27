@@ -96,6 +96,7 @@
     <Compile Include="BindingModels\AddCommentBindingModel.cs" />
     <Compile Include="BindingModels\AddGraphicCardBindingModel.cs" />
     <Compile Include="BindingModels\AddHardDriveBindingModel.cs" />
+    <Compile Include="BindingModels\AddProcessorBindingModel.cs" />
     <Compile Include="BindingModels\AddProductBindingModel.cs" />
     <Compile Include="BindingModels\ChangeUserRolesBindingModel.cs" />
     <Compile Include="BindingModels\VoteForReviewViewModel.cs" />
