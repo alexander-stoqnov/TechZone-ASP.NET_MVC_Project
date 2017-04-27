@@ -5,6 +5,7 @@
 
     public class AddGraphicCardBindingModel : AddProductBindingModel
     {
+        [Display(Name = "Memory Type")]
         public GraphicCardMemoryType MemoryType { get; set; }
 
         public GraphicCardManufacturerType Brand { get; set; }

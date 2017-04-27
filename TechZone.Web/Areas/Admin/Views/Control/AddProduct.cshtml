@@ -50,7 +50,7 @@ input, select, textarea {
     <div class="form-group">
         @Html.LabelFor(m => m.Guarantee, new { @class = "col-md-2 control-label" })
         <div class="col-md-2">
-            @Html.DropDownListFor(m => m.Guarantee, Enum.GetNames(typeof(GuaranteeDurationType)).Select(e => new SelectListItem { Text =  e }), new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Guarantee, Enum.GetNames(typeof(GuaranteeDurationType)).Select(e => new SelectListItem { Text =  e.Replace("_", " ") }), new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -81,6 +81,9 @@ input, select, textarea {
         }
         if (selectObject.value == 'graphicCard') {
             $('#new-product-form').attr("action", "/Admin/Control/AddGraphicCard");
+        }
+        if (selectObject.value == 'processor') {
+            $('#new-product-form').attr("action", "/Admin/Control/AddProcessor");
         }
         $('#product-specs').load('/Admin/Control/ProductSpecs', { productType: selectObject.value });
     }

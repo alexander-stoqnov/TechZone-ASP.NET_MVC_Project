@@ -1,4 +1,6 @@
-﻿namespace TechZone.Services
+﻿using AutoMapper.XpressionMapper.Extensions;
+
+namespace TechZone.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -87,6 +89,13 @@
         {
             GraphicCard graphicCard = Mapper.Instance.Map<GraphicCard>(agcbm);
             this.Context.GraphicCards.Add(graphicCard);
+            this.Context.SaveChanges();
+        }
+
+        public void AddNewProcessor(AddProcessorBindingModel apbm)
+        {
+            Processor processor = Mapper.Instance.Map<Processor>(apbm);
+            this.Context.Processors.Add(processor);
             this.Context.SaveChanges();
         }
     }

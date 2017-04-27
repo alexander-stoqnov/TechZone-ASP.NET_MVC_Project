@@ -135,5 +135,19 @@
             this._service.AddNewGraphicCard(agcbm);
             return RedirectToAction("Products");
         }
+
+        [HttpPost]
+        [Route("AddProcessor")]
+        public ActionResult AddProcessor(AddProcessorBindingModel apbm)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Cache should be between 1 and 32 Mb and clock speed be between 1 and 16 Ghz");
+                return RedirectToAction("AddProduct");
+            }
+
+            this._service.AddNewProcessor(apbm);
+            return RedirectToAction("Products");
+        }
     }
 }

@@ -5,16 +5,14 @@
     <div class="col-md-2">
         @Html.DropDownListFor(m => m.DriveType, Enum.GetNames(typeof(HardDriveType)).Select(e => new SelectListItem {Text = e}), new {@class = "form-control"})
     </div>
-</div>
-<div class="form-group">
-    @Html.LabelFor(m => m.DriveBrand, new {@class = "col-md-2 control-label"})
+    @Html.LabelFor(m => m.DriveBrand, new { @class = "col-md-1 control-label" })
     <div class="col-md-2">
-        @Html.DropDownListFor(m => m.DriveBrand, Enum.GetNames(typeof(HardDriveBrandType)).Select(e => new SelectListItem {Text = e}), new {@class = "form-control"})
+        @Html.DropDownListFor(m => m.DriveBrand, Enum.GetNames(typeof(HardDriveBrandType)).Select(e => new SelectListItem { Text = e }), new { @class = "form-control" })
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(m => m.Capacity, new { @class = "col-md-2 control-label" })
+    @Html.LabelFor(m => m.Capacity, new { @class = "col-md-2 col-md-offset-1 control-label" })
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.Capacity, new { @class = "form-control", type = "number" })
+        @Html.TextBoxFor(m => m.Capacity, new { @class = "form-control", type = "number", min = "80", max = "10000"  })
     </div>
 </div>

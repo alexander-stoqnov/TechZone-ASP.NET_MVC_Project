@@ -76,6 +76,7 @@ namespace TechZone.Web
                 m.CreateMap<SubmitReportViewModel, Report>();
                 m.CreateMap<AddHardDriveBindingModel, HardDrive>();
                 m.CreateMap<AddGraphicCardBindingModel, GraphicCard>();
+                m.CreateMap<AddProcessorBindingModel, Processor>();
             });
         }
     }
