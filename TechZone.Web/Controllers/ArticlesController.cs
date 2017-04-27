@@ -54,27 +54,27 @@
             return this.View("All", articleVms);
         }
 
-        //[CustomAuthorize(Roles = "Admin")]
-        //[Route("EditArticle/{id}")]
-        //public ActionResult EditArticle(int id)
-        //{
-        //    EditArticleViewModel eavm = service.GetArticleToManage(id);
-        //    return this.View(eavm);
-        //}
+        [CustomAuthorize(Roles = "Admin")]
+        [Route("EditArticle/{id}")]
+        public ActionResult EditArticle(int id)
+        {
+            EditArticleViewModel eavm = this._service.GetArticleToManage(id);
+            return this.View(eavm);
+        }
 
-        //[CustomAuthorize(Roles = "Admin")]
-        //[HttpPost]
-        //[Route("EditArticle/{id}")]
-        //public ActionResult EditArticle(EditArticleViewModel eavm)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        service.EditSelectedArticle(eavm);
-        //        return RedirectToAction("All", "Articles", new { area = "Blog" });
-        //    }
+        [CustomAuthorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("EditArticle/{id}")]
+        public ActionResult EditArticle(EditArticleViewModel eavm)
+        {
+            if (ModelState.IsValid)
+            {
+                this._service.EditSelectedArticle(eavm);
+                return RedirectToAction("All", "Articles", new { area = "Blog" });
+            }
 
-        //    return this.View(eavm);
-        //}
+            return this.View(eavm);
+        }
 
         [CustomAuthorize(Roles = "Admin")]
         [Route("DeleteArticle/{id}")]
@@ -84,13 +84,13 @@
             return this.View(eavm);
         }
 
-        //[CustomAuthorize(Roles = "Admin")]
-        //[HttpPost]
-        //[Route("DeleteArticle/{id}")]
-        //public ActionResult DeleteArticle(EditArticleViewModel eavm)
-        //{
-        //    service.DeleteArticle(eavm.Id);
-        //    return RedirectToAction("All", "Articles", new { area = "Blog" });
-        //}
+        [CustomAuthorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("DeleteArticle/{id}")]
+        public ActionResult DeleteArticle(EditArticleViewModel eavm)
+        {
+            this._service.DeleteArticle(eavm.Id);
+            return RedirectToAction("All", "Articles", new { area = "Blog" });
+        }
     }
 }

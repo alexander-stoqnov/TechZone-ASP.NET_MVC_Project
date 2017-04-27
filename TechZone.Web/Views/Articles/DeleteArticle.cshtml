@@ -5,7 +5,7 @@
 
 <h2>Delete Article</h2>
 
-@using (Html.BeginForm("DeleteArticle", "Articles", FormMethod.Post, new { @class = "form-horizontal", role = "form", area = "Blog" }))
+@using (Html.BeginForm("DeleteArticle", "Articles", FormMethod.Post, new { @class = "form-horizontal", role = "form", area = "Blog", style = "max-width: 600px" }))
 {
     <hr />
     @Html.LabelFor(m => m.Title, new { @class = "control-label" })

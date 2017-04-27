@@ -37,13 +37,13 @@
             return Mapper.Map<EditArticleViewModel>(article);
         }
 
-        //public void EditSelectedArticle(EditArticleViewModel eavm)
-        //{
-        //    Article article = this.Context.Articles.Find(eavm.Id);
-        //    article.Content = eavm.Content;
-        //    article.Title = eavm.Title;
-        //    this.Context.SaveChanges();
-        //}
+        public void EditSelectedArticle(EditArticleViewModel eavm)
+        {
+            Article article = this.Context.Articles.Find(eavm.Id);
+            article.Content = eavm.Content;
+            article.Title = eavm.Title;
+            this.Context.SaveChanges();
+        }
 
         public void DeleteArticle(int id)
         {
