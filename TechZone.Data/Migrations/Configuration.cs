@@ -617,13 +617,13 @@ namespace TechZone.Data.Migrations
                 userManager.Create(newUser, "Pesho1!");
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Admin");
-                context.Customers.Add(new Customer() { UserId = newUser.Id, Credits = 10000 });
+                context.Customers.Add(new Customer { UserId = newUser.Id, Credits = 10000 });
             }
 
             var pesho = userManager.FindByName("pesho");
             if (pesho == null)
             {
-                var newUser = new ApplicationUser()
+                var newUser = new ApplicationUser
                 {
                     UserName = "pesho",
                     FirstName = "Petar",
@@ -634,13 +634,13 @@ namespace TechZone.Data.Migrations
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Admin");
                 userManager.AddToRole(newUser.Id, "Customer");
-                context.Customers.Add(new Customer() { UserId = newUser.Id, Credits = 10000 });
+                context.Customers.Add(new Customer { UserId = newUser.Id, Credits = 10000 });
             }
 
             var bojo = userManager.FindByName("bojo");
             if (bojo == null)
             {
-                var newUser = new ApplicationUser()
+                var newUser = new ApplicationUser
                 {
                     UserName = "bojo",
                     FirstName = "Bozhidar",
@@ -650,7 +650,7 @@ namespace TechZone.Data.Migrations
                 userManager.Create(newUser, "Pesho1!");
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Publisher");
-                context.Customers.Add(new Customer() { UserId = newUser.Id });
+                context.Customers.Add(new Customer { UserId = newUser.Id });
             }
 
             var joro = userManager.FindByName("joro");
@@ -666,13 +666,13 @@ namespace TechZone.Data.Migrations
                 userManager.Create(newUser, "Pesho1!");
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Publisher");
-                context.Customers.Add(new Customer() { UserId = newUser.Id });
+                context.Customers.Add(new Customer { UserId = newUser.Id });
             }
 
             var jicata = userManager.FindByName("jicata");
             if (jicata == null)
             {
-                var newUser = new ApplicationUser()
+                var newUser = new ApplicationUser
                 {
                     UserName = "jicata",
                     FirstName = "Svetlin",
@@ -682,7 +682,7 @@ namespace TechZone.Data.Migrations
                 userManager.Create(newUser, "Pesho1!");
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Customer");
-                context.Customers.Add(new Customer() { UserId = newUser.Id, Credits = 10000 });
+                context.Customers.Add(new Customer { UserId = newUser.Id, Credits = 10000 });
             }
 
             context.SaveChanges();

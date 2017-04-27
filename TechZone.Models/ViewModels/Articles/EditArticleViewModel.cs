@@ -1,9 +1,8 @@
-﻿namespace TechZone.Models.EntityModels
+﻿namespace TechZone.Models.ViewModels.Articles
 {
     using System.ComponentModel.DataAnnotations;
-    using System;
 
-    public class Article
+    public class EditArticleViewModel
     {
         public int Id { get; set; }
 
@@ -16,13 +15,5 @@
         [MinLength(200, ErrorMessage = "Article content should be at least 200 characters long")]
         [MaxLength(5000, ErrorMessage = "Article content should be at least 200 characters long")]
         public string Content { get; set; }
-
-        [Display(Name = "Image URL")]
-        [RegularExpression("(http|https)://.+")]
-        public string ImageUrl { get; set; }
-
-        public DateTime? PublishDate { get; set; }
-
-        public virtual Customer Publisher { get; set; }
     }
 }

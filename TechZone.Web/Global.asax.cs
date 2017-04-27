@@ -1,4 +1,5 @@
-﻿using TechZone.Models.ViewModels.Home;
+﻿using TechZone.Models.ViewModels.Articles;
+using TechZone.Models.ViewModels.Home;
 
 namespace TechZone.Web
 {
@@ -71,12 +72,16 @@ namespace TechZone.Web
                     .ForMember(ervm => ervm.SubmittedBy, expr => expr.MapFrom(r => r.Snitch.User.UserName))
                     .ForMember(ervm => ervm.CommentOffender, expr => expr.MapFrom(r => r.OffensiveComment.Customer.User.UserName))
                     .ForMember(ervm => ervm.ReviewId, expr => expr.MapFrom(r => r.OffensiveComment.Review.Id));
+                m.CreateMap<Article, GeneralArticleViewModel>()
+                    .ForMember(gavm => gavm.AuthorName, expr => expr.MapFrom(a => a.Publisher.User.FullName));
+                m.CreateMap<Article, EditArticleViewModel>();
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
                 m.CreateMap<SubmitReportViewModel, Report>();
                 m.CreateMap<AddHardDriveBindingModel, HardDrive>();
                 m.CreateMap<AddGraphicCardBindingModel, GraphicCard>();
                 m.CreateMap<AddProcessorBindingModel, Processor>();
+                m.CreateMap<AddArticleViewModel, Article>();
             });
         }
     }

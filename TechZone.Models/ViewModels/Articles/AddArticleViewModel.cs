@@ -1,12 +1,9 @@
-﻿namespace TechZone.Models.EntityModels
+﻿namespace TechZone.Models.ViewModels.Articles
 {
     using System.ComponentModel.DataAnnotations;
-    using System;
 
-    public class Article
+    public class AddArticleViewModel
     {
-        public int Id { get; set; }
-
         [Required]
         [MinLength(15, ErrorMessage = "Article title shouldd be at least 15 symbols long")]
         [MaxLength(100, ErrorMessage = "Article title shouldd be less than 100 characters long")]
@@ -18,11 +15,7 @@
         public string Content { get; set; }
 
         [Display(Name = "Image URL")]
-        [RegularExpression("(http|https)://.+")]
+        [RegularExpression("(http|https)://.+", ErrorMessage = "Picture path must start with http or https")]
         public string ImageUrl { get; set; }
-
-        public DateTime? PublishDate { get; set; }
-
-        public virtual Customer Publisher { get; set; }
     }
 }

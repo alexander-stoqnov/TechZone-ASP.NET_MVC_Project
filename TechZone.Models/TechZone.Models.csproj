@@ -137,6 +137,9 @@
     <Compile Include="ViewModels\Admin\RoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserRolesViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserViewModel.cs" />
+    <Compile Include="ViewModels\Articles\AddArticleViewModel.cs" />
+    <Compile Include="ViewModels\Articles\EditArticleViewModel.cs" />
+    <Compile Include="ViewModels\Articles\GeneralArticleViewModel.cs" />
     <Compile Include="ViewModels\Customer\CustomerProfileViewModel.cs" />
     <Compile Include="ViewModels\Customer\CustomerPurchaseHistoryViewModel.cs" />
     <Compile Include="ViewModels\Home\HomePageViewModel.cs" />
