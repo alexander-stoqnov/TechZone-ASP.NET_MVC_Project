@@ -8,6 +8,6 @@
 
         public string Content { get; set; }
 
-        public virtual Publisher Publisher { get; set; }
+        public virtual Customer Publisher { get; set; }
     }
 }

@@ -19,11 +19,11 @@ namespace TechZone.Data.Migrations
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            //SeedRoles(roleManager);
-            //SeedUsers(context, userManager);
-            //SeedGraphicCards(context);
-            //SeedHardDrives(context);
-            //SeedProcessors(context);
+            SeedRoles(roleManager);
+            SeedUsers(context, userManager);
+            SeedGraphicCards(context);
+            SeedHardDrives(context);
+            SeedProcessors(context);
             context.SaveChanges();
         }
 
@@ -650,7 +650,7 @@ namespace TechZone.Data.Migrations
                 userManager.Create(newUser, "Pesho1!");
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Publisher");
-                context.Publishers.Add(new Publisher() { UserId = newUser.Id });
+                context.Customers.Add(new Customer() { UserId = newUser.Id });
             }
 
             var joro = userManager.FindByName("joro");
@@ -666,7 +666,7 @@ namespace TechZone.Data.Migrations
                 userManager.Create(newUser, "Pesho1!");
                 userManager.SetLockoutEnabled(newUser.Id, false);
                 userManager.AddToRole(newUser.Id, "Publisher");
-                context.Publishers.Add(new Publisher() { UserId = newUser.Id });
+                context.Customers.Add(new Customer() { UserId = newUser.Id });
             }
 
             var jicata = userManager.FindByName("jicata");

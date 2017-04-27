@@ -11,6 +11,7 @@
             this.VotedFor = new HashSet<Review>();
             this.WrittenReviews = new HashSet<Review>();
             this.Comments = new HashSet<Comment>();
+            this.Articles = new HashSet<Article>();
         }
 
         public int Id { get; set; }
@@ -31,5 +32,7 @@
         public virtual ICollection<Review> WrittenReviews { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

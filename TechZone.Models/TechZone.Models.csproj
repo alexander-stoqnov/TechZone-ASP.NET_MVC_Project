@@ -109,7 +109,6 @@
     <Compile Include="EntityModels\HardDrive.cs" />
     <Compile Include="EntityModels\Processor.cs" />
     <Compile Include="EntityModels\Product.cs" />
-    <Compile Include="EntityModels\Publisher.cs" />
     <Compile Include="EntityModels\Purchase.cs" />
     <Compile Include="EntityModels\Report.cs" />
     <Compile Include="EntityModels\Review.cs" />
