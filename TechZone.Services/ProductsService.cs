@@ -19,25 +19,22 @@
         public IEnumerable<GeneralProductPageViewModel> GetAllGraphicCards()
         {
             var graphicCards = this.Context.GraphicCards.OrderByDescending(gc => gc.Views).ToList();
-            List<Product> products = new List<Product>(graphicCards); 
-            return this.GetGeneralProductPageViewModels(products);
+            return this.GetGeneralProductPageViewModels(graphicCards);
         }
 
         public IEnumerable<GeneralProductPageViewModel> GetAllHardDrives()
         {
             var hardDrives = this.Context.HardDrives.OrderByDescending(gc => gc.Views).ToList();
-            List<Product> products = new List<Product>(hardDrives);
-            return this.GetGeneralProductPageViewModels(products);
+            return this.GetGeneralProductPageViewModels(hardDrives);
         }
 
         public IEnumerable<GeneralProductPageViewModel> GetAllProcessors()
         {
             var processors = this.Context.Processors.OrderByDescending(gc => gc.Views).ToList();
-            List<Product> products = new List<Product>(processors);
-            return this.GetGeneralProductPageViewModels(products);
+            return this.GetGeneralProductPageViewModels(processors);
         }
 
-        private HashSet<GeneralProductPageViewModel> GetGeneralProductPageViewModels(List<Product> products)
+        private HashSet<GeneralProductPageViewModel> GetGeneralProductPageViewModels<T>(List<T> products) where T : Product
         {
             var productVms = new HashSet<GeneralProductPageViewModel>();
             foreach (var product in products)
