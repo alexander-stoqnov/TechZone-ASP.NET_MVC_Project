@@ -6,12 +6,39 @@
     using AutoMapper;
     using Models.ViewModels.Home;
     using System;
+    using Models.EntityModels;
 
     public class ProductsService : Service
     {
         public IEnumerable<GeneralProductPageViewModel> GetAllProducts()
         {
             var products = this.Context.Products.OrderByDescending(p => p.Views).ToList();
+            return GetGeneralProductPageViewModels(products);
+        }
+
+        public IEnumerable<GeneralProductPageViewModel> GetAllGraphicCards()
+        {
+            var graphicCards = this.Context.GraphicCards.OrderByDescending(gc => gc.Views).ToList();
+            List<Product> products = new List<Product>(graphicCards); 
+            return this.GetGeneralProductPageViewModels(products);
+        }
+
+        public IEnumerable<GeneralProductPageViewModel> GetAllHardDrives()
+        {
+            var hardDrives = this.Context.HardDrives.OrderByDescending(gc => gc.Views).ToList();
+            List<Product> products = new List<Product>(hardDrives);
+            return this.GetGeneralProductPageViewModels(products);
+        }
+
+        public IEnumerable<GeneralProductPageViewModel> GetAllProcessors()
+        {
+            var processors = this.Context.Processors.OrderByDescending(gc => gc.Views).ToList();
+            List<Product> products = new List<Product>(processors);
+            return this.GetGeneralProductPageViewModels(products);
+        }
+
+        private HashSet<GeneralProductPageViewModel> GetGeneralProductPageViewModels(List<Product> products)
+        {
             var productVms = new HashSet<GeneralProductPageViewModel>();
             foreach (var product in products)
             {

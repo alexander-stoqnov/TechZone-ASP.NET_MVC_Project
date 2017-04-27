@@ -22,6 +22,27 @@
             return View(productVms);
         }
 
+        [Route("GraphicCards")]
+        public ActionResult GraphicCards()
+        {
+            IEnumerable<GeneralProductPageViewModel> graphicCardVms = this._service.GetAllGraphicCards();
+            return this.View("All", graphicCardVms);
+        }
+
+        [Route("HardDrives")]
+        public ActionResult HardDrives()
+        {
+            IEnumerable<GeneralProductPageViewModel> hardDriveVms = this._service.GetAllHardDrives();
+            return this.View("All", hardDriveVms);
+        }
+
+        [Route("Processors")]
+        public ActionResult Processors()
+        {
+            IEnumerable<GeneralProductPageViewModel> processorVms = this._service.GetAllProcessors();
+            return this.View("All", processorVms);
+        }
+
         [Route("Details/{id=1}")]
         public ActionResult Details(int id = 1)
         {
