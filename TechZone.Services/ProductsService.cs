@@ -11,7 +11,7 @@
     {
         public IEnumerable<GeneralProductPageViewModel> GetAllProducts()
         {
-            var products = this.Context.Products.ToList();
+            var products = this.Context.Products.OrderByDescending(p => p.Views).ToList();
             var productVms = new HashSet<GeneralProductPageViewModel>();
             foreach (var product in products)
             {

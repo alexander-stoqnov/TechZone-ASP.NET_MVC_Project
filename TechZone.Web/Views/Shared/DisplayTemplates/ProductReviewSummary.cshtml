@@ -36,6 +36,13 @@
             }
         </div>
         <div class="review-block-title">@Html.ActionLink(Model.Title, "Details", "Reviews", new { id = Model.Id }, null)</div>
-        <div class="review-block-description">@Model.Content</div>
+        <div class="review-block-description">
+            @{
+                foreach (var paragraph in Model.ContentParagraphs)
+                {
+                    <p>@paragraph</p>
+                }
+            }
+        </div>
     </div>
 </div>

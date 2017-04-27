@@ -19,11 +19,11 @@ namespace TechZone.Data.Migrations
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            SeedRoles(roleManager);
-            SeedUsers(context, userManager);
-            SeedGraphicCards(context);
-            SeedHardDrives(context);
-            SeedProcessors(context);
+            //SeedRoles(roleManager);
+            //SeedUsers(context, userManager);
+            //SeedGraphicCards(context);
+            //SeedHardDrives(context);
+            //SeedProcessors(context);
             context.SaveChanges();
         }
 

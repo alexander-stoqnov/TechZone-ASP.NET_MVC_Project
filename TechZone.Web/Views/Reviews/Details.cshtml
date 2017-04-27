@@ -26,7 +26,14 @@
                                         <ul class="media-date reviews list-inline">
                                             <li>@Model.PublishDateString</li>
                                         </ul>
-                                        <p class="media-comment">@Model.Content</p>
+                                        <p class="media-comment">
+                                            @{
+                                                foreach (var contentParagraph in Model.ContentParagraphs)
+                                                {
+                                                    <p>@contentParagraph</p>
+                                                }
+                                            }
+                                        </p>
                                         <a class="btn btn-info btn-circle" href="#post-reply-form" id="reply"><span class="glyphicon glyphicon-share-alt"></span>REPLY</a>
                                         <a class="btn btn-warning btn-circle" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> @Model.CountOfComments COMMENTS</a>
                                         @if (User.Identity.IsAuthenticated)
@@ -59,10 +66,10 @@
                                                     </button>
                                                 }
                                             </div>
-                                        }                                       
+                                        }
                                     </div>
                                     <div id="error-message-here" class="alert alert-danger col-sm-6 col-sm-offset-4" hidden="hidden"></div>
-                                </div>                               
+                                </div>
                                 <div class="collapse" id="replyOne">
                                     <ul class="media-list">
                                         @foreach (var comment in Model.ReviewComments)

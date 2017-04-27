@@ -54,6 +54,7 @@
                 srvm.ReviewerUsername = review.Reviewer.User.UserName;
                 srvm.DaysAgoPublished = (int)(DateTime.Now - review.PublishDate).TotalDays;
                 srvm.PublishDateString = review.PublishDate.ToString("yy-MMM-dd ddd", new CultureInfo("en-US"));
+                srvm.ContentParagraphs = review.Content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 if (review.Reviewer.User.ProfilePictureFileName != null)
                 {
                     srvm.ReviewerImageData = this.GetUserProfilePicture(review.Reviewer.User.ProfilePictureFileName,
@@ -95,6 +96,7 @@
         {
             var review = this.Context.Reviews.Find(id);
             ReviewDetailsViewModel rdvm = Mapper.Instance.Map<ReviewDetailsViewModel>(review);
+            rdvm.ContentParagraphs = review.Content.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
             rdvm.VisitorIsAlsoReviewPublisher = currentUserId == review.Reviewer.UserId;
             if (review.Reviewer.User.ProfilePictureFileName != null)
             {

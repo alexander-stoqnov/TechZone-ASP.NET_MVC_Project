@@ -1,4 +1,4 @@
-﻿ @model TechZone.Models.ViewModels.Products.ProductDetailsViewModel
+﻿@model TechZone.Models.ViewModels.Products.ProductDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -44,6 +44,10 @@
                             {
                                 <span style="color: red">Out of stock</span>
                             }
+                            else if (Model.Quantity <= 50)
+                            {
+                                <span style="color: orange">Less than 50 left!</span>
+                            }
                             else
                             {
                                 @:In Stock
@@ -54,7 +58,7 @@
                             @using (Html.BeginForm("AddToShoppingCart", "Purchase", FormMethod.Post))
                             {
                                 @Html.HiddenFor(vm => vm.Id);
-                                <input type="submit" value="Add to Cart" class="btn btn-success"/>
+                                <input type="submit" value="Add to Cart" class="btn btn-success" />
                             }
                         </div>
                     </div>
