@@ -110,6 +110,136 @@ namespace TechZone.Data.Migrations
                 Description = "Are you amazed by the things you can do with your computer? . If you bought your computer more than a handful of years ago, you're missing more than you know - uncompromised gaming, while you stream, chat and share with your community - stunning visuals of 4K HDR premium content - transport into a great VR experience. With premium performance and new & enhanced features, a desktop computer based on an 7th Gen Intel Core processor is always ready for real-life productivity, creativity and entertainment. With a range of smart, stylish designs and sizes, there is a 7th Gen Intel Core Desktop powered computer to fit a wide range of budgets and needs.",
                 ImageUrl = "https://images10.newegg.com/ProductImage/19-117-731-Z01.jpg",
                 Guarantee = GuaranteeDurationType.ThirtySixMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i3,
+                Cores = ProcessorCoresType.Dual_Core,
+                Cache = 3,
+                ProcessorSpeed = 3.70m,
+                Price = 115.98m,
+                Quantity = 854,
+                Name = "Intel 3.70 GHz Core i3-6100 3M Cache",
+                Description = "The 6th generation Intel Core processor is based on the Skylake micro architecture and built with 14nm manufacturing process. It comes packed with advanced features to take your productivity, creativity and 3D gaming to the next level. And, by enabling new exciting Windows 10 features, the 6th generation Intel Core processor empowers you to unleash your imagination and explore the possibilities. The Intel Core i3-6100 comes with two-core, four-thread configuration, delivering the performance and capability you need for everyday home and office tasks, as well as a host of new features to help you make the most of your PC experience.",
+                ImageUrl = "https://images10.newegg.com/NeweggImage/productimage/2MN-0004-00002-01.jpg",
+                Guarantee = GuaranteeDurationType.TwentyFourMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i3,
+                Cores = ProcessorCoresType.Dual_Core,
+                Cache = 3,
+                ProcessorSpeed = 3.90m,
+                Price = 115.09m,
+                Quantity = 291,
+                Name = "Intel Core i3-7100 7th Gen, 3M Cache,3.90 GHz",
+                Description = "Unprecedented power and responsiveness, paired with easy, built-in security, means you can work, play, and create as quickly and seamlessly as your heart desires. Plus, by enabling superior 4K resolution, 7th Generation Intel® Core™ processors will have you feeling immersed in gaming and entertainment like never before, whether at home or on the go.",
+                ImageUrl = "https://images10.newegg.com/ProductImage/19-117-734-Z01.jpg",
+                Guarantee = GuaranteeDurationType.TwelveMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.Intel,
+                Series = ProcessorSeriesType.i3,
+                Cores = ProcessorCoresType.Dual_Core,
+                Cache = 4,
+                ProcessorSpeed = 4m,
+                Price = 149.99m,
+                Quantity = 64,
+                Name = "Intel Core i3-7300 Kaby Lake, Dual-Core, 4.0 GHz",
+                Description = "The Intel Core i3-7300, developed under the codename Kaby Lake-S, is a desktop processor that was first available for purchase in January 2017. It is a dual-core CPU, resulting in a lower multi-tasking potential when compared to processors with more cores. This Core i3 series CPU operates at a stock clock speed of 4.00 GHz1.10 GHz faster than an average desktop processor. Its cache size is 4MB, which is an average cache among desktop processors, and its 64GB of maximum supported memory is above average compared to all desktop CPUs.",
+                ImageUrl = "https://photos05.redcart.pl/templates/images/thumb/11998/432/600/pl/0/templates/images/products/11998/1-PROINTCI30069_0.jpg",
+                Guarantee = GuaranteeDurationType.SixtyMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.AMD,
+                Series = ProcessorSeriesType.FX,
+                Cores = ProcessorCoresType.Octa_Core,
+                Cache = 8,
+                ProcessorSpeed = 4m,
+                Price = 119.99m,
+                Quantity = 154,
+                Name = "AMD FX-8350 FX-Series 8-Core",
+                Description = "AMD FX 8-Core Processor, Unlocked, Black Edition. AMD's next-generation architecture takes 8-core processing to a new level. Get up to 24% better frame rates in some of the most demanding games, at stunning resolutions. Get faster audio encoding so you can enjoy your music sooner. Go up to 5.0 GHz with aggressive cooling solutions from AMD. What Is In The Box: CPU, Heat Sink and Fan(E3), Thermal Paste is already applied on the Heat Sink, FX Bezel Sticker.",
+                ImageUrl = "https://p1.akcdn.net/full/148865399.amd-x8-fx-8350-4ghz-am3.jpg",
+                Guarantee = GuaranteeDurationType.ThirtySixMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.AMD,
+                Series = ProcessorSeriesType.FX,
+                Cores = ProcessorCoresType.Octa_Core,
+                Cache = 8,
+                ProcessorSpeed = 4.4m,
+                Price = 168.88m,
+                Quantity = 84,
+                Name = "AMD FX-9370 Vishera 8-Core 4.4 GHz",
+                Description = "The AMD FX-9370, developed under the codename Zambezi, is a desktop processor that was first available for purchase in June 2013. It has an octa-core model, resulting in a high multi-tasking potential.This FX series CPU operates at a stock clock speed of 4.70 GHzone of the fastest desktop processors.If that isn't enough power, the FX-9370 has been tested by AMD to handle a maximum overclocked speed up to 5.00 GHz.Its cache size is 8MB, which is an above average cache among desktop processors.",
+                ImageUrl = "https://images10.newegg.com/NeweggImage/ProductImage/19-113-346-02.jpg",
+                Guarantee = GuaranteeDurationType.TwentyFourMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.AMD,
+                Series = ProcessorSeriesType.Ryzen,
+                Cores = ProcessorCoresType.Octa_Core,
+                Cache = 16,
+                ProcessorSpeed = 3.7m,
+                Price = 325.70m,
+                Quantity = 182,
+                Name = "AMD Ryzen 7 1700 Processor with Wraith Spire LED Cooler",
+                Description = "AMD's Ryzen1700 combines 8 processor cores and 16 threads with a surprisingly low 65W TDP to deliver an efficient, powerful processing solution like no other. Boasting AMD SenseMI technology with true machine intelligence, the Ryzen 7 1700 also comes equipped with the AMD Wraith Spire cooler, featuring color-configurable LED illumination for customized style. REQUIRES A DISCRETE GRAPHICS CARD, NOT INCLUDED.",
+                ImageUrl = "https://www.evetech.co.za/repository/ProductImages/amd-ryzen-7-1700-processor-1000px-v2.jpg",
+                Guarantee = GuaranteeDurationType.ThirtySixMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.AMD,
+                Series = ProcessorSeriesType.Ryzen,
+                Cores = ProcessorCoresType.Quad_Core,
+                Cache = 16,
+                ProcessorSpeed = 3.5m,
+                Price = 189.99m,
+                Quantity = 33,
+                Name = "AMD Ryzen 5 1500X Processor with Wraith Spire Cooler",
+                Description = "The Ryzen 5 1500X has the potential to be a disruptive product for AMD, one that wrecks through Intel's sub-$200 CPU lineup, and we are relieved to report that it did succeed to an extent. Suddenly, Intel's sub-$200 processors, including the Core i3-7100 dual-core, Core i5-7400 quad-core, and $206 Core i5-7500, seem like bad options. Intel is giving you too little for the money. Intel's \"Kaby Lake\" architecture continues to maintain per-core performance leadership over AMD's \"Zen,\" but not by much thanks to the latter's huge leap in core performance over previous AMD chips. The Ryzen 5 1500X processor also gives you so much more for its $189 price - 4 cores with SMT enabling 8 threads (competing Core i5 chips lack HyperThreading), higher clock speeds out of the box, and unlocked base-clock multipliers. Intel has the gall to ask $189 for the dual-core i3-7350K with unlocked multiplier and half the L3 cache.",
+                ImageUrl = "https://www.amd.com/en/system/files/11157-ryzen-5-pib-left-facing-1260x709.png",
+                Guarantee = GuaranteeDurationType.SixtyMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.AMD,
+                Series = ProcessorSeriesType.Ryzen,
+                Cores = ProcessorCoresType.Octa_Core,
+                Cache = 16,
+                ProcessorSpeed = 3.6m,
+                Price = 469.99m,
+                Quantity = 152,
+                Name = "AMD Ryzen 7 1800X",
+                Description = "AMD’s high-performance x86 Core “Zen” architecture delivers >52% improvement in instructions-per-clock cycle over the previous generation AMD core, without increasing power. AMD introduces SenseMI technology, a set of learning and adapting features that help the AMD Ryzen™ processor customize its performance to you and your applications. Finally: performance that thinks. The new AMD AM4 Platform puts effortless compatibility front and center. Our new 1331-pin processor socket works with the 7th Gen AMD APU, AMD Ryzen CPU, and the upcoming \"Raven Ridge\" APU. The one Socket AM4 motherboard you buy will work with any AM4 processor! And with support for the latest I/O standards like USB 3.1 Gen 2, NVMe, or PCI Express® 3.0, it's easy to build a high-performance system that can grow with your needs.",
+                ImageUrl = "https://images10.newegg.com/NeweggImage/ProductImage/19-113-430-S01.jpg",
+                Guarantee = GuaranteeDurationType.ThirtySixMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.AMD,
+                Series = ProcessorSeriesType.A,
+                Cores = ProcessorCoresType.Quad_Core,
+                Cache = 4,
+                ProcessorSpeed = 3.7m,
+                Price = 129.46m,
+                Quantity = 152,
+                Name = "AMD A10-Series APU A10-7850K",
+                Description = "This new APU form AMD continues to revolutionize the microprocessor market. It is the first APU to deliver 856Glops and the first with H.S.A. (Heterogeneous Systems Architecture which defines how the 4 compute cores interact with the 8 graphics cores. This APU also is Mantle capable, improving it's console-like optimizations.",
+                ImageUrl = "https://img.pccomponentes.com/articles/6/62664/amd-a10-7850k-3-7ghz.jpg",
+                Guarantee = GuaranteeDurationType.TwelveMonths
+            }, new Processor
+            {
+                Brand = ProcessorBrandType.AMD,
+                Series = ProcessorSeriesType.A,
+                Cores = ProcessorCoresType.Dual_Core,
+                Cache = 4,
+                ProcessorSpeed = 3.9m,
+                Price = 48.49m,
+                Quantity = 231,
+                Name = "AMD A6-6400K Richland 3.9GHz Dual-Core",
+                Description = "AMD A6-64000K Dual-Core APU Processor 3.9GHz Socket FM2, Retail (Black Edition)",
+                ImageUrl = "http://www.pdf-manuals.com/p/pictures21/amd-a6-6400k-dual-core-a6-series-accelerated-ad640kokhlbox-b-h-243553.jpg",
+                Guarantee = GuaranteeDurationType.TwentyFourMonths
             });
         }
 
