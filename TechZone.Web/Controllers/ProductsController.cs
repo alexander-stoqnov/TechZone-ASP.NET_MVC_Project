@@ -64,11 +64,11 @@
             return this.PartialView("_ProductSpecsPartial", specs);
         }
 
-        [Route("TestApi")]
-        public ActionResult TestApi()
+        [Route("TestApi/{productName}")]
+        public ActionResult TestApi(string productName)
         {
             var client = new HttpClient();
-            var response = client.GetAsync("http://localhost:1575/api/products/all").Result;
+            var response = client.GetAsync($"http://localhost:1575/api/products/all?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<GeneralProductPageViewModel>>().Result;
             return View("All", products);
         }
