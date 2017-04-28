@@ -1,5 +1,4 @@
-﻿using TechZone.Models.ViewModels.Articles;
-using TechZone.Models.ViewModels.Home;
+﻿
 
 namespace TechZone.Web
 {
@@ -7,18 +6,20 @@ namespace TechZone.Web
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using System;
+    using System.Globalization;
     using AutoMapper;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.ViewModels.Admin;
     using Models.EntityModels;
     using Models.ViewModels.Products;
-    using System;
     using Models.ViewModels.Purchase;
     using Models.ViewModels.Customer;
     using Models.BindingModels;
     using Models.ViewModels.Reviews;
-    using System.Globalization;
     using Models.ViewModels.Moderator;
+    using Models.ViewModels.Articles;
+    using Models.ViewModels.Home;
 
     public class MvcApplication : HttpApplication
     {

@@ -65,7 +65,7 @@
             }
 
             string fileName = Path.GetFileName(file.FileName);
-            if (!fileName.ToLower().EndsWith(".jpg") && !fileName.ToLower().EndsWith(".png"))
+            if (!fileName.ToLower().EndsWith(".jpg") && !fileName.ToLower().EndsWith(".png") && !fileName.ToLower().EndsWith(".jpeg"))
             {
                 ModelState.AddModelError("", "Invalid picture format!");
                 return this.View(aavm);
@@ -108,7 +108,7 @@
             if (ModelState.IsValid)
             {
                 this._service.EditSelectedArticle(eavm);
-                return RedirectToAction("All", "Articles", new { area = "Blog" });
+                return RedirectToAction("All", "Articles");
             }
 
             return this.View(eavm);
@@ -128,7 +128,7 @@
         public ActionResult DeleteArticle(EditArticleViewModel eavm)
         {
             this._service.DeleteArticle(eavm.Id);
-            return RedirectToAction("All", "Articles", new { area = "Blog" });
+            return RedirectToAction("All", "Articles");
         }
     }
 }

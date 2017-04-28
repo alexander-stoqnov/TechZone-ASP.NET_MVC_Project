@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechZone.Web", "TechZone.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechZone.Web.Tests", "TechZone.Web.Tests\TechZone.Web.Tests.csproj", "{F1EBBBDD-CC6E-485F-83F8-F1F61C7A1EB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechZone.Api", "TechZone.Api\TechZone.Api.csproj", "{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F1EBBBDD-CC6E-485F-83F8-F1F61C7A1EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1EBBBDD-CC6E-485F-83F8-F1F61C7A1EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1EBBBDD-CC6E-485F-83F8-F1F61C7A1EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
