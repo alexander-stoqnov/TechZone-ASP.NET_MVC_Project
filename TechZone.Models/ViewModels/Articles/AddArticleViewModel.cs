@@ -13,9 +13,5 @@
         [MinLength(200, ErrorMessage = "Article content should be at least 200 characters long")]
         [MaxLength(5000, ErrorMessage = "Article content should be at least 200 characters long")]
         public string Content { get; set; }
-
-        [Display(Name = "Image URL")]
-        [RegularExpression("(http|https)://.+", ErrorMessage = "Picture path must start with http or https")]
-        public string ImageUrl { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace TechZone.Services
+﻿using System.Threading.Tasks;
+using Dropbox.Api.Team;
+
+namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Customer;
@@ -25,7 +28,7 @@
 
         private string GetUserProfilePicture(string profilePictureFileName, string userUserName, string dropboxKey)
         {
-            var imageByteData = this.DownloadAsync(new DropboxClient(dropboxKey), $"Users/{userUserName}/ProfilePicture", profilePictureFileName);            
+            var imageByteData = this.DownloadAsync(new DropboxClient(dropboxKey), $"Users/{userUserName}/ProfilePicture", profilePictureFileName);
             string imageBase64Data = Convert.ToBase64String(imageByteData.Result);
             return $"data:image/*;base64,{imageBase64Data}";
         }

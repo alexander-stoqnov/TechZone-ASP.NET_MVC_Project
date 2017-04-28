@@ -17,9 +17,7 @@
         [MaxLength(5000, ErrorMessage = "Article content should be at least 200 characters long")]
         public string Content { get; set; }
 
-        [Display(Name = "Image URL")]
-        [RegularExpression("(http|https)://.+")]
-        public string ImageUrl { get; set; }
+        public string ImageFileName { get; set; }
 
         public DateTime? PublishDate { get; set; }
 

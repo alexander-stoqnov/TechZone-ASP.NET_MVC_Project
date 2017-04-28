@@ -10,10 +10,12 @@
 
         public string Content { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string ImageData { get; set; }
 
         public DateTime? PublishDate { get; set; }
 
         public string AuthorName { get; set; }
+
+        public string AuthorUsername { get; set; }
     }
 }

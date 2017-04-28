@@ -73,7 +73,8 @@ namespace TechZone.Web
                     .ForMember(ervm => ervm.CommentOffender, expr => expr.MapFrom(r => r.OffensiveComment.Customer.User.UserName))
                     .ForMember(ervm => ervm.ReviewId, expr => expr.MapFrom(r => r.OffensiveComment.Review.Id));
                 m.CreateMap<Article, GeneralArticleViewModel>()
-                    .ForMember(gavm => gavm.AuthorName, expr => expr.MapFrom(a => a.Publisher.User.FullName));
+                    .ForMember(gavm => gavm.AuthorName, expr => expr.MapFrom(a => a.Publisher.User.FullName))
+                    .ForMember(gavm => gavm.AuthorUsername, expr => expr.MapFrom(a => a.Publisher.User.UserName));
                 m.CreateMap<Article, EditArticleViewModel>();
 
                 m.CreateMap<WriteReviewBindingModel, Review>();

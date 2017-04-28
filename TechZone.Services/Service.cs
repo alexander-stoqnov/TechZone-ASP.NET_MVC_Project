@@ -1,4 +1,5 @@
-﻿using Dropbox.Api.Stone;
+﻿using System;
+using Dropbox.Api.Stone;
 
 namespace TechZone.Services
 {
@@ -27,11 +28,17 @@ namespace TechZone.Services
                     body: mem);
             }
         }
-
         protected Task<byte[]> DownloadAsync(DropboxClient dbx, string folderName, string fileName)
         {
             Task<IDownloadResponse<FileMetadata>> downloadTask = dbx.Files.DownloadAsync($"/{folderName}/{fileName}");
-            downloadTask.Wait();
+            try
+            {
+                downloadTask.Wait();
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException();
+            }
 
             return downloadTask.Result.GetContentAsByteArrayAsync();
         }

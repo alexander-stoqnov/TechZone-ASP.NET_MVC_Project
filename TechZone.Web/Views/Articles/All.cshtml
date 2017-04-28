@@ -35,7 +35,7 @@
         {
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    @Html.ActionLink($"{article.AuthorName}", "All", "Articles", new { authorName = article.AuthorName }, new { @class = "author-name" }) <span> / @article.PublishDate.Value.ToString("d MMMM yyyy")</span>
+                    @Html.ActionLink($"{article.AuthorName}", "All", "Articles", new { authorName = article.AuthorUsername }, new { @class = "author-name" }) <span> / @article.PublishDate.Value.ToString("d MMMM yyyy")</span>
                     @if (User.IsInRole("Admin"))
                     {
                         <div class="btn-group" style="float: right;">
@@ -56,13 +56,13 @@
                     <div class="media">
                         <div class="media-left">
                             <a href="#">
-                                @if (article.ImageUrl == null)
+                                @if (article.ImageData == null)
                                 {
                                     <img class="media-object" src="http://placehold.it/250x150" alt="Kurt" style="max-width: 250px">
                                 }
                                 else
                                 {
-                                    <img class="media-object" src="@article.ImageUrl" alt="Kurt" style="max-width: 250px">
+                                    <img class="media-object" src="@article.ImageData" alt="Kurt" style="max-width: 250px">
                                 }
                             </a>
                         </div>
