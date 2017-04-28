@@ -1,0 +1,29 @@
+﻿@model TechZone.Models.ViewModels.Products.SearchProductViewModel
+
+<div class="row">
+    @using (Html.BeginForm("TestApi", "Products", FormMethod.Get, new { @class = "text-left", role = "form", id = "register-form" }))
+    {
+        <div class="form-group">
+            <input type="text" name="productName"/>
+            <label>Start Price</label>
+            <input type="number" name="startPrice"/>
+            <label>Top Price</label>
+            <input type="number" name="topPrice" />
+            <label>Discount</label>
+            <input type="number" name="discount" />
+            @*@Html.LabelFor(m => m.Name, new {@class = "col-md-1 control-label"})
+            <div class="col-md-2">
+                @Html.TextBoxFor(m => m.Name, new {@class = "form-control", placeholder = "Name"})
+            </div>
+            @Html.LabelFor(m => m.Price, new {@class = "col-md-1 control-label"})
+            <div class="col-md-2">
+                @Html.TextBoxFor(m => m.Price, new {@class = "form-control", placeholder = "Name"})
+            </div>
+            @Html.LabelFor(m => m.Discount, new {@class = "col-md-1 control-label"})
+            <div class="col-md-2">
+                @Html.TextBoxFor(m => m.Discount, new {@class = "form-control", placeholder = "Name"})
+            </div>*@
+        </div>
+        <input type="submit" value="Search"/>
+    }
+</div>

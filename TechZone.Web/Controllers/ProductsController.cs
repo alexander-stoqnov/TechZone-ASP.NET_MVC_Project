@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web.Controllers
+﻿using System;
+
+namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Services;
@@ -64,11 +66,18 @@
             return this.PartialView("_ProductSpecsPartial", specs);
         }
 
-        [Route("TestApi/{productName}")]
-        public ActionResult TestApi(string productName)
+        [Route("ProductSearchForm")]
+        [ChildActionOnly]
+        public ActionResult ProductsSearchForm()
+        {
+            return this.PartialView("_SearchPanelPartial", new SearchProductViewModel());
+        }
+
+        [Route("TestApi")]
+        public ActionResult TestApi(string productName = "", int startPrice = 0, int topPrice = Int32.MaxValue, int discount = 0)
         {
             var client = new HttpClient();
-            var response = client.GetAsync($"http://localhost:1575/api/products/all?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true").Result;
+            var response = client.GetAsync($"http://localhost:1575/api/products/all?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {startPrice} and Price le {topPrice} and Discount ge {discount}").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<GeneralProductPageViewModel>>().Result;
             return View("All", products);
         }

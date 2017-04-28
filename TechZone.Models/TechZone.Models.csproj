@@ -157,6 +157,7 @@
     <Compile Include="ViewModels\Moderator\SubmitReportViewModel.cs" />
     <Compile Include="ViewModels\Products\GeneralProductPageViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Products\SearchProductViewModel.cs" />
     <Compile Include="ViewModels\Purchase\FinalCheckoutViewModel.cs" />
     <Compile Include="ViewModels\Purchase\ProductInCartViewModel.cs" />
     <Compile Include="ViewModels\Purchase\ShoppingCartViewModel.cs" />
