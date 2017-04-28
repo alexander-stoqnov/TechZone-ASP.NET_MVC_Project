@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Dropbox.Api.Team;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Customer;

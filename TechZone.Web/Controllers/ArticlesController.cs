@@ -21,7 +21,7 @@
         }
 
         [Route("All/{authorName=}")]
-        [HandleError(ExceptionType = typeof(ArgumentException), View = "NaughtyStringsError")]
+        [HandleError(ExceptionType = typeof(ArgumentException), View = "WaitForDownload")]
         public ActionResult All(string authorName = "")
         {
             var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
@@ -46,6 +46,7 @@
         [Route("Add")]
         [HttpPost]
         [CustomAuthorize(Roles = "Publisher")]
+        [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Add(AddArticleViewModel aavm)
         {
             var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");

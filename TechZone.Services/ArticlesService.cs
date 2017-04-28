@@ -34,15 +34,8 @@
                 var articleVm = Mapper.Instance.Map<GeneralArticleViewModel>(article);
                 if (article.ImageFileName != null)
                 {
-                    try
-                    {
-                        articleVm.ImageData = this.DownloadArticlePicture(article.ImageFileName, article.Publisher.User.UserName,
-      dropboxKey);
-                    }
-                    catch (Exception)
-                    {
-                        throw new InvalidOperationException();
-                    }                    
+                    articleVm.ImageData = this.DownloadArticlePicture(article.ImageFileName, article.Publisher.User.UserName,
+      dropboxKey);                  
                 }
                 articlesVms.Add(articleVm);
             }
@@ -52,17 +45,9 @@
 
         private string DownloadArticlePicture(string articleFileName, string publisherUsername, string dropboxKey)
         {
-            try
-            {
-                var imageByteData = this.DownloadAsync(new DropboxClient(dropboxKey), $"Articles/{publisherUsername}", articleFileName);
-                string imageBase64Data = Convert.ToBase64String(imageByteData.Result);
-                return $"data:image/*;base64,{imageBase64Data}";
-            }
-            catch (Exception)
-            {
-                throw new InvalidOperationException();
-            }
-
+            var imageByteData = this.DownloadAsync(new DropboxClient(dropboxKey), $"Articles/{publisherUsername}", articleFileName);
+            string imageBase64Data = Convert.ToBase64String(imageByteData.Result);
+            return $"data:image/*;base64,{imageBase64Data}";
         }
 
         public IEnumerable<GeneralArticleViewModel> GetFilteredArticles(string content)

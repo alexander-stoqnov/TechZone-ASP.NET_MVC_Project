@@ -344,6 +344,7 @@
     <Content Include="Views\Articles\Add.cshtml" />
     <Content Include="Views\Articles\DeleteArticle.cshtml" />
     <Content Include="Views\Articles\EditArticle.cshtml" />
+    <Content Include="Views\Shared\WaitForDownload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">

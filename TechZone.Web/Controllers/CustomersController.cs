@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web.Controllers
+﻿using System;
+
+namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Services;
@@ -20,12 +22,20 @@
         }
 
         [Route("UserProfile")]
+        [HandleError(ExceptionType = typeof(ArgumentException), View = "WaitForDownload")]
         public ActionResult UserProfile()
         {
             var currentUserId = this.User.Identity.GetUserId();
             var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
-            CustomerProfileViewModel customerProfileVm = this._service.GetCurrentUserProfile(currentUserId, apikey[1]);
-            return View(customerProfileVm);
+            try
+            {
+                CustomerProfileViewModel customerProfileVm = this._service.GetCurrentUserProfile(currentUserId, apikey[1]);
+                return View(customerProfileVm);
+            }
+            catch (Exception)
+            {               
+                throw new ArgumentException();
+            }
         }
 
         [Route("UploadPicture")]
