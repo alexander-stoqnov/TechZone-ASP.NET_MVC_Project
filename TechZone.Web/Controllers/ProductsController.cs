@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace TechZone.Web.Controllers
 {
@@ -74,10 +75,13 @@ namespace TechZone.Web.Controllers
         }
 
         [Route("TestApi")]
-        public ActionResult TestApi(string productName = "", int startPrice = 0, int topPrice = Int32.MaxValue, int discount = 0)
+        public ActionResult TestApi(string priceRange, string productName = "", int discount = 0)
         {
+            var priceMinMax = priceRange.Split(new[] {' ', '$', '-'}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            int minPrice = priceMinMax[0];
+            int maxPrice = priceMinMax[1];
             var client = new HttpClient();
-            var response = client.GetAsync($"http://localhost:1575/api/products/all?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {startPrice} and Price le {topPrice} and Discount ge {discount}").Result;
+            var response = client.GetAsync($"http://localhost:1575/api/products/all?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {minPrice} and Price le {maxPrice} and Discount ge {discount}").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<GeneralProductPageViewModel>>().Result;
             return View("All", products);
         }

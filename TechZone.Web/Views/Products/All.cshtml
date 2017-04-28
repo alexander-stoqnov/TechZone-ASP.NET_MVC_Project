@@ -3,7 +3,11 @@
     ViewBag.Title = "All";
 }
 
-@section styles { <link rel="stylesheet" href="/Content/CustomSiteCss/ProductStyles.css"> }
+@section styles 
+{ 
+    <link rel="stylesheet" href="/Content/CustomSiteCss/ProductStyles.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
 @{ int counter = 0; }
 
 <div class="container">
@@ -74,22 +78,38 @@
 
 @section scripts
 {
-<script>
-    function addToCart(prodId) {
-        var productId = "productId_" + prodId;
-        var product = document.getElementById(productId);
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        function addToCart(prodId) {
+            var productId = "productId_" + prodId;
+            var product = document.getElementById(productId);
 
-        $.ajax({
-            type: "POST",
-            url: "/Purchase/AddToShoppingCart",
-            data: { id : product.value},
-            success: function () {
-                $('#shopping-cart').load('/Purchase/CountOfProductsInCart', function() {
-                    $(this).children(':first').unwrap();
-                    window.location.href = '/Products/All/#' + prodId;
-                });  
-            }
+            $.ajax({
+                type: "POST",
+                url: "/Purchase/AddToShoppingCart",
+                data: { id: product.value },
+                success: function() {
+                    $('#shopping-cart')
+                        .load('/Purchase/CountOfProductsInCart',
+                            function() {
+                                $(this).children(':first').unwrap();
+                                window.location.href = '/Products/All/#' + prodId;
+                            });
+                }
+            });
+        }
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 30,
+                max: 1000,
+                values: [75, 700],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+              " - $" + $("#slider-range").slider("values", 1));
         });
-    }
-</script>
+    </script>
 }
