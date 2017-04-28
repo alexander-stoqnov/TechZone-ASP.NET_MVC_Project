@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using Services;
     using System.Collections.Generic;
+    using System.Net.Http;
     using Models.ViewModels.Products;
 
     [RoutePrefix("Products")]
@@ -61,6 +62,15 @@
         {
             Dictionary<string, string> specs = this._service.GetProductSpecs(id);
             return this.PartialView("_ProductSpecsPartial", specs);
+        }
+
+        [Route("TestApi")]
+        public ActionResult TestApi()
+        {
+            var client = new HttpClient();
+            var response = client.GetAsync("http://localhost:1575/api/products/all").Result;
+            var products = response.Content.ReadAsAsync<IEnumerable<GeneralProductPageViewModel>>().Result;
+            return View("All", products);
         }
     }
 }
