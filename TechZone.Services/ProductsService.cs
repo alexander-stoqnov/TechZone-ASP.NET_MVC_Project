@@ -1,6 +1,4 @@
-﻿using TechZone.Models.BindingModels;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Products;
@@ -161,6 +159,20 @@ namespace TechZone.Services
             GraphicCardManufacturerType graphicCardManufacturerType = (GraphicCardManufacturerType)Enum.Parse(typeof(GraphicCardManufacturerType), brand);
             ManufacturerType manufacturerType = (ManufacturerType)Enum.Parse(typeof(ManufacturerType), manufacturer);
             return this.Context.GraphicCards.Where(gc => gc.MemoryType == graphicCardMemoryType && gc.Brand == graphicCardManufacturerType && gc.Manufacturer == manufacturerType);
+        }
+
+        public IQueryable<Processor> GetProcessorsForApi(string brand, string series, string cores)
+        {
+            ProcessorBrandType processorBrandType = (ProcessorBrandType)Enum.Parse(typeof(ProcessorBrandType), brand);
+            ProcessorSeriesType processorSeriesType = (ProcessorSeriesType)Enum.Parse(typeof(ProcessorSeriesType), series);
+            ProcessorCoresType processorCoresType = (ProcessorCoresType)Enum.Parse(typeof(ProcessorCoresType), cores.Replace("+", "_"));
+            var processors =
+                this.Context.Processors.Where(
+                    p =>
+                        p.Brand == processorBrandType && 
+                        p.Cores == processorCoresType &&
+                        p.Series == processorSeriesType);
+            return processors;
         }
     }
 }

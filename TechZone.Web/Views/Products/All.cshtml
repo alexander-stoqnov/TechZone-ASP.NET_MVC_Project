@@ -14,19 +14,26 @@
 
 <div class="container">
     @Html.Partial("_SearchPanelPartial")
-    @foreach (var product in Model)
+    @if (Model.Any())
     {
-        if (counter % 4 == 0)
+        foreach (var product in Model)
         {
-            @:<div class="row">
+            if (counter%4 == 0)
+            {
+                @:<div class="row">
+            }
+            @Html.Partial("_GeneralProductViewPartial", product)
+            if (counter%4 == 3 || counter == Model.Count() - 1)
+            {
+                @:</div>
+            }
+            counter++;
         }
-        @Html.Partial("_GeneralProductViewPartial", product)
-        if (counter % 4 == 3 || counter == Model.Count() - 1)
-        {
-            @:</div>
-        }
-    counter++;
-}
+    }
+    else
+    {
+        <h2>No results. Please try another search!</h2>
+    }
 </div>
 <div class="text-center">
     @Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("All", new { page }))
@@ -45,7 +52,7 @@
                 $('#product-search-form').attr("action", "/Products/FilterGraphicCards");
             }
             if (selectObject.value == 'processor') {
-                $('#product-search-form').attr("action", "/Admin/Control/AddProcessor");
+                $('#product-search-form').attr("action", "/Products/FilterProcessors");
             }
             $('#particular-product-filter').load('/Admin/Control/ProductSpecs', { productType: selectObject.value });
         }

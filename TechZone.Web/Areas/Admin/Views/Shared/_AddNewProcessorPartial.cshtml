@@ -13,7 +13,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Cores, new { @class = "col-md-2 control-label" })
     <div class="col-md-2">
-        @Html.DropDownListFor(m => m.Series, Enum.GetNames(typeof(ProcessorCoresType)).Select(e => new SelectListItem {Text = e.Replace("_", " ")}), new {@class = "form-control"})
+        @Html.DropDownListFor(m => m.Cores, Enum.GetNames(typeof(ProcessorCoresType)).Select(e => new SelectListItem {Text = e.Replace("_", " "), Value = e}), new {@class = "form-control"})
     </div>
     @Html.LabelFor(m => m.ProcessorSpeed, new { @class = "col-md-1 control-label" })
     <div class="col-md-1">

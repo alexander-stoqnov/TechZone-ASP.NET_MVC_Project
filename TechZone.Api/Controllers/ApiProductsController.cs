@@ -34,5 +34,12 @@
         {
             return Ok(this._service.GetGraphicCardsForApi(memoryType, brand, manufacturer));
         }
+
+        [Route("Processors")]
+        [EnableQuery]
+        public IHttpActionResult GetFilteredProcessors(string brand, string series, string cores)
+        {
+            return Ok(this._service.GetProcessorsForApi(brand, series, cores));
+        }
     }
 }
