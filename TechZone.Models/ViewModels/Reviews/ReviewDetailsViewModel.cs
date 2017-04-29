@@ -29,6 +29,8 @@
 
         public bool VisitorIsAlsoReviewPublisher { get; set; }
 
+        public bool IsVisitorAllowedToPostComments { get; set; }
+
         public IEnumerable<ReviewCommentViewModel> ReviewComments { get; set; }
     }
 }

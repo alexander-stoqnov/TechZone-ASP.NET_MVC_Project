@@ -61,7 +61,7 @@ namespace TechZone.Web.Controllers
             }
 
             string fileName = Path.GetFileName(file.FileName);
-            if (!fileName.ToLower().EndsWith(".jpg") && !fileName.ToLower().EndsWith(".png"))
+            if (!fileName.ToLower().EndsWith(".jpg") && !fileName.ToLower().EndsWith(".png") && !fileName.ToLower().EndsWith(".jpeg"))
             {
                 ModelState.AddModelError("", "Invalid picture format!");
                 return this.View("UserProfile", customerProfileVm);

@@ -36,7 +36,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @Html.ActionLink($"{article.AuthorName}", "All", "Articles", new { authorName = article.AuthorUsername }, new { @class = "author-name" }) <span> / @article.PublishDate.Value.ToString("d MMMM yyyy")</span>
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                     {
                         <div class="btn-group" style="float: right;">
                             <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

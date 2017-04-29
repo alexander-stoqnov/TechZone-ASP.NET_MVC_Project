@@ -11,7 +11,6 @@
             <div class="comment-tabs">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="active"><a href="#comments" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Comments</h4></a></li>
-                    <li><a href="#pictures" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Pictures</h4></a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="comments">
@@ -44,10 +43,10 @@
                                                     HttpMethod = "post",
                                                     OnFailure = "userAlreadyVoted",
                                                     OnSuccess = "castUpVote"
-                                                }, new { style = "display: inline" }))
+                                                }, new {style = "display: inline"}))
                                                 {
                                                     @Html.HiddenFor(vm => vm.Id)
-                                                    <input type="hidden" name="vote" value="up" />
+                                                    <input type="hidden" name="vote" value="up"/>
                                                     <button type="submit" class="btn btn-success fa fa-thumbs-up">
                                                         <span id="useful">@Model.Useful</span>
                                                     </button>
@@ -57,10 +56,10 @@
                                                     HttpMethod = "post",
                                                     OnFailure = "userAlreadyVoted",
                                                     OnSuccess = "castDownVote"
-                                                }, new { style = "display: inline" }))
+                                                }, new {style = "display: inline"}))
                                                 {
                                                     @Html.HiddenFor(vm => vm.Id)
-                                                    <input type="hidden" name="vote" value="down" />
+                                                    <input type="hidden" name="vote" value="down"/>
                                                     <button type="submit" id="testBtnDown" class="btn btn-danger fa fa-thumbs-down">
                                                         <span id="useless">@Model.Useless</span>
                                                     </button>
@@ -80,9 +79,12 @@
                                 </div>
                             </li>
                         </ul>
-                        <div id="post-reply-form">
-                            @Html.Action("CommentForm", Model.Id)
-                        </div>
+                        @if (Model.IsVisitorAllowedToPostComments)
+                        {
+                            <div id="post-reply-form">
+                                @Html.Action("CommentForm", Model.Id)
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

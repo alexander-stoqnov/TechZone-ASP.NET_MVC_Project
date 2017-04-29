@@ -92,7 +92,7 @@
             return this.View("All", articleVms);
         }
 
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Moderator")]
         [Route("EditArticle/{id}")]
         public ActionResult EditArticle(int id)
         {
@@ -100,7 +100,7 @@
             return this.View(eavm);
         }
 
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Moderator")]
         [HttpPost]
         [Route("EditArticle/{id}")]
         public ActionResult EditArticle(EditArticleViewModel eavm)
@@ -114,7 +114,7 @@
             return this.View(eavm);
         }
 
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Moderator")]
         [Route("DeleteArticle/{id}")]
         public ActionResult DeleteArticle(int id)
         {
@@ -122,7 +122,7 @@
             return this.View(eavm);
         }
 
-        [CustomAuthorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin,Moderator")]
         [HttpPost]
         [Route("DeleteArticle/{id}")]
         public ActionResult DeleteArticle(EditArticleViewModel eavm)

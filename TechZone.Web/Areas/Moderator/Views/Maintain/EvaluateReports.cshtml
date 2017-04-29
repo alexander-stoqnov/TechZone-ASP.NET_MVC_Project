@@ -4,6 +4,7 @@
 }
 
 <div class="container" style="margin-top: 30px;">
+    <h2 style="color: blue ">Welcome to the moderator page!</h2>
     @foreach (var report in Model)
     {
         <div class="col-xs-12 col-sm-6 col-md-4" id="reportId_@report.Id">
@@ -30,24 +31,24 @@
                 </tr>
                 <tr class="text-center">
                     <td colspan="2">
-                        @Html.ActionLink("View", "Details", "Reviews", new { id = report.ReviewId, area = "" }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("View", "Details", "Reviews", new {id = report.ReviewId, area = ""}, new {@class = "btn btn-warning"})
                         @using (Ajax.BeginForm("DismissReport", null, new AjaxOptions
                         {
                             HttpMethod = "post",
                             OnSuccess = "toggleReport('" + report.Id + "')"
-                        }, new { style = "display: inline" }))
+                        }, new {style = "display: inline"}))
                         {
-                            <input type="hidden" name="id" value="@report.Id" />
-                                    <input type="submit" class="btn btn-success" value="Dismiss" />
+                            <input type="hidden" name="id" value="@report.Id"/>
+                            <input type="submit" class="btn btn-success" value="Dismiss"/>
                         }
                         @using (Ajax.BeginForm("IssueWarning", null, new AjaxOptions
                         {
                             HttpMethod = "post",
                             OnSuccess = "toggleReport('" + report.Id + "')"
-                        }, new { style = "display: inline" }))
+                        }, new {style = "display: inline"}))
                         {
-                            <input type="hidden" name="id" value="@report.Id" />
-                                    <input type="submit" class="btn btn-danger" value="Warn" />
+                            <input type="hidden" name="id" value="@report.Id"/>
+                            <input type="submit" class="btn btn-danger" value="Warn"/>
                         }
                     </td>
                 </tr>

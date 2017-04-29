@@ -76,6 +76,10 @@
             {
                 return RedirectToAction("Details", "Reviews", new { id = acbm.Id });
             }
+            if (this._service.IsCurrentUserAllowedToComment(currentUserId))
+            {
+                return RedirectToAction("Details", "Reviews", new { id = acbm.Id });
+            }
             this._service.WriteCommentToReview(currentUserId, acbm);
             return RedirectToAction("Details", "Reviews", new { id = acbm.Id });
         }

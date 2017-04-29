@@ -5,7 +5,7 @@
             @if (Model.AlreadyReviewed)
             {
                 <div class="alert alert-success">
-                    You have already submitted a review! Click @Html.ActionLink("Here", "Details", "Reviews", new {id = Model.ReviewId}, null) to edit your review.
+                    You have already submitted a review! Click @Html.ActionLink("Here", "Details", "Reviews", new {id = Model.ReviewId}, null) to read your review.
                 </div>
             }
             else
