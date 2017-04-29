@@ -1,0 +1,52 @@
+﻿@model TechZone.Models.ViewModels.Products.GeneralProductPageViewModel
+
+<div class="col-xs-12 col-sm-6 col-md-3" style="padding: 15px;" id="@Model.Id">
+    <div class="col-item">
+        <div class="post-img-content" style="vertical-align: middle">
+            <img src="@Model.ImageUrl" class="img-responsive" alt="@Model.Name" width="350" height="260" />
+            @if (Model.Discount != 0)
+            {
+                <span class="round-tag">-@Model.Discount%</span>
+            }
+        </div>
+        <div class="info">
+            <div class="row">
+                <div class="price col-sm-7">
+                    <h5> @Model.Name</h5>
+                    <h5 class="price-text-color">
+                        @if (Model.Discount != 0)
+                        {
+                            <del>$@Model.Price</del> @:$@Model.FinalPrice.ToString("0.00")
+                        }
+                        else
+                        {
+                            @:$@Model.Price
+                        }
+                    </h5>
+                </div>
+                <div class="rating hidden-sm hidden-md col-sm-5">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (Math.Round(Model.Rating) >= i)
+                        {<i class="price-text-color fa fa-star"></i>}
+                        else
+                        {<i class="fa fa-star"></i>}
+                    }
+                </div>
+            </div>
+            <div class="separator clear-left">
+                <p class="btn-add">
+                    <i class="fa fa-shopping-cart"></i>
+                    <input type="hidden" id="productId_@Model.Id" value="@Model.Id" />
+                    <a href="#" class="hidden-sm" onclick="addToCart(@Model.Id)">Add to cart</a>
+                </p>
+                <p class="btn-details">
+                    <i class="fa fa-list"></i>
+                    @Html.ActionLink("More details", "Details", "Products", new { id = Model.Id }, new { @class = "hidden-sm" })
+                </p>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+</div>

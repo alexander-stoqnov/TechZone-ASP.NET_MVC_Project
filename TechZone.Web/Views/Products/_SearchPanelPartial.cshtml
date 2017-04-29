@@ -1,7 +1,5 @@
-﻿@model TechZone.Models.ViewModels.Products.SearchProductViewModel
-
-<div class="row">
-    @using (Html.BeginForm("TestApi", "Products", FormMethod.Get, new { @class = "text-left", role = "form"}))
+﻿<div class="row">
+    @using (Html.BeginForm("FilterProducts", "Products", FormMethod.Get, new { @class = "text-left", role = "form"}))
     {
         <div class="form-group">
             <label>Name</label>

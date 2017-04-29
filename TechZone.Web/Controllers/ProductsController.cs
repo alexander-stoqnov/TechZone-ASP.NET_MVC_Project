@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using PagedList;
 
 namespace TechZone.Web.Controllers
 {
@@ -20,31 +21,31 @@ namespace TechZone.Web.Controllers
         }
 
         [Route("All")]
-        public ActionResult All()
+        public ActionResult All(int page = 1)
         {
             IEnumerable<GeneralProductPageViewModel> productVms = this._service.GetAllProducts();
-            return View(productVms);
+            return View(productVms.ToPagedList(page, 12));
         }
 
         [Route("GraphicCards")]
-        public ActionResult GraphicCards()
+        public ActionResult GraphicCards(int page = 1)
         {
             IEnumerable<GeneralProductPageViewModel> graphicCardVms = this._service.GetAllGraphicCards();
-            return this.View("All", graphicCardVms);
+            return this.View("All", graphicCardVms.ToPagedList(page, 12));
         }
 
         [Route("HardDrives")]
-        public ActionResult HardDrives()
+        public ActionResult HardDrives(int page = 1)
         {
             IEnumerable<GeneralProductPageViewModel> hardDriveVms = this._service.GetAllHardDrives();
-            return this.View("All", hardDriveVms);
+            return this.View("All", hardDriveVms.ToPagedList(page, 12));
         }
 
         [Route("Processors")]
-        public ActionResult Processors()
+        public ActionResult Processors(int page = 1)
         {
             IEnumerable<GeneralProductPageViewModel> processorVms = this._service.GetAllProcessors();
-            return this.View("All", processorVms);
+            return this.View("All", processorVms.ToPagedList(page, 12));
         }
 
         [Route("Details/{id=1}")]
@@ -67,15 +68,8 @@ namespace TechZone.Web.Controllers
             return this.PartialView("_ProductSpecsPartial", specs);
         }
 
-        [Route("ProductSearchForm")]
-        [ChildActionOnly]
-        public ActionResult ProductsSearchForm()
-        {
-            return this.PartialView("_SearchPanelPartial", new SearchProductViewModel());
-        }
-
         [Route("TestApi")]
-        public ActionResult TestApi(string priceRange, string productName = "", int discount = 0)
+        public ActionResult FilterProducts(string priceRange, string productName = "", int discount = 0)
         {
             var priceMinMax = priceRange.Split(new[] {' ', '$', '-'}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
             int minPrice = priceMinMax[0];
@@ -83,7 +77,7 @@ namespace TechZone.Web.Controllers
             var client = new HttpClient();
             var response = client.GetAsync($"http://localhost:1575/api/products/all?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {minPrice} and Price le {maxPrice} and Discount ge {discount}").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<GeneralProductPageViewModel>>().Result;
-            return View("All", products);
+            return View("All", products.ToPagedList(1, 12));
         }
     }
 }

@@ -113,6 +113,14 @@
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -238,6 +246,7 @@
     <Content Include="Content\CustomSiteCss\ProductReviews.css" />
     <Content Include="Content\CustomSiteCss\ProductStyles.css" />
     <Content Include="Content\CustomSiteCss\ReviewDetails.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -269,6 +278,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\CustomScripts\GoogleMapScript.js" />
+    <Content Include="Scripts\CustomScripts\ProductPages.js" />
     <Content Include="Scripts\CustomScripts\ProductReviews.js" />
     <Content Include="Scripts\CustomScripts\ReviewVoting.js" />
     <Content Include="Scripts\CustomScripts\ShipmentCalculation.js" />
@@ -350,6 +360,7 @@
     <Content Include="Views\Articles\EditArticle.cshtml" />
     <Content Include="Views\Shared\WaitForDownload.cshtml" />
     <Content Include="Views\Products\_SearchPanelPartial.cshtml" />
+    <Content Include="Views\Products\_GeneralProductViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">
