@@ -10,6 +10,8 @@
 
         public int Discount { get; set; }
 
+        public int Views { get; set; }
+
         public string Name { get; set; }
 
         public decimal Rating { get; set; }

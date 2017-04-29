@@ -8,7 +8,16 @@
             </div>
             <label class="col-md-1 control-label">Discount</label>
             <div class="col-md-2">
-                <input type="number" name="discount" class="form-control" />
+                <input type="number" name="discount" class="form-control"/>
+            </div>
+            <label class="col-md-1 control-label">Order By</label>
+            <div class="col-md-2">
+                <select name="orderType" class="form-control">
+                    <option value="Views desc">Views (default)</option>
+                    <option value="Price asc">Price Ascending</option>
+                    <option value="Price desc">Price Descending</option>
+                    <option value="Discount desc">Discount %</option>
+                </select>
             </div>
         </div>
         <div class="form-group">

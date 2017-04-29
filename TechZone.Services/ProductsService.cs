@@ -45,10 +45,7 @@
                 {
                     productVm.Name = productVm.Name.Substring(0, 35) + "...";
                 }
-                if (product.Discount != 0)
-                {
-                    productVm.FinalPrice = CalculateFinalPrice(product.Discount, product.Price);
-                }
+                productVm.FinalPrice = CalculateFinalPrice(product.Discount, product.Price);
                 if (product.IsAvailable)
                 {
                     productVms.Add(productVm);
