@@ -1,14 +1,15 @@
-﻿using System;
-using System.Linq;
-using PagedList;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Services;
     using System.Collections.Generic;
     using System.Net.Http;
     using Models.ViewModels.Products;
+    using System;
+    using System.Linq;
+    using PagedList;
+    using Models.BindingModels;
+    using Models.EntityModels;
 
     [RoutePrefix("Products")]
     public class ProductsController : Controller
@@ -68,7 +69,7 @@ namespace TechZone.Web.Controllers
             return this.PartialView("_ProductSpecsPartial", specs);
         }
 
-        [Route("TestApi")]
+        [Route("FilterProducts")]
         public ActionResult FilterProducts(string priceRange, string productName = "", int discount = 0)
         {
             var priceMinMax = priceRange.Split(new[] {' ', '$', '-'}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
@@ -78,6 +79,30 @@ namespace TechZone.Web.Controllers
             var response = client.GetAsync($"http://localhost:1575/api/products/all?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {minPrice} and Price le {maxPrice} and Discount ge {discount}").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<GeneralProductPageViewModel>>().Result;
             return View("All", products.ToPagedList(1, 12));
+        }
+
+        [Route("FilterHardDrives")]
+        public ActionResult FilterHardDrives(AddHardDriveBindingModel ahbm, string priceRange, string productName = "")
+        {
+            var priceMinMax = priceRange.Split(new[] { ' ', '$', '-' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            int minPrice = priceMinMax[0];
+            int maxPrice = priceMinMax[1];
+            var client = new HttpClient();
+            var response = client.GetAsync($"http://localhost:1575/api/products/harddrives?driveBrand={ahbm.DriveBrand.ToString("G")}&driveType={ahbm.DriveType.ToString("G")}&?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {minPrice} and Price le {maxPrice} and Discount ge {ahbm.Discount} and Capacity ge {ahbm.Capacity}").Result;
+            var products = response.Content.ReadAsAsync<IEnumerable<HardDrive>>().Result;
+            return View("All", this._service.GetGeneralProductPageViewModels(products.ToList()).ToPagedList(1, 12));
+        }
+
+        [Route("FilterGraphicCards")]
+        public ActionResult FilterGraphicCards(AddGraphicCardBindingModel agcbm, string priceRange, string productName = "")
+        {
+            var priceMinMax = priceRange.Split(new[] { ' ', '$', '-' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            int minPrice = priceMinMax[0];
+            int maxPrice = priceMinMax[1];
+            var client = new HttpClient();
+            var response = client.GetAsync($"http://localhost:1575/api/products/graphiccards?memoryType={agcbm.MemoryType.ToString("G")}&brand={agcbm.Brand.ToString("G")}&manufacturer={agcbm.Manufacturer.ToString("G")}&?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {minPrice} and Price le {maxPrice} and Discount ge {agcbm.Discount} and Memory ge {agcbm.Memory}").Result;
+            var products = response.Content.ReadAsAsync<IEnumerable<GraphicCard>>().Result;
+            return View("All", this._service.GetGeneralProductPageViewModels(products.ToList()).ToPagedList(1, 12));
         }
     }
 }

@@ -16,9 +16,23 @@
 
         [Route("All")]
         [EnableQuery]
-        public IHttpActionResult getFilteredProducts()
+        public IHttpActionResult GetFilteredProducts()
         {
             return Ok(this._service.GetAllProducts());
+        }
+
+        [Route("HardDrives")]
+        [EnableQuery]
+        public IHttpActionResult GetFilteredHardDrives(string driveBrand, string driveType)
+        {
+            return Ok(this._service.GetHardDrivesForApi(driveBrand, driveType));
+        }
+
+        [Route("GraphicCards")]
+        [EnableQuery]
+        public IHttpActionResult GetFilteredGraphicCards(string memoryType, string brand, string manufacturer)
+        {
+            return Ok(this._service.GetGraphicCardsForApi(memoryType, brand, manufacturer));
         }
     }
 }

@@ -39,10 +39,10 @@
     <script>
         function loadProductFilters(selectObject) {
             if (selectObject.value == 'hardDrive') {
-                $('#product-search-form').attr("action", "/Admin/Control/AddHardDrive");
+                $('#product-search-form').attr("action", "/Products/FilterHardDrives");
             }
             if (selectObject.value == 'graphicCard') {
-                $('#product-search-form').attr("action", "/Admin/Control/AddGraphicCard");
+                $('#product-search-form').attr("action", "/Products/FilterGraphicCards");
             }
             if (selectObject.value == 'processor') {
                 $('#product-search-form').attr("action", "/Admin/Control/AddProcessor");

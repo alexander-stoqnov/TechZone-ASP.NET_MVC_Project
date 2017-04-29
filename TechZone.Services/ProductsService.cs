@@ -7,6 +7,7 @@
     using Models.ViewModels.Home;
     using System;
     using Models.EntityModels;
+    using Models.Enums;
 
     public class ProductsService : Service
     {
@@ -34,7 +35,7 @@
             return this.GetGeneralProductPageViewModels(processors);
         }
 
-        private HashSet<GeneralProductPageViewModel> GetGeneralProductPageViewModels<T>(List<T> products) where T : Product
+        public HashSet<GeneralProductPageViewModel> GetGeneralProductPageViewModels<T>(List<T> products) where T : Product
         {
             var productVms = new HashSet<GeneralProductPageViewModel>();
             foreach (var product in products)
@@ -143,6 +144,21 @@
             }
 
             return latestProductsVms;
+        }
+
+        public IQueryable<HardDrive> GetHardDrivesForApi(string driveBrand, string driveType)
+        {
+            HardDriveType hardDriveType = (HardDriveType)Enum.Parse(typeof(HardDriveType), driveType);
+            HardDriveBrandType hardDriveBrandType = (HardDriveBrandType)Enum.Parse(typeof(HardDriveBrandType), driveBrand);
+            return this.Context.HardDrives.Where(hd => hd.DriveBrand == hardDriveBrandType && hd.DriveType == hardDriveType);
+        }
+
+        public object GetGraphicCardsForApi(string memoryType, string brand, string manufacturer)
+        {
+            GraphicCardMemoryType graphicCardMemoryType = (GraphicCardMemoryType)Enum.Parse(typeof(GraphicCardMemoryType), memoryType);
+            GraphicCardManufacturerType graphicCardManufacturerType = (GraphicCardManufacturerType)Enum.Parse(typeof(GraphicCardManufacturerType), brand);
+            ManufacturerType manufacturerType = (ManufacturerType)Enum.Parse(typeof(ManufacturerType), manufacturer);
+            return this.Context.GraphicCards.Where(gc => gc.MemoryType == graphicCardMemoryType && gc.Brand == graphicCardManufacturerType && gc.Manufacturer == manufacturerType);
         }
     }
 }
