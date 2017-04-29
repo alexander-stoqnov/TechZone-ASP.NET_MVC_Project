@@ -1,4 +1,6 @@
-﻿namespace TechZone.Services
+﻿using TechZone.Services.Contracts;
+
+namespace TechZone.Services
 {
     using Models.ViewModels.Moderator;
     using System.Linq;
@@ -6,7 +8,7 @@
     using Models.EntityModels;
     using System.Collections.Generic;
 
-    public class ModeratorService : Service
+    public class ModeratorService : Service, IModeratorService
     {
         public SubmitReportViewModel PrepareSubmitReportInfo(int id)
         {

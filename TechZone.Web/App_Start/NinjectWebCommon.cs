@@ -1,3 +1,6 @@
+using TechZone.Services;
+using TechZone.Services.Contracts;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(TechZone.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(TechZone.Web.App_Start.NinjectWebCommon), "Stop")]
 
@@ -61,6 +64,13 @@ namespace TechZone.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IAdminService>().To<AdminService>();
+            kernel.Bind<IArticlesService>().To<ArticlesService>();
+            kernel.Bind<ICustomersService>().To<CustomersService>();
+            kernel.Bind<IModeratorService>().To<ModeratorService>();
+            kernel.Bind<IProductsService>().To<ProductsService>();
+            kernel.Bind<IPurchaseService>().To<PurchaseService>();
+            kernel.Bind<IReviewsService>().To<ReviewsService>();
         }        
     }
 }

@@ -1,4 +1,4 @@
-﻿using AutoMapper.XpressionMapper.Extensions;
+﻿using TechZone.Services.Contracts;
 
 namespace TechZone.Services
 {
@@ -10,7 +10,7 @@ namespace TechZone.Services
     using Models.ViewModels.Admin;
     using Models.BindingModels;
 
-    public class AdminService : Service
+    public class AdminService : Service, IAdminService
     {
         public UserRolesViewModel GetAllUsersAndRoles()
         {

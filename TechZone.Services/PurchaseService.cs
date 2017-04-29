@@ -1,4 +1,6 @@
-﻿namespace TechZone.Services
+﻿using TechZone.Services.Contracts;
+
+namespace TechZone.Services
 {
     using System;
     using System.Linq;
@@ -12,7 +14,7 @@
     using iTextSharp.text.pdf;
     using System.Globalization;
 
-    public class PurchaseService : Service
+    public class PurchaseService : Service, IPurchaseService
     {
         public bool ProductExists(int id)
         {

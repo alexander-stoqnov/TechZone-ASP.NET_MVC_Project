@@ -1,7 +1,6 @@
 ﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
-    using Services;
     using System.Collections.Generic;
     using System.Net.Http;
     using Models.ViewModels.Products;
@@ -10,15 +9,16 @@
     using PagedList;
     using Models.BindingModels;
     using Models.EntityModels;
+    using Services.Contracts;
 
     [RoutePrefix("Products")]
     public class ProductsController : Controller
     {
-        private ProductsService _service;
+        private readonly IProductsService _service;
 
-        public ProductsController()
+        public ProductsController(IProductsService service)
         {
-            this._service = new ProductsService();
+            this._service = service;
         }
 
         [Route("All")]

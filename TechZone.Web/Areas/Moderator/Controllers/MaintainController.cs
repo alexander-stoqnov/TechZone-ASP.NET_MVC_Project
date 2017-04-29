@@ -1,23 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using TechZone.Web.Attributes;
-
-namespace TechZone.Web.Areas.Moderator.Controllers
+﻿namespace TechZone.Web.Areas.Moderator.Controllers
 {
     using System.Web.Mvc;
-    using Services;
+    using Services.Contracts;
     using Models.ViewModels.Moderator;
     using Microsoft.AspNet.Identity;
+    using System.Collections.Generic;
+    using System.Net;
+    using Attributes;
 
     [RouteArea("Moderator")]
     [RoutePrefix("Maintain")]
     public class MaintainController : Controller
     {
-        private ModeratorService _service;
+        private IModeratorService _service;
 
-        public MaintainController()
+        public MaintainController(IModeratorService service)
         {
-            this._service = new ModeratorService();
+            this._service = service;
         }
 
         [Route("SubmitReport/{id}")]

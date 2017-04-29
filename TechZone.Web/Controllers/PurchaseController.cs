@@ -2,18 +2,18 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-    using Services;
+    using Services.Contracts;
     using Microsoft.AspNet.Identity;
     using Models.ViewModels.Purchase;
 
     [RoutePrefix("Purchase")]
     public class PurchaseController : Controller
     {
-        private PurchaseService _service;
+        private readonly IPurchaseService _service;
 
-        public PurchaseController()
+        public PurchaseController(IPurchaseService service)
         {
-            this._service = new PurchaseService();
+            this._service = service;
         }
 
         [HttpPost]

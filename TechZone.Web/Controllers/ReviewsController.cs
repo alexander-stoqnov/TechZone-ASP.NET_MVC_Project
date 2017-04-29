@@ -2,19 +2,19 @@
 {
     using System.Web.Mvc;
     using Models.BindingModels;
-    using Services;
     using Microsoft.AspNet.Identity;
     using Models.ViewModels.Reviews;
     using System.Net;
+    using Services.Contracts;
 
     [RoutePrefix("Reviews")]
     public class ReviewsController : Controller
     {
-        private ReviewsService _service;
+        private readonly IReviewsService _service;
 
-        public ReviewsController()
+        public ReviewsController(IReviewsService service)
         {
-            this._service = new ReviewsService();
+            this._service = service;
         }
 
         [ChildActionOnly]
@@ -76,7 +76,7 @@
             {
                 return RedirectToAction("Details", "Reviews", new { id = acbm.Id });
             }
-            if (this._service.IsCurrentUserAllowedToComment(currentUserId))
+            if (!this._service.IsCurrentUserAllowedToComment(currentUserId))
             {
                 return RedirectToAction("Details", "Reviews", new { id = acbm.Id });
             }

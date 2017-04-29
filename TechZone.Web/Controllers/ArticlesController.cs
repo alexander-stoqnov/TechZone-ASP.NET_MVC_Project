@@ -3,21 +3,21 @@
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Models.ViewModels.Articles;
-    using Services;
     using Attributes;
     using Microsoft.AspNet.Identity;
     using System.Web;
     using System.IO;
     using System;
+    using Services.Contracts;
 
     [RoutePrefix("Articles")]
     public class ArticlesController : Controller
     {
-        private ArticlesService _service;
+        private readonly IArticlesService _service;
 
-        public ArticlesController()
+        public ArticlesController(IArticlesService service)
         {
-            this._service = new ArticlesService();
+            this._service = service;
         }
 
         [Route("All/{authorName=}")]

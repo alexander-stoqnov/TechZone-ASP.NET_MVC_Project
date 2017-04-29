@@ -1,24 +1,23 @@
-﻿using System;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
-    using Services;
     using Models.ViewModels.Customer;
     using Microsoft.AspNet.Identity;
     using Attributes;
     using System.IO;
     using System.Web;
+    using System;
+    using Services.Contracts;
 
     [RoutePrefix("Customers")]
     [CustomAuthorize(Roles = "Customer")]
     public class CustomersController : Controller
     {
-        private readonly CustomersService _service;
+        private readonly ICustomersService _service;
 
-        public CustomersController()
+        public CustomersController(ICustomersService service)
         {
-            this._service = new CustomersService();
+            this._service = service;
         }
 
         [Route("UserProfile")]

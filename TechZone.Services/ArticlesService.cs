@@ -1,16 +1,17 @@
-﻿namespace TechZone.Services
+﻿using TechZone.Services.Contracts;
+
+namespace TechZone.Services
 {
     using System.Collections.Generic;
     using System.Linq;
     using AutoMapper;
-    using Models.ViewModels.Articles;
     using System;
-    using Models.EntityModels;
     using Dropbox.Api;
-    using System.util.collections;
+    using Models.ViewModels.Articles;
+    using Models.EntityModels;
     using Models.ViewModels.Home;
 
-    public class ArticlesService : Service
+    public class ArticlesService : Service, IArticlesService
     {
         public void AddArticle(string currentUserId, AddArticleViewModel aavm, string fileName, byte[] file, string dropboxKey)
         {

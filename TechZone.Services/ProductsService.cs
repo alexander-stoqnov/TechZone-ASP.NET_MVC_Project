@@ -1,15 +1,17 @@
-﻿namespace TechZone.Services
+﻿using TechZone.Services.Contracts;
+
+namespace TechZone.Services
 {
     using System.Collections.Generic;
-    using Models.ViewModels.Products;
     using System.Linq;
     using AutoMapper;
-    using Models.ViewModels.Home;
     using System;
     using Models.EntityModels;
     using Models.Enums;
+    using Models.ViewModels.Home;
+    using Models.ViewModels.Products;
 
-    public class ProductsService : Service
+    public class ProductsService : Service, IProductsService
     {
         public IEnumerable<GeneralProductPageViewModel> GetAllProducts()
         {

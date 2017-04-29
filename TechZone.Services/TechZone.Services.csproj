@@ -76,6 +76,13 @@
     <Compile Include="AdminService.cs" />
     <Compile Include="ArticlesService.cs" />
     <Compile Include="CustomersService.cs" />
+    <Compile Include="Contracts\IAdminService.cs" />
+    <Compile Include="Contracts\IArticlesService.cs" />
+    <Compile Include="Contracts\ICustomersService.cs" />
+    <Compile Include="Contracts\IModeratorService.cs" />
+    <Compile Include="Contracts\IProductsService.cs" />
+    <Compile Include="Contracts\IPurchaseService.cs" />
+    <Compile Include="Contracts\IReviewsService.cs" />
     <Compile Include="ModeratorService.cs" />
     <Compile Include="ProductsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +104,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

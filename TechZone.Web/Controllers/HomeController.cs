@@ -1,22 +1,21 @@
-﻿using System.Linq;
-
-namespace TechZone.Web.Controllers
+﻿namespace TechZone.Web.Controllers
 {
     using Models.ViewModels.Home;
     using System.Web.Mvc;
-    using Services;
+    using System.Linq;
+    using Services.Contracts;
 
     public class HomeController : Controller
     {
-        private ProductsService _productsService;
-        private ReviewsService _reviewsService;
-        private ArticlesService _articlesService;
+        private readonly IProductsService _productsService;
+        private readonly IReviewsService _reviewsService;
+        private readonly IArticlesService _articlesService;
 
-        public HomeController()
+        public HomeController(IProductsService productsService, IReviewsService reviewsService, IArticlesService articlesService)
         {
-            this._productsService = new ProductsService();
-            this._reviewsService = new ReviewsService();
-            this._articlesService = new ArticlesService();
+            this._productsService = productsService;
+            this._reviewsService = reviewsService;
+            this._articlesService = articlesService;
         }
 
         public ActionResult Index()

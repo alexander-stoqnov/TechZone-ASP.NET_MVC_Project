@@ -1,17 +1,19 @@
-﻿namespace TechZone.Services
+﻿using TechZone.Services.Contracts;
+
+namespace TechZone.Services
 {
-    using Models.BindingModels;
     using System.Linq;
     using AutoMapper;
-    using Models.EntityModels;
     using System;
-    using Models.ViewModels.Reviews;
     using System.Globalization;
     using Dropbox.Api;
     using System.Collections.Generic;
     using Models.ViewModels.Home;
+    using Models.ViewModels.Reviews;
+    using Models.EntityModels;
+    using Models.BindingModels;
 
-    public class ReviewsService : Service
+    public class ReviewsService : Service, IReviewsService
     {
         public bool ReviewExists(int id)
         {

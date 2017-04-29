@@ -2,7 +2,7 @@
 {
     using System.Web.Mvc;
     using Attributes;
-    using Services;
+    using Services.Contracts;
     using System.Web;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -15,11 +15,11 @@
     [CustomAuthorize(Roles = "Admin")]
     public class ControlController : Controller
     {
-        private readonly AdminService _service;
+        private readonly IAdminService _service;
 
-        public ControlController()
+        public ControlController(IAdminService service)
         {
-            this._service = new AdminService();
+            this._service = service;
         }
 
         [Route("Users")]

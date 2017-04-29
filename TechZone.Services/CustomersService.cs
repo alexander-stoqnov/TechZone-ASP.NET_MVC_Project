@@ -1,4 +1,6 @@
-﻿namespace TechZone.Services
+﻿using TechZone.Services.Contracts;
+
+namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Customer;
@@ -7,7 +9,7 @@
     using Dropbox.Api;
     using System;
 
-    public class CustomersService : Service
+    public class CustomersService : Service, ICustomersService
     {
         public CustomerProfileViewModel GetCurrentUserProfile(string currentUserId, string dropboxKey)
         {
