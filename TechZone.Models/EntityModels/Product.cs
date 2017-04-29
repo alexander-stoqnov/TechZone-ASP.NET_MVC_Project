@@ -4,6 +4,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Enums;
+    using Newtonsoft.Json;
 
     public abstract class Product
     {
@@ -50,10 +51,13 @@
 
         public GuaranteeDurationType Guarantee { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Purchase> Purchases { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Review> Reviews { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace TechZone.Services
+﻿using TechZone.Models.BindingModels;
+
+namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Products;
@@ -153,7 +155,7 @@
             return this.Context.HardDrives.Where(hd => hd.DriveBrand == hardDriveBrandType && hd.DriveType == hardDriveType);
         }
 
-        public object GetGraphicCardsForApi(string memoryType, string brand, string manufacturer)
+        public IQueryable<GraphicCard> GetGraphicCardsForApi(string memoryType, string brand, string manufacturer)
         {
             GraphicCardMemoryType graphicCardMemoryType = (GraphicCardMemoryType)Enum.Parse(typeof(GraphicCardMemoryType), memoryType);
             GraphicCardManufacturerType graphicCardManufacturerType = (GraphicCardManufacturerType)Enum.Parse(typeof(GraphicCardManufacturerType), brand);

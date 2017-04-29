@@ -75,6 +75,7 @@
 
         [Route("EditProduct")]
         [HttpPost]
+        [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult EditProduct(EditProductViewModel epbm)
         {
             if (!ModelState.IsValid)
@@ -112,6 +113,7 @@
 
         [HttpPost]
         [Route("AddHardDrive")]
+        [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult AddHardDrive(AddHardDriveBindingModel ahdbm)
         {
             if (!ModelState.IsValid)
@@ -125,6 +127,7 @@
 
         [HttpPost]
         [Route("AddGraphicCard")]
+        [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult AddGraphicCard(AddGraphicCardBindingModel agcbm)
         {
             if (!ModelState.IsValid)
@@ -139,6 +142,7 @@
 
         [HttpPost]
         [Route("AddProcessor")]
+        [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult AddProcessor(AddProcessorBindingModel apbm)
         {
             if (!ModelState.IsValid)
