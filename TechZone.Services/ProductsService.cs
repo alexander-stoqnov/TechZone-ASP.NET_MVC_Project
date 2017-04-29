@@ -166,13 +166,10 @@
             ProcessorBrandType processorBrandType = (ProcessorBrandType)Enum.Parse(typeof(ProcessorBrandType), brand);
             ProcessorSeriesType processorSeriesType = (ProcessorSeriesType)Enum.Parse(typeof(ProcessorSeriesType), series);
             ProcessorCoresType processorCoresType = (ProcessorCoresType)Enum.Parse(typeof(ProcessorCoresType), cores.Replace("+", "_"));
-            var processors =
-                this.Context.Processors.Where(
-                    p =>
+            return this.Context.Processors.Where( p =>
                         p.Brand == processorBrandType && 
                         p.Cores == processorCoresType &&
                         p.Series == processorSeriesType);
-            return processors;
         }
     }
 }
