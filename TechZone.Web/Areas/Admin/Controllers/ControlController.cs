@@ -92,6 +92,7 @@
         }
 
         [Route("ProductSpecs")]
+        [AllowAnonymous]
         public ActionResult ProductSpecs(string productType)
         {
             if (productType.ToLower() == "harddrive")

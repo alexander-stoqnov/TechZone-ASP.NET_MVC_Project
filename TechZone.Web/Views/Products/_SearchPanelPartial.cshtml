@@ -1,17 +1,35 @@
 ﻿<div class="row">
-    @using (Html.BeginForm("FilterProducts", "Products", FormMethod.Get, new { @class = "text-left", role = "form"}))
+    @using (Html.BeginForm("FilterProducts", "Products", FormMethod.Get, new { @class = "form-horizontal", role = "form", id = "product-search-form"}))
     {
         <div class="form-group">
-            <label>Name</label>
-            <input type="text" name="productName"/>
-            <label>Discount</label>
-            <input type="number" name="discount"/>
+            <label class="col-md-1 control-label">Name</label>
+            <div class="col-md-2">
+                <input type="text" name="productName" class="form-control"/>
+            </div>
+            <label class="col-md-1 control-label">Discount</label>
+            <div class="col-md-2">
+                <input type="number" name="discount" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
             <p>
                 <label for="amount">Price range:</label>
                 <input type="text" id="amount" name="priceRange" readonly style="border: 0; color: #f6931f; font-weight: bold;">
             </p>
-            <div id="slider-range" style="max-width: 400px; "></div>
+            <div id="slider-range" style="max-width: 400px;"></div>
         </div>
-        <input type="submit" value="Search"/>
+        <div class="form-group">
+            <label for="product-type" class="control-label col-md-1">Type</label>
+            <div class="col-sm-2">
+                <select name="productType" id="product-type" class="form-control" onchange="loadProductFilters(this)">
+                    <option value="">Product Type...</option>
+                    <option value="hardDrive">Hard Drive</option>
+                    <option value="graphicCard">Graphic Card</option>
+                    <option value="processor">Processor</option>
+                </select>
+            </div>
+        </div>
+        <div id="particular-product-filter"> </div>
+        <input type="submit" value="Search" class="btn btn-primary col-sm-offset-3"/>
     }
 </div>

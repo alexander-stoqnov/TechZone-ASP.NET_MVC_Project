@@ -1,5 +1,4 @@
-﻿@using PagedList
-@using PagedList.Mvc
+﻿@using PagedList.Mvc
 @model IEnumerable<TechZone.Models.ViewModels.Products.GeneralProductPageViewModel>
 @{
     ViewBag.Title = "All";
@@ -30,11 +29,25 @@
 }
 </div>
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)Model, page => Url.Action("All", new { page }))
+    @Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("All", new { page }))
 </div>
 
 @section scripts
 {
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="/Scripts/CustomScripts/ProductPages.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/Scripts/CustomScripts/ProductPages.js"></script>
+    <script>
+        function loadProductFilters(selectObject) {
+            if (selectObject.value == 'hardDrive') {
+                $('#product-search-form').attr("action", "/Admin/Control/AddHardDrive");
+            }
+            if (selectObject.value == 'graphicCard') {
+                $('#product-search-form').attr("action", "/Admin/Control/AddGraphicCard");
+            }
+            if (selectObject.value == 'processor') {
+                $('#product-search-form').attr("action", "/Admin/Control/AddProcessor");
+            }
+            $('#particular-product-filter').load('/Admin/Control/ProductSpecs', { productType: selectObject.value });
+        }
+    </script>
 }
