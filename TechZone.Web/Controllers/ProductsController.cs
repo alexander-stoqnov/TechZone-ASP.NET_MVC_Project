@@ -32,21 +32,21 @@
         public ActionResult GraphicCards(int page = 1)
         {
             IEnumerable<GeneralProductPageViewModel> graphicCardVms = this._service.GetAllGraphicCards();
-            return this.View("All", graphicCardVms.ToPagedList(page, 12));
+            return this.View("All", graphicCardVms.ToPagedList(page, 30));
         }
 
         [Route("HardDrives")]
         public ActionResult HardDrives(int page = 1)
         {
             IEnumerable<GeneralProductPageViewModel> hardDriveVms = this._service.GetAllHardDrives();
-            return this.View("All", hardDriveVms.ToPagedList(page, 12));
+            return this.View("All", hardDriveVms.ToPagedList(page, 30));
         }
 
         [Route("Processors")]
         public ActionResult Processors(int page = 1)
         {
             IEnumerable<GeneralProductPageViewModel> processorVms = this._service.GetAllProcessors();
-            return this.View("All", processorVms.ToPagedList(page, 12));
+            return this.View("All", processorVms.ToPagedList(page, 30));
         }
 
         [Route("Details/{id=1}")]

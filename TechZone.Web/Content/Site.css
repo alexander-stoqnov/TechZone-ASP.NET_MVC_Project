@@ -32,3 +32,22 @@ textarea {
 .table > tbody > tr > th {
 vertical-align: middle;
 }
+
+.carouselImg img {
+    width: auto;
+    height: 450px;
+    max-height: 450px;
+    margin: 0 auto;
+}
+
+.carousel-text {
+    background-color: #04427E;
+    color: white;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.carousel-header {
+    color: red;
+    text-shadow: 1px 1px 4px darkgray;
+}

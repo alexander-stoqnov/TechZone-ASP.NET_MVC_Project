@@ -7,6 +7,8 @@
     using System;
     using Models.EntityModels;
     using Dropbox.Api;
+    using System.util.collections;
+    using Models.ViewModels.Home;
 
     public class ArticlesService : Service
     {
@@ -32,6 +34,7 @@
             foreach (var article in articles)
             {
                 var articleVm = Mapper.Instance.Map<GeneralArticleViewModel>(article);
+                articleVm.ContentParagraphs = article.Content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 if (article.ImageFileName != null)
                 {
                     articleVm.ImageData = this.DownloadArticlePicture(article.ImageFileName, article.Publisher.User.UserName,
@@ -75,6 +78,24 @@
             Article article = this.Context.Articles.Find(id);
             this.Context.Articles.Remove(article);
             this.Context.SaveChanges();
+        }
+
+        public ICollection<LatestArticleViewModel> GetHomePageLatestArticles(string dropboxKey)
+        {
+            var articles = this.Context.Articles.OrderByDescending(a => a.PublishDate).Take(3).ToList();
+            ICollection<LatestArticleViewModel> articleVms = new List<LatestArticleViewModel>();
+            foreach (var article in articles)
+            {
+                LatestArticleViewModel articleVm = Mapper.Instance.Map<LatestArticleViewModel>(article);
+                articleVm.ContentParagraphs = article.Content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                if (article.ImageFileName != null)
+                {
+                    articleVm.ImageData = DownloadArticlePicture(article.ImageFileName, article.Publisher.User.UserName,
+                        dropboxKey);
+                }
+                articleVms.Add(articleVm);
+            }
+            return articleVms;
         }
     }
 }

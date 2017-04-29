@@ -68,7 +68,12 @@
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">@article.Title</h4>
-                            <p>@article.Content</p>
+                            @{
+                                foreach (var paragraph in article.ContentParagraphs)
+                                {
+                                    <p>@paragraph</p>
+                                }
+                            }
                         </div>
                     </div>
                 </div>

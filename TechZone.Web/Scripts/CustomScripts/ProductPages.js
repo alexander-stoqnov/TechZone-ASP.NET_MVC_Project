@@ -16,6 +16,20 @@
         }
     });
 }
+
+function loadProductFilters(selectObject) {
+    if (selectObject.value == 'hardDrive') {
+        $('#product-search-form').attr("action", "/Products/FilterHardDrives");
+    }
+    if (selectObject.value == 'graphicCard') {
+        $('#product-search-form').attr("action", "/Products/FilterGraphicCards");
+    }
+    if (selectObject.value == 'processor') {
+        $('#product-search-form').attr("action", "/Products/FilterProcessors");
+    }
+    $('#particular-product-filter').load('/Admin/Control/ProductSpecs', { productType: selectObject.value });
+}
+
 $(function () {
     $("#slider-range").slider({
         range: true,

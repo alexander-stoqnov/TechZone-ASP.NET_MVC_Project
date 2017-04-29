@@ -8,7 +8,7 @@
 
         public string Title { get; set; }
 
-        public string Content { get; set; }
+        public string[] ContentParagraphs { get; set; }
 
         public string ImageData { get; set; }
 

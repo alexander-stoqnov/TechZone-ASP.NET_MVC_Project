@@ -2,6 +2,7 @@
 @model IEnumerable<TechZone.Models.ViewModels.Products.GeneralProductPageViewModel>
 @{
     ViewBag.Title = "All";
+    int counter = 0;
 }
 
 @section styles 
@@ -9,8 +10,6 @@
     <link rel="stylesheet" href="/Content/CustomSiteCss/ProductStyles.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 }
-
-@{ int counter = 0; }
 
 <div class="container">
     @Html.Partial("_SearchPanelPartial")
@@ -43,18 +42,4 @@
 {
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/Scripts/CustomScripts/ProductPages.js"></script>
-    <script>
-        function loadProductFilters(selectObject) {
-            if (selectObject.value == 'hardDrive') {
-                $('#product-search-form').attr("action", "/Products/FilterHardDrives");
-            }
-            if (selectObject.value == 'graphicCard') {
-                $('#product-search-form').attr("action", "/Products/FilterGraphicCards");
-            }
-            if (selectObject.value == 'processor') {
-                $('#product-search-form').attr("action", "/Products/FilterProcessors");
-            }
-            $('#particular-product-filter').load('/Admin/Control/ProductSpecs', { productType: selectObject.value });
-        }
-    </script>
 }

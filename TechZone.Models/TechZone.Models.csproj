@@ -147,6 +147,7 @@
     <Compile Include="ViewModels\Customer\CustomerProfileViewModel.cs" />
     <Compile Include="ViewModels\Customer\CustomerPurchaseHistoryViewModel.cs" />
     <Compile Include="ViewModels\Home\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\Home\LatestArticleViewModel.cs" />
     <Compile Include="ViewModels\Home\LatestProductViewModel.cs" />
     <Compile Include="ViewModels\Home\LatestReviewViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />

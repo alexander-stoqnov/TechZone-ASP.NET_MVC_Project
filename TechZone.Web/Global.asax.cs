@@ -1,6 +1,4 @@
-﻿
-
-namespace TechZone.Web
+﻿namespace TechZone.Web
 {
     using System.Web;
     using System.Web.Mvc;
@@ -77,6 +75,7 @@ namespace TechZone.Web
                     .ForMember(gavm => gavm.AuthorName, expr => expr.MapFrom(a => a.Publisher.User.FullName))
                     .ForMember(gavm => gavm.AuthorUsername, expr => expr.MapFrom(a => a.Publisher.User.UserName));
                 m.CreateMap<Article, EditArticleViewModel>();
+                m.CreateMap<Article, LatestArticleViewModel>();
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
                 m.CreateMap<SubmitReportViewModel, Report>();
