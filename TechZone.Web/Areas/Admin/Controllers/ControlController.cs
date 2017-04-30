@@ -61,7 +61,7 @@
                 return RedirectToAction("Products", "Control");
             }
             bool isAvailable = this._service.DisableEnableSelectedProduct(id);
-            return this.PartialView("_ProductAvailabilityButtonPartial", isAvailable);
+            return this.PartialView("~/Areas/Admin/Views/Shared/_ProductAvailabilityButtonPartial.cshtml", isAvailable);
         }
 
         [Route("EditProduct")]
