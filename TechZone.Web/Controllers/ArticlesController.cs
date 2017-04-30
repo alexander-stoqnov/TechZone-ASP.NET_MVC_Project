@@ -85,12 +85,12 @@
             return this.View(aavm);
         }
 
-        [Route("Search/{content=}")]
-        [HttpPost]
+        [Route("Search")]
         [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Search(string content = "")
         {
-            IEnumerable<GeneralArticleViewModel> articleVms = _service.GetFilteredArticles(content);
+            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
+            IEnumerable<GeneralArticleViewModel> articleVms = _service.GetFilteredArticles(content, apikey[1]);
             return this.View("All", articleVms);
         }
 

@@ -8,7 +8,7 @@ namespace TechZone.Services.Contracts
     {
         void AddArticle(string currentUserId, AddArticleViewModel aavm, string fileName, byte[] file, string dropboxKey);
         IEnumerable<GeneralArticleViewModel> GetAllArticles(string publisherName, string dropboxKey);
-        IEnumerable<GeneralArticleViewModel> GetFilteredArticles(string content);
+        IEnumerable<GeneralArticleViewModel> GetFilteredArticles(string content, string dropboxKey);
         EditArticleViewModel GetArticleToManage(int id);
         void EditSelectedArticle(EditArticleViewModel eavm);
         void DeleteArticle(int id);
