@@ -2,7 +2,6 @@
 @model IEnumerable<TechZone.Models.ViewModels.Products.GeneralProductPageViewModel>
 @{
     ViewBag.Title = "All";
-    int counter = 0;
 }
 
 @section styles 
@@ -13,21 +12,14 @@
 
 <div class="container">
     @Html.Partial("_SearchPanelPartial")
+    <div id="loader" style="display: none" class="text-center">
+        Loading...<img src="http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-3.gif" style="width: 150px" />
+    </div>
     @if (Model.Any())
     {
-        foreach (var product in Model)
-        {
-            if (counter%4 == 0)
-            {
-                @:<div class="row">
-            }
-            @Html.Partial("_GeneralProductViewPartial", product)
-            if (counter%4 == 3 || counter == Model.Count() - 1)
-            {
-                @:</div>
-            }
-            counter++;
-        }
+        <div id="product-search-results">
+            @Html.Partial("_GeneralProductViewPartial", Model)
+        </div>
     }
     else
     {

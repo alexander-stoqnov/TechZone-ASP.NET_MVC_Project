@@ -27,6 +27,9 @@ function loadProductFilters(selectObject) {
     if (selectObject.value == 'processor') {
         $('#product-search-form').attr("action", "/Products/FilterProcessors");
     }
+    if (selectObject.value == 'none') {
+        $('#product-search-form').attr("action", "/Products/FilterProducts");
+    }
     $('#particular-product-filter').load('/Admin/Control/ProductSpecs', { productType: selectObject.value });
 }
 

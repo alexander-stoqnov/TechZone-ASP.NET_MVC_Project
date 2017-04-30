@@ -1,5 +1,10 @@
 ﻿<div class="row">
-    @using (Html.BeginForm("FilterProducts", "Products", FormMethod.Get, new { @class = "form-horizontal", role = "form", id = "product-search-form"}))
+@using (Ajax.BeginForm("FilterProducts", null, new AjaxOptions
+    {
+        HttpMethod = "get",
+        UpdateTargetId = "product-search-results",
+        LoadingElementId = "loader"
+    }, new { @class = "form-horizontal", role = "form", id = "product-search-form" }))
     {
         <div class="form-group">
             <label class="col-md-1 control-label">Name</label>
@@ -31,7 +36,7 @@
             <label for="product-type" class="control-label col-md-1 col-md-offset-1">Type</label>
             <div class="col-sm-2">
                 <select name="productType" id="product-type" class="form-control" onchange="loadProductFilters(this)">
-                    <option value="">Product Type...</option>
+                    <option value="none">Product Type...</option>
                     <option value="hardDrive">Hard Drive</option>
                     <option value="graphicCard">Graphic Card</option>
                     <option value="processor">Processor</option>
