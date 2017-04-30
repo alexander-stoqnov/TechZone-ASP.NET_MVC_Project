@@ -91,7 +91,7 @@
         {
             var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             IEnumerable<GeneralArticleViewModel> articleVms = _service.GetFilteredArticles(content, apikey[1]);
-            return this.View("All", articleVms);
+            return this.PartialView("_ArticleGeneralViewPartial", articleVms);
         }
 
         [CustomAuthorize(Roles = "Admin,Moderator")]
