@@ -1,6 +1,4 @@
-﻿using TechZone.Services.Contracts;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Linq;
     using AutoMapper;
@@ -12,6 +10,8 @@ namespace TechZone.Services
     using Models.ViewModels.Reviews;
     using Models.EntityModels;
     using Models.BindingModels;
+    using Contracts;
+
 
     public class ReviewsService : Service, IReviewsService
     {
@@ -30,6 +30,8 @@ namespace TechZone.Services
             review.Product = product;
             this.Context.Reviews.Add(review);
             this.Context.SaveChanges();
+            product.Rating = (decimal) product.Reviews.Average(r => r.Rating);
+            this.Context.SaveChanges();
         }
 
         public ReviewOverviewViewModel GetReviewsForProduct(int id, string dropboxKey)
@@ -41,7 +43,7 @@ namespace TechZone.Services
             }
             ReviewOverviewViewModel rovm = new ReviewOverviewViewModel
             {
-                AverageUserRating = (decimal)product.Reviews.Average(r => r.Rating),
+                AverageUserRating = product.Rating,
                 NumberOf1Star = product.Reviews.Count(r => r.Rating == 1),
                 NumberOf2Stars = product.Reviews.Count(r => r.Rating == 2),
                 NumberOf3Stars = product.Reviews.Count(r => r.Rating == 3),

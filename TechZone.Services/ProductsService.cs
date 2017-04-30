@@ -1,6 +1,4 @@
-﻿using TechZone.Services.Contracts;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -10,7 +8,8 @@ namespace TechZone.Services
     using Models.Enums;
     using Models.ViewModels.Home;
     using Models.ViewModels.Products;
-
+    using Contracts;
+    
     public class ProductsService : Service, IProductsService
     {
         public IEnumerable<GeneralProductPageViewModel> GetAllProducts()
