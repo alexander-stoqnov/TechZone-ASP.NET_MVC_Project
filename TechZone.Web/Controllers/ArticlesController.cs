@@ -45,6 +45,7 @@
 
         [Route("Add")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [CustomAuthorize(Roles = "Publisher")]
         [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Add(AddArticleViewModel aavm)
@@ -86,6 +87,7 @@
 
         [Route("Search/{content=}")]
         [HttpPost]
+        [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Search(string content = "")
         {
             IEnumerable<GeneralArticleViewModel> articleVms = _service.GetFilteredArticles(content);
@@ -102,7 +104,9 @@
 
         [CustomAuthorize(Roles = "Admin,Moderator")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("EditArticle/{id}")]
+        [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult EditArticle(EditArticleViewModel eavm)
         {
             if (ModelState.IsValid)
@@ -124,6 +128,7 @@
 
         [CustomAuthorize(Roles = "Admin,Moderator")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("DeleteArticle/{id}")]
         public ActionResult DeleteArticle(EditArticleViewModel eavm)
         {

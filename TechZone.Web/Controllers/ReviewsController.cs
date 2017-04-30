@@ -40,6 +40,7 @@
         [HttpPost]
         [Route("Write")]
         [Authorize(Roles = "Customer")]
+        [ValidateAntiForgeryToken]
         [HandleError(ExceptionType = typeof(System.Web.HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Write(WriteReviewBindingModel wrbm)
         {
@@ -68,6 +69,7 @@
         [HttpPost]
         [Route("Comment")]
         [Authorize]
+        [ValidateAntiForgeryToken]
         [HandleError(ExceptionType = typeof(System.Web.HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Comment(AddCommentBindingModel acbm)
         {
@@ -95,6 +97,7 @@
         [HttpPost]
         [Route("Vote")]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Vote(VoteForReviewViewModel vfrvm)
         {
             var currentUserId = this.User.Identity.GetUserId();

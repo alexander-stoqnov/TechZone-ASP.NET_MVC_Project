@@ -12,7 +12,7 @@
     [RoutePrefix("Maintain")]
     public class MaintainController : Controller
     {
-        private IModeratorService _service;
+        private readonly IModeratorService _service;
 
         public MaintainController(IModeratorService service)
         {
@@ -29,6 +29,7 @@
 
         [Route("SubmitReport/{id}")]
         [Authorize(Roles = "Customer")]
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult SubmitReport(SubmitReportViewModel srbm)
         {
@@ -52,6 +53,7 @@
 
         [Route("DismissReport")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DismissReport(int id)
         {
             if (!this._service.ReportStillExists(id))
@@ -65,6 +67,7 @@
 
         [Route("IssueWarning")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult IssueWarning(int id)
         {
             if (!this._service.ReportStillExists(id))

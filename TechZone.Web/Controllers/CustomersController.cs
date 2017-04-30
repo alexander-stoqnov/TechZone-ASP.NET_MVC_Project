@@ -39,6 +39,7 @@
 
         [Route("UploadPicture")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UploadPicture()
         {
             var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");

@@ -31,6 +31,7 @@
 
         [Route("Users")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Users([Bind(Include = "Id,Roles")] ChangeUserRolesBindingModel curbm)
         {
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -52,6 +53,7 @@
 
         [HttpPost]
         [Route("DeleteProduct")]
+        [ValidateAntiForgeryToken]
         public ActionResult ToggleProductAvailability(int id)
         {
             if (!this._service.ProductExists(id))
@@ -75,6 +77,7 @@
 
         [Route("EditProduct")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult EditProduct(EditProductViewModel epbm)
         {
@@ -113,6 +116,7 @@
 
         [HttpPost]
         [Route("AddHardDrive")]
+        [ValidateAntiForgeryToken]
         [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult AddHardDrive(AddHardDriveBindingModel ahdbm)
         {
@@ -127,6 +131,7 @@
 
         [HttpPost]
         [Route("AddGraphicCard")]
+        [ValidateAntiForgeryToken]
         [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult AddGraphicCard(AddGraphicCardBindingModel agcbm)
         {
@@ -142,6 +147,7 @@
 
         [HttpPost]
         [Route("AddProcessor")]
+        [ValidateAntiForgeryToken]
         [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult AddProcessor(AddProcessorBindingModel apbm)
         {

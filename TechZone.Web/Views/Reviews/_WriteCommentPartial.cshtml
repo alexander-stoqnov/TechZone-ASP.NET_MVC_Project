@@ -2,6 +2,7 @@
 
 @using (Html.BeginForm("Comment", "Reviews", FormMethod.Post, new { @class = "form-horizontal" }))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(vm => vm.Id)
     <div class="form-group">
         @Html.LabelFor(vm => vm.Comment, new { @class = "col-sm-2 control-label" })

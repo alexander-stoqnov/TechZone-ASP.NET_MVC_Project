@@ -57,6 +57,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Delete")]
         public ActionResult RemoveFromCart(int id)
         {
@@ -93,6 +94,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Finalize")]
         [Authorize(Roles = "Customer")]
         public ActionResult Finalize(decimal finalPrice)

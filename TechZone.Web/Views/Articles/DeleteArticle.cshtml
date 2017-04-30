@@ -5,8 +5,9 @@
 
 <h2>Delete Article</h2>
 
-@using (Html.BeginForm("DeleteArticle", "Articles", FormMethod.Post, new { @class = "form-horizontal", role = "form", area = "Blog", style = "max-width: 600px" }))
+@using (Html.BeginForm("DeleteArticle", "Articles", FormMethod.Post, new { @class = "form-horizontal", role = "form", style = "max-width: 600px" }))
 {
+    @Html.AntiForgeryToken()
     <hr />
     @Html.LabelFor(m => m.Title, new { @class = "control-label" })
     @Html.TextBoxFor(vm => vm.Title, null, new { @class = "form-control", @readonly = "readonly" });

@@ -2,54 +2,43 @@
 @{
     ViewBag.Title = "Users";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int counter = 0;
 }
 
-<style>
-    .row {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    select {
-        overflow-y: auto;
-        text-align: center;
-    }
-</style>
-
 <h2>Users</h2>
-@{ int counter = 0;}
 @foreach (var user in Model.Users)
 {
     if (counter % 6 == 0)
     {
-        @:<div class="row">
+        @:<div class="row" style="text-align: center; margin-bottom: 15px;">
     }
     <div class="col-sm-2">
         <b>@Html.DisplayFor(vm => user.Name)</b>
         @using (Html.BeginForm())
                 {
+            @Html.AntiForgeryToken()
             <input type="hidden" name="id" value="@user.Id" />
-                    <select name="roles" multiple="multiple" class="form-control" size="4">
-                        @{
-                            foreach (var role in Model.Roles)
-                            {
-                                if (user.Roles.Any(r => r == role.Name))
-                                {
-                                    <option value="@role.Name" selected="selected">@role.Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@role.Name">@role.Name</option>
-                                }
-                            }
+            <select name="roles" multiple="multiple" class="form-control" size="4" style="overflow-y: auto; text-align: center">
+                @{
+                    foreach (var role in Model.Roles)
+                    {
+                        if (user.Roles.Any(r => r == role.Name))
+                        {
+                            <option value="@role.Name" selected="selected">@role.Name</option>
                         }
-                    </select>
-                    <input type="submit" class="btn btn-success btn-sm" value="Change" />
+                        else
+                        {
+                            <option value="@role.Name">@role.Name</option>
+                        }
+                    }
+                }
+            </select>
+            <input type="submit" class="btn btn-success btn-sm" value="Change" />
     }
     </div>
     if (counter % 6 == 5 || counter == Model.Users.Count - 1)
     {
         @:</div>
     }
-        counter++;
+    counter++;
 }

@@ -36,8 +36,9 @@
                         {
                             HttpMethod = "post",
                             OnSuccess = "toggleReport('" + report.Id + "')"
-                        }, new {style = "display: inline"}))
+                        }, new { style = "display: inline" }))
                         {
+                            @Html.AntiForgeryToken()
                             <input type="hidden" name="id" value="@report.Id"/>
                             <input type="submit" class="btn btn-success" value="Dismiss"/>
                         }
@@ -45,8 +46,9 @@
                         {
                             HttpMethod = "post",
                             OnSuccess = "toggleReport('" + report.Id + "')"
-                        }, new {style = "display: inline"}))
+                        }, new { style = "display: inline" }))
                         {
+                            @Html.AntiForgeryToken()
                             <input type="hidden" name="id" value="@report.Id"/>
                             <input type="submit" class="btn btn-danger" value="Warn"/>
                         }

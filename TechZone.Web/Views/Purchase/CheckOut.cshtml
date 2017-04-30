@@ -39,6 +39,7 @@
 <div class="row">
     @using (Html.BeginForm("Finalize", "Purchase", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
         <a href="@Url.Action("ShoppingCart", "Purchase")" class="btn btn-danger">
             <span class="glyphicon glyphicon-shopping-cart"></span> Back to Cart
         </a>

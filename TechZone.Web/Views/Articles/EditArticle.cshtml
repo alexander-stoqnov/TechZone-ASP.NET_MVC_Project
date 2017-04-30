@@ -5,10 +5,10 @@
 
 <h2>Edit Article</h2>
 
-@using (Html.BeginForm("EditArticle", "Articles", FormMethod.Post, new { @class = "form-horizontal", role = "form", area = "Blog" }))
+@using (Html.BeginForm("EditArticle", "Articles", FormMethod.Post, new { @class = "form-horizontal", role = "form", style = "max-width: 600px" }))
 {
+    @Html.AntiForgeryToken()
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -24,10 +24,14 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             @Html.HiddenFor(vm => vm.Id)
-            <input type="submit" value="Edit" class="btn btn-success" />
+            <input type="submit" value="Edit" class="btn btn-success"/>
         </div>
     </div>
+    <div class="text-left col-md-offset-4">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+    </div>
 }
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

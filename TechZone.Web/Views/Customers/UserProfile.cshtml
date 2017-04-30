@@ -15,8 +15,9 @@
                     <img src="@Model.ImageData" class="avatar img-rounded img-responsive" alt="@Model.FullName Profile Picture">
                 }
                 <div style="position: absolute; width: 100%; bottom: 5px; margin: 0 auto">
-                    @using (Html.BeginForm("UploadPicture", "Customers", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                    @using (Html.BeginForm("UploadPicture", "Customers", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
+                        @Html.AntiForgeryToken()
                         <label class="btn btn-success btn-md" for="my-file-selector">
                             <input id="my-file-selector" type="file" name="picture" style="display: none;">
                             Browse

@@ -7,8 +7,8 @@
 @using (Html.BeginForm("Add", "Articles", FormMethod.Post, new { @class = "form-horizontal", role = "form", style = "max-width: 600px; text-align: center", enctype = "multipart/form-data" }))
 {
     <h4>Add New Article</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <hr/>
+    @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -28,10 +28,18 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Add" class="btn btn-success" />
+            <input type="submit" value="Add" class="btn btn-success"/>
         </div>
     </div>
+    <div class="text-left col-md-offset-4">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+    </div>
 }
+
+<div>
+   
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

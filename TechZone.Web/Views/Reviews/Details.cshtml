@@ -43,8 +43,9 @@
                                                     HttpMethod = "post",
                                                     OnFailure = "userAlreadyVoted",
                                                     OnSuccess = "castUpVote"
-                                                }, new {style = "display: inline"}))
+                                                }, new { style = "display: inline" }))
                                                 {
+                                                    @Html.AntiForgeryToken()
                                                     @Html.HiddenFor(vm => vm.Id)
                                                     <input type="hidden" name="vote" value="up"/>
                                                     <button type="submit" class="btn btn-success fa fa-thumbs-up">
@@ -56,8 +57,9 @@
                                                     HttpMethod = "post",
                                                     OnFailure = "userAlreadyVoted",
                                                     OnSuccess = "castDownVote"
-                                                }, new {style = "display: inline"}))
+                                                }, new { style = "display: inline" }))
                                                 {
+                                                    @Html.AntiForgeryToken()
                                                     @Html.HiddenFor(vm => vm.Id)
                                                     <input type="hidden" name="vote" value="down"/>
                                                     <button type="submit" id="testBtnDown" class="btn btn-danger fa fa-thumbs-down">
