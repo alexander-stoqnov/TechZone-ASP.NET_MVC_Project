@@ -14,6 +14,7 @@
                 @Html.ActionLink("Edit", "EditProduct", "Control", new { area = "Admin", id = product.Id }, new { @class = "btn btn-warning btn-xs" })
                 @using (Html.BeginForm("ToggleProductAvailability", "Control", new { area = "Admin" }, FormMethod.Post, new { style = "display:inline" }))
                 {
+                    @Html.AntiForgeryToken()
                     <input type="hidden" name="id" value="@product.Id" />
                     if (product.IsAvailable)
                     {
