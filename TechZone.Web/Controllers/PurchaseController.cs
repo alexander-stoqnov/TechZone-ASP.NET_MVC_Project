@@ -33,7 +33,7 @@
             {
                 this._service.AddProductToShoppingCart(id, User.Identity.GetUserId());
             }
-            return RedirectToAction("All", "Products");
+            return this.RedirectToAction("CountOfProductsInCart", "Purchase");
         }
 
         public ActionResult CountOfProductsInCart()

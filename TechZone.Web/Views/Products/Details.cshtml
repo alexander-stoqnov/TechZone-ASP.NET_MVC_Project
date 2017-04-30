@@ -55,11 +55,21 @@
                         </div>
                         <hr>
                         <div class="btn-group cart">
-                            @using (Html.BeginForm("AddToShoppingCart", "Purchase", FormMethod.Post))
+                            @using (Ajax.BeginForm("AddToShoppingCart", "Purchase", null, new AjaxOptions
                             {
-                                @Html.HiddenFor(vm => vm.Id);
+                                HttpMethod = "post",
+                                UpdateTargetId = "shopping-cart"
+                            }, new { role = "form" }))
+                            {
+                                @Html.HiddenFor(vm => vm.Id)
                                 <input type="submit" value="Add to Cart" class="btn btn-success" />
                             }
+
+                            @*@using (Html.BeginForm("AddToShoppingCart", "Purchase", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(vm => vm.Id)
+                                <input type="submit" value="Add to Cart" class="btn btn-success"/>
+                            }*@
                         </div>
                     </div>
                 </div>

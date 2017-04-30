@@ -1,21 +1,21 @@
-﻿function addToCart(prodId) {
-    var productId = "productId_" + prodId;
-    var product = document.getElementById(productId);
+﻿//function addToCart(prodId) {
+//    var productId = "productId_" + prodId;
+//    var product = document.getElementById(productId);
 
-    $.ajax({
-        type: "POST",
-        url: "/Purchase/AddToShoppingCart",
-        data: { id: product.value },
-        success: function () {
-            $('#shopping-cart')
-                .load('/Purchase/CountOfProductsInCart',
-                    function () {
-                        $(this).children(':first').unwrap();
-                        window.location.href = '/Products/All/#' + prodId;
-                    });
-        }
-    });
-}
+//    $.ajax({
+//        type: "POST",
+//        url: "/Purchase/AddToShoppingCart",
+//        data: { id: product.value },
+//        success: function () {
+//            $('#shopping-cart')
+//                .load('/Purchase/CountOfProductsInCart',
+//                    function () {
+//                        $(this).children(':first').unwrap();
+//                        window.location.href = '/Products/All/#' + prodId;
+//                    });
+//        }
+//    });
+//}
 
 function loadProductFilters(selectObject) {
     if (selectObject.value == 'hardDrive') {

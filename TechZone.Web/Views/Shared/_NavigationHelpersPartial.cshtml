@@ -1,10 +1,9 @@
 ﻿@model int
-<li id="shopping-cart">
-    <a href="@Url.Action("ShoppingCart", "Purchase")" class="shopping-cart-button float-right">
-        <i class="fa fa-shopping-cart"></i>
-        <span class="text">Shopping Cart (@Model)</span>
-    </a>
-</li>
+<a href="@Url.Action("ShoppingCart", "Purchase")" class="shopping-cart-button float-right">
+    <i class="fa fa-shopping-cart"></i>
+    <span class="text">Shopping Cart (@Model)</span>
+</a>
+
 
 @*<li>
     <a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3" style="color: #9d9d9d; margin-right: 50px;">Search</a>
