@@ -1,6 +1,4 @@
-﻿using TechZone.Services.Contracts;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using Models.ViewModels.Customer;
@@ -8,6 +6,7 @@ namespace TechZone.Services
     using AutoMapper;
     using Dropbox.Api;
     using System;
+    using Contracts;
 
     public class CustomersService : Service, ICustomersService
     {

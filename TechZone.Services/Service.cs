@@ -1,13 +1,11 @@
-﻿using System;
-using Dropbox.Api.Stone;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using Data;
     using System.IO;
     using System.Threading.Tasks;
     using Dropbox.Api;
     using Dropbox.Api.Files;
+    using Dropbox.Api.Stone;
 
     public abstract class Service
     {
@@ -18,28 +16,21 @@ namespace TechZone.Services
 
         protected TechZoneContext Context { get; }
 
-        protected async Task Upload(DropboxClient dbx, string folder, string file, byte[] content)
+        protected void Upload(DropboxClient dbx, string folder, string file, byte[] content)
         {
             using (var mem = new MemoryStream(content))
             {
-                var updated = await dbx.Files.UploadAsync(
+                var updated = dbx.Files.UploadAsync(
                     folder + "/" + file,
                     WriteMode.Overwrite.Instance, 
                     body: mem);
+                updated.Wait();
             }
         }
         protected Task<byte[]> DownloadAsync(DropboxClient dbx, string folderName, string fileName)
         {
             Task<IDownloadResponse<FileMetadata>> downloadTask = dbx.Files.DownloadAsync($"/{folderName}/{fileName}");
-            try
-            {
-                downloadTask.Wait();
-            }
-            catch (Exception)
-            {
-                throw new InvalidOperationException();
-            }
-
+            downloadTask.Wait();
             return downloadTask.Result.GetContentAsByteArrayAsync();
         }
     }

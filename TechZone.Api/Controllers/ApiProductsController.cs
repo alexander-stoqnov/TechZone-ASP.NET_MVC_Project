@@ -7,7 +7,7 @@
     [RoutePrefix("Api/Products")]
     public class ApiProductsController : ApiController
     {
-        private ProductsService _service;
+        private readonly ProductsService _service;
 
         public ApiProductsController()
         {
