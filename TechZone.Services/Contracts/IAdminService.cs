@@ -10,7 +10,7 @@
         void ChangeUserRoles(string id);
         IEnumerable<ManageProductViewModel> GetProductsToManage();
         bool ProductExists(int id);
-        void DisableEnableSelectedProduct(int id);
+        bool DisableEnableSelectedProduct(int id);
         EditProductViewModel GetProductToEditDetails(int id);
         void EditProductInfo(EditProductViewModel epbm);
         void AddNewHardDrive(AddHardDriveBindingModel ahdbm);

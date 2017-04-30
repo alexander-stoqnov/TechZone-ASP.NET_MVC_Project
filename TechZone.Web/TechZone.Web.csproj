@@ -274,6 +274,7 @@
     <Content Include="Areas\Admin\Views\Shared\_AddNewHardDrivePartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AddNewGraphicCardPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AddNewProcessorPartial.cshtml" />
+    <Content Include="Views\Shared\_ProductAvailabilityButtonPartial.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

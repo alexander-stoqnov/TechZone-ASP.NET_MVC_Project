@@ -1,6 +1,4 @@
-﻿using TechZone.Services.Contracts;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,6 +7,7 @@ namespace TechZone.Services
     using Models.EntityModels;
     using Models.ViewModels.Admin;
     using Models.BindingModels;
+    using Contracts;
 
     public class AdminService : Service, IAdminService
     {
@@ -52,11 +51,12 @@ namespace TechZone.Services
             return this.Context.Products.Find(id) != null;
         }
 
-        public void DisableEnableSelectedProduct(int id)
+        public bool DisableEnableSelectedProduct(int id)
         {
             var productToDisable = this.Context.Products.Find(id);
             productToDisable.IsAvailable = !productToDisable.IsAvailable;         
             this.Context.SaveChanges();
+            return productToDisable.IsAvailable;
         }
 
         public EditProductViewModel GetProductToEditDetails(int id)

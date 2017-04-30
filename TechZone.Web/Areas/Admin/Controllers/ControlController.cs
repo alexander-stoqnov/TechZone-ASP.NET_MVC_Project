@@ -50,7 +50,7 @@
             IEnumerable<ManageProductViewModel> manageProductVms = this._service.GetProductsToManage();
             return this.View(manageProductVms);
         }
-
+        
         [HttpPost]
         [Route("DeleteProduct")]
         [ValidateAntiForgeryToken]
@@ -60,8 +60,8 @@
             {
                 return RedirectToAction("Products", "Control");
             }
-            this._service.DisableEnableSelectedProduct(id);
-            return RedirectToAction("Products", "Control");
+            bool isAvailable = this._service.DisableEnableSelectedProduct(id);
+            return this.PartialView("_ProductAvailabilityButtonPartial", isAvailable);
         }
 
         [Route("EditProduct")]
