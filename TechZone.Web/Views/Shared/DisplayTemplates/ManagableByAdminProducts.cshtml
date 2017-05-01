@@ -21,7 +21,7 @@
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="id" value="@product.Id" />
                     <span id="product-availability-@product.Id">
-                        @Html.Partial("_ProductAvailabilityButtonPartial", product.IsAvailable)
+                        @Html.Partial("~/Areas/Admin/Views/Shared/_ProductAvailabilityButtonPartial.cshtml", product.IsAvailable)
                     </span>
                 }
             </td>

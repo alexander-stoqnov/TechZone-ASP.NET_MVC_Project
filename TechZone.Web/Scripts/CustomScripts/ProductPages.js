@@ -36,9 +36,9 @@ function loadProductFilters(selectObject) {
 $(function () {
     $("#slider-range").slider({
         range: true,
-        min: 30,
-        max: 1000,
-        values: [75, 700],
+        min: 0,
+        max: 700,
+        values: [0, 700],
         slide: function (event, ui) {
             $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
         }
