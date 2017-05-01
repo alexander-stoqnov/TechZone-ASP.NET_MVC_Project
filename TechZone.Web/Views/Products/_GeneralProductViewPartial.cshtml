@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<TechZone.Models.ViewModels.Products.GeneralProductPageViewModel>
 
 @{
+    if (!Model.Any())
+    {
+        <h2>No results. Please try another search!</h2>
+    }
+    else
+    {
     int counter = 0;
     foreach (var product in Model)
     {
@@ -67,6 +73,8 @@
         {
             @:</div>
         }
-        counter++;
+            counter++;
+        }
     }
+
 }

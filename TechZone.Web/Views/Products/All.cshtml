@@ -23,11 +23,8 @@
     }
     else
     {
-        <h2>No results. Please try another search!</h2>
+        
     }
-</div>
-<div class="text-center">
-    @Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("All", new { page }))
 </div>
 
 @section scripts

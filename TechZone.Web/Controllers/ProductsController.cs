@@ -6,7 +6,6 @@
     using Models.ViewModels.Products;
     using System;
     using System.Linq;
-    using PagedList;
     using Models.BindingModels;
     using Models.EntityModels;
     using Services.Contracts;
@@ -22,31 +21,31 @@
         }
 
         [Route("All")]
-        public ActionResult All(int page = 1)
+        public ActionResult All()
         {
             IEnumerable<GeneralProductPageViewModel> productVms = this._service.GetAllProducts();
-            return View(productVms.ToPagedList(page, 12));
+            return View(productVms);
         }
 
         [Route("GraphicCards")]
-        public ActionResult GraphicCards(int page = 1)
+        public ActionResult GraphicCards()
         {
             IEnumerable<GeneralProductPageViewModel> graphicCardVms = this._service.GetAllGraphicCards();
-            return this.View("All", graphicCardVms.ToPagedList(page, 30));
+            return this.View("All", graphicCardVms);
         }
 
         [Route("HardDrives")]
-        public ActionResult HardDrives(int page = 1)
+        public ActionResult HardDrives()
         {
             IEnumerable<GeneralProductPageViewModel> hardDriveVms = this._service.GetAllHardDrives();
-            return this.View("All", hardDriveVms.ToPagedList(page, 30));
+            return this.View("All", hardDriveVms);
         }
 
         [Route("Processors")]
-        public ActionResult Processors(int page = 1)
+        public ActionResult Processors()
         {
             IEnumerable<GeneralProductPageViewModel> processorVms = this._service.GetAllProcessors();
-            return this.View("All", processorVms.ToPagedList(page, 30));
+            return this.View("All", processorVms);
         }
 
         [Route("Details/{id=1}")]
@@ -76,7 +75,7 @@
             var client = new HttpClient();
             var response = client.GetAsync($"http://localhost:1575/api/products/all?$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {priceMinMax[0]} and Price le {priceMinMax[1]} and Discount ge {discount}&$orderby={orderType}").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<GeneralProductPageViewModel>>().Result;
-            return this.PartialView("_GeneralProductViewPartial", products.ToPagedList(1, 30));
+            return this.PartialView("_GeneralProductViewPartial", products);
         }
 
         [Route("FilterHardDrives")]
@@ -86,7 +85,7 @@
             var client = new HttpClient();
             var response = client.GetAsync($"http://localhost:1575/api/products/harddrives?driveBrand={ahbm.DriveBrand.ToString("G")}&driveType={ahbm.DriveType.ToString("G")}&$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {priceMinMax[0]} and Price le {priceMinMax[1]} and Discount ge {ahbm.Discount} and Capacity ge {ahbm.Capacity}&$orderby={orderType}").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<HardDrive>>().Result;
-            return this.PartialView("_GeneralProductViewPartial", this._service.GetGeneralProductPageViewModels(products.ToList()).ToPagedList(1, 30));
+            return this.PartialView("_GeneralProductViewPartial", this._service.GetGeneralProductPageViewModels(products.ToList()));
         }
 
         [Route("FilterGraphicCards")]
@@ -96,7 +95,7 @@
             var client = new HttpClient();
             var response = client.GetAsync($"http://localhost:1575/api/products/graphiccards?memoryType={agcbm.MemoryType.ToString("G")}&brand={agcbm.Brand.ToString("G")}&manufacturer={agcbm.Manufacturer.ToString("G")}&$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {priceMinMax[0]} and Price le {priceMinMax[1]} and Discount ge {agcbm.Discount} and Memory ge {agcbm.Memory}&$orderby={orderType}").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<GraphicCard>>().Result;
-            return this.PartialView("_GeneralProductViewPartial", this._service.GetGeneralProductPageViewModels(products.ToList()).ToPagedList(1, 30));
+            return this.PartialView("_GeneralProductViewPartial", this._service.GetGeneralProductPageViewModels(products.ToList()));
         }
 
         [Route("FilterProcessors")]
@@ -106,7 +105,7 @@
             var client = new HttpClient();
             var response = client.GetAsync($"http://localhost:1575/api/products/processors?brand={apbm.Brand.ToString("G")}&series={apbm.Series.ToString("G")}&cores={apbm.Cores.ToString("G")}&$filter=substringof('{productName.ToLower()}', tolower(Name)) eq true and Price ge {priceMinMax[0]} and Price le {priceMinMax[1]} and Discount ge {apbm.Discount} and Cache ge {apbm.Cache} and ProcessorSpeed ge {apbm.ProcessorSpeed}&$orderby={orderType}").Result;
             var products = response.Content.ReadAsAsync<IEnumerable<Processor>>().Result;
-            return this.PartialView("_GeneralProductViewPartial", this._service.GetGeneralProductPageViewModels(products.ToList()).ToPagedList(1, 30));
+            return this.PartialView("_GeneralProductViewPartial", this._service.GetGeneralProductPageViewModels(products.ToList()));
         }
 
         private int[] GetPriceRangeMinMaxNumbers(string priceRange)
