@@ -1,18 +1,18 @@
 ﻿namespace TechZone.Api.Controllers
 {
     using System.Web.Http;
-    using Services;
+    using Services.Contracts;
     using System.Web.Http.OData;
     using System.Linq;
 
     [RoutePrefix("Api/Products")]
     public class ApiProductsController : ApiController
     {
-        private readonly ProductsService _service;
+        private readonly IProductsService _service;
 
-        public ApiProductsController()
+        public ApiProductsController(IProductsService service)
         {
-            this._service = new ProductsService();
+            this._service = service;
         }
 
         [Route("All")]

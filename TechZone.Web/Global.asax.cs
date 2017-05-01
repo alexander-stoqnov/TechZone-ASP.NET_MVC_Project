@@ -8,16 +8,16 @@
     using System.Globalization;
     using AutoMapper;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Models.ViewModels.Admin;
     using Models.EntityModels;
     using Models.ViewModels.Products;
     using Models.ViewModels.Purchase;
     using Models.ViewModels.Customer;
-    using Models.BindingModels;
+    using Models.ViewModels.Admin;
     using Models.ViewModels.Reviews;
     using Models.ViewModels.Moderator;
     using Models.ViewModels.Articles;
     using Models.ViewModels.Home;
+    using Models.BindingModels;
 
     public class MvcApplication : HttpApplication
     {
