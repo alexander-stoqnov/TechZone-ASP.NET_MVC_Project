@@ -44,10 +44,22 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -93,6 +105,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TechZone.Api\TechZone.Api.csproj">
+      <Project>{d058ef80-c50a-46da-abac-b0a7d7e1a36a}</Project>
+      <Name>TechZone.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">
+      <Project>{37a7688e-7a09-459e-b89d-d3d023d4fd35}</Project>
+      <Name>TechZone.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechZone.Models\TechZone.Models.csproj">
+      <Project>{661fa679-778a-49a7-a618-3f27404ea280}</Project>
+      <Name>TechZone.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechZone.Services\TechZone.Services.csproj">
+      <Project>{051c3df8-6932-47e8-8bb6-9b18f11d5a02}</Project>
+      <Name>TechZone.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TechZone.Web\TechZone.Web.csproj">
       <Project>{CE621F51-2FF3-464E-9BD6-6B9E41CDD77F}</Project>
       <Name>TechZone.Web</Name>
