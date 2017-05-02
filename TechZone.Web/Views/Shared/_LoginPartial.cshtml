@@ -25,7 +25,7 @@
             <li>
                 <a href="@Url.Action("UserProfile", "Customers")">
                     <i class="fa fa-user" aria-hidden="true"></i>
-                    <span class="text">@User.Identity.GetUserName()</span>
+                    <span class="text" id="username">@User.Identity.GetUserName()</span>
                 </a>
             </li>
             <li>

@@ -2,5 +2,5 @@
 
 @if (!Model.IsEmailAvailable)
 {
-    <p class="text-danger">Email '@Model.Email' is already taken</p>
+    <p class="text-danger" id="email-warning">Email '@Model.Email' is already taken</p>
 }
