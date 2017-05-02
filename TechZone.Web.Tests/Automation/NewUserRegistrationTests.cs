@@ -5,7 +5,7 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Support.UI;
-    using System.Text;
+    using Helpers;
 
     /// <summary>
     /// These test are for the user accounts registration and login. Testing both valid and invalid data.
@@ -13,156 +13,117 @@
     [TestClass]
     public class NewUserRegistrationTests
     {
-        private readonly IWebDriver driver;
-        private readonly WebDriverWait wait;
+        private readonly IWebDriver _driver;
+        private readonly WebDriverWait _wait;
+        private string _validUsername;
+        private string _validPassword;
 
         public NewUserRegistrationTests()
         {
-            this.driver = new ChromeDriver();
-            this.wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            this._driver = new ChromeDriver();
+            this._wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
 
         [TestInitialize]
         public void Init()
         {
             // Arrange
-            driver.Navigate().GoToUrl("http://localhost:1574/");
-            driver.Manage().Window.Maximize();
-            wait.Until(ExpectedConditions.ElementExists(By.Id("registerLink")));
-            driver.FindElement(By.Id("registerLink")).Click();
+            _validUsername = TextGenerator.RandomUsernameGenerator();
+            _validPassword = TextGenerator.RandomPasswordGenerator();
+
+            _driver.Navigate().GoToUrl("http://localhost:1574/");
+            _driver.Manage().Window.Maximize();
+            _wait.Until(ExpectedConditions.ElementExists(By.Id("registerLink")));
+            _driver.FindElement(By.Id("registerLink")).Click();
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void Register_ShouldBeAbleToRegisterWithValidUsernamePassword()
         {
             // Act
-            string validUsername = this.RandomUsernameGenerator();
-            string validPassword = this.RandomPasswordGenerator();
+            _wait.Until(ExpectedConditions.ElementExists(By.Id("Username")));
+            _driver.FindElement(By.Id("Username")).SendKeys(_validUsername);
+            _driver.FindElement(By.Id("Password")).SendKeys(_validPassword);
+            _driver.FindElement(By.Id("ConfirmPassword")).SendKeys(_validPassword);
+            _driver.FindElement(By.Id("Email")).SendKeys($"{_validUsername}@email.com");
+            _driver.FindElement(By.Id("FirstName")).SendKeys("UnitTestFirst");
+            _driver.FindElement(By.Id("LastName")).SendKeys("UnitTestLast");
+            _driver.FindElement(By.ClassName("login-button")).Click();
 
-            wait.Until(ExpectedConditions.ElementExists(By.Id("Username")));
-            driver.FindElement(By.Id("Username")).SendKeys(validUsername);
-            driver.FindElement(By.Id("Password")).SendKeys(validPassword);
-            driver.FindElement(By.Id("ConfirmPassword")).SendKeys(validPassword);
-            driver.FindElement(By.Id("Email")).SendKeys($"{validUsername}@email.com");
-            driver.FindElement(By.Id("FirstName")).SendKeys("UnitTestFirst");
-            driver.FindElement(By.Id("LastName")).SendKeys("UnitTestLast");
-            driver.FindElement(By.ClassName("login-button")).Click();
+            _wait.Until(ExpectedConditions.ElementExists(By.Id("username")));
 
-            wait.Until(ExpectedConditions.ElementExists(By.Id("username")));
-
-            string expectedText = validUsername;
-            string actualText = driver.FindElement(By.Id("username")).Text;
+            string expectedText = _validUsername;
+            string actualText = _driver.FindElement(By.Id("username")).Text;
 
             // Assert
             Assert.AreEqual(expectedText, actualText);
-            driver.Quit();
+            _driver.Quit();
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void Register_ShouldShowAnErrorIfPasswordsAreDifferent()
         {
             // Act
-            string validUsername = this.RandomUsernameGenerator();
+            _wait.Until(ExpectedConditions.ElementExists(By.Id("Username")));
+            _driver.FindElement(By.Id("Username")).SendKeys(_validUsername);
+            _driver.FindElement(By.Id("Password")).SendKeys("password1!");
+            _driver.FindElement(By.Id("ConfirmPassword")).SendKeys("password2!");
+            _driver.FindElement(By.Id("Email")).SendKeys($"{_validUsername}@email.com");
+            _driver.FindElement(By.Id("FirstName")).SendKeys("UnitTestFirst");
+            _driver.FindElement(By.Id("LastName")).SendKeys("UnitTestLast");
+            _driver.FindElement(By.ClassName("login-button")).Click();
 
-            wait.Until(ExpectedConditions.ElementExists(By.Id("Username")));
-            driver.FindElement(By.Id("Username")).SendKeys(validUsername);
-            driver.FindElement(By.Id("Password")).SendKeys("password1!");
-            driver.FindElement(By.Id("ConfirmPassword")).SendKeys("password2!");
-            driver.FindElement(By.Id("Email")).SendKeys($"{validUsername}@email.com");
-            driver.FindElement(By.Id("FirstName")).SendKeys("UnitTestFirst");
-            driver.FindElement(By.Id("LastName")).SendKeys("UnitTestLast");
-            driver.FindElement(By.ClassName("login-button")).Click();
-
-            wait.Until(ExpectedConditions.ElementExists(By.ClassName("validation-summary-errors")));
+            _wait.Until(ExpectedConditions.ElementExists(By.ClassName("validation-summary-errors")));
 
             string expectedErrorMessage = "The password and confirmation password do not match.";
-            string actualErrorMessage = driver.FindElement(By.XPath("//*[@id=\"register-form\"]/div[2]/div[2]/ul/li")).Text;
+            string actualErrorMessage = _driver.FindElement(By.XPath("//*[@id=\"register-form\"]/div[2]/div[2]/ul/li")).Text;
             
             // Assert
             Assert.AreEqual(expectedErrorMessage, actualErrorMessage);
-            driver.Quit();
+            _driver.Quit();
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void Register_ShouldShowAnErrorIfPasswordDoesNotMatchPattern()
         {
             // Act
-            string validUsername = this.RandomUsernameGenerator();
+            _wait.Until(ExpectedConditions.ElementExists(By.Id("Username")));
+            _driver.FindElement(By.Id("Username")).SendKeys(_validUsername);
+            _driver.FindElement(By.Id("Password")).SendKeys("password");
+            _driver.FindElement(By.Id("ConfirmPassword")).SendKeys("password");
+            _driver.FindElement(By.Id("Email")).SendKeys($"{_validUsername}@email.com");
+            _driver.FindElement(By.Id("FirstName")).SendKeys("UnitTestFirst");
+            _driver.FindElement(By.Id("LastName")).SendKeys("UnitTestLast");
+            _driver.FindElement(By.ClassName("login-button")).Click();
 
-            wait.Until(ExpectedConditions.ElementExists(By.Id("Username")));
-            driver.FindElement(By.Id("Username")).SendKeys(validUsername);
-            driver.FindElement(By.Id("Password")).SendKeys("password");
-            driver.FindElement(By.Id("ConfirmPassword")).SendKeys("password");
-            driver.FindElement(By.Id("Email")).SendKeys($"{validUsername}@email.com");
-            driver.FindElement(By.Id("FirstName")).SendKeys("UnitTestFirst");
-            driver.FindElement(By.Id("LastName")).SendKeys("UnitTestLast");
-            driver.FindElement(By.ClassName("login-button")).Click();
-
-            wait.Until(ExpectedConditions.ElementExists(By.ClassName("validation-summary-errors")));
+            _wait.Until(ExpectedConditions.ElementExists(By.ClassName("validation-summary-errors")));
 
             string expectedErrorMessage = "Passwords must have at least one digit ('0'-'9').";
-            string actualErrorMessage = driver.FindElement(By.XPath("//*[@id=\"register-form\"]/div[2]/div[2]/ul/li")).Text;
+            string actualErrorMessage = _driver.FindElement(By.XPath("//*[@id=\"register-form\"]/div[2]/div[2]/ul/li")).Text;
 
             // Assert
             Assert.AreEqual(expectedErrorMessage, actualErrorMessage);
-            driver.Quit();
+            _driver.Quit();
         }
 
         [TestMethod]
         public void Register_ShouldReturnAWarningForTakenEmailWithoutClickingRegisterButton()
         {
             // Act
-            string validUsername = this.RandomUsernameGenerator();
+            _wait.Until(ExpectedConditions.ElementExists(By.Id("Username")));
+            _driver.FindElement(By.Id("Username")).SendKeys(_validUsername);
+            _driver.FindElement(By.Id("Password")).SendKeys("password");
+            _driver.FindElement(By.Id("ConfirmPassword")).SendKeys("password");
+            _driver.FindElement(By.Id("Email")).SendKeys("pesho@g.c");
 
-            wait.Until(ExpectedConditions.ElementExists(By.Id("Username")));
-            driver.FindElement(By.Id("Username")).SendKeys(validUsername);
-            driver.FindElement(By.Id("Password")).SendKeys("password");
-            driver.FindElement(By.Id("ConfirmPassword")).SendKeys("password");
-            driver.FindElement(By.Id("Email")).SendKeys("pesho@g.c");
-
-            wait.Until(ExpectedConditions.ElementExists(By.Id("email-warning")));
+            _wait.Until(ExpectedConditions.ElementExists(By.Id("email-warning")));
 
             string expectedErrorMessage = "Email 'pesho@g.c' is already taken";
-            string actualErrorMessage = driver.FindElement(By.Id("email-warning")).Text;
+            string actualErrorMessage = _driver.FindElement(By.Id("email-warning")).Text;
 
             // Assert
             Assert.AreEqual(expectedErrorMessage, actualErrorMessage);
-            driver.Quit();
-        }
-
-
-        private string RandomUsernameGenerator()
-        {
-            string letters = "abcdefghijklmnopqrstuvwyzABCDEFGHIJKLMNOPQRSTUVWYZ";
-            Random rnd = new Random();
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < 10; i++)
-            {
-                sb.Append(letters[rnd.Next(0, 42)]);
-            }
-
-            return sb.ToString();
-        }
-
-        private string RandomPasswordGenerator()
-        {
-            string smallLetters = "abcdefghijklmnopqrstuvwyz";
-            string bigLetters = "ABCDEFGHIJKLMNOPQRSTUVWYZ";
-            string digits = "0123456789";
-            string specialCharacters = "!?@#$%^&*(_)[]{}";
-            Random rnd = new Random();
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < 6; i++)
-            {
-                sb.Append(smallLetters[rnd.Next(0, 24)]);
-            }
-            sb.Append(bigLetters[rnd.Next(0, 23)]);
-            sb.Append(digits[rnd.Next(0, 9)]);
-            sb.Append(specialCharacters[rnd.Next(0, 15)]);
-
-            return sb.ToString();
-        }
+            _driver.Quit();
+        }       
     }
 }

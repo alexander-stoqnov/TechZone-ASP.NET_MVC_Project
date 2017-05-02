@@ -133,7 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\NewUserRegistrationTests.cs" />
+    <Compile Include="Automation\PurchasingTests.cs" />
     <Compile Include="Controllers\ProductsControllerTest.cs" />
+    <Compile Include="Helpers\TextGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
