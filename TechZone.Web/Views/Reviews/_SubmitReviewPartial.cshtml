@@ -33,7 +33,7 @@
                                 </div>
                                 @Html.HiddenFor(vm => vm.Rating)
                             <input id="product-id" name="productId" type="hidden" value="@Model.Id" />
-                            <input id="ratings-hidden" name="rating" type="hidden"  data-val="true" data-val-required="The Rating field is required.">
+                            <input id="ratings-hidden" name="rating" type="hidden">
                                 <div class="col-sm-offset-2">
                                     @Html.ValidationSummary("", new { @class = "text-danger" })
                                 </div>

@@ -1,12 +1,11 @@
-﻿using TechZone.Services.Contracts;
-
-namespace TechZone.Services
+﻿namespace TechZone.Services
 {
     using Models.ViewModels.Moderator;
     using System.Linq;
     using AutoMapper;
     using Models.EntityModels;
     using System.Collections.Generic;
+    using Contracts;
 
     public class ModeratorService : Service, IModeratorService
     {

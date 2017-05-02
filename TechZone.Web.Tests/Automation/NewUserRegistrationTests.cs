@@ -31,7 +31,7 @@
             _validUsername = TextGenerator.RandomUsernameGenerator();
             _validPassword = TextGenerator.RandomPasswordGenerator();
 
-            _driver.Navigate().GoToUrl("http://localhost:1574/");
+            _driver.Navigate().GoToUrl("http://localhost:15777/");
             _driver.Manage().Window.Maximize();
             _wait.Until(ExpectedConditions.ElementExists(By.Id("registerLink")));
             _driver.FindElement(By.Id("registerLink")).Click();
