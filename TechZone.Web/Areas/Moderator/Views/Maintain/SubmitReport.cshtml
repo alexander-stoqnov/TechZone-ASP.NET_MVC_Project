@@ -25,7 +25,9 @@
         </div>
         @Html.HiddenFor(m => m.ReportedCommentId)
         @Html.HiddenFor(m => m.ReviewId)
-        @Html.ValidationSummary("", new {@class = "text-danger"})
+        <div class="col-xs-offset-2">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+        </div>
     }
 </div>
 

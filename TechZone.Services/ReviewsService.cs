@@ -98,12 +98,19 @@
 
         public ReviewDetailsViewModel GetReviewDetails(string currentUserId, int id, string dropboxKey)
         {
-            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            var customer = this.Context.Customers.FirstOrDefault(c => c.UserId == currentUserId);
             var review = this.Context.Reviews.Find(id);
             ReviewDetailsViewModel rdvm = Mapper.Instance.Map<ReviewDetailsViewModel>(review);
             rdvm.ContentParagraphs = review.Content.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
-            rdvm.VisitorIsAlsoReviewPublisher = currentUserId == review.Reviewer.UserId;
-            rdvm.IsVisitorAllowedToPostComments = customer.Warnings <= 3;
+            if (customer != null)
+            {
+                rdvm.VisitorIsAlsoReviewPublisher = currentUserId == review.Reviewer.UserId;
+                rdvm.IsVisitorAllowedToPostComments = customer.Warnings <= 3;
+            }
+            else
+            {
+                rdvm.IsVisitorAllowedToPostComments = true;
+            }
             if (review.Reviewer.User.ProfilePictureFileName != null)
             {
                 rdvm.ReviewerImageData = this.GetUserProfilePicture(review.Reviewer.User.ProfilePictureFileName,

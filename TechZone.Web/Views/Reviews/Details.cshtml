@@ -43,7 +43,7 @@
                                                     HttpMethod = "post",
                                                     OnFailure = "userAlreadyVoted",
                                                     OnSuccess = "castUpVote"
-                                                }, new { style = "display: inline" }))
+                                                }, new {style = "display: inline"}))
                                                 {
                                                     @Html.AntiForgeryToken()
                                                     @Html.HiddenFor(vm => vm.Id)
@@ -57,7 +57,7 @@
                                                     HttpMethod = "post",
                                                     OnFailure = "userAlreadyVoted",
                                                     OnSuccess = "castDownVote"
-                                                }, new { style = "display: inline" }))
+                                                }, new {style = "display: inline"}))
                                                 {
                                                     @Html.AntiForgeryToken()
                                                     @Html.HiddenFor(vm => vm.Id)
@@ -79,13 +79,23 @@
                                         }
                                     </ul>
                                 </div>
+                                
                             </li>
                         </ul>
-                        @if (Model.IsVisitorAllowedToPostComments)
+
+                        @if (!this.User.Identity.IsAuthenticated)
+                        {
+                            <p class="alert alert-success col-sm-offset-2 text-center">Please @Html.ActionLink("Login", "Login", "Account") to post a comment!</p>
+                        }
+                        else if (Model.IsVisitorAllowedToPostComments)
                         {
                             <div id="post-reply-form">
                                 @Html.Action("CommentForm", Model.Id)
                             </div>
+                        }
+                        else
+                        {
+                            <p class="alert alert-danger col-sm-offset-1">You have received at least 3 warnings for inappropriate comments. Please contact a moderator for further assistance.</p>
                         }
                     </div>
                 </div>

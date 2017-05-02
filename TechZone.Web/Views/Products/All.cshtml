@@ -1,5 +1,4 @@
-﻿@using PagedList.Mvc
-@model IEnumerable<TechZone.Models.ViewModels.Products.GeneralProductPageViewModel>
+﻿@model IEnumerable<TechZone.Models.ViewModels.Products.GeneralProductPageViewModel>
 @{
     ViewBag.Title = "All";
 }
@@ -20,10 +19,6 @@
         <div id="product-search-results">
             @Html.Partial("_GeneralProductViewPartial", Model)
         </div>
-    }
-    else
-    {
-        
     }
 </div>
 
