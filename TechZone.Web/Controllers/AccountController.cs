@@ -122,11 +122,6 @@
             {
                 return View(model);
             }
-
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
@@ -168,7 +163,6 @@
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-
                     this.UserManager.AddToRole(user.Id, "Customer");
                     this.context.Customers.Add(new Customer { UserId = user.Id, Credits = 10000 });
                     context.SaveChanges();
@@ -217,19 +211,9 @@
                 var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -345,7 +329,10 @@
             switch (result)
             {
                 case SignInStatus.Success:
-                    this.AddOrUpdateCartForUser(loginInfo.Email);
+                    //string currentUserId = this.context.Users.FirstOrDefault(u => u.Email == loginInfo.Email).Id;
+                    //this.UserManager.AddToRole(currentUserId, "Customer");
+                    //this.context.Customers.Add(new Customer { UserId = currentUserId, Credits = 10000 });
+                    //this.AddOrUpdateCartForUser(loginInfo.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -445,6 +432,17 @@
                 this.context.ShoppingCarts.Add(newCart);
             }
             this.context.SaveChanges();
+        }
+
+        [AllowAnonymous]
+        public ActionResult EmailCheck(string email)
+        {
+            EmailAvailabilityCheckViewModel emailCheck = new EmailAvailabilityCheckViewModel
+            {
+                IsEmailAvailable = !this.context.Users.Any(u => u.Email == email),
+                Email = email
+            };
+            return this.PartialView("_EmailCheckPartial", emailCheck);
         }
 
         protected override void Dispose(bool disposing)

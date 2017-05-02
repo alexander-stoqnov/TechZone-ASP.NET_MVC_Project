@@ -362,6 +362,7 @@
     <Content Include="Views\Products\_SearchPanelPartial.cshtml" />
     <Content Include="Views\Products\_GeneralProductViewPartial.cshtml" />
     <Content Include="Views\Articles\_ArticleGeneralViewPartial.cshtml" />
+    <Content Include="Views\Account\_EmailCheckPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechZone.Data\TechZone.Data.csproj">

@@ -127,6 +127,7 @@
     <Compile Include="Enums\ProcessorCoresType.cs" />
     <Compile Include="Enums\ProcessorSeriesType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Account\EmailAvailabilityCheckViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />

@@ -13,53 +13,63 @@
 <div class="text-center" style="padding:50px 0">
     <div class="logo">Register</div>
     <div class="login-form-1">
-        @using (Html.BeginForm(Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "text-left", role = "form", id = "register-form" })))
+        @using (Html.BeginForm(Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "text-left", role = "form", id = "register-form"})))
         {
-        @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-        <div class="login-form-main-message"></div>
-        <div class="main-login-form">
-            <div class="login-group">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Username, new { @class = "sr-only" })
-                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Username" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "sr-only" })
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "sr-only" })
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
-                </div>
+            <div class="login-form-main-message"></div>
+            <div class="main-login-form">
+                <div class="login-group">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Username, new {@class = "sr-only"})
+                        @Html.TextBoxFor(m => m.Username, new {@class = "form-control", placeholder = "Username"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new {@class = "sr-only"})
+                        @Html.PasswordFor(m => m.Password, new {@class = "form-control", placeholder = "Password"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword, new {@class = "sr-only"})
+                        @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control", placeholder = "Confirm Password"})
+                    </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "sr-only" })
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
-                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new {@class = "sr-only"})
+                        @Html.TextBoxFor(m => m.Email, new {@class = "form-control", placeholder = "Email", oninput = "checkAvailability()"})
+                    </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.FirstName, new { @class = "sr-only" })
-                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
-                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FirstName, new {@class = "sr-only"})
+                        @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control", placeholder = "First Name"})
+                    </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.LastName, new { @class = "sr-only" })
-                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.LastName, new {@class = "sr-only"})
+                        @Html.TextBoxFor(m => m.LastName, new {@class = "form-control", placeholder = "Last Name"})
+                    </div>
                 </div>
+                @Html.ValidationSummary("", new {@class = "text-danger"})
+                <ul>
+                    <li id="email-availability"></li>
+                </ul>
+                <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
             </div>
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-            <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
-        </div>
-        <div class="etc-login-form">
-            <p>            
-                Already have an account? @Html.ActionLink("Login Here", "Login", "Account")
-            </p>
-        </div>
+
+            <div class="etc-login-form">
+                <p>
+                    Already have an account? @Html.ActionLink("Login Here", "Login", "Account")
+                </p>
+            </div>
         }
     </div>
+
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+        function checkAvailability() {
+            $("#email-availability").load("/Account/EmailCheck", { "email": $("#Email").val() });
+        }
+</script>
 }
