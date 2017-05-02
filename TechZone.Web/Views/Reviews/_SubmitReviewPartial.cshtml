@@ -20,30 +20,30 @@
                             {
                                 @Html.AntiForgeryToken()
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="title">Title</label>
-                                    <div class="col-md-6">
-                                        <input type="text" name="title" id="title" class="form-control" placeholder="Enter review title..." style="max-width : 150px}" />   
+                                    @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Enter review title...", style = "max-width : 150px", id = "title"})
                                     </div>
-
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="new-review">Review</label>
+                                    @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
                                     <div class="col-md-10">
-                                        <textarea class="form-control animated" cols="250" id="new-review" name="content" placeholder="Enter your review here..." rows="5" style="max-width: inherit"></textarea>
+                                        @Html.TextAreaFor(m => m.Content, new { @class = "form-control animated", placeholder = "Enter your review here...", rows = "5", style = "max-width: inherit", id="new-review" })
                                     </div>
-                                   
                                 </div>
 
                             <input id="product-id" name="productId" type="hidden" value="@Model.Id" />
                             <input id="ratings-hidden" name="rating" type="hidden">
-                          
-                            <div class="text-right">
-                                <div class="stars starrr" data-rating="0"></div>
-                                <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display: none; margin-right: 10px;">
-                                    <span class="glyphicon glyphicon-remove"></span>Cancel
-                                </a>
-                                <button class="btn btn-success btn-lg" type="submit">Post</button>
-                            </div>
+                                <div class="col-sm-offset-2">
+                                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                                </div>
+                                <div class="text-right">
+                                    <div class="stars starrr" data-rating="0"></div>
+                                    <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display: none; margin-right: 10px;">
+                                        <span class="glyphicon glyphicon-remove"></span>Cancel
+                                    </a>
+                                    <button class="btn btn-success btn-lg" type="submit">Post</button>
+                                </div>                              
                             }
                         </div>
                     </div>
