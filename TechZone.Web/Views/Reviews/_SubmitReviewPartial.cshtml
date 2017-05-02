@@ -26,14 +26,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
+                                    @Html.LabelFor(m => m.Content, new {@class = "col-md-2 control-label"})
                                     <div class="col-md-10">
-                                        @Html.TextAreaFor(m => m.Content, new { @class = "form-control animated", placeholder = "Enter your review here...", rows = "5", style = "max-width: inherit", id="new-review" })
+                                        @Html.TextAreaFor(m => m.Content, new {@class = "form-control animated", placeholder = "Enter your review here...", rows = "5", style = "max-width: inherit", id = "new-review"})
                                     </div>
                                 </div>
-
+                                @Html.HiddenFor(vm => vm.Rating)
                             <input id="product-id" name="productId" type="hidden" value="@Model.Id" />
-                            <input id="ratings-hidden" name="rating" type="hidden">
+                            <input id="ratings-hidden" name="rating" type="hidden"  data-val="true" data-val-required="The Rating field is required.">
                                 <div class="col-sm-offset-2">
                                     @Html.ValidationSummary("", new { @class = "text-danger" })
                                 </div>
