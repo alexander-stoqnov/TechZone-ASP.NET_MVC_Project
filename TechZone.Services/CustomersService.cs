@@ -7,6 +7,7 @@
     using Dropbox.Api;
     using System;
     using Contracts;
+    using Models.EntityModels;
 
     public class CustomersService : Service, ICustomersService
     {
@@ -53,6 +54,20 @@
             string orderFileName = $"{customer.User.UserName}_{purchase.PurchaseDate.ToString("yyyyMMdd")}_{purchase.Id.ToString("00000000")}.pdf";
             var imageByteData = this.DownloadAsync(new DropboxClient("mQ4aAGajcfAAAAAAAAAAEcVfYBCEdnqccMa1IOiDpmOYVO6GkdprCUTg5p3GWMih"), $"Users/{customer.User.UserName}/Orders", orderFileName);
             return imageByteData.Result;
+        }
+
+        public string GenerateChatRoom(string currentUserId, string message)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            ForgivenessRequest frq = new ForgivenessRequest
+            {
+                Customer = customer,
+                Message = message,
+                RoomId = $"{customer.User.UserName}{new Random().Next(0, Int32.MaxValue)}"
+            };
+            this.Context.ForgivenessRequests.Add(frq);
+            this.Context.SaveChanges();
+            return frq.RoomId;
         }
     }
 }

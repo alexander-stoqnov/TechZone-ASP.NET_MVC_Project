@@ -78,5 +78,17 @@
             this._service.IssueWarningToCustomer(id);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
+
+        [Route("ChatRoom")]
+        [Authorize(Roles = "Customer,Moderator")]
+        public ActionResult ChatRoom(string roomId)
+        {
+            string currentUserId = User.Identity.GetUserId();
+            if (!this._service.IsRoomForCurrentUser(currentUserId, roomId) || !this.User.IsInRole("Moderator"))
+            {
+                return RedirectToAction("All", "Products");
+            }
+            return this.View("ChatRoom", null, User.Identity.GetUserName());
+        }
     }
 }

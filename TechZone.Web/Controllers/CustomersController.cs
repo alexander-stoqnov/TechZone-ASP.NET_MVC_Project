@@ -86,5 +86,14 @@
             MemoryStream ms = new MemoryStream(pdfFile);
             return new FileStreamResult(ms, "application/pdf");
         }
+
+        [HttpPost]
+        [Route("SubmitChatRequest")]
+        public ActionResult SubmitChatRequest(string message)
+        {
+            string currentUserId = User.Identity.GetUserId();
+            string roomNumber = this._service.GenerateChatRoom(currentUserId, message);
+            return RedirectToAction("ChatRoom", "Maintain", new {area = "Moderator",  roomId = roomNumber });
+        }
     }
 }

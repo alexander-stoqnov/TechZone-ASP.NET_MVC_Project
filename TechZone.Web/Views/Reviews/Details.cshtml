@@ -23,7 +23,7 @@
                                     }
                                     else
                                     {
-                                        <img class="media-object img-circle" src="http://placehold.it/120" alt="Reviewer Profile Picture">
+                                        <img class="media-object img-circle" src="http://dummyimage.com/120x120/666/ffffff&text=No+Image" alt="Reviewer Profile Picture">
                                     }
                                 </a>
                                 <div class="media-body">
@@ -36,82 +36,91 @@
                                             @{
                                                 foreach (var contentParagraph in Model.ContentParagraphs)
                                                 {
-                                                    <p>@contentParagraph</p>
+                                                <p>@contentParagraph</p>
                                                 }
                                             }
-                                        </p>
-                                        <a class="btn btn-info btn-circle" href="#post-reply-form" id="reply"><span class="glyphicon glyphicon-share-alt"></span>REPLY</a>
-                                        <a class="btn btn-warning btn-circle" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> @Model.CountOfComments COMMENTS</a>
-                                        @if (User.Identity.IsAuthenticated)
-                                        {
-                                            <div class="pull-right">
-                                                @using (Ajax.BeginForm("Vote", null, new AjaxOptions
-                                                {
-                                                    HttpMethod = "post",
-                                                    OnFailure = "userAlreadyVoted",
-                                                    OnSuccess = "castUpVote"
-                                                }, new {style = "display: inline"}))
-                                                {
-                                                    @Html.AntiForgeryToken()
-                                                    @Html.HiddenFor(vm => vm.Id)
-                                                    <input type="hidden" name="vote" value="up"/>
-                                                    <button type="submit" class="btn btn-success fa fa-thumbs-up">
-                                                        <span id="useful">@Model.Useful</span>
-                                                    </button>
-                                                }
-                                                @using (Ajax.BeginForm("Vote", null, new AjaxOptions
-                                                {
-                                                    HttpMethod = "post",
-                                                    OnFailure = "userAlreadyVoted",
-                                                    OnSuccess = "castDownVote"
-                                                }, new {style = "display: inline"}))
-                                                {
-                                                    @Html.AntiForgeryToken()
-                                                    @Html.HiddenFor(vm => vm.Id)
-                                                    <input type="hidden" name="vote" value="down"/>
-                                                    <button type="submit" id="testBtnDown" class="btn btn-danger fa fa-thumbs-down">
-                                                        <span id="useless">@Model.Useless</span>
-                                                    </button>
-                                                }
-                                            </div>
-                                        }
+                                            </p>
+                                            <a class="btn btn-info btn-circle" href="#post-reply-form" id="reply"><span class="glyphicon glyphicon-share-alt"></span>REPLY</a>
+                                            <a class="btn btn-warning btn-circle" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> @Model.CountOfComments COMMENTS</a>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <div class="pull-right">
+                                                    @using (Ajax.BeginForm("Vote", null, new AjaxOptions
+                                                    {
+                                                        HttpMethod = "post",
+                                                        OnFailure = "userAlreadyVoted",
+                                                        OnSuccess = "castUpVote"
+                                                    }, new { style = "display: inline" }))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.HiddenFor(vm => vm.Id)
+                                                        <input type="hidden" name="vote" value="up" />
+                                                        <button type="submit" class="btn btn-success fa fa-thumbs-up">
+                                                            <span id="useful">@Model.Useful</span>
+                                                        </button>
+                                                    }
+                                                    @using (Ajax.BeginForm("Vote", null, new AjaxOptions
+                                                    {
+                                                        HttpMethod = "post",
+                                                        OnFailure = "userAlreadyVoted",
+                                                        OnSuccess = "castDownVote"
+                                                    }, new { style = "display: inline" }))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.HiddenFor(vm => vm.Id)
+                                                        <input type="hidden" name="vote" value="down" />
+                                                        <button type="submit" id="testBtnDown" class="btn btn-danger fa fa-thumbs-down">
+                                                            <span id="useless">@Model.Useless</span>
+                                                        </button>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                        <div id="error-message-here" class="alert alert-danger col-sm-6 col-sm-offset-4" hidden="hidden"></div>
                                     </div>
-                                    <div id="error-message-here" class="alert alert-danger col-sm-6 col-sm-offset-4" hidden="hidden"></div>
-                                </div>
-                                <div class="collapse" id="replyOne">
-                                    <ul class="media-list">
-                                        @foreach (var comment in Model.ReviewComments)
-                                        {
-                                            @Html.DisplayFor(vm => comment, "CommentForReview")
-                                        }
-                                    </ul>
-                                </div>
-                                
-                            </li>
-                        </ul>
+                                    <div class="collapse" id="replyOne">
+                                        <ul class="media-list">
+                                            @foreach (var comment in Model.ReviewComments)
+                                            {
+                                                @Html.DisplayFor(vm => comment, "CommentForReview")
+                                            }
+                                        </ul>
+                                    </div>
 
-                        @if (!this.User.Identity.IsAuthenticated)
-                        {
-                            <p class="alert alert-success col-sm-offset-2 text-center">Please @Html.ActionLink("Login", "Login", "Account") to post a comment!</p>
-                        }
-                        else if (Model.IsVisitorAllowedToPostComments)
-                        {
-                            <div id="post-reply-form">
-                                @Html.Action("CommentForm", Model.Id)
-                            </div>
-                        }
-                        else
-                        {
-                            <p class="alert alert-danger col-sm-offset-1">You have received at least 3 warnings for inappropriate comments. Please contact a moderator for further assistance.</p>
-                        }
+                                </li>
+                            </ul>
+
+                            @if (!this.User.Identity.IsAuthenticated)
+                            {
+                                <p class="alert alert-success col-sm-offset-2 text-center">Please @Html.ActionLink("Login", "Login", "Account") to post a comment!</p>
+                            }
+                            else if (Model.IsVisitorAllowedToPostComments)
+                            {
+                                <div id="post-reply-form">
+                                    @Html.Action("CommentForm", Model.Id)
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="alert alert-danger col-sm-offset-1 text-center">
+                                    You have received at least 3 warnings for inappropriate comments. Please contact a moderator for further assistance. Write a short message to explain your situation.
+                                </p>
+                                <div class="col-sm-offset-2">
+                                    @using (Html.BeginForm("SubmitChatRequest", "Customers", FormMethod.Post))
+                                    {
+                                        <textarea class="form-control" name="message" id="forgive-form" rows="3" style="max-width: 450px"></textarea><br/>
+                                        <input type="submit" value="Chat Request" class="btn btn-warning"/>
+                                    }
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/CustomScripts/ReviewVoting.js" type="text/javascript"></script>
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/CustomScripts/ReviewVoting.js" type="text/javascript"></script>
+    }

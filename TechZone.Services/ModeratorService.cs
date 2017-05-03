@@ -58,5 +58,12 @@
             this.Context.Reports.Remove(report);
             this.Context.SaveChanges();
         }
+
+        public bool IsRoomForCurrentUser(string currentUserId, string roomId)
+        {
+            var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
+            ForgivenessRequest frq = this.Context.ForgivenessRequests.FirstOrDefault(fr => fr.RoomId == roomId);
+            return frq != null && frq.Customer == customer;
+        }
     }
 }

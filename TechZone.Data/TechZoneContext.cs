@@ -33,6 +33,8 @@ namespace TechZone.Data
 
         public virtual DbSet<Report> Reports { get; set; }
 
+        public virtual DbSet<ForgivenessRequest> ForgivenessRequests { get; set; }
+
         public static TechZoneContext Create()
         {
             return new TechZoneContext();

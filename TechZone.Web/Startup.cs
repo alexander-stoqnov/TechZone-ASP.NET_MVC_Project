@@ -8,6 +8,7 @@ namespace TechZone.Web
     {
         public void Configuration(IAppBuilder app)
         {
+            app.MapSignalR();
             ConfigureAuth(app);
         }
     }

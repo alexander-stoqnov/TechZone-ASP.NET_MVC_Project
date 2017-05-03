@@ -109,6 +109,7 @@
     <Compile Include="EntityModels\Article.cs" />
     <Compile Include="EntityModels\Comment.cs" />
     <Compile Include="EntityModels\Customer.cs" />
+    <Compile Include="EntityModels\ForgivenessRequest.cs" />
     <Compile Include="EntityModels\GraphicCard.cs" />
     <Compile Include="EntityModels\HardDrive.cs" />
     <Compile Include="EntityModels\Processor.cs" />

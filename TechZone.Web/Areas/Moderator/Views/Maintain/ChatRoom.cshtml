@@ -1,0 +1,23 @@
+﻿@model string
+@{
+    ViewBag.Title = "ChatRoom";
+    Layout = User.IsInRole("Moderator") ? "~/Areas/Moderator/Views/Shared/_Layout.cshtml" : "~/Views/Shared/_Layout.cshtml";
+    string username = User.IsInRole("Moderator") ? "Moderator" : Model;
+}
+
+<style>
+    #other {
+        color: red;
+    }
+</style>
+
+<input type="hidden" value="@username" id="username"/>
+<ul id="chat-window"></ul>
+<input type="text" id="message" class="form-control"/>
+<input type="button" value="Send" id="send-message" />
+@section scripts {
+<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalR/hubs"></script>
+    <script src="~/Scripts/CustomScripts/chatOutput.js"></script>
+<script src="~/Scripts/CustomScripts/chatInput.js"></script>
+}
