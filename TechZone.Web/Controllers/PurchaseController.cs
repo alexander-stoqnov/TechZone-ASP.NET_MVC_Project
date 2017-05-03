@@ -99,7 +99,6 @@
         [Authorize(Roles = "Customer")]
         public ActionResult Finalize(decimal finalPrice)
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             var currentUserId = this.User.Identity.GetUserId();
             if (!this._service.EnoughCredits(currentUserId, finalPrice))
             {

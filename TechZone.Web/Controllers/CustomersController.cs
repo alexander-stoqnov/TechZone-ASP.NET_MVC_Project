@@ -76,7 +76,6 @@
         [Route("Order/{id}")]
         public ActionResult Order(int id)
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             string currentUserId = User.Identity.GetUserId();
             if (!this._service.OrderBellongsToCurrentUser(currentUserId, id))
             {
