@@ -1,4 +1,6 @@
-﻿namespace TechZone.Web.Controllers
+﻿using System;
+
+namespace TechZone.Web.Controllers
 {
     using System.Web.Mvc;
     using Models.BindingModels;
@@ -18,6 +20,7 @@
         }
 
         [ChildActionOnly]
+        [HandleError(ExceptionType = typeof(InvalidOperationException), View = "NotFound")]
         public ActionResult SubmitReview(int id)
         {
             var currentUserId = this.User.Identity.GetUserId();
@@ -30,6 +33,7 @@
         }
 
         [ChildActionOnly]
+        [HandleError(ExceptionType = typeof(InvalidOperationException), View = "NotFound")]
         public ActionResult LoadProductReviews(int id)
         {
             ReviewOverviewViewModel rovm = this._service.GetReviewsForProduct(id);
@@ -52,8 +56,8 @@
             return RedirectToAction("Details", "Products", new { id = wrbm.ProductId });
         }
 
-        [Route("Details/{id}")]
-        public ActionResult Details(int id)
+        [Route("Details/{id?}")]
+        public ActionResult Details(int? id)
         {
             if (!this._service.ReviewExists(id))
             {
@@ -86,6 +90,7 @@
 
         [Route("CommentForm")]
         [ChildActionOnly]
+        [HandleError(ExceptionType = typeof(InvalidOperationException), View = "NotFound")]
         public ActionResult CommentForm(int id)
         {
             AddCommentBindingModel acbm = new AddCommentBindingModel { Id = id};

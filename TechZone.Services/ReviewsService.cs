@@ -14,7 +14,7 @@
 
     public class ReviewsService : Service, IReviewsService
     {
-        public bool ReviewExists(int id)
+        public bool ReviewExists(int? id)
         {
             return this.Context.Reviews.Find(id) != null;
         }
@@ -95,7 +95,7 @@
             return this.Context.Reviews.FirstOrDefault(r => r.Reviewer.Id == customer.Id && r.Product.Id == id) != null;
         }
 
-        public ReviewDetailsViewModel GetReviewDetails(string currentUserId, int id)
+        public ReviewDetailsViewModel GetReviewDetails(string currentUserId, int? id)
         {
             var customer = this.Context.Customers.FirstOrDefault(c => c.UserId == currentUserId);
             var review = this.Context.Reviews.Find(id);

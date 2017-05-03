@@ -73,11 +73,11 @@
             return RedirectToAction("UserProfile", "Customers");
         }
 
-        [Route("Order/{id}")]
-        public ActionResult Order(int id)
+        [Route("Order/{id?}")]
+        public ActionResult Order(int? id)
         {
             string currentUserId = User.Identity.GetUserId();
-            if (!this._service.OrderBellongsToCurrentUser(currentUserId, id))
+            if (id == null || !this._service.OrderBellongsToCurrentUser(currentUserId, id))
             {
                 return RedirectToAction("UserProfile", "Customers");
             }
@@ -89,6 +89,7 @@
 
         [HttpPost]
         [Route("SubmitChatRequest")]
+        [ValidateAntiForgeryToken]
         public ActionResult SubmitChatRequest(string message)
         {
             string currentUserId = User.Identity.GetUserId();

@@ -57,6 +57,7 @@
                                 UpdateTargetId = "shopping-cart"
                             }, new { role = "form", style = "display: inline; margin-top:8px", @class = "btn-add" }))
                             {
+                                @Html.AntiForgeryToken()
                                 <i class="fa fa-shopping-cart"></i>
                                 <input type="hidden" value="@product.Id" name="id" />
                                 <a href="#" type="submit" class="hidden-sm"><input type="submit" value="Add to cart" style="background-color: transparent; border-color: transparent"/></a>

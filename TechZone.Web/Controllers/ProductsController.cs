@@ -62,6 +62,7 @@
 
         [Route("HardwareSpecs/{id}")]
         [ChildActionOnly]
+        [HandleError(ExceptionType = typeof(InvalidOperationException), View = "NotFound")]
         public ActionResult HardwareSpecs(int id)
         {
             Dictionary<string, string> specs = this._service.GetProductSpecs(id);

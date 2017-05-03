@@ -63,7 +63,7 @@
             return articlesVms;
         }
 
-        public EditArticleViewModel GetArticleToManage(int id)
+        public EditArticleViewModel GetArticleToManage(int? id)
         {
             Article article = this.Context.Articles.Find(id);
             return Mapper.Map<EditArticleViewModel>(article);
@@ -99,6 +99,11 @@
                 articleVms.Add(articleVm);
             }
             return articleVms;
+        }
+
+        public bool ArticleExists(int? id)
+        {
+            return this.Context.Articles.Any(a => a.Id == id);
         }
     }
 }

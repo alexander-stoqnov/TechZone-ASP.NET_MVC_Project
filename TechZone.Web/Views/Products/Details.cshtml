@@ -61,6 +61,7 @@
                                 UpdateTargetId = "shopping-cart"
                             }, new { role = "form" }))
                             {
+                                @Html.AntiForgeryToken()
                                 @Html.HiddenFor(vm => vm.Id)
                                 <input type="submit" value="Add to Cart" class="btn btn-success" />
                             }

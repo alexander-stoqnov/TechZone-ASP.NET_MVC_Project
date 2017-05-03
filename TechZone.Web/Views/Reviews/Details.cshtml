@@ -108,6 +108,7 @@
                                 <div class="col-sm-offset-2">
                                     @using (Html.BeginForm("SubmitChatRequest", "Customers", FormMethod.Post))
                                     {
+                                        @Html.AntiForgeryToken()
                                         <textarea class="form-control" name="message" id="forgive-form" rows="3" style="max-width: 450px"></textarea><br/>
                                         <input type="submit" value="Chat Request" class="btn btn-warning"/>
                                     }

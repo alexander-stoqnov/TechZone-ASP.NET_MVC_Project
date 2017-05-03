@@ -17,6 +17,7 @@
     {
         using (Html.BeginForm("RemoveUserWarnings", "Maintain", FormMethod.Post, new { style = "display: inline;" }))
         {
+            @Html.AntiForgeryToken()
             <input type="hidden" value="@Model.RoomId" name="roomId" />
             <input type="submit" class="btn btn-warning" value="Remove Warnings" />
         }

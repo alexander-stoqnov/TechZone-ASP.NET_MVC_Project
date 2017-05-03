@@ -17,6 +17,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("AddToShoppingCart")]
         public ActionResult AddToShoppingCart(int id)
         {

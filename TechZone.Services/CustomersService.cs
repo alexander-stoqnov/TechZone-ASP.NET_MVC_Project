@@ -40,14 +40,14 @@
             Upload(new DropboxClient("mQ4aAGajcfAAAAAAAAAAEcVfYBCEdnqccMa1IOiDpmOYVO6GkdprCUTg5p3GWMih"), $"/Users/{customer.User.UserName}/ProfilePicture", fileName, file);
         }
 
-        public bool OrderBellongsToCurrentUser(string currentUserId, int id)
+        public bool OrderBellongsToCurrentUser(string currentUserId, int? id)
         {
             var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
             var purchase = this.Context.Purchases.Find(id);
             return purchase?.Customer.Id == customer.Id;
         }
 
-        public byte[] DownloadOrderInvoice(string currentUserId, int id)
+        public byte[] DownloadOrderInvoice(string currentUserId, int? id)
         {
             var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
             var purchase = this.Context.Purchases.Find(id);

@@ -92,9 +92,14 @@
         }
 
         [CustomAuthorize(Roles = "Admin,Moderator")]
-        [Route("EditArticle/{id}")]
-        public ActionResult EditArticle(int id)
+        [Route("EditArticle/{id?}")]
+        public ActionResult EditArticle(int? id)
         {
+            if (!this._service.ArticleExists(id))
+            {
+                return RedirectToAction("All", "Articles");
+            }
+
             EditArticleViewModel eavm = this._service.GetArticleToManage(id);
             return this.View(eavm);
         }
@@ -116,9 +121,14 @@
         }
 
         [CustomAuthorize(Roles = "Admin,Moderator")]
-        [Route("DeleteArticle/{id}")]
-        public ActionResult DeleteArticle(int id)
+        [Route("DeleteArticle/{id?}")]
+        public ActionResult DeleteArticle(int? id)
         {
+            if (!this._service.ArticleExists(id))
+            {
+                return RedirectToAction("All", "Articles");
+            }
+
             EditArticleViewModel eavm = _service.GetArticleToManage(id);
             return this.View(eavm);
         }

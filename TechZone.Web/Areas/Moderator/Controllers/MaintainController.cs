@@ -101,6 +101,7 @@
         [HttpPost]
         [Route("RemoveUserWarnings")]
         [CustomAuthorize(Roles = "Moderator")]
+        [ValidateAntiForgeryToken]
         public ActionResult RemoveUserWarnings(string roomId)
         {
             this._service.RemoveUserWarnings(roomId);
