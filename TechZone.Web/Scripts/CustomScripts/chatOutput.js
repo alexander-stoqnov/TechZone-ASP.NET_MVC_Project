@@ -5,7 +5,7 @@
         .done(function() {
             $('#send-message')
                 .click(function() {
-                    chat.server.receiveMessage($('#username').val(), $('#message').val());
+                    chat.server.receiveMessage($('#chat-username').val(), $('#message').val());
                 });
         });
 })

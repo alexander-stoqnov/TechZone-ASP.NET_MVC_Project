@@ -84,10 +84,12 @@
         public ActionResult ChatRoom(string roomId)
         {
             string currentUserId = User.Identity.GetUserId();
-            if (!this._service.IsRoomForCurrentUser(currentUserId, roomId) || !this.User.IsInRole("Moderator"))
+            if (!this._service.IsRoomForCurrentUser(currentUserId, roomId) && !this.User.IsInRole("Moderator"))
             {
-                return RedirectToAction("All", "Products");
+                return RedirectToAction("All", "Products", new { area = ""});
             }
+
+
             return this.View("ChatRoom", null, User.Identity.GetUserName());
         }
     }
