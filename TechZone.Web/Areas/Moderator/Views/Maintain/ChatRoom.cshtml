@@ -4,29 +4,9 @@
     Layout = User.IsInRole("Moderator") ? "~/Areas/Moderator/Views/Shared/_Layout.cshtml" : "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    #normal-message {
-        padding: 5px 15px;
-        background-color: #0098FF;
-        border-radius: 50px;
-    }
-     #other {
-         color: #F79200;
-     }
-    #chat-container {
-        margin-top: 50px;
-    }
-    #chat-window {
-        list-style-type: none
-    }
-    #chat-window>li {
-        font-size: 1.5em;
-        margin: 10px;
-    }
-    #message {
-        max-width: 400px;
-    }
-</style>
+@section styles {
+<link rel="stylesheet" href="/Content/CustomSiteCss/ChatStyles.css">
+}
 
 <div class="container" id="chat-container">
     <input type="hidden" value="@(User.IsInRole("Moderator") ? "Moderator" : Model)" id="chat-username" />
@@ -36,16 +16,8 @@
 </div>
 
 @section scripts {
-    <script>
-        $('#message').keydown(function (e) {
-            if (e.keyCode == 13) {
-                $('#send-message').click();
-            }
-        });
-    </script>
-
-    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
-    <script src="~/signalR/hubs"></script>
-    <script src="~/Scripts/CustomScripts/chatOutput.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="~/signalR/hubs"></script>
+<script src="~/Scripts/CustomScripts/chatOutput.js"></script>
 <script src="~/Scripts/CustomScripts/chatInput.js"></script>
 }

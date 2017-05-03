@@ -250,6 +250,7 @@
     <Content Include="Content\CustomSiteCss\ArticlesStyles.css" />
     <Content Include="Content\CustomSiteCss\bootstrap-admin.css" />
     <Content Include="Content\CustomSiteCss\bootstrap-moderator.css" />
+    <Content Include="Content\CustomSiteCss\ChatStyles.css" />
     <Content Include="Content\CustomSiteCss\LoginRegisterStyles.css" />
     <Content Include="Content\CustomSiteCss\ProductDetails.css" />
     <Content Include="Content\CustomSiteCss\ProductReviews.css" />
