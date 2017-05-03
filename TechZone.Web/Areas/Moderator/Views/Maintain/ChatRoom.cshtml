@@ -5,26 +5,46 @@
 }
 
 <style>
-    #other {
-        color: red;
+    #normal-message {
+        padding: 5px 15px;
+        background-color: #0098FF;
+        border-radius: 50px;
     }
+     #other {
+         color: #F79200;
+     }
     #chat-container {
         margin-top: 50px;
     }
     #chat-window {
         list-style-type: none
     }
+    #chat-window>li {
+        font-size: 1.5em;
+        margin: 10px;
+    }
+    #message {
+        max-width: 400px;
+    }
 </style>
 
 <div class="container" id="chat-container">
     <input type="hidden" value="@(User.IsInRole("Moderator") ? "Moderator" : Model)" id="chat-username" />
     <ul id="chat-window"></ul>
-    <input type="text" id="message" class="form-control" />
-    <input type="button" value="Send" id="send-message" />
+    <input type="text" id="message" class="form-control" style="display: inline;" />
+    <input type="button" value="Send" id="send-message" class="btn btn-success"/>
 </div>
 
 @section scripts {
-<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script>
+        $('#message').keydown(function (e) {
+            if (e.keyCode == 13) {
+                $('#send-message').click();
+            }
+        });
+    </script>
+
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
     <script src="~/signalR/hubs"></script>
     <script src="~/Scripts/CustomScripts/chatOutput.js"></script>
 <script src="~/Scripts/CustomScripts/chatInput.js"></script>
