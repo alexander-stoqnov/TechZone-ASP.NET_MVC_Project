@@ -88,9 +88,20 @@
             {
                 return RedirectToAction("All", "Products", new { area = ""});
             }
+            ChatRoomUsernamesViewModel cruvm = new ChatRoomUsernamesViewModel
+            {
+                currentUserUsername = User.Identity.GetUserName(),
+                roomId = roomId
+            };
+            return this.View(cruvm);
+        }
 
-
-            return this.View("ChatRoom", null, User.Identity.GetUserName());
+        [HttpPost]
+        [Route("RemoveUserWarnings")]
+        public ActionResult RemoveUserWarnings(string roomId)
+        {
+            this._service.RemoveUserWarnings(roomId);
+            return RedirectToAction("EvaluateReports", "Maintain", new {area = "Moderator"});
         }
     }
 }

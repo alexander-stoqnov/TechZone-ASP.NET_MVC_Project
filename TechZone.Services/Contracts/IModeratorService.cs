@@ -12,5 +12,6 @@ namespace TechZone.Services.Contracts
         void RemoveReport(int id);
         void IssueWarningToCustomer(int id);
         bool IsRoomForCurrentUser(string currentUserId, string roomId);
+        void RemoveUserWarnings(string roomId);
     }
 }

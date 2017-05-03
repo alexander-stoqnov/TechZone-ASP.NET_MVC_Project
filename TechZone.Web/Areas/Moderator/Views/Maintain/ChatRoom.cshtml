@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model TechZone.Models.ViewModels.Moderator.ChatRoomUsernamesViewModel
 @{
     ViewBag.Title = "ChatRoom";
     Layout = User.IsInRole("Moderator") ? "~/Areas/Moderator/Views/Shared/_Layout.cshtml" : "~/Views/Shared/_Layout.cshtml";
@@ -9,10 +9,18 @@
 }
 
 <div class="container" id="chat-container">
-    <input type="hidden" value="@(User.IsInRole("Moderator") ? "Moderator" : Model)" id="chat-username" />
+    <input type="hidden" value="@(User.IsInRole("Moderator") ? "Moderator" : Model.currentUserUsername)" id="chat-username" />
     <ul id="chat-window"></ul>
     <input type="text" id="message" class="form-control" style="display: inline;" />
     <input type="button" value="Send" id="send-message" class="btn btn-success"/>
+    @if (User.IsInRole("Moderator"))
+    {
+        using (Html.BeginForm("RemoveUserWarnings", "Maintain", FormMethod.Post, new { style = "display: inline;" }))
+        {
+            <input type="hidden" value="@Model.roomId" name="roomId" />
+            <input type="submit" class="btn btn-warning" value="Remove Warnings" />
+        }
+    }
 </div>
 
 @section scripts {

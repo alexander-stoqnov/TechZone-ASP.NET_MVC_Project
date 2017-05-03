@@ -63,7 +63,19 @@
         {
             var customer = this.Context.Customers.First(c => c.UserId == currentUserId);
             ForgivenessRequest frq = this.Context.ForgivenessRequests.FirstOrDefault(fr => fr.RoomId == roomId);
-            return frq != null && frq.Customer == customer;
+            return frq != null && frq.Customer == customer && !frq.IsAnswered;
+        }
+
+        public void RemoveUserWarnings(string roomId)
+        {
+            var frq = this.Context.ForgivenessRequests.First(c => c.RoomId == roomId);
+            frq.Customer.Warnings = 0;
+            var forgivnesses = this.Context.ForgivenessRequests.Where(freq => freq.Customer.Id == frq.Customer.Id);
+            foreach (var forgivness in forgivnesses)
+            {
+                forgivness.IsAnswered = true;
+            }
+            this.Context.SaveChanges();
         }
     }
 }
