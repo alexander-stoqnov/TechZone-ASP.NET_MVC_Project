@@ -12,7 +12,6 @@
     using Models.BindingModels;
     using Contracts;
 
-
     public class ReviewsService : Service, IReviewsService
     {
         public bool ReviewExists(int id)
@@ -34,7 +33,7 @@
             this.Context.SaveChanges();
         }
 
-        public ReviewOverviewViewModel GetReviewsForProduct(int id, string dropboxKey)
+        public ReviewOverviewViewModel GetReviewsForProduct(int id)
         {
             var product = this.Context.Products.Find(id);
             if (product.Reviews.Count == 0)
@@ -62,7 +61,7 @@
                 if (review.Reviewer.User.ProfilePictureFileName != null)
                 {
                     srvm.ReviewerImageData = this.GetUserProfilePicture(review.Reviewer.User.ProfilePictureFileName,
-                        review.Reviewer.User.UserName, dropboxKey);
+                        review.Reviewer.User.UserName);
                 }
                 rovm.Reviews.Add(srvm);
             }
@@ -70,9 +69,9 @@
             return rovm;
         }
 
-        private string GetUserProfilePicture(string profilePictureFileName, string userUserName, string dropboxKey)
+        private string GetUserProfilePicture(string profilePictureFileName, string userUserName)
         {
-            var imageByteData = this.DownloadAsync(new DropboxClient(dropboxKey), $"Users/{userUserName}/ProfilePicture", profilePictureFileName);
+            var imageByteData = this.DownloadAsync(new DropboxClient("mQ4aAGajcfAAAAAAAAAAEcVfYBCEdnqccMa1IOiDpmOYVO6GkdprCUTg5p3GWMih"), $"Users/{userUserName}/ProfilePicture", profilePictureFileName);
             string imageBase64Data = Convert.ToBase64String(imageByteData.Result);
             return $"data:image/*;base64,{imageBase64Data}";
         }
@@ -96,7 +95,7 @@
             return this.Context.Reviews.FirstOrDefault(r => r.Reviewer.Id == customer.Id && r.Product.Id == id) != null;
         }
 
-        public ReviewDetailsViewModel GetReviewDetails(string currentUserId, int id, string dropboxKey)
+        public ReviewDetailsViewModel GetReviewDetails(string currentUserId, int id)
         {
             var customer = this.Context.Customers.FirstOrDefault(c => c.UserId == currentUserId);
             var review = this.Context.Reviews.Find(id);
@@ -114,7 +113,7 @@
             if (review.Reviewer.User.ProfilePictureFileName != null)
             {
                 rdvm.ReviewerImageData = this.GetUserProfilePicture(review.Reviewer.User.ProfilePictureFileName,
-                    review.Reviewer.User.UserName, dropboxKey);
+                    review.Reviewer.User.UserName);
             }
             rdvm.ReviewComments = Mapper.Instance.Map<IEnumerable<ReviewCommentViewModel>>(review.Comments);
             return rdvm;

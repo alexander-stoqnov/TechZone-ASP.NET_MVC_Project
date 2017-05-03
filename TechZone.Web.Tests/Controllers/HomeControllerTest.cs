@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Configuration;
+using Microsoft.AspNet.Identity;
 
 namespace TechZone.Web.Tests.Controllers
 {
@@ -39,7 +40,6 @@ namespace TechZone.Web.Tests.Controllers
         public void HomeIndex_ShouldReturnNotEmptyViewModel()
         {
             HomeController controller = new HomeController(this._productsService, this._reviewsService, this._articlesService);
-            controller.User.Identity.GetUserId();
             var result = controller.Index() as ViewResult;
             var vm = result.Model as HomePageViewModel;
             Assert.IsNotNull(vm);

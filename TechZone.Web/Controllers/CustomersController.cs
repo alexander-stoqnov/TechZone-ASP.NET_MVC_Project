@@ -25,10 +25,9 @@
         public ActionResult UserProfile()
         {
             var currentUserId = this.User.Identity.GetUserId();
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             try
             {
-                CustomerProfileViewModel customerProfileVm = this._service.GetCurrentUserProfile(currentUserId, apikey[1]);
+                CustomerProfileViewModel customerProfileVm = this._service.GetCurrentUserProfile(currentUserId);
                 return View(customerProfileVm);
             }
             catch (Exception)
@@ -42,9 +41,8 @@
         [ValidateAntiForgeryToken]
         public ActionResult UploadPicture()
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             string currentUserId = User.Identity.GetUserId();
-            CustomerProfileViewModel customerProfileVm = this._service.GetCurrentUserProfile(currentUserId, apikey[1]);
+            CustomerProfileViewModel customerProfileVm = this._service.GetCurrentUserProfile(currentUserId);
 
             HttpPostedFileBase file = this.Request.Files["picture"];
 
@@ -71,7 +69,7 @@
             file.InputStream.CopyTo(memstr);
             byte[] imageData = memstr.ToArray();
 
-            this._service.UploadUserProfilePicture(currentUserId, apikey[1], fileName, imageData);
+            this._service.UploadUserProfilePicture(currentUserId, fileName, imageData);
             return RedirectToAction("UserProfile", "Customers");
         }
 
@@ -85,7 +83,7 @@
                 return RedirectToAction("UserProfile", "Customers");
             }
 
-            var pdfFile = this._service.DownloadOrderInvoice(currentUserId, id, apikey[1]);
+            var pdfFile = this._service.DownloadOrderInvoice(currentUserId, id);
             MemoryStream ms = new MemoryStream(pdfFile);
             return new FileStreamResult(ms, "application/pdf");
         }

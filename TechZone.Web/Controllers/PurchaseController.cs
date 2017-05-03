@@ -105,7 +105,7 @@
             {
                 return RedirectToAction("CheckOut", "Purchase");
             }
-            this._service.FinalizePurchase(currentUserId, finalPrice, apikey[1]);
+            this._service.FinalizePurchase(currentUserId, finalPrice);
             return this.RedirectToAction("All", "Products");
         }
     }

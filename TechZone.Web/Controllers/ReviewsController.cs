@@ -32,8 +32,7 @@
         [ChildActionOnly]
         public ActionResult LoadProductReviews(int id)
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
-            ReviewOverviewViewModel rovm = this._service.GetReviewsForProduct(id, apikey[1]);
+            ReviewOverviewViewModel rovm = this._service.GetReviewsForProduct(id);
             return this.PartialView("_AllProductReviewPartial", rovm);
         }
 
@@ -56,13 +55,12 @@
         [Route("Details/{id}")]
         public ActionResult Details(int id)
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             if (!this._service.ReviewExists(id))
             {
                 return this.RedirectToAction("All", "Products");
             }
             var currentUserId = this.User.Identity.GetUserId();
-            ReviewDetailsViewModel rdvm = this._service.GetReviewDetails(currentUserId, id, apikey[1]);
+            ReviewDetailsViewModel rdvm = this._service.GetReviewDetails(currentUserId, id);
             return this.View(rdvm);
         }
 

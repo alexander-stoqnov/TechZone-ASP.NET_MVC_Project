@@ -9,10 +9,10 @@ namespace TechZone.Services.Contracts
     {
         bool ReviewExists(int id);
         void CreateReview(string currentUserId, WriteReviewBindingModel wrbm);
-        ReviewOverviewViewModel GetReviewsForProduct(int id, string dropboxKey);
+        ReviewOverviewViewModel GetReviewsForProduct(int id);
         SubmitReviewViewModel CheckWhetherUserHasReviewedProduct(string currentUserId, int id);
         bool HasUserReviewedProduct(string currentUserId, int id);
-        ReviewDetailsViewModel GetReviewDetails(string currentUserId, int id, string dropboxKey);
+        ReviewDetailsViewModel GetReviewDetails(string currentUserId, int id);
         void WriteCommentToReview(string currentUserId, AddCommentBindingModel acbm);
         bool UserHasAlreadyVotedForReview(string currentUserId, int id);
         void CastUserVote(string currentUserId, VoteForReviewViewModel vote);

@@ -7,11 +7,12 @@
     public class AddProductBindingModel
     {
         [Required]
-        [MinLength(10, ErrorMessage = "Product name cannot be less than 10 characters long")]
+        [MinLength(10, ErrorMessage = "Product name cannot be less than 10 characters")]
+        [MaxLength(70, ErrorMessage = "Product name should be less than 50 characters")]
         public string Name { get; set; }
 
-        [Required]
-        [MinLength(30, ErrorMessage = "Product description cannot be less than 30 characters long")]
+        [MinLength(30, ErrorMessage = "Product description cannot be less than 30 characters")]
+        [MaxLength(3000, ErrorMessage = "Product description should be less than 3000 characters")]
         public string Description { get; set; }
 
         [RegularExpression("(http|https)://.+")]

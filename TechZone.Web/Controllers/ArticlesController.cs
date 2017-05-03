@@ -24,10 +24,9 @@
         [HandleError(ExceptionType = typeof(ArgumentException), View = "WaitForDownload")]
         public ActionResult All(string authorName = "")
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             try
             {
-                IEnumerable<GeneralArticleViewModel> articleVms = this._service.GetAllArticles(authorName, apikey[1]);
+                IEnumerable<GeneralArticleViewModel> articleVms = this._service.GetAllArticles(authorName);
                 return View(articleVms);
             }
             catch (Exception)
@@ -50,7 +49,6 @@
         [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Add(AddArticleViewModel aavm)
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             HttpPostedFileBase file = this.Request.Files["articlePicture"];
 
             if (file == null)
@@ -78,7 +76,7 @@
             byte[] imageData = memstr.ToArray();
             if (ModelState.IsValid)
             {
-                this._service.AddArticle(currentUserId, aavm, fileName, imageData, apikey[1]);
+                this._service.AddArticle(currentUserId, aavm, fileName, imageData);
                 return RedirectToAction("All", "Articles");
             }
 
@@ -89,8 +87,7 @@
         [HandleError(ExceptionType = typeof(HttpRequestValidationException), View = "NaughtyStringsError")]
         public ActionResult Search(string content = "")
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
-            IEnumerable<GeneralArticleViewModel> articleVms = _service.GetFilteredArticles(content, apikey[1]);
+            IEnumerable<GeneralArticleViewModel> articleVms = _service.GetFilteredArticles(content);
             return this.PartialView("_ArticleGeneralViewPartial", articleVms);
         }
 

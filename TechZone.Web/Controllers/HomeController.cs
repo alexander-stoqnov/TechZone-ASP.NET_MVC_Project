@@ -20,21 +20,18 @@
 
         public ActionResult Index()
         {
-            var apikey = System.IO.File.ReadAllLines(Server.MapPath("~/Scripts/CustomScripts/") + "keys.txt");
             HomePageViewModel hpvm = new HomePageViewModel
             {
                 LatestProducts = this._productsService.GetHomePageLatestProducts(),
                 LatestReviews = this._reviewsService.GetHomePageLatestReviews(),
-                LatestArticles = this._articlesService.GetHomePageLatestArticles(apikey[1]).ToList()
+                LatestArticles = this._articlesService.GetHomePageLatestArticles().ToList()
             };
             return View(hpvm);
         }
 
         public ActionResult Contact()
         {
-            string path = Server.MapPath("~/Scripts/CustomScripts/");
-            var apikey = System.IO.File.ReadAllLines(path + "keys.txt");
-            return View("Contact", null, apikey[0]);
+            return View();
         }
     }
 }

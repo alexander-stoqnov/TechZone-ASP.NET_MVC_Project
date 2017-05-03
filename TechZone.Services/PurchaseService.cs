@@ -157,7 +157,7 @@ namespace TechZone.Services
             return customer.Credits > totalPrice;
         }
 
-        public void FinalizePurchase(string currentUserId, decimal finalPrice, string dropboxKey)
+        public void FinalizePurchase(string currentUserId, decimal finalPrice)
         {
             var customer = this.Context.Customers.First(c => c.User.Id == currentUserId);
             var cart = this.Context.ShoppingCarts.First(c => c.Customer.Id == currentUserId);
@@ -188,7 +188,7 @@ namespace TechZone.Services
             byte[] pdfData = CreatePdf(purchase);
             string fileName =
                 $"{purchase.Customer.User.UserName}_{purchase.PurchaseDate.ToString("yyyyMMdd")}_{purchase.Id.ToString("00000000")}.pdf";
-            Upload(new DropboxClient(dropboxKey), $"/Users/{customer.User.UserName}/Orders", fileName, pdfData);
+            Upload(new DropboxClient("mQ4aAGajcfAAAAAAAAAAEcVfYBCEdnqccMa1IOiDpmOYVO6GkdprCUTg5p3GWMih"), $"/Users/{customer.User.UserName}/Orders", fileName, pdfData);
         }
 
         public bool ContainsItemsNotInStock(string currentUserId)

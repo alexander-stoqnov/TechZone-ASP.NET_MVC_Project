@@ -4,9 +4,9 @@
 
     public interface ICustomersService
     {
-        CustomerProfileViewModel GetCurrentUserProfile(string currentUserId, string dropboxKey);
-        void UploadUserProfilePicture(string currentUserId, string dropboxKey, string fileName, byte[] file);
+        CustomerProfileViewModel GetCurrentUserProfile(string currentUserId);
+        void UploadUserProfilePicture(string currentUserId, string fileName, byte[] file);
         bool OrderBellongsToCurrentUser(string currentUserId, int id);
-        byte[] DownloadOrderInvoice(string currentUserId, int id, string dropboxKey);
+        byte[] DownloadOrderInvoice(string currentUserId, int id);
     }
 }

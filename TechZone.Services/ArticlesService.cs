@@ -12,7 +12,7 @@
 
     public class ArticlesService : Service, IArticlesService
     {
-        public void AddArticle(string currentUserId, AddArticleViewModel aavm, string fileName, byte[] file, string dropboxKey)
+        public void AddArticle(string currentUserId, AddArticleViewModel aavm, string fileName, byte[] file)
         {
             Customer customer = this.Context.Customers.First(c => c.User.Id == currentUserId);
             Article article = Mapper.Instance.Map<Article>(aavm);
@@ -22,32 +22,32 @@
             article.ImageFileName = newFileName;
             this.Context.Articles.Add(article);
             this.Context.SaveChanges();
-            Upload(new DropboxClient(dropboxKey), $"/Articles/{customer.User.UserName}", newFileName, file);
+            Upload(new DropboxClient("mQ4aAGajcfAAAAAAAAAAEcVfYBCEdnqccMa1IOiDpmOYVO6GkdprCUTg5p3GWMih"), $"/Articles/{customer.User.UserName}", newFileName, file);
         }
 
-        public IEnumerable<GeneralArticleViewModel> GetAllArticles(string publisherName, string dropboxKey)
+        public IEnumerable<GeneralArticleViewModel> GetAllArticles(string publisherName)
         {
             var articles = this.Context.Articles
                 .Where(a => a.Publisher.User.UserName.Contains(publisherName))
                 .OrderByDescending(a => a.PublishDate).ToList();        
 
-            return GetArticlesFromEntities(articles, dropboxKey);
+            return GetArticlesFromEntities(articles);
         }
 
-        private string DownloadArticlePicture(string articleFileName, string publisherUsername, string dropboxKey)
+        private string DownloadArticlePicture(string articleFileName, string publisherUsername)
         {
-            var imageByteData = this.DownloadAsync(new DropboxClient(dropboxKey), $"Articles/{publisherUsername}", articleFileName);
+            var imageByteData = this.DownloadAsync(new DropboxClient("mQ4aAGajcfAAAAAAAAAAEcVfYBCEdnqccMa1IOiDpmOYVO6GkdprCUTg5p3GWMih"), $"Articles/{publisherUsername}", articleFileName);
             string imageBase64Data = Convert.ToBase64String(imageByteData.Result);
             return $"data:image/*;base64,{imageBase64Data}";
         }
 
-        public IEnumerable<GeneralArticleViewModel> GetFilteredArticles(string content, string dropboxKey)
+        public IEnumerable<GeneralArticleViewModel> GetFilteredArticles(string content)
         {
             var articles = this.Context.Articles.Where(a => a.Title.Contains(content)).OrderByDescending(a => a.PublishDate).ToList();
-            return GetArticlesFromEntities(articles, dropboxKey);
+            return GetArticlesFromEntities(articles);
         }
 
-        private IEnumerable<GeneralArticleViewModel> GetArticlesFromEntities(List<Article> articles, string dropboxKey)
+        private IEnumerable<GeneralArticleViewModel> GetArticlesFromEntities(List<Article> articles)
         {
             var articlesVms = new HashSet<GeneralArticleViewModel>();
             foreach (var article in articles)
@@ -56,8 +56,7 @@
                 articleVm.ContentParagraphs = article.Content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 if (article.ImageFileName != null)
                 {
-                    articleVm.ImageData = this.DownloadArticlePicture(article.ImageFileName, article.Publisher.User.UserName,
-      dropboxKey);
+                    articleVm.ImageData = this.DownloadArticlePicture(article.ImageFileName, article.Publisher.User.UserName);
                 }
                 articlesVms.Add(articleVm);
             }
@@ -85,7 +84,7 @@
             this.Context.SaveChanges();
         }
 
-        public ICollection<LatestArticleViewModel> GetHomePageLatestArticles(string dropboxKey)
+        public ICollection<LatestArticleViewModel> GetHomePageLatestArticles()
         {
             var articles = this.Context.Articles.OrderByDescending(a => a.PublishDate).Take(3).ToList();
             ICollection<LatestArticleViewModel> articleVms = new List<LatestArticleViewModel>();
@@ -95,8 +94,7 @@
                 articleVm.ContentParagraphs = article.Content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 if (article.ImageFileName != null)
                 {
-                    articleVm.ImageData = DownloadArticlePicture(article.ImageFileName, article.Publisher.User.UserName,
-                        dropboxKey);
+                    articleVm.ImageData = DownloadArticlePicture(article.ImageFileName, article.Publisher.User.UserName);
                 }
                 articleVms.Add(articleVm);
             }

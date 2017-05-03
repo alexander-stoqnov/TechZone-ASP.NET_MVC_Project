@@ -14,7 +14,7 @@ namespace TechZone.Services.Contracts
         void RemoveProductFromCart(string currentUserId, string sessionId, int productId);
         FinalCheckoutViewModel CalculatePriceWithoutShipment(string currentUserId);
         bool EnoughCredits(string currentUserId, decimal totalPrice);
-        void FinalizePurchase(string currentUserId, decimal finalPrice, string dropboxKey);
+        void FinalizePurchase(string currentUserId, decimal finalPrice);
         bool ContainsItemsNotInStock(string currentUserId);
 
         /// <summary>
