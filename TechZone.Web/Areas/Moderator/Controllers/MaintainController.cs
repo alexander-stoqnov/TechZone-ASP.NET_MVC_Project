@@ -54,6 +54,7 @@
         [Route("DismissReport")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = "Moderator")]
         public ActionResult DismissReport(int id)
         {
             if (!this._service.ReportStillExists(id))
@@ -68,6 +69,7 @@
         [Route("IssueWarning")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = "Moderator")]
         public ActionResult IssueWarning(int id)
         {
             if (!this._service.ReportStillExists(id))
@@ -90,18 +92,27 @@
             }
             ChatRoomUsernamesViewModel cruvm = new ChatRoomUsernamesViewModel
             {
-                currentUserUsername = User.Identity.GetUserName(),
-                roomId = roomId
+                CurrentUserUsername = User.Identity.GetUserName(),
+                RoomId = roomId
             };
             return this.View(cruvm);
         }
 
         [HttpPost]
         [Route("RemoveUserWarnings")]
+        [CustomAuthorize(Roles = "Moderator")]
         public ActionResult RemoveUserWarnings(string roomId)
         {
             this._service.RemoveUserWarnings(roomId);
-            return RedirectToAction("EvaluateReports", "Maintain", new {area = "Moderator"});
+            return RedirectToAction("JudgeWarnings", "Maintain", new {area = "Moderator"});
+        }
+
+        [Route("JudgeWarnings")]
+        [CustomAuthorize(Roles = "Moderator")]
+        public ActionResult JudgeWarnings()
+        {
+            IEnumerable<UserWarningsViewModel> warningsVms = this._service.GetAllUserWarnings();
+            return this.View(warningsVms);
         }
     }
 }

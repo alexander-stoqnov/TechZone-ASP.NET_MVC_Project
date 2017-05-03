@@ -76,6 +76,9 @@
                     .ForMember(gavm => gavm.AuthorUsername, expr => expr.MapFrom(a => a.Publisher.User.UserName));
                 m.CreateMap<Article, EditArticleViewModel>();
                 m.CreateMap<Article, LatestArticleViewModel>();
+                m.CreateMap<ForgivenessRequest, UserWarningsViewModel>()
+                 .ForMember(uwvm => uwvm.CountOfWarnings, expr => expr.MapFrom(fr => fr.Customer.Warnings))
+                 .ForMember(uwvm => uwvm.WarnedUserUsername, expr => expr.MapFrom(fr => fr.Customer.User.UserName));
 
                 m.CreateMap<WriteReviewBindingModel, Review>();
                 m.CreateMap<SubmitReportViewModel, Report>();

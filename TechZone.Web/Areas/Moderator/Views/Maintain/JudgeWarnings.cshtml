@@ -1,0 +1,24 @@
+﻿@model IEnumerable<TechZone.Models.ViewModels.Moderator.UserWarningsViewModel>
+@{
+    ViewBag.Title = "JudgeWarnings";
+}
+
+<table class="table table-striped text-center" style="max-width: 500px; margin-top: 20px">
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(vm => vm.WarnedUserUsername)</th>
+        <th class="text-center">@Html.DisplayNameFor(vm => vm.CountOfWarnings)</th>
+        <th class="text-center">@Html.DisplayNameFor(vm => vm.RoomId)</th>
+    </tr>
+    @{
+        foreach (var warning in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(vm => warning.WarnedUserUsername)</td>
+                <td>@Html.DisplayFor(vm => warning.CountOfWarnings)</td>
+                <td>
+                    @Html.ActionLink("Enter", "ChatRoom", new { roomId = warning.RoomId}, new { @class = "btn btn-sm btn-success"})
+                </td>
+            </tr>
+        }
+    }
+</table>

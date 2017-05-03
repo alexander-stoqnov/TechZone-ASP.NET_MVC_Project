@@ -2,8 +2,8 @@
 {
     public class ChatRoomUsernamesViewModel
     {
-        public string currentUserUsername { get; set; }
+        public string CurrentUserUsername { get; set; }
 
-        public string roomId { get; set; }
+        public string RoomId { get; set; }
     }
 }

@@ -9,7 +9,7 @@
 }
 
 <div class="container" id="chat-container">
-    <input type="hidden" value="@(User.IsInRole("Moderator") ? "Moderator" : Model.currentUserUsername)" id="chat-username" />
+    <input type="hidden" value="@(User.IsInRole("Moderator") ? "Moderator" : Model.CurrentUserUsername)" id="chat-username" />
     <ul id="chat-window"></ul>
     <input type="text" id="message" class="form-control" style="display: inline;" />
     <input type="button" value="Send" id="send-message" class="btn btn-success"/>
@@ -17,7 +17,7 @@
     {
         using (Html.BeginForm("RemoveUserWarnings", "Maintain", FormMethod.Post, new { style = "display: inline;" }))
         {
-            <input type="hidden" value="@Model.roomId" name="roomId" />
+            <input type="hidden" value="@Model.RoomId" name="roomId" />
             <input type="submit" class="btn btn-warning" value="Remove Warnings" />
         }
     }

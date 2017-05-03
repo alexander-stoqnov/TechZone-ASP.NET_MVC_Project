@@ -77,5 +77,12 @@
             }
             this.Context.SaveChanges();
         }
+
+        public IEnumerable<UserWarningsViewModel> GetAllUserWarnings()
+        {
+            var warnings =
+                this.Context.ForgivenessRequests.Where(fr => !fr.IsAnswered);
+            return Mapper.Instance.Map<IEnumerable<UserWarningsViewModel>>(warnings);
+        }
     }
 }

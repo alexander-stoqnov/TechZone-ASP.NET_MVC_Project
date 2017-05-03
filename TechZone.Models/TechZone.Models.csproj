@@ -163,6 +163,7 @@
     <Compile Include="ViewModels\Moderator\ChatRoomUsernamesViewModel.cs" />
     <Compile Include="ViewModels\Moderator\EvaluateReportViewModel.cs" />
     <Compile Include="ViewModels\Moderator\SubmitReportViewModel.cs" />
+    <Compile Include="ViewModels\Moderator\UserWarningsViewModel.cs" />
     <Compile Include="ViewModels\Products\GeneralProductPageViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductDetailsViewModel.cs" />
     <Compile Include="ViewModels\Purchase\FinalCheckoutViewModel.cs" />

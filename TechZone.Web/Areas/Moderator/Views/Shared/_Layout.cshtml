@@ -19,6 +19,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("TechZone", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Evaluate Reports", "EvaluateReports", "Maintain", new { area = "Moderator" }, null)</li>
+                    <li>@Html.ActionLink("Evaluate Warnings", "JudgeWarnings", "Maintain", new { area = "Moderator" }, null)</li>
+                </ul>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
