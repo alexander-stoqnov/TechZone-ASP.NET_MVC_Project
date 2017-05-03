@@ -17,7 +17,14 @@
                         <ul class="media-list">
                             <li class="media">
                                 <a class="pull-left" href="#">
-                                    <img class="media-object img-circle" src="@Model.ReviewerImageData" alt="Reviewer Profile Picture">
+                                    @if (Model.ReviewerImageData != null)
+                                    {
+                                        <img class="media-object img-circle" src="@Model.ReviewerImageData" alt="Reviewer Profile Picture">
+                                    }
+                                    else
+                                    {
+                                        <img class="media-object img-circle" src="http://placehold.it/120" alt="Reviewer Profile Picture">
+                                    }
                                 </a>
                                 <div class="media-body">
                                     <div class="well well-lg">

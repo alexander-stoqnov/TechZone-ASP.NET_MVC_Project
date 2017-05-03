@@ -11,7 +11,7 @@
                 <div class="pull-right">
                     @Html.ActionLink("Report", "SubmitReport", "Maintain", new { area = "Moderator", id = Model.Id }, new { @class = "btn btn-danger" })
                 </div>
-                <p class="media-comment">@Model.Content</p>
+                <p class="media-comment" id="comment-@Model.Id">@Model.Content</p>
             </div>
         </div>
     </div>
