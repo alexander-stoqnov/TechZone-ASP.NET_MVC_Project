@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using Microsoft.AspNet.Identity;
-
-namespace TechZone.Web.Tests.Controllers
+﻿namespace TechZone.Web.Tests.Controllers
 {
     using System.Web.Mvc;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,34 +12,40 @@ namespace TechZone.Web.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
-        private IProductsService _productsService;
-        private IReviewsService _reviewsService;
-        private IArticlesService _articlesService;
+        private readonly IProductsService _productsService;
+        private readonly IReviewsService _reviewsService;
+        private readonly IArticlesService _articlesService;
+        private readonly HomeController _controller;
 
-        [TestInitialize]
-        public void Init()
+        public HomeControllerTest()
         {
             ConfigureMappings();
             this._productsService = new ProductsService();
             this._reviewsService = new ReviewsService();
             this._articlesService = new ArticlesService();
+            this._controller = new HomeController(this._productsService, this._reviewsService, this._articlesService);
         }
 
         [TestMethod]
         public void HomeIndex_ShouldReturnItsDefaultView()
         {
-            HomeController controller = new HomeController(this._productsService, this._reviewsService, this._articlesService);
-            var result = controller.Index() as ViewResult;
+            var result = _controller.Index() as ViewResult;
             Assert.IsTrue(string.IsNullOrEmpty(result.ViewName));
         }
 
         [TestMethod]
         public void HomeIndex_ShouldReturnNotEmptyViewModel()
         {
-            HomeController controller = new HomeController(this._productsService, this._reviewsService, this._articlesService);
-            var result = controller.Index() as ViewResult;
+            var result = _controller.Index() as ViewResult;
             var vm = result.Model as HomePageViewModel;
             Assert.IsNotNull(vm);
+        }
+
+        [TestMethod]
+        public void HomeContact_ShouldReturItsDefaultView()
+        {
+            var result = _controller.Contact() as ViewResult;
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName));
         }
 
         private void ConfigureMappings()
