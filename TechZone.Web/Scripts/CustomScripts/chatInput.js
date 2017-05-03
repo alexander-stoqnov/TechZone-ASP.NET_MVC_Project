@@ -6,16 +6,20 @@
             return;
         }
         if (name === $('#chat-username').val()) {
-            $('#chat-window').append('<li id="mine"><span id="normal-message">' + name + ' : ' + message + '</span></li>');
+            var newMsgMine = $('<li id="mine" style="display: none;"><span id="normal-message">' + name + ' : ' + message + '</span></li>');
+            $('#chat-window').append(newMsgMine);
+            newMsgMine.toggle('fast');
         } else {
-            $('#chat-window').append('<li id="other"><span id="normal-message">' + name + ' : ' + message + '</span></li>');
+            var newMsgOther = $('<li id="mine" style="display: none;"><span id="normal-message">' + name + ' : ' + message + '</span></li>');
+            $('#chat-window').append(newMsgOther);
+            newMsgOther.toggle('fast');
         }
         $('#message').val('');
     }
 
-    $('#message').keydown(function (e) {
-        if (e.keyCode == 13) {
-            $('#send-message').click();
-        }
-    });
+    //$('#message').keydown(function (e) {
+    //    if (e.keyCode == 13) {
+    //        $('#send-message').click();
+    //    }
+    //});
 })
