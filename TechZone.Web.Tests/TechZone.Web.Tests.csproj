@@ -140,6 +140,7 @@
     <Compile Include="Automation\PostingCommentsTests.cs" />
     <Compile Include="Automation\PurchasingTests.cs" />
     <Compile Include="Automation\ReviewsTests.cs" />
+    <Compile Include="Controllers\AdminControllerTest.cs" />
     <Compile Include="Controllers\ArticlesControllerTest.cs" />
     <Compile Include="Controllers\ProductsControllerTest.cs" />
     <Compile Include="Helpers\TextGenerator.cs" />

@@ -97,8 +97,9 @@
         [TestMethod]
         public void ProductsHardWareSpecs_ShouldReturnAPartialView()
         {
-            _controller.WithCallTo(pc => pc.HardwareSpecs(13))
-          .ShouldRenderPartialView("_ProductSpecsPartial");
+            _controller
+                .WithCallToChild(c => c.HardwareSpecs(10))
+                .ShouldRenderPartialView("_ProductSpecsPartial");
         }
 
         [TestMethod]

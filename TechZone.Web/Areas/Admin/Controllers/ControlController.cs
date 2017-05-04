@@ -111,7 +111,7 @@
             {
                 return this.PartialView("_AddNewProcessorPartial");
             }
-            return null;
+            return new EmptyResult();
         }
 
         [HttpPost]
