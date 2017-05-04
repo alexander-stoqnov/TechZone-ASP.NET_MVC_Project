@@ -254,7 +254,7 @@ namespace TechZone.Services
             foreach (var prod in purchasesVms)
             {
                 AddCellToBody(tableLayout, prod.Name);
-                AddCellToBody(tableLayout, "$" + prod.FinalPrice);
+                AddCellToBody(tableLayout, $"${prod.FinalPrice:f2}");
                 AddCellToBody(tableLayout, (int)prod.Guarantee + "M");
             }
             return tableLayout;

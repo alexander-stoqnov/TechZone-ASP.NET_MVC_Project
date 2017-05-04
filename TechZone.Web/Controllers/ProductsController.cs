@@ -21,6 +21,7 @@
         }
 
         [Route("All")]
+        //[OutputCache(Duration = 30 * 60)]
         public ActionResult All()
         {
             IEnumerable<GeneralProductPageViewModel> productVms = this._service.GetAllProducts();

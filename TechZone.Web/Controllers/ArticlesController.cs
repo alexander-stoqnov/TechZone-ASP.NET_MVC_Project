@@ -21,6 +21,7 @@
         }
 
         [Route("All/{authorName=}")]
+        //[OutputCache(Duration = 30)]
         [HandleError(ExceptionType = typeof(ArgumentException), View = "WaitForDownload")]
         public ActionResult All(string authorName = "")
         {
