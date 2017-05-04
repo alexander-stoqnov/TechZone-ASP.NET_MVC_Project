@@ -39,7 +39,7 @@
 
         public IEnumerable<EvaluateReportViewModel> GetAllUnevaluatedReports()
         {
-            var reportEntities = this.Context.Reports.Where(r => !r.IsEvaluated);
+            var reportEntities = this.Context.Reports.Where(r => !r.IsEvaluated).ToList();
             return Mapper.Instance.Map<IEnumerable<EvaluateReportViewModel>>(reportEntities);
         }
 
@@ -86,7 +86,7 @@
         public IEnumerable<UserWarningsViewModel> GetAllUserWarnings()
         {
             var warnings =
-                this.Context.ForgivenessRequests.Where(fr => !fr.IsAnswered);
+                this.Context.ForgivenessRequests.Where(fr => !fr.IsAnswered).ToList();
             return Mapper.Instance.Map<IEnumerable<UserWarningsViewModel>>(warnings);
         }
     }

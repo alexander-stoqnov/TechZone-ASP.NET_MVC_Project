@@ -102,15 +102,28 @@
                             }
                             else
                             {
-                                <p class="alert alert-danger col-sm-offset-1 text-center">
+                                <p class="alert alert-danger col-sm-offset-1 text-center col-sm-7">
                                     You have received at least 3 warnings for inappropriate comments. Please contact a moderator for further assistance. Write a short message to explain your situation.
                                 </p>
                                 <div class="col-sm-offset-2">
-                                    @using (Html.BeginForm("SubmitChatRequest", "Customers", FormMethod.Post))
+                                    @using (Html.BeginForm("SubmitChatRequest", "Customers", FormMethod.Post, new { @class = "form-horizontal text-center", role = "form" }))
                                     {
                                         @Html.AntiForgeryToken()
-                                        <textarea class="form-control" name="message" id="forgive-form" rows="3" style="max-width: 450px"></textarea><br/>
-                                        <input type="submit" value="Chat Request" class="btn btn-warning"/>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                @Html.TextAreaFor(m => m.Message, new {@class = "form-control", rows = "3", name = "message"})
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <input type="submit" value="Chat Request" class="btn btn-warning"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 text-left">
+                                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
                                     }
                                 </div>
                             }

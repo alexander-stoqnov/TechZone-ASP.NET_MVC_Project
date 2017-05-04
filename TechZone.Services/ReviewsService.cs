@@ -27,7 +27,7 @@
 
             review.Reviewer = customer;
             review.Product = product;
-            if (product.Rating == 0)
+            if (product.Rating == 0 && !product.Reviews.Any())
             {
                 product.Rating = review.Rating;
             }

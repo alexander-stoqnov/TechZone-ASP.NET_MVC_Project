@@ -10,7 +10,7 @@ namespace TechZone.Data
         public TechZoneContext()
             : base("name=TechZoneContext", throwIfV1Schema: false)
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TechZoneContext, Configuration>());
+           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<TechZoneContext, Configuration>());
         }
 
         public virtual DbSet<Product> Products { get; set; }

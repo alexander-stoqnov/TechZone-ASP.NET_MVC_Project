@@ -1,4 +1,6 @@
-﻿namespace TechZone.Models.ViewModels.Reviews
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TechZone.Models.ViewModels.Reviews
 {
     using System.Collections.Generic;
 
@@ -26,6 +28,11 @@
         public int Useful { get; set; }
 
         public int Useless { get; set; }
+
+        [MinLength(10, ErrorMessage = "Write at least 10 characters to our moderator.")]
+        [MaxLength(300, ErrorMessage = "Your message shouldn't be longer than 300 characters")]
+        [Required]
+        public string Message { get; set; }
 
         public bool VisitorIsAlsoReviewPublisher { get; set; }
 
