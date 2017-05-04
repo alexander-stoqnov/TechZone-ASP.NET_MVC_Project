@@ -3,12 +3,14 @@ namespace TechZone.Data
     using System.Data.Entity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.EntityModels;
+    using TechZone.Data.Migrations;
 
     public class TechZoneContext : IdentityDbContext<ApplicationUser>
     {
         public TechZoneContext()
             : base("name=TechZoneContext", throwIfV1Schema: false)
         {
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TechZoneContext, Configuration>());
         }
 
         public virtual DbSet<Product> Products { get; set; }

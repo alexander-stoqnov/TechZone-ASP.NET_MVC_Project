@@ -27,9 +27,15 @@
 
             review.Reviewer = customer;
             review.Product = product;
+            if (product.Rating == 0)
+            {
+                product.Rating = review.Rating;
+            }
+            else
+            {
+                product.Rating = (decimal)product.Reviews.Average(r => r.Rating);
+            }
             this.Context.Reviews.Add(review);
-            this.Context.SaveChanges();
-            product.Rating = (decimal) product.Reviews.Average(r => r.Rating);
             this.Context.SaveChanges();
         }
 
@@ -159,7 +165,7 @@
 
         public ICollection<LatestReviewViewModel> GetHomePageLatestReviews()
         {
-            var latestReviews = this.Context.Reviews.OrderByDescending(r => r.PublishDate).Take(3);
+            var latestReviews = this.Context.Reviews.OrderByDescending(r => r.PublishDate).Take(3).ToList();
             var latestReviewsVm = new HashSet<LatestReviewViewModel>();
 
             foreach (var review in latestReviews)

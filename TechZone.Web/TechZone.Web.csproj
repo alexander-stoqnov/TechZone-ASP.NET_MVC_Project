@@ -287,6 +287,7 @@
     <Content Include="Areas\Admin\Views\Shared\_ProductAvailabilityButtonPartial.cshtml" />
     <Content Include="Areas\Moderator\Views\Maintain\ChatRoom.cshtml" />
     <Content Include="Areas\Moderator\Views\Maintain\JudgeWarnings.cshtml" />
+    <None Include="Properties\PublishProfiles\TechZone-SoftUni - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

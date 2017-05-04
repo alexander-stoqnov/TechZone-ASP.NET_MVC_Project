@@ -20,11 +20,11 @@ namespace TechZone.Data.Migrations
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             SeedRoles(roleManager);
-            SeedUsers(context, userManager);
-            SeedGraphicCards(context);
-            SeedHardDrives(context);
-            SeedProcessors(context);
-            context.SaveChanges();
+            // SeedUsers(context, userManager);
+            // SeedGraphicCards(context);
+            // SeedHardDrives(context);
+            // SeedProcessors(context);
+            // context.SaveChanges();
         }
 
         private void SeedProcessors(TechZoneContext context)

@@ -22,13 +22,13 @@
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
                                     <div class="col-md-10">
-                                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Enter review title...", style = "max-width : 150px", id = "title"})
+                                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Enter review title...", style = "max-width : 300px", id = "title"})
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.Content, new {@class = "col-md-2 control-label"})
                                     <div class="col-md-10">
-                                        @Html.TextAreaFor(m => m.Content, new {@class = "form-control animated", placeholder = "Enter your review here...", rows = "5", style = "max-width: inherit", id = "new-review"})
+                                        @Html.TextAreaFor(m => m.Content, new {@class = "form-control animated", placeholder = "Enter your review here...", style = "max-width: inherit", id = "new-review"})
                                     </div>
                                 </div>
                                 @Html.HiddenFor(vm => vm.Rating)
