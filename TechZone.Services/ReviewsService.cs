@@ -33,7 +33,7 @@
             }
             else
             {
-                product.Rating = (decimal)product.Reviews.Average(r => r.Rating);
+                product.Rating = (decimal)(product.Reviews.Sum(r => r.Rating) + wrbm.Rating)/(product.Reviews.Count() + 1);
             }
             this.Context.Reviews.Add(review);
             this.Context.SaveChanges();
