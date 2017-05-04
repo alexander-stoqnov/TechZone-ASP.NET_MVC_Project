@@ -19,10 +19,15 @@
             this._service = service;
         }
 
-        [Route("SubmitReport/{id}")]
+        [Route("SubmitReport/{id?}")]
         [Authorize(Roles = "Customer")]
-        public ActionResult SubmitReport(int id)
+        public ActionResult SubmitReport(int? id)
         {
+            if (id == null || !this._service.CommentExists(id))
+            {
+                return RedirectToAction("All", "Products", new {area = ""});
+            }
+
             SubmitReportViewModel srvm = this._service.PrepareSubmitReportInfo(id);
             return View(srvm);
         }

@@ -5,7 +5,7 @@ namespace TechZone.Services.Contracts
 
     public interface IModeratorService
     {
-        SubmitReportViewModel PrepareSubmitReportInfo(int id);
+        SubmitReportViewModel PrepareSubmitReportInfo(int? id);
         void SendCommentReport(string currentUserId, SubmitReportViewModel srbm);
         IEnumerable<EvaluateReportViewModel> GetAllUnevaluatedReports();
         bool ReportStillExists(int id);
@@ -14,5 +14,6 @@ namespace TechZone.Services.Contracts
         bool IsRoomForCurrentUser(string currentUserId, string roomId);
         void RemoveUserWarnings(string roomId);
         IEnumerable<UserWarningsViewModel> GetAllUserWarnings();
+        bool CommentExists(int? id);
     }
 }

@@ -9,7 +9,12 @@
 
     public class ModeratorService : Service, IModeratorService
     {
-        public SubmitReportViewModel PrepareSubmitReportInfo(int id)
+        public bool CommentExists(int? id)
+        {
+            return this.Context.Comments.Any(c => c.Id == id);
+        }
+
+        public SubmitReportViewModel PrepareSubmitReportInfo(int? id)
         {
             var comment = this.Context.Comments.Find(id);
             return new SubmitReportViewModel
