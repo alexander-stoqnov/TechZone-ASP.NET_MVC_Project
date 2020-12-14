@@ -1,11 +1,14 @@
 ﻿namespace TechZone.Models.EntityModels
 {
+<<<<<<< HEAD
     using System.Collections.Generic;
     using System;
     using System.ComponentModel.DataAnnotations;
     using Enums;
     using Newtonsoft.Json;
 
+=======
+>>>>>>> parent of 60e339d... Added ASP.NET MVC
     public abstract class Product
     {
         protected Product()

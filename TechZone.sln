@@ -9,12 +9,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechZone.Data", "TechZone.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechZone.Services", "TechZone.Services\TechZone.Services.csproj", "{051C3DF8-6932-47E8-8BB6-9B18F11D5A02}"
 EndProject
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechZone.Web", "TechZone.Web\TechZone.Web.csproj", "{CE621F51-2FF3-464E-9BD6-6B9E41CDD77F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechZone.Web.Tests", "TechZone.Web.Tests\TechZone.Web.Tests.csproj", "{F1EBBBDD-CC6E-485F-83F8-F1F61C7A1EB2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechZone.Api", "TechZone.Api\TechZone.Api.csproj", "{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}"
 EndProject
+=======
+>>>>>>> parent of 60e339d... Added ASP.NET MVC
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +36,7 @@ Global
 		{051C3DF8-6932-47E8-8BB6-9B18F11D5A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{051C3DF8-6932-47E8-8BB6-9B18F11D5A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{051C3DF8-6932-47E8-8BB6-9B18F11D5A02}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{CE621F51-2FF3-464E-9BD6-6B9E41CDD77F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE621F51-2FF3-464E-9BD6-6B9E41CDD77F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE621F51-2FF3-464E-9BD6-6B9E41CDD77F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +49,8 @@ Global
 		{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D058EF80-C50A-46DA-ABAC-B0A7D7E1A36A}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+>>>>>>> parent of 60e339d... Added ASP.NET MVC
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
