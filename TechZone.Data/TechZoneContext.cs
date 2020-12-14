@@ -15,11 +15,15 @@ namespace TechZone.Data
 
         public virtual DbSet<Product> Products { get; set; }
 
+<<<<<<< HEAD
         public virtual DbSet<GraphicCard> GraphicCards { get; set; }
 
         public virtual DbSet<HardDrive> HardDrives { get; set; }
 
         public virtual DbSet<Processor> Processors { get; set; }
+=======
+        public virtual DbSet<Customer> Customers { get; set; }
+>>>>>>> parent of 3c96dd1... Added another entity model
 
         public virtual DbSet<Customer> Customers { get; set; }
 

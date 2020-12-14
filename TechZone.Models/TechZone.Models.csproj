@@ -88,14 +88,18 @@
     <Compile Include="EntityModels\Article.cs" />
     <Compile Include="EntityModels\Comment.cs" />
     <Compile Include="EntityModels\Customer.cs" />
+<<<<<<< HEAD
     <Compile Include="EntityModels\ForgivenessRequest.cs" />
     <Compile Include="EntityModels\GraphicCard.cs" />
     <Compile Include="EntityModels\HardDrive.cs" />
     <Compile Include="EntityModels\Processor.cs" />
 =======
 >>>>>>> parent of 60e339d... Added ASP.NET MVC
+=======
+>>>>>>> parent of 3c96dd1... Added another entity model
     <Compile Include="EntityModels\Product.cs" />
     <Compile Include="EntityModels\Purchase.cs" />
+<<<<<<< HEAD
     <Compile Include="EntityModels\Report.cs" />
     <Compile Include="EntityModels\Review.cs" />
     <Compile Include="EntityModels\ShoppingCart.cs" />
@@ -108,6 +112,8 @@
     <Compile Include="Enums\ProcessorBrandType.cs" />
     <Compile Include="Enums\ProcessorCoresType.cs" />
     <Compile Include="Enums\ProcessorSeriesType.cs" />
+=======
+>>>>>>> parent of 3c96dd1... Added another entity model
     <Compile Include="Properties\AssemblyInfo.cs" />
 <<<<<<< HEAD
     <Compile Include="ViewModels\Account\EmailAvailabilityCheckViewModel.cs" />

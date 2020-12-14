@@ -2,6 +2,7 @@
 {
 <<<<<<< HEAD
     using System.Collections.Generic;
+<<<<<<< HEAD
     using System;
     using System.ComponentModel.DataAnnotations;
     using Enums;
@@ -10,6 +11,10 @@
 =======
 >>>>>>> parent of 60e339d... Added ASP.NET MVC
     public abstract class Product
+=======
+
+    public class Product
+>>>>>>> parent of 3c96dd1... Added another entity model
     {
         protected Product()
         {
@@ -38,6 +43,7 @@
         [Range(0, Int64.MaxValue, ErrorMessage = "Price cannot be less than 0")]
         public decimal Price { get; set; }
 
+<<<<<<< HEAD
         [Required]
         [Range(0, Int32.MaxValue, ErrorMessage = "Quantity cannot be less than 0")]
         public int Quantity { get; set; }
@@ -57,6 +63,10 @@
         public GuaranteeDurationType Guarantee { get; set; }
 
         [JsonIgnore]
+=======
+        public int Discount { get; set; }
+
+>>>>>>> parent of 3c96dd1... Added another entity model
         public virtual ICollection<Purchase> Purchases { get; set; }
 
         [JsonIgnore]
